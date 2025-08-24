@@ -6,9 +6,9 @@
 
 ---
 
-### Welcome to [Lego // Linux](https://mechablocks.com)
+### Welcome to [Mecha // Blocks](https://mechablocks.com)
 
-Lego // Linux - Where Lego and Linux meet!
+Mecha // Blocks - Where Lego and Linux meet!
 
 This repository hosts the website dedicated to showcasing AFOL Lego models and their associated LDraw-based instructions.
 
@@ -54,6 +54,6 @@ This repository hosts the website dedicated to showcasing AFOL Lego models and t
 
 [[ Mecha // Blocks // Project Page ]](https://github.com/nathaneltitane/mechablocks) [ Version // 01-21-2023 ]
 
-### Enjoying Lego // Linux? Buy me a coffee to show your appreciation!
+### Enjoying Mecha // Blocks? Buy me a coffee to show your appreciation!
 
 [![Donate](https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&logo=paypal&label=Donate)](https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ)
