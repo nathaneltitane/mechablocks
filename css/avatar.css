@@ -1,0 +1,63 @@
+.avatar {
+	background-image: url(/avatar/avatar-bird.png);
+	background-repeat: no-repeat;
+	border-radius: 50% 50% 50% 50%;
+	display: block;
+	padding: 10px 10px 10px 10px;
+	margin: 10px 10px 10px 10px;
+}
+
+.avatar-flex {
+	background-size: calc(60px - 10px - 10px);
+	height: calc(60px - 10px - 10px);
+	width: calc(60px - 10px - 10px);
+}
+
+.avatar-12 {
+	background-size: 12px;
+	height: 12px;
+	width: 12px;
+}
+
+.avatar-16 {
+	background-size: 16px;
+	height: 16px;
+	width: 16px;
+}
+
+.avatar-24 {
+	background-size: 24px;
+	height: 24px;
+	width: 24px;
+}
+
+.avatar-32 {
+	background-size: 32px;
+	height: 32px;
+	width: 32px;
+}
+
+.avatar-64 {
+	background-size: 64px;
+	height: 64px;
+	width: 64px;
+}
+
+.avatar-96 {
+	background-size: 96px;
+	height: 96px;
+	width: 96px;
+}
+
+.avatar-128 {
+	background-size: 128px;
+	height: 128px;
+	width: 128px;
+}
+
+.avatar-256 {
+	background-size: 256px;
+	height: 256px;
+	width: 256px;
+}
+

@@ -1,0 +1,37 @@
+#navigation {
+	height: 64px;
+	width: 64px;
+	position: fixed;
+	bottom: calc(80px + 10px);
+	right: 10px;
+	padding: 10px 10px 10px 10px;
+}
+
+#navigation-button-label {
+	padding: 0px 10px 0px 0px;
+}
+
+@keyframes navigation-reveal {
+	0% {right: -200px;}
+
+	100% {right: 0px;}
+}
+
+.navigation {
+	color: #000000ff;
+	margin: 0px 0px 0px 0px;
+	padding: 10px 4px 10px 10px;
+
+	position: fixed;
+	bottom: calc(80px);
+	right: -200px;
+
+	animation-name: navigation-reveal;
+	animation-delay: 1.5s;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+.navigation-label-color {
+	 color: #00000000;
+}

@@ -1,0 +1,54 @@
+#helper {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+
+	z-index: 888;
+}
+
+.helper {
+	background-color: #000000ff;
+	color: #efefefff;
+	padding: 20px 20px 0px 20px;
+	margin: 0px 0px 0px 0px;
+	position: fixed;
+	bottom: -20px;
+	left: 0px;
+	right: calc( 64px + 6px);
+
+	height: 0vh;
+
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+@keyframes helper-reveal {
+	0% {height: 0vh;}
+
+	100% {height: calc( 100vh - 0px );}
+}
+
+.helper-show {
+	height: calc( 100vh - 0px );
+
+	animation: helper-reveal 1s;
+	animation-delay: 0s;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes helper-conceal {
+	0% {height: calc( 100vh - 0px );}
+
+	100% {height: 0vh;}
+}
+
+.helper-hide {
+	height: 0vh;
+
+	animation: helper-conceal 1s;
+	animation-delay: 0s;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}

@@ -1,0 +1,277 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [ -f "${HOME}"/.local/bin/frobulator ]
+then
+	rm -r -f "${HOME}"/.local/bin/frobulator
+fi
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# superuser ////////////////////////////////////////////////////////////////////
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="03-09-2024"
+
+# usage ///////////////////////////////////////////////////////////////////////
+
+while (($#))
+do
+	case "${1}" in
+		-d|--directory)
+			directory="${2}"
+
+			shift
+		;;
+
+		-a|--all)
+			option="all"
+		;;
+
+		-e|--export)
+			option="exports"
+		;;
+
+		-r|--render)
+			option="renders"
+		;;
+
+		-s|--instructions)
+			option="instructions"
+		;;
+
+		-m|--models)
+			option="models"
+		;;
+
+		-i|--images)
+			option="images"
+		;;
+
+		-r|--drawer)
+			option="drawer"
+		;;
+
+		-u|--menu)
+			option="menu"
+		;;
+
+		-v|--viewer)
+			option="viewer"
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ./${script} [DIRECTORY] | [OPTION] [PARAMETER]"
+			echo
+			echo -e "Utility options:"
+			echo
+			echo -e "-d, --directory     Specify directory to load models from."
+			echo
+			echo -e "-a, --all           Full website framework and content update."
+			echo
+			echo -e "-e, --exports       Models exports content update."
+			echo -e "-r, --renders       Models renders content update."
+			echo -e "-m, --models        Models content update."
+			echo -e "-i, --images        Model images update."
+			echo -e "-r, --drawer        Drawer content update."
+			echo -e "-u, --menu          Models menu content update."
+			echo -e "-v, --viewer        Models viewer content update."
+			echo
+			echo -e "'${script}'         [ Version ${version} ]"
+			echo
+
+			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
+		;;
+
+		*)
+			echo
+			echo -e "Usage: ./${script} [DIRECTORY] | [OPTION] [PARAMETER]"
+			echo
+			echo -e "${script}: Unknown option '${1}'"
+			echo -e "Type './${script} --help' for help and usage information."
+			echo
+
+			exit 1
+
+		;;
+
+		esac
+
+		shift
+done
+
+# clear ////////////////////////////////////////////////////////////////////////
+
+frobulator.clear
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+export directory="${directory}"
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+# functions ////////////////////////////////////////////////////////////////////
+
+upload () {
+
+	message="${1}"
+
+	git add *
+
+	git commit		\
+		--all		\
+		--message="${message}"
+
+	git push > /dev/null 2>&1
+
+	echo
+}
+
+option () {
+
+	for script in ${list[@]}
+	do
+		"${SHELL}" "${PWD}"/"${script}"
+	done
+
+	upload "Models update" &
+
+	frobulator.fwd "Updating..."
+	echo
+
+	list=()
+}
+
+# requirements /////////////////////////////////////////////////////////////////
+
+list+=(
+	git
+	rsync
+)
+
+frobulator.assess ${list[@]}
+
+list=()
+
+# update ///////////////////////////////////////////////////////////////////////
+
+if [[ "${option}" = "all" ]]
+then
+	list+=(
+		mechablocks-exports
+		mechablocks-renders
+		mechablocks-instructions
+		mechablocks-models
+		mechablocks-images
+		mechablocks-drawer
+#		mechablocks-menu
+		mechablocks-viewer
+	)
+fi
+
+if [[ "${option}" = "exports" ]]
+then
+	list+=(
+		mechablocks-exports
+	)
+fi
+
+if [[ "${option}" = "renders" ]]
+then
+	list+=(
+		mechablocks-renders
+	)
+fi
+
+if [[ "${option}" = "instructions" ]]
+then
+	list+=(
+		mechablocks-instructions
+	)
+fi
+
+if [[ "${option}" = "models" ]]
+then
+	list+=(
+		mechablocks-models
+	)
+fi
+
+if [[ "${option}" = "images" ]]
+then
+	list+=(
+		mechablocks-images
+	)
+fi
+
+if [[ "${option}" = "drawer" ]]
+then
+	list+=(
+		mechablocks-drawer
+	)
+fi
+
+if [[ "${option}" = "menu" ]]
+then
+	list+=(
+		mechablocks-menu
+	)
+fi
+
+if [[ "${option}" = "viewer" ]]
+then
+	list+=(
+		mechablocks-viewer
+	)
+fi
+
+option ${list[@]}
+
+list=()
+
+frobulator.scs "Done" "[ Update ]"
+echo

@@ -1,0 +1,74 @@
+.icon {
+	background-repeat: no-repeat;
+	display: block;
+}
+
+.icon-left{
+	margin-left: 10px;
+	margin-right: auto;
+}
+
+.icon-right{
+	margin-left: auto;
+	margin-right: 10px;
+}
+
+.icon-center{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.icon-flex {
+	background-size: calc(60px - 10px - 10px);
+	height: calc(60px - 10px - 10px);
+	width: calc(60px - 10px - 10px);
+}
+
+.icon-12 {
+	background-size: 12px;
+	height: 12px;
+	width: 12px;
+}
+
+.icon-16 {
+	background-size: 16px;
+	height: 16px;
+	width: 16px;
+}
+
+.icon-24 {
+	background-size: 24px;
+	height: 24px;
+	width: 24px;
+}
+
+.icon-32 {
+	background-size: 32px;
+	height: 32px;
+	width: 32px;
+}
+
+.icon-64 {
+	background-size: 64px;
+	height: 64px;
+	width: 64px;
+}
+
+.icon-96 {
+	background-size: 96px;
+	height: 96px;
+	width: 96px;
+}
+
+.icon-128 {
+	background-size: 128px;
+	height: 128px;
+	width: 128px;
+}
+
+.icon-256 {
+	background-size: 256px;
+	height: 256px;
+	width: 256px;
+}
+

@@ -1,0 +1,287 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [ -f "${HOME}"/.local/bin/frobulator ]
+then
+	rm -r -f "${HOME}"/.local/bin/frobulator
+fi
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# superuser ////////////////////////////////////////////////////////////////////
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="03-09-2024"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+modules_directory="${PWD}"/modules
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+# functions ////////////////////////////////////////////////////////////////////
+
+frobulator.inf "Generating model entries"
+echo
+
+frobulator.fwd "Writing..."
+echo
+
+# generate header
+
+cat << 'MODELS-MENU-HEADER' -> "${modules_directory}/"menu.html
+		<script>
+
+			$(function(){
+
+				$.get("/modules/anchors.html", function (data) {
+
+					$("#anchors").append(data);
+
+				});
+
+				}
+			);
+
+		</script>
+
+		<!-- BEGIN MODELS MENU -->
+
+MODELS-MENU-HEADER
+
+# values
+
+extensions_list+=(
+	dae
+)
+
+for extension in ${extensions_list[@]}
+do
+	count=1
+
+	models_list=( $(find "${models_directory}" -type f -iname "*.${extension}" ! -iname "*instructions*" | sort) )
+
+	# set IFS
+
+	IFS=$'\n'
+
+	for model_path in ${models_list[@]}
+	do
+		model_path=$(echo "${model_path}" | cut -d '/' -f6-)
+
+		# get model file name from path
+
+		model_file="${model_path##*/}"
+
+		# strip extension from model file name
+
+		model_name="${model_file%.*}"
+
+		# use model directory as root
+
+		model_directory="${model_path%/*/*}"
+
+		# define model output directories
+
+		export_directory="${render_directory}"/exports
+
+		render_directory="${model_directory}"/renders
+
+		flat_directory="${render_directory}"/flat
+
+		thumbnail_directory="${render_directory}"/thumbnail
+
+		# define model specific directories
+
+		model_category=$(cat "${model_directory%/*}"/title)
+
+		model_title=$(cat "${model_directory}"/title)
+
+		model_title_string=$(echo ${model_title//\<\/\br\>/})
+
+		model_paypal="${model_directory}"/paypal
+
+		model_paypal_id=$(cat "${model_paypal}")
+
+		model_pieces="${model_directory}"/pieces
+
+		model_pieces_count=$(cat "${model_pieces}")
+
+		model_instructions="${model_directory}"/instructions
+
+		model_price="${model_directory}"/price
+
+		model_instructions_price=$(cat "${model_price}")
+
+		# keep first container visible
+
+		if [ "${count}" -eq 1 ]
+		then
+			hidden=""
+		else
+			hidden="hidden"
+		fi
+
+# generate model container
+
+cat << MODEL-CONTAINER ->> "${modules_directory}/"menu.html
+<!-- BEGIN CONTAINER -->
+
+<div id=${model_title_string/ /-} class='container ${hidden}'>
+
+	<div class='flex flex-column flex-center flex-around flex-wrap'>
+
+		<div class='flex-cell'>
+
+			<a href="models/${path[1]}/${path[2]}"'>
+
+				<img src="/${path[0]}/${path[1]}/${path[2]}/${path[3]}/${path[4]}/${path[5]}"/>
+
+			</a>
+
+		</div>
+
+	</div>
+
+MODEL-CONTAINER
+
+if [ -d "${model_instructions}" ]
+then
+
+cat << MODEL-TITLE ->> "${modules_directory}/"menu.html
+	<div id="menu" class="menu section flex flex-column flex-stretch">
+
+		<div class="category flex-cell text-left">
+
+			${model_category}
+
+		</div>
+
+		<a class="container" href="models/${path[1]}/${path[2]}/">
+
+			<div class="flex flex-row flex-middle">
+
+				<div class="flex">
+
+					<div class="icon icon-flex icon-center logo-green"></div>
+
+				</div>
+
+				<div class="flex-cell text-center">
+
+					${model_title_string}
+
+				</div>
+
+			</div>
+
+		</a>
+
+	</div>
+
+</div>
+
+<!-- END CONTAINER -->
+
+MODEL-TITLE
+
+else
+
+cat << MODEL-TITLE ->> "${modules_directory}/"menu.html
+	<div id="menu" class="menu section flex flex-column flex-stretch">
+
+		<div class="category flex-cell text-left">
+
+			${model_category}
+
+		</div>
+
+		<a class="container" href="models/${path[1]}/${path[2]}/">
+
+			<div class="flex flex-row flex-middle">
+
+				<div class="flex">
+
+					<div class="icon icon-flex icon-center logo-orange"></div>
+
+				</div>
+
+				<div class="flex-cell text-center">
+
+					${model_title_string}
+
+				</div>
+
+			</div>
+
+		</a>
+
+	</div>
+
+</div>
+
+<!-- END CONTAINER -->
+
+MODEL-TITLE
+
+fi
+
+	((count++))
+
+	done
+done
+
+# generate footer
+
+cat << FOOTER ->> "${modules_directory}/"menu.html
+<!-- END MODELS MENU -->
+
+<div id="anchors" class="section">
+
+</div>
+
+FOOTER
+
+frobulator.inf "Models" "[ ${count} ]"
+echo
+
+frobulator.cpt "Complete" "[ Menu ]"
+echo

@@ -1,0 +1,25 @@
+#footer {
+	background: #aaaaaaff;
+	border-radius: 20px 20px 0px 0px;
+	height: 80px;
+	width: auto;
+	position: fixed;
+	bottom: -80px;
+	left: 0px;
+	right: 0px;
+
+	animation-name: footer-reveal;
+	animation-delay: 0.5s;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+.footer {
+	height: 80px;
+}
+
+@keyframes footer-reveal {
+	0% {bottom: -80px;}
+
+	100% {bottom: 0px;}
+}

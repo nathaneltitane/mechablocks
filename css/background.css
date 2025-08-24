@@ -1,0 +1,38 @@
+#background,
+#background-overlay {
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+
+	height: 100vh;
+	width: 100vw;
+
+	opacity: 0;
+}
+
+#background {
+	animation-name: background-reveal;
+	animation-delay: 0.5s;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+#background-overlay {
+	-webkit-transition: opacity 0.5s ease;
+	-moz-transition: opacity 0.5s ease;
+	-o-transition: opacity 0.5s ease;
+	transition: opacity 0.5s ease;
+}
+
+@keyframes background-reveal {
+	0% {opacity: 0;}
+
+	100% {opacity: 1;}
+}
+
+#background-overlay:active,
+#background-overlay:hover {
+	opacity: 1;
+}

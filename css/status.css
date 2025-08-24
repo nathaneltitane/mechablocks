@@ -1,0 +1,29 @@
+.status-available {
+	background: #37a537;
+	color: #8de08d !important;
+	font-weight: bold;
+}
+
+.status-background-available {
+	background: #37a537;
+}
+
+.status-font-available {
+	color: #8de08d !important;
+	font-weight: bold;
+}
+
+.status-progress {
+	background: #ff9e5e;
+	color: #b44e0b !important;
+	font-weight: bold;
+}
+
+.status-background-progress {
+	background: #ff9e5e;
+}
+
+.status-font-progress {
+	color: #b44e0b !important;
+	font-weight: bold;
+}

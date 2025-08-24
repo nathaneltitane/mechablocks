@@ -1,0 +1,179 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [ -f "${HOME}"/.local/bin/frobulator ]
+then
+	rm -r -f "${HOME}"/.local/bin/frobulator
+fi
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# superuser ////////////////////////////////////////////////////////////////////
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="03-09-2024"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+local_directory=/media/internal/Lego
+local_models_directory="${local_directory}"/models
+
+server_directory="${PWD}"
+server_models_directory="${server_directory}"/models
+server_images_directory="${server_directory}"/images
+server_javascript_directory="${server_directory}"/javascript
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+# functions ////////////////////////////////////////////////////////////////////
+
+synchronize () {
+
+	source="${1}"
+	destination="${2}"
+
+	rsync				\
+		--archive		\
+		--quiet			\
+		--recursive		\
+						"${source}" "${destination}" > "${sink}" 2>&1
+
+}
+
+# background ///////////////////////////////////////////////////////////////////
+
+# prepare update
+
+frobulator.directory "${server_directory}" images
+
+frobulator.fwd "Copying..."
+echo
+
+# values
+
+extensions_list+=(
+	png
+)
+
+for extension in ${extensions_list[@]}
+do
+	directories_list=(
+		flat
+		overlay
+		thumbnail
+	)
+
+	for directory in ${directories_list[@]}
+	do
+		frobulator.directory "${server_images_directory}" "${directory}"
+
+		count=0
+
+		# set IFS
+
+		IFS=$'\n'
+
+		# shuffle models directories list:
+		# creates random showcase of all models on each update
+
+		for image_path in $(find ${local_models_directory} -type f -not -path "work-in-progress" -iname "${directory}"."${extension}" | sort)
+		do
+			# get model directory
+
+			model_directory="${image_path%/*/*/*}"
+
+			if [ -f "${model_directory}"/background ]
+			then
+
+				image_count=$(printf "%03d" "${count}")
+
+				# get model image base directory from path
+
+				image_directory="${image_path%/*}"
+
+				# get model image file name from path
+
+				image_file="${image_path##*/}"
+
+				# get model image file extension from path
+
+				image_extension="${image_file##*.}"
+
+				# strip extension from model file name
+
+				image_name="${image_file%.*}"
+
+				# set synchronization paths
+
+				local_path="${image_path}"
+
+				server_path="${server_images_directory}"/${directory}/${image_name}-"${image_count}"."${extension}"
+
+				synchronize "${image_path}" "${server_path}"
+			fi
+
+			((count++))
+
+		done
+
+	done
+
+	# reset IFS
+
+	IFS=''
+
+done
+
+# update random background generator with new image file count
+
+frobulator.inf "Updating" "[ Images ]"
+echo
+
+sed															\
+	-i														\
+	-e "s/var count = .*/var count = ${count};/g"		\
+															"${server_javascript_directory}"/background.js
+
+frobulator.inf "Models" "[ ${count} ]"
+echo
+
+frobulator.cpt "Complete" "[ Images ]"
+echo

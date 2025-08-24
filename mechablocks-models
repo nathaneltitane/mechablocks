@@ -1,0 +1,95 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [ -f "${HOME}"/.local/bin/frobulator ]
+then
+	rm -r -f "${HOME}"/.local/bin/frobulator
+fi
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# superuser ////////////////////////////////////////////////////////////////////
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="08-08-2024"
+
+# usage ////////////////////////////////////////////////////////////////////////
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+local_directory=/media/internal/Lego
+local_models_directory="${local_directory}"/models
+
+server_directory="${PWD}"
+server_models_directory="${server_directory}"/models
+
+server_backgrounds_directory="${server_directory}"/background
+server_javascript_directory="${server_directory}"/javascript
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+# functions ////////////////////////////////////////////////////////////////////
+
+
+# synchronize //////////////////////////////////////////////////////////////////
+
+frobulator.inf "Synchronizing entries" "[ models ]"
+echo
+
+if [[ ! -d "${server_models_directory}" ]]
+then
+	mkdir -p "${server_models_directory}"
+fi
+
+rsync							\
+	--archive					\
+	--quiet						\
+	--recursive					\
+	--exclude='*.ldr'			\
+	--exclude='*.mpd'			\
+	--exclude='*.pdf'			\
+	--exclude="configuration"	\
+	--exclude='LPub3D'			\
+	--delete					\
+								"${local_models_directory}"/* "${server_models_directory}" > "${sink}" 2>&1 &
+
+frobulator.progress sync
+
+frobulator.cpt "Complete" "[ Models ]"
+echo

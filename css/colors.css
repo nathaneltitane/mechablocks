@@ -1,0 +1,54 @@
+#colors {
+	background: #bbbbbbff;
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: -100vw;
+	width: 100vw;
+
+	overflow-y: scroll;
+
+	z-index: 888;
+
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: calc(64px + 8px);
+}
+
+.colors {
+	aspect-ratio: 1/1;
+	border-radius: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+@keyframes colors-reveal {
+	0% {left: -100vw;}
+
+	100% {left: calc(-64px - 8px);}
+}
+
+.colors-show {
+	left: 0vw;
+
+	animation: colors-reveal 1s;
+	animation-delay: 0s;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes colors-conceal {
+	0% {left: calc(-64px - 8px);}
+
+	100% {left: -100vw;}
+}
+
+.colors-hide {
+	left: -100vw;
+
+	animation: colors-conceal 1s;
+	animation-delay: 0s;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
