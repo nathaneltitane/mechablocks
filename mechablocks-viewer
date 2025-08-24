@@ -192,9 +192,9 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 
 		<!-- title -->
 
-		<title>LEGO // LINUX - ${model_title_string}</title>
+		<title>Mecha // Blocks - ${model_title_string}</title>
 
-		<meta name="title"					content="LEGO // LINUX - ${model_title_string}">
+		<meta name="title"					content="Mecha // Blocks - ${model_title_string}">
 		<meta name="description"			content="Preview this model in 3D.">
 
 		<meta property="og:type"			content="website">

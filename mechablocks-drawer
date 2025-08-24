@@ -390,7 +390,7 @@ cat << MODEL-DRAWER-FOOTER ->> "${modules_directory}"/drawer.html
 						<div class="flex-cell text-center">
 
 							Version // ${stamp}</br>
-							Lego // Linux - Where Lego meets Linux</br>
+							Mecha // Blocks - Where Lego meets Linux</br>
 							N Λ T H Λ N E L - ©  <text id="year"></text>
 
 						</div>
