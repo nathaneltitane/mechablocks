@@ -2,7 +2,7 @@
 
 [![Donate](https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&logo=paypal&label=Donate)](https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ)
 
-[[ Lego // Linux // Project Page ]](https://github.com/nathaneltitane/mechablocks) [ Version // 01-21-2023 ]
+[[ Mecha // Blocks // Project Page ]](https://github.com/nathaneltitane/mechablocks) [ Version // 01-21-2023 ]
 
 ---
 
