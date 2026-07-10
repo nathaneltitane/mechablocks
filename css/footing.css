@@ -1,0 +1,32 @@
+.footing {
+	background: transparent;
+	color: #222222ff;
+	padding: 10px 10px 10px 10px;
+	margin: 0px 0px 0px 0px;
+	position: absolute;
+	bottom: 0px;
+
+	opacity: 0;
+
+	animation: footing-reveal 0.75s ease forwards;
+}
+
+@keyframes footing-reveal {
+
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+
+}
+
+.footing-open {
+	bottom: 80px;
+}
+
+.footing-close {
+	bottom: 0px;
+}

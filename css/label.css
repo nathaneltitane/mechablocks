@@ -1,0 +1,13 @@
+.label {
+    font-weight: normal;
+}
+
+.container:not(:active) .label,
+.container:not(:hover) .label {
+    font-weight: normal;
+}
+
+.container:active .label,
+.container:hover .label {
+    font-weight: bold;
+}

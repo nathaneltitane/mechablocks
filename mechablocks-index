@@ -1,0 +1,426 @@
+#!/bin/bash
+
+# dependencies /////////////////////////////////////////////////////////////////
+
+if [ -f "${HOME}"/.local/bin/frobulator ]
+then
+	rm -r -f "${HOME}"/.local/bin/frobulator
+fi
+
+if [[ -z $(command -v frobulator) ]]
+then
+	if [[ $(id -u -n) = "root" ]]
+	then
+		SUDO_HOME=/root
+
+		USER="${SUDO_USER}"
+
+		HOME=/home/"${USER}"
+	fi
+
+	if [[ -z $(command -v curl) ]]
+	then
+		yes | apt-get install curl
+	fi
+
+	if [ ! -d "${HOME}"/.local/bin ]
+	then
+		mkdir -p "${HOME}"/.local/bin
+	fi
+
+	curl -s -L get.frbltr.app > "${HOME}"/.local/bin/frobulator
+
+	chmod +x "${HOME}"/.local/bin/frobulator
+fi
+
+. "${HOME}"/.local/bin/frobulator
+
+# script ///////////////////////////////////////////////////////////////////////
+
+script=$(basename -- "${BASH_SOURCE[0]}")
+
+# version //////////////////////////////////////////////////////////////////////
+
+version="06-06-2026"
+
+# prompt ///////////////////////////////////////////////////////////////////////
+
+frobulator.script "Setting up ${script#*-}"
+
+# variables ////////////////////////////////////////////////////////////////////
+
+server_directory="${PWD}"
+
+site_address='https://mechablocks.com'
+
+site_name='MechaBlocks'
+
+site_name_stylized='MECHA // BLOCKS'
+
+site_description='Custom LEGO® Mecha MOCs, 3D Viewer & Building Instructions'
+
+site_slogan='Where LEGO® meets Open Source'
+
+site_logo='logo/logo-red.png'
+
+output_sitemap='sitemap.xml'
+
+index_homepage='./index.html'
+
+marker_schema_begin='<!-- schema-itemlist-begin -->'
+
+marker_schema_end='<!-- schema-itemlist-end -->'
+
+directories_exclude_list=(
+	'./.git/'
+	'./.github/'
+	'./node_modules/'
+	'./modules/'
+	'./logo/'
+	'./assets/'
+	'./images/'
+	'./renders/'
+	'./exports/'
+)
+
+directories_schema_list=(
+	'./models/'
+)
+
+# defaults /////////////////////////////////////////////////////////////////////
+
+url_site="${site_address%/}"
+
+page_count=0
+
+position=0
+
+url_schemas=()
+
+# functions ////////////////////////////////////////////////////////////////////
+
+directory_excluded_check () {
+
+	file_path="${1}"
+
+	for directory_path in "${directories_exclude_list[@]}"
+	do
+		if [[ "${file_path}" == "${directory_path}"* ]]
+		then
+			return 0
+		fi
+	done
+
+	return 1
+
+}
+
+schema_included_check () {
+
+	file_path="${1}"
+
+	for directory_path in "${directories_schema_list[@]}"
+	do
+		if [[ "${file_path}" == "${directory_path}"* ]]
+		then
+			return 0
+		fi
+	done
+
+	return 1
+
+}
+
+url_prepare () {
+
+	url_path="${1}"
+
+	url_path="${url_path#./}"
+	url_path="${url_path#index.html}"
+	url_path="${url_path%index.html}"
+	url_path="${url_path%/}"
+
+	if [ "${url_path}" = "." ] ||
+	   [ "${url_path}" = ""  ]
+	then
+		url_path="/"
+	else
+		url_path="/${url_path}/"
+	fi
+
+	url_path="${url_path//\/\//\/}"
+
+	url_full="${url_site}${url_path}"
+
+}
+
+url_index () {
+
+	url_prepare "${1}"
+
+	file_path="${2}"
+
+	date_modified="$(date -u -r "${file_path}" '+%Y-%m-%d')"
+
+	frequency_change="weekly"
+
+	priority="0.80"
+
+	cat >> "${output_sitemap}" << URL
+
+	<url>
+
+		<loc>${url_full}</loc>
+
+		<lastmod>${date_modified}</lastmod>
+
+		<changefreq>${frequency_change}</changefreq>
+
+		<priority>${priority}</priority>
+
+	</url>
+URL
+
+	(( page_count++ ))
+
+}
+
+schema_itemlist_write () {
+
+	output_schema="${1}"
+
+	schema_count="${#url_schemas[@]}"
+
+	cat > "${output_schema}" << SCHEMA-BEGIN
+
+		<script type="application/ld+json">
+
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "WebSite",
+					"@id": "${site_address}/#website",
+					"name": "${site_name}",
+					"alternateName": "${site_name_stylized}",
+					"url": "${site_address}/",
+					"description": "${site_description}",
+					"publisher": {
+						"@id": "${site_address}/#organization"
+					}
+				},
+				{
+					"@type": "Organization",
+					"@id": "${site_address}/#organization",
+					"name": "${site_name}",
+					"alternateName": [
+						"${site_name_stylized}",
+						"${site_name}"
+					],
+					"url": "${site_address}/",
+					"slogan": "${site_slogan}",
+					"logo": {
+						"@type": "ImageObject",
+						"url": "${site_address}/${site_logo}"
+					},
+					"founder": {
+						"@type": "Person",
+						"name": "Nathanel Titane"
+					}
+				},
+				{
+					"@type": "BreadcrumbList",
+					"@id": "${site_address}/#breadcrumbs",
+					"itemListElement": [
+						{
+							"@type": "ListItem",
+							"position": 1,
+							"name": "Home",
+							"item": "${site_address}/"
+						}
+					]
+				},
+				{
+					"@type": "CollectionPage",
+					"@id": "${site_address}/#collection",
+					"name": "${site_name} - LEGO® Mecha MOCs",
+					"url": "${site_address}/",
+					"description": "${site_description}",
+					"isPartOf": {
+						"@id": "${site_address}/#website"
+					},
+					"mainEntity": {
+						"@type": "ItemList",
+						"numberOfItems": ${schema_count},
+						"itemListElement": [
+SCHEMA-BEGIN
+
+	for url_schema in "${url_schemas[@]}"
+	do
+		(( position++ ))
+
+		if [ "${position}" -lt "${schema_count}" ]
+		then
+			separator=','
+		else
+			separator=''
+		fi
+
+		cat >> "${output_schema}" << SCHEMA-ITEM
+							{
+								"@type": "ListItem",
+								"position": ${position},
+								"url": "${url_schema}"
+							}${separator}
+SCHEMA-ITEM
+	done
+
+	cat >> "${output_schema}" << SCHEMA-END
+						]
+					},
+					"breadcrumb": {
+						"@id": "${site_address}/#breadcrumbs"
+					}
+				}
+			]
+		}
+SCHEMA-END
+
+}
+
+schema_homepage_update () {
+
+	if [ ! -f "${index_homepage}" ]
+	then
+		frobulator.wrn "Homepage not found" "[ ${index_homepage} ]"
+		echo
+
+		return 1
+	fi
+
+	if ! grep -q "${marker_schema_begin}" "${index_homepage}" ||
+	   ! grep -q "${marker_schema_end}" "${index_homepage}"
+	then
+		frobulator.wrn "Schema markers not found" "[ ${index_homepage} ]"
+		echo
+
+		return 1
+	fi
+
+	output_schema="$(mktemp)"
+
+	output_homepage="$(mktemp)"
+
+	schema_itemlist_write "${output_schema}"
+
+	awk												\
+		-v marker_begin="${marker_schema_begin}"	\
+		-v marker_end="${marker_schema_end}"		\
+		-v output_schema="${output_schema}"			\
+		'
+			index($0, marker_begin) {
+				print
+
+				while ((getline line < output_schema) > 0) {
+					print line
+				}
+
+				skip = 1
+
+				next
+			}
+
+			index($0, marker_end) {
+				skip = 0
+
+				print
+
+				next
+			}
+
+			skip != 1 {
+				print
+			}
+		' "${index_homepage}" > "${output_homepage}"
+
+	mv "${output_homepage}" "${index_homepage}"
+
+	rm -f "${output_schema}"
+
+	frobulator.inf "Schema updated" "[ ${index_homepage} ]"
+	echo
+
+}
+
+# initialize ///////////////////////////////////////////////////////////////////
+
+frobulator.fwd "Writing..."
+echo
+
+# write header /////////////////////////////////////////////////////////////////
+
+cat > "${output_sitemap}" << HEADER
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+HEADER
+
+# index pages //////////////////////////////////////////////////////////////////
+
+IFS=$'\n'
+
+index_files=$(find . -type f -name 'index.html' | sort)
+
+for file_path in ${index_files}
+do
+	if directory_excluded_check "${file_path}"
+	then
+		continue
+	fi
+
+	url_index "${file_path}" "${file_path}"
+
+	if schema_included_check "${file_path}"
+	then
+		url_prepare "${file_path}"
+
+		url_schemas+=("${url_full}")
+	fi
+done
+
+unset IFS
+
+# write schema /////////////////////////////////////////////////////////////////
+
+schema_homepage_update
+
+# write footer /////////////////////////////////////////////////////////////////
+
+cat >> "${output_sitemap}" << FOOTER
+
+</urlset>
+FOOTER
+
+# report ///////////////////////////////////////////////////////////////////////
+
+if [ "${page_count}" -eq 0 ]
+then
+	frobulator.err "No URLs found" "[ ${url_site} ]"
+	echo
+
+	frobulator.wrn "Script must be run from site root directory."
+	echo
+
+	exit 1
+else
+	frobulator.inf "Sitemap written" "[ ${output_sitemap} ]"
+	echo
+
+	frobulator.inf "URL count" "[ ${page_count} ]"
+	echo
+
+	frobulator.inf "Schema URL count" "[ ${#url_schemas[@]} ]"
+	echo
+
+	frobulator.cpt "Complete" "[ Sitemap ]"
+fi

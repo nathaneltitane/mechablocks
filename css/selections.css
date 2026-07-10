@@ -1,0 +1,154 @@
+#selections {
+	background: #aaaaaaff;
+	border-radius: 0px 0px 20px 20px;
+	position: fixed;
+	height: 160px;
+	top: -200px;
+	left: 0px;
+	right: 0px;
+}
+
+#selections::before {
+
+	content: '';
+
+	position: absolute;
+	left: 50%;
+	top: 100%;
+
+	transform: translateX(-50%);
+
+	width: 120px;
+	height: 40px;
+
+	border-radius: 0px 0px 20px 20px;
+
+	background: #aaaaaaff;
+}
+
+#selections::after {
+	content: 'Modes';
+
+	font-weight: bold;
+
+	display: flex;
+	align-items: normal;
+	justify-content: center;
+
+
+	position: absolute;
+	left: 50%;
+	top: calc(100% + 5px);
+
+	transform: translateX(-50%);
+
+	width: 0px;
+	height: 0px;
+
+	border-left: 10px solid #00000000;
+	border-right: 10px solid #00000000;
+	border-top: 10px solid #000000ff;
+	border-bottom: 10px solid #00000000;
+}
+
+.selections-tab {
+	position: absolute;
+	left: 50%;
+	top: 100%;
+
+	transform: translateX(-50%);
+
+	width: 120px;
+	height: 40px;
+
+	border-radius: 0px 0px 20px 20px;
+
+	background: #00000000;
+}
+
+.selections {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 160px;
+
+	display: flex;
+	flex-direction: row;
+
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
+
+	scrollbar-width: none;
+
+	-webkit-overflow-scrolling: touch;
+}
+
+.selections-button {
+	background: #00000000;
+	color: #666666ff;
+
+	margin: 0px 0px 0px 0px;
+	padding: 10px 10px 10px 10px;
+
+	width: 80px;
+	height: auto;
+}
+
+.selections-start {
+	border-top: 10px solid #00000000;
+	border-bottom: 10px solid #00000000;
+	border-right: 10px solid #00000000;
+	border-left: 10px solid #000000ff;
+
+	width: 40px;
+	transform: translateX(50%);
+
+	opacity: 0;
+}
+
+.selections-end {
+	border-top: 10px solid #00000000;
+	border-bottom: 10px solid #00000000;
+	border-right: 10px solid #000000ff;
+	border-left: 10px solid #00000000;
+
+	width: 40px;
+	transform: translateX(-50%);
+
+	opacity: 0;
+}
+
+#selections.selections-tab-hide {
+	top: -160px;
+}
+
+#selections.selections-tab-show {
+	top: -160px;
+}
+
+#selections.selections-hide {
+	top: -200px;
+}
+
+#selections.selections-show {
+	top: 0px;
+}
+
+.selections-left {
+	opacity: 1;
+}
+
+.selections-right {
+	opacity: 1;
+}
+
+.selections-label {
+	height: 20px;
+}
+
+.mode,
+.option {
+	width: 140px;
+}

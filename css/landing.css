@@ -1,0 +1,24 @@
+.landing {
+	background: transparent;
+	color: #222222ff;
+	padding: 10px 10px 10px 10px;
+	margin: 0px 0px 0px 0px;
+	position: absolute;
+	top: 0px;
+
+	opacity: 0;
+
+	animation: landing-reveal 0.75s ease forwards;
+}
+
+@keyframes landing-reveal {
+
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+
+}

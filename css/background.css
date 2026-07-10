@@ -1,0 +1,38 @@
+#background,
+#background-overlay {
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+
+	height: 100vh;
+	width: 100vw;
+
+	opacity: 0;
+
+	position: absolute;
+
+	z-index: -1;
+}
+
+#background {
+	animation-name: background-reveal;
+	animation-delay: 0.5s;
+	animation-duration: 1.25s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes background-reveal {
+
+	0% {
+		opacity: 0;
+		transform: scale(1.75);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+}

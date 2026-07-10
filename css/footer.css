@@ -1,0 +1,79 @@
+#footer {
+	background: #aaaaaaff;
+	border-radius: 20px 20px 0px 0px;
+	position: fixed;
+	height: 80px;
+	bottom: -80px;
+	left: 0px;
+	right: 0px;
+}
+
+.footer {
+	position: relative;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 80px;
+
+	display: flex;
+	flex-direction: row;
+
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
+
+	scrollbar-width: none;
+
+	-webkit-overflow-scrolling: touch;
+}
+
+.footer-button {
+	background: #00000000;
+	color: #666666ff;
+
+	margin: 0px 0px 0px 0px;
+	padding: 10px 0px 0px 0px;
+
+	width: 80px;
+	height: auto;
+}
+
+.footer-start {
+	border-top: 10px solid #00000000;
+	border-bottom: 10px solid #00000000;
+	border-right: 10px solid #00000000;
+	border-left: 10px solid #000000ff;
+
+	width: 40px;
+	transform: translateX(50%);
+
+	opacity: 0;
+}
+
+.footer-end {
+	border-top: 10px solid #00000000;
+	border-bottom: 10px solid #00000000;
+	border-right: 10px solid #000000ff;
+	border-left: 10px solid #00000000;
+
+	width: 40px;
+	transform: translateX(-50%);
+
+	opacity: 0;
+}
+
+#footer.footer-hide {
+	bottom: -80px;
+}
+
+#footer.footer-show {
+	bottom: 0px;
+}
+
+.footer-left {
+	opacity: 1;
+}
+
+.footer-right {
+	opacity: 1;
+}

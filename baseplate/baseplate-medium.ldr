@@ -1,0 +1,7 @@
+0 
+0 Name: New Model.ldr
+0 Author: Nathanel Titane // nathanel.titane@gmail.com // All Rights Reserved
+1 71 -320 0 320 0 0 -1 0 1 0 1 0 0 609.dat
+1 71 320.0001 0 320.0001 1 0 0 0 1 0 0 0 1 609.dat
+1 71 320.0002 0 -320.0002 0 0 1 0 1 0 -1 0 0 609.dat
+1 71 -320.0003 0 -320.0003 -1 0 0 0 1 0 0 0 -1 609.dat

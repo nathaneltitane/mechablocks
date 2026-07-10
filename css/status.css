@@ -1,0 +1,45 @@
+.status-available {
+	background: #37a537ff;
+	color: #8de08dff !important;
+	font-weight: bold;
+}
+
+.status-background-available {
+	background: #37a537ff;
+}
+
+.status-button-available {
+	background: #8de08dff;
+	color: #37a537ff !important;
+	font-weight: bold;
+}
+
+.status-font-available {
+	color: #8de08dff !important;
+	font-weight: bold;
+}
+
+.status-progress {
+	background: #ff9e5eff;
+	color: #b44e0bff !important;
+	font-weight: bold;
+}
+
+.status-background-progress {
+	background: #ff9e5eff;
+}
+
+.status-button-progress {
+	background: #b44e0bff;
+	color: #ff9e5eff !important;
+	font-weight: bold;
+}
+
+.status-font-progress {
+	color: #b44e0bff !important;
+	font-weight: bold;
+}
+
+.status-button-available:hover {
+	color: #efefefff !important;
+}
