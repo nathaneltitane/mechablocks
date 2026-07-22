@@ -13,8 +13,8 @@ function footer_init ( ) {
 		return ;
 	}
 
-	var timeout_reset ;
 	var initialized = false ;
+	var ready = false ;
 	var bootstrap_observer = null ;
 	var footer_observer = null ;
 
@@ -37,35 +37,15 @@ function footer_init ( ) {
 
 		console.log ( 'footer [ state ] : show' ) ;
 
-		$('.footing').addClass('footing-open');
+		$( '.footing' ).addClass( 'footing-open' );
 
 		footer_id.classList.remove ( 'footer-hide' ) ;
 		footer_id.classList.add ( 'footer-show' ) ;
 	}
 
-	function delay_show ( footer ) {
-
-		console.log ( 'footer [ state ] : delay_show scheduled' ) ;
-
-		clearTimeout ( timeout_reset ) ;
-
-		timeout_reset = setTimeout ( function ( ) {
-
-			console.log ( 'footer [ state ] : delay_show execute' ) ;
-
-			show ( footer ) ;
-
-			requestAnimationFrame ( function ( ) {
-
-				scroll ( footer ) ;
-			} ) ;
-
-		}, 1500 ) ;
-	}
-
 	// footer slot readiness check
 
-	var slot_identifiers_list = [ 'paypal', 'controls', 'plane', 'dimensions', 'minifig', 'wireframe', 'edges', 'camera', 'color', 'home','browse', 'contact', 'shop', 'github', 'donations' ] ;
+	var slot_identifiers_list = [ 'paypal', 'controls', 'plane', 'dimensions', 'minifig', 'wireframe', 'edges', 'camera', 'color', 'home', 'browse', 'contact', 'shop', 'github', 'donations' ] ;
 
 	var landing_slot_identifiers_list = [ 'home', 'browse', 'contact', 'shop', 'github', 'donations' ] ;
 
@@ -97,6 +77,117 @@ function footer_init ( ) {
 		return true ;
 	}
 
+	function assets ( footer, callback ) {
+
+		var assets_list = footer.querySelectorAll ( 'img, object' ) ;
+		var assets_pending = assets_list.length ;
+		var assets_complete = false ;
+
+		console.log ( 'footer [ asset ] : check start', '[ ', assets_pending, ' ]' ) ;
+
+		function complete ( ) {
+
+			if ( assets_complete ) {
+
+				return ;
+			}
+
+			assets_complete = true ;
+
+			requestAnimationFrame ( function ( ) {
+
+				requestAnimationFrame ( function ( ) {
+
+					console.log ( 'footer [ asset ] : ready - all' ) ;
+
+					callback ( ) ;
+				} ) ;
+			} ) ;
+		}
+
+		function asset_ready ( asset ) {
+
+			if ( asset.dataset.footerReady === 'true' ) {
+
+				return ;
+			}
+
+			asset.dataset.footerReady = 'true' ;
+
+			assets_pending -- ;
+
+			console.log ( 'footer [ asset ] : ready - ', asset, '[ ', assets_pending, ' remaining ]' ) ;
+
+			if ( assets_pending <= 0 ) {
+
+				complete ( ) ;
+			}
+		}
+
+		if ( assets_pending === 0 ) {
+
+			complete ( ) ;
+
+			return ;
+		}
+
+		for ( var i = 0 ; i < assets_list.length ; i ++ ) {
+
+			(function ( asset ) {
+
+				if ( asset.tagName === 'IMG' && asset.complete ) {
+
+					asset_ready ( asset ) ;
+
+					return ;
+				}
+
+				if ( asset.tagName === 'OBJECT' && asset.contentDocument ) {
+
+					asset_ready ( asset ) ;
+
+					return ;
+				}
+
+				asset.addEventListener ( 'load', function ( ) {
+
+					asset_ready ( asset ) ;
+
+				}, { once: true } ) ;
+
+				asset.addEventListener ( 'error', function ( ) {
+
+					console.warn ( 'footer [ asset ] : failed - ', asset ) ;
+
+					asset_ready ( asset ) ;
+
+				}, { once: true } ) ;
+
+			})( assets_list [ i ] ) ;
+		}
+	}
+
+	function fonts ( callback ) {
+
+		if ( ! document.fonts || ! document.fonts.ready ) {
+
+			console.log ( 'footer [ font ] : unsupported - skip' ) ;
+
+			callback ( ) ;
+
+			return ;
+		}
+
+		console.log ( 'footer [ font ] : pending' ) ;
+
+		document.fonts.ready.then ( function ( ) {
+
+			console.log ( 'footer [ font ] : ready' ) ;
+
+			callback ( ) ;
+		} ) ;
+	}
+
 	function canvas ( callback ) {
 
 		var canvas = document.getElementById ( 'canvas' ) ;
@@ -121,7 +212,6 @@ function footer_init ( ) {
 				requestAnimationFrame ( function ( ) {
 
 					callback ( ) ;
-
 				} ) ;
 
 				return ;
@@ -136,57 +226,81 @@ function footer_init ( ) {
 	function scroll ( footer ) {
 
 		var arrow_left = document.querySelector ( '#footer-start .footer-start' ) ;
-
 		var arrow_right = document.querySelector ( '#footer-end .footer-end' ) ;
-
-		// do not show arrows if not laid out and loaded
 
 		if ( ! footer || footer.clientWidth <= 0 ) {
 
-			if ( arrow_left ) arrow_left.classList.remove ( 'footer-right' ) ;
-			if ( arrow_right ) arrow_right.classList.remove ( 'footer-left' ) ;
+			if ( arrow_left ) {
+
+				arrow_left.classList.remove ( 'footer-right' ) ;
+			}
+
+			if ( arrow_right ) {
+
+				arrow_right.classList.remove ( 'footer-left' ) ;
+			}
 
 			return ;
 		}
-
-		// robust overflow check - flex / subpixel / rounding
 
 		var can_scroll = footer.scrollWidth > ( footer.clientWidth + 1 ) ;
 
 		if ( ! can_scroll ) {
 
-			if ( arrow_left ) arrow_left.classList.remove ( 'footer-right' ) ;
-			if ( arrow_right ) arrow_right.classList.remove ( 'footer-left' ) ;
+			if ( arrow_left ) {
+
+				arrow_left.classList.remove ( 'footer-right' ) ;
+			}
+
+			if ( arrow_right ) {
+
+				arrow_right.classList.remove ( 'footer-left' ) ;
+			}
 
 			return ;
 		}
 
 		var scroll_maximum = footer.scrollWidth - footer.clientWidth ;
 
-		// start
-
 		if ( footer.scrollLeft <= 0 ) {
 
-			if ( arrow_left ) arrow_left.classList.add ( 'footer-right' ) ;
-			if ( arrow_right ) arrow_right.classList.remove ( 'footer-left' ) ;
+			if ( arrow_left ) {
+
+				arrow_left.classList.add ( 'footer-right' ) ;
+			}
+
+			if ( arrow_right ) {
+
+				arrow_right.classList.remove ( 'footer-left' ) ;
+			}
 
 			return ;
 		}
-
-		// end
 
 		if ( footer.scrollLeft >= scroll_maximum - 1 ) {
 
-			if ( arrow_left ) arrow_left.classList.remove ( 'footer-right' ) ;
-			if ( arrow_right ) arrow_right.classList.add ( 'footer-left' ) ;
+			if ( arrow_left ) {
+
+				arrow_left.classList.remove ( 'footer-right' ) ;
+			}
+
+			if ( arrow_right ) {
+
+				arrow_right.classList.add ( 'footer-left' ) ;
+			}
 
 			return ;
 		}
 
-		// middle
+		if ( arrow_left ) {
 
-		if ( arrow_left ) arrow_left.classList.add ( 'footer-right' ) ;
-		if ( arrow_right ) arrow_right.classList.add ( 'footer-left' ) ;
+			arrow_left.classList.add ( 'footer-right' ) ;
+		}
+
+		if ( arrow_right ) {
+
+			arrow_right.classList.add ( 'footer-left' ) ;
+		}
 	}
 
 	function bind ( footer ) {
@@ -229,8 +343,6 @@ function footer_init ( ) {
 				return ;
 			}
 
-			// hide ( footer ) ;
-
 		}, { passive: true } ) ;
 
 		document.addEventListener ( 'pointerup', function ( ) {
@@ -242,7 +354,8 @@ function footer_init ( ) {
 				return ;
 			}
 
-			delay_show ( footer ) ;
+			show ( footer ) ;
+			scroll ( footer ) ;
 
 		}, { passive: true } ) ;
 
@@ -255,7 +368,8 @@ function footer_init ( ) {
 				return ;
 			}
 
-			delay_show ( footer ) ;
+			show ( footer ) ;
+			scroll ( footer ) ;
 
 		}, { passive: true } ) ;
 
@@ -281,7 +395,6 @@ function footer_init ( ) {
 			console.log ( 'footer [ scroll ] : scroll' ) ;
 
 			scroll ( footer ) ;
-
 		} ) ;
 
 		window.addEventListener ( 'resize', function ( ) {
@@ -289,13 +402,15 @@ function footer_init ( ) {
 			console.log ( 'footer [ scroll ] : resize' ) ;
 
 			scroll ( footer ) ;
-
 		} ) ;
 	}
 
-	function footer_load_check ( footer ) {
+	function footer_ready ( footer ) {
 
-		console.log ( 'footer [ state ] : footer_load_check check' ) ;
+		if ( ready ) {
+
+			return ;
+		}
 
 		if ( ! slots ( ) ) {
 
@@ -304,24 +419,41 @@ function footer_init ( ) {
 			return ;
 		}
 
-		canvas ( function ( ) {
+		console.log ( 'footer [ state ] : structure ready' ) ;
 
-			console.log ( 'footer [ state ] : ready' ) ;
+		assets ( footer, function ( ) {
 
-			delay_show ( footer ) ;
-			scroll ( footer ) ;
+			fonts ( function ( ) {
 
-			if ( footer_observer ) {
+				canvas ( function ( ) {
 
-				footer_observer.disconnect ( ) ;
-				footer_observer = null ;
-			}
+					if ( ready ) {
+
+						return ;
+					}
+
+					ready = true ;
+
+					console.log ( 'footer [ state ] : ready' ) ;
+
+					show ( footer ) ;
+					scroll ( footer ) ;
+
+					if ( footer_observer ) {
+
+						footer_observer.disconnect ( ) ;
+						footer_observer = null ;
+					}
+				} ) ;
+			} ) ;
 		} ) ;
 	}
 
 	function initialize ( ) {
 
 		if ( initialized ) {
+
+			footer_ready ( footer_get ( ) ) ;
 
 			return ;
 		}
@@ -346,21 +478,12 @@ function footer_init ( ) {
 
 			console.log ( 'footer [ bootstrap ] : footer load detected ', '[ ', mutations.length, ' ]', footer_id ) ;
 
-			footer_load_check ( footer ) ;
+			footer_ready ( footer ) ;
 		} ) ;
 
-		footer_observer.observe ( footer_id, { childList: true, subtree: true, characterData: true } ) ;
+		footer_observer.observe ( footer_id, { childList: true, subtree: true, characterData: true, attributes: true } ) ;
 
-		footer_load_check ( footer ) ;
-
-		setTimeout ( function ( ) {
-
-			console.log ( 'footer [ failsafe ] : forced reveal' ) ;
-
-			show ( footer ) ;
-			scroll ( footer ) ;
-
-		}, 2500 ) ;
+		footer_ready ( footer ) ;
 
 		if ( bootstrap_observer ) {
 
@@ -374,13 +497,6 @@ function footer_init ( ) {
 		console.log ( 'footer [ bootstrap ] : bootstrap load detected ', '[ ', mutations.length, ' ]', footer_id ) ;
 
 		initialize ( ) ;
-
-		requestAnimationFrame ( function ( ) {
-
-			scroll ( footer_get ( ) ) ;
-
-		} ) ;
-
 	} ) ;
 
 	bootstrap_observer.observe ( footer_id, { childList: true, subtree: true } ) ;
