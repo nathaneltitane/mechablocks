@@ -194,20 +194,51 @@ function footer_init ( ) {
 
 	function reveal ( footer ) {
 
-		if ( reveal_timeout ) {
+		var canvas = document.getElementById ( 'canvas' ) ;
 
-			clearTimeout ( reveal_timeout ) ;
+		function reveal_start ( ) {
+
+			if ( reveal_timeout ) {
+
+				clearTimeout ( reveal_timeout ) ;
+			}
+
+			reveal_timeout = setTimeout ( function ( ) {
+
+				reveal_timeout = null ;
+				revealed = true ;
+
+				show ( ) ;
+				scroll_update ( footer ) ;
+
+			}, 2500 ) ;
 		}
 
-		reveal_timeout = setTimeout ( function ( ) {
+		if ( ! canvas ) {
 
-			reveal_timeout = null ;
-			revealed = true ;
+			reveal_start ( ) ;
 
-			show ( ) ;
-			scroll_update ( footer ) ;
+			return ;
+		}
 
-		}, 2500 ) ;
+		function canvas_ready ( ) {
+
+			if (
+				canvas.width  > 0 &&
+				canvas.height > 0
+			) {
+
+				console.log ( 'footer [ reveal ] : canvas ready' ) ;
+
+				reveal_start ( ) ;
+
+				return ;
+			}
+
+			requestAnimationFrame ( canvas_ready ) ;
+		}
+
+		canvas_ready ( ) ;
 	}
 
 	function bind ( footer ) {
