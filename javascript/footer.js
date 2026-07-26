@@ -14,8 +14,10 @@ function footer_init ( ) {
 	}
 
 	var initialized = false ;
+	var revealed = false ;
 	var bootstrap_observer = null ;
 	var footer_observer = null ;
+	var reveal_timeout = null ;
 
 	function footer_get ( ) {
 
@@ -190,6 +192,24 @@ function footer_init ( ) {
 		}
 	}
 
+	function reveal ( footer ) {
+
+		if ( reveal_timeout ) {
+
+			clearTimeout ( reveal_timeout ) ;
+		}
+
+		reveal_timeout = setTimeout ( function ( ) {
+
+			reveal_timeout = null ;
+			revealed = true ;
+
+			show ( ) ;
+			scroll_update ( footer ) ;
+
+		}, 2500 ) ;
+	}
+
 	function bind ( footer ) {
 
 		console.log ( 'footer [ event ] : bind events' ) ;
@@ -198,7 +218,7 @@ function footer_init ( ) {
 
 		document.addEventListener ( 'pointerdown', function ( event ) {
 
-			if ( ! canvas ) {
+			if ( ! revealed || ! canvas ) {
 
 				return ;
 			}
@@ -219,7 +239,7 @@ function footer_init ( ) {
 
 		document.addEventListener ( 'pointerup', function ( ) {
 
-			if ( ! canvas ) {
+			if ( ! revealed || ! canvas ) {
 
 				return ;
 			}
@@ -231,7 +251,7 @@ function footer_init ( ) {
 
 		document.addEventListener ( 'pointercancel', function ( ) {
 
-			if ( ! canvas ) {
+			if ( ! revealed || ! canvas ) {
 
 				return ;
 			}
@@ -274,7 +294,6 @@ function footer_init ( ) {
 			console.log ( 'footer [ observer ] : mutation detected ', '[ ', mutations.length, ' ]' ) ;
 
 			assets_bind ( footer ) ;
-			footing_open ( ) ;
 			scroll_update ( footer ) ;
 		} ) ;
 
@@ -307,12 +326,14 @@ function footer_init ( ) {
 
 		initialized = true ;
 
+		hide ( ) ;
+
 		bind ( footer ) ;
 		assets_bind ( footer ) ;
 		observe ( footer ) ;
 
-		show ( ) ;
 		scroll_update ( footer ) ;
+		reveal ( footer ) ;
 
 		if ( document.fonts && document.fonts.ready ) {
 
@@ -320,7 +341,6 @@ function footer_init ( ) {
 
 				console.log ( 'footer [ font ] : ready' ) ;
 
-				footing_open ( ) ;
 				scroll_update ( footer ) ;
 			} ) ;
 		}
@@ -331,6 +351,8 @@ function footer_init ( ) {
 			bootstrap_observer = null ;
 		}
 	}
+
+	hide ( ) ;
 
 	bootstrap_observer = new MutationObserver ( function ( mutations ) {
 
