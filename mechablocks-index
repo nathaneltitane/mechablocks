@@ -423,4 +423,5 @@ else
 	echo
 
 	frobulator.cpt "Complete" "[ Sitemap ]"
+	echo
 fi
