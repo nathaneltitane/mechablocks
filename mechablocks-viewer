@@ -367,9 +367,9 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 				"https://mechablocks.com/${overlay_directory}/overlay.png",
 				"https://mechablocks.com/${instructions_samples_directory}/sample-01.png",
 				"https://mechablocks.com/${instructions_samples_directory}/sample-02.png",
-				"https://mechablocks.com/${instructions_samples_directory}/sample-03.png"
-				"https://mechablocks.com/${instructions_samples_directory}/sample-04.png"
-				"https://mechablocks.com/${instructions_samples_directory}/sample-05.png"
+				"https://mechablocks.com/${instructions_samples_directory}/sample-03.png",
+				"https://mechablocks.com/${instructions_samples_directory}/sample-04.png",
+				"https://mechablocks.com/${instructions_samples_directory}/sample-05.png",
 				"https://mechablocks.com/${instructions_samples_directory}/sample-06.png"
 			],
 			"url": "https://mechablocks.com/${model_directory}",
