@@ -7,8 +7,8 @@
    viewBox="0 0 270.93332 270.93334"
    version="1.1"
    id="svg8"
-   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
-   sodipodi:docname="logo-dimension.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   sodipodi:docname="logo-details.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.8730469"
-     inkscape:cx="512.26694"
-     inkscape:cy="511.99999"
+     inkscape:zoom="1.8828125"
+     inkscape:cx="512"
+     inkscape:cy="512"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -115,14 +115,14 @@
          id="path3824" />
       <path
          id="path3876"
-         style="fill:#ff0000;fill-opacity:1;stroke-width:0.512097"
-         d="M 135.46666 249.88709 A 36.870964 18.435482 0 0 1 98.595531 231.46392 L 98.595531 247.83864 A 36.870965 18.435482 0 0 0 135.46666 266.2742 L 135.46666 249.88709 z " />
+         style="fill:#ffdd55;fill-opacity:1;stroke-width:0.512097"
+         d="M 135.46666,249.88709 A 36.870964,18.435482 0 0 1 98.595531,231.46392 v 16.37472 a 36.870965,18.435482 0 0 0 36.871129,18.43556 z" />
       <path
          id="ellipse3866"
-         style="fill:#0000ff;fill-opacity:1;stroke-width:0.512097"
-         d="M 135.46666 249.88709 L 135.46666 266.2742 A 36.870965 18.435482 0 0 0 172.3378 247.83864 L 172.3378 231.45152 A 36.870964 18.435482 0 0 1 135.46666 249.88709 z " />
+         style="fill:#ffcc00;fill-opacity:1;stroke-width:0.512097"
+         d="m 135.46666,249.88709 v 16.38711 a 36.870965,18.435482 0 0 0 36.87114,-18.43556 v -16.38712 a 36.870964,18.435482 0 0 1 -36.87114,18.43557 z" />
       <ellipse
-         style="fill:#aaffaa;fill-opacity:1;stroke-width:0.512096"
+         style="fill:#fff6d5;fill-opacity:1;stroke-width:0.512096"
          id="ellipse3868"
          cx="135.46666"
          cy="231.45158"
