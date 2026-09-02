@@ -5,6 +5,9 @@
 	margin: 0px 0px 0px 0px;
 	position: absolute;
 	bottom: 0px;
+	right: 0px;
+
+	text-align: right;
 
 	opacity: 0;
 
