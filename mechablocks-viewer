@@ -5547,7 +5547,9 @@ cat << 3D-MODEL-PAGE-FOOTER ->> "${model_directory}/index.html"
 
 			<div class="footer">
 
-				<!-- modal loaders -->
+				<!-- edge border overlay -->
+
+				<div class="footer-border"></div>
 
 				<div id="contact-modal">
 
