@@ -44,6 +44,10 @@
 	pointer-events: none;
 
 	z-index: 10;
+
+	box-shadow:
+		inset 5px 0px 10px #aaaaaaff,
+		inset -5px 0px 10px #aaaaaaff;
 }
 
 .footer-button {
