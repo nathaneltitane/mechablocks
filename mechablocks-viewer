@@ -433,7 +433,27 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 				"priceCurrency": "USD",
 				"availability": "https://schema.org/InStock",
 				"url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=${model_paypal_id}"
-			}
+			},
+			"aggregateRating": {
+				"@type": "AggregateRating",
+				"ratingValue": "${model_average_rating}",
+				"reviewCount": "${model_review_count}"
+			},
+			"review": [
+				{
+					"@type": "Review",
+					"reviewRating": {
+						"@type": "Rating",
+						"ratingValue": "${model_rating_value}",
+						"bestRating": "5"
+					},
+					"author": {
+						"@type": "Person",
+						"name": "${model_customer_name}"
+					},
+					"reviewBody": "Instructions were super clear, built without any issues."
+				}
+			]
 		}
 
 		</script>

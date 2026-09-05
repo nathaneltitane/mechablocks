@@ -167,7 +167,27 @@
 				"priceCurrency": "USD",
 				"availability": "https://schema.org/InStock",
 				"url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=H3J9Q4CQ3UPEC"
-			}
+			},
+			"aggregateRating": {
+				"@type": "AggregateRating",
+				"ratingValue": "",
+				"reviewCount": ""
+			},
+			"review": [
+				{
+					"@type": "Review",
+					"reviewRating": {
+						"@type": "Rating",
+						"ratingValue": "",
+						"bestRating": "5"
+					},
+					"author": {
+						"@type": "Person",
+						"name": ""
+					},
+					"reviewBody": "Instructions were super clear, built without any issues."
+				}
+			]
 		}
 
 		</script>
@@ -2571,7 +2591,7 @@
 
 					loader.load (
 
-						'/minifigs/exports/minifig-yellow.dae',
+						'/minifigs/exports/minifig-purple.dae',
 
 						function ( collada ) {
 
@@ -2777,7 +2797,7 @@
 
 						function ( error ) {
 
-							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-yellow.dae', error );
+							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-purple.dae', error );
 
 						}
 
