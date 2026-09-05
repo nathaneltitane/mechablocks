@@ -1,11 +1,15 @@
 User-agent: *
 
-Disallow: /javascript/
-Disallow: /modules/
-Disallow: /logo/
-Disallow: /assets/
+Disallow: /avatar/
+Disallow: /baseplate/
+Disallow: /css/
 Disallow: /images/
+Disallow: /javascript/
+Disallow: /logo/
+Disallow: /minifigs/
+Disallow: /modules/
 Disallow: /renders/
+Disallow: /work-in-progress/
 
 Allow: /
 
