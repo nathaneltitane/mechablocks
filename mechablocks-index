@@ -136,7 +136,6 @@ directories_exclude_list=(
 	'./baseplate/'
 	'./css/'
 	'./exports/'
-	'./exports/'
 	'./images/'
 	'./javascript/'
 	'./logo/'
