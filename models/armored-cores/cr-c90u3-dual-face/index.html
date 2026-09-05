@@ -138,59 +138,91 @@
 			]
 		}
 
-		</script>
+	</script>
 
-		<!-- product -->
+	<!-- product -->
 
-		<script type="application/ld+json">
+	<script type="application/ld+json">
 
-		{
-			"@context": "https://schema.org",
-			"@type": "Product",
-			"name": "CR-C90U3 DUAL FACE – LEGO® MOC Instructions",
-			"brand": { "@type": "Brand", "name": "MechaBlocks" },
-			"category": "LEGO® MOC",
-			"description": "Custom LEGO® MOC with interactive 3D preview. Purchase step-by-step building instructions (digital download).",
-			"image": [
-				"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/renders/overlay/overlay.png",
-				"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-01.png",
-				"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-02.png",
-				"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-03.png",
-				"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-04.png",
-				"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-05.png",
-				"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-06.png"
-			],
-			"url": "https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face",
-			"offers": {
-				"@type": "Offer",
-				"price": "20.00",
-				"priceCurrency": "USD",
-				"availability": "https://schema.org/InStock",
-				"url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RPDUGB5B8PA9Y"
-			},
-			"aggregateRating": {
-				"@type": "AggregateRating",
-				"ratingValue": "",
-				"reviewCount": ""
-			},
-			"review": [
-				{
-					"@type": "Review",
-					"reviewRating": {
-						"@type": "Rating",
-						"ratingValue": "",
-						"bestRating": "5"
+	{
+		"@context": "https://schema.org",
+		"@type": "Product",
+		"name": "CR-C90U3 DUAL FACE – LEGO® MOC Instructions",
+		"brand": { "@type": "Brand", "name": "MechaBlocks" },
+		"category": "LEGO® MOC",
+		"description": "Custom LEGO® MOC with interactive 3D preview. Purchase step-by-step building instructions (digital download).",
+		"image": [
+			"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/renders/overlay/overlay.png",
+			"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-01.png",
+			"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-02.png",
+			"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-03.png",
+			"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-04.png",
+			"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-05.png",
+			"https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face/instructions/samples/sample-06.png"
+		],
+		"url": "https://mechablocks.com/models/armored-cores/cr-c90u3-dual-face",
+		"offers": {
+			"@type": "Offer",
+			"price": "20.00",
+			"priceCurrency": "USD",
+			"availability": "https://schema.org/InStock",
+			"url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RPDUGB5B8PA9Y",
+			"shippingDetails": {
+				"@type": "OfferShippingDetails",
+				"shippingRate": {
+					"@type": "MonetaryAmount",
+					"value": "0",
+					"currency": "USD"
+				},
+				"shippingDestination": {
+					"@type": "DefinedRegion",
+					"addressCountry": "US"
+				},
+				"deliveryTime": {
+					"@type": "ShippingDeliveryTime",
+					"handlingTime": {
+						"@type": "QuantitativeValue",
+						"minValue": "0",
+						"maxValue": "0",
+						"unitCode": "DAY"
 					},
-					"author": {
-						"@type": "Person",
-						"name": ""
-					},
-					"reviewBody": "Instructions were super clear, built without any issues."
+					"transitTime": {
+						"@type": "QuantitativeValue",
+						"minValue": "0",
+						"maxValue": "0",
+						"unitCode": "DAY"
+					}
 				}
-			]
-		}
+			},
+			"hasMerchantReturnPolicy": {
+				"@type": "MerchantReturnPolicy",
+				"applicableCountry": "US",
+				"returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+			}
+		},
+		"aggregateRating": {
+			"@type": "AggregateRating",
+			"ratingValue": "",
+			"reviewCount": ""
+		},
+		"review": [
+			{
+				"@type": "Review",
+				"reviewRating": {
+					"@type": "Rating",
+					"ratingValue": "",
+					"bestRating": "5"
+				},
+				"author": {
+					"@type": "Person",
+					"name": ""
+				},
+				"reviewBody": "Instructions were super clear, built without any issues."
+			}
+		]
+	}
 
-		</script>
+	</script>
 
 		<!-- page information + primary image -->
 
@@ -2591,7 +2623,7 @@
 
 					loader.load (
 
-						'/minifigs/exports/minifig-white.dae',
+						'/minifigs/exports/minifig-orange.dae',
 
 						function ( collada ) {
 
@@ -2797,7 +2829,7 @@
 
 						function ( error ) {
 
-							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-white.dae', error );
+							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-orange.dae', error );
 
 						}
 
