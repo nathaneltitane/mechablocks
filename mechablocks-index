@@ -131,12 +131,18 @@ directories_exclude_list=(
 	'./.git/'
 	'./.github/'
 	'./node_modules/'
-	'./modules/'
-	'./logo/'
 	'./assets/'
-	'./images/'
-	'./renders/'
+	'./avatar/'
+	'./baseplate/'
+	'./css/'
 	'./exports/'
+	'./exports/'
+	'./images/'
+	'./javascript/'
+	'./logo/'
+	'./minifigs/'
+	'./modules/'
+	'./renders/'
 )
 
 directories_schema_list=(
