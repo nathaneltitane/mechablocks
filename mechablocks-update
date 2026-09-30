@@ -168,31 +168,31 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "-d, --directory      Specify [d]irectory to load models from."
+			echo -e "-d, --directory       Specify [d]irectory to load models from."
 			echo
-			echo -e "-a, --all            Update [a]ll website framework and content."
+			echo -e "-a, --all             Update [a]ll website framework and content."
 			echo
-			echo -e "-e, --export         Update models [e]xports content."
+			echo -e "-e, --export          Update models [e]xports content."
 			echo
-			echo -e "-r, --render         Update models [r]enders content."
+			echo -e "-r, --render          Update models [r]enders content."
 			echo
-			echo -e "-s, --instructions   Update models in[s]tructions content."
+			echo -e "-s, --instructions    Update models in[s]tructions content."
 			echo
-			echo -e "-m, --models         Update [m]odels content."
+			echo -e "-m, --models          Update [m]odels content."
 			echo
-			echo -e "-i, --images         Update model [i]mages."
+			echo -e "-i, --images          Update model [i]mages."
 			echo
-			echo -e "-w, --drawer         Update dra[w]er content."
+			echo -e "-w, --drawer          Update dra[w]er content."
 			echo
-			echo -e "-u, --menu           Update models men[u] content."
+			echo -e "-u, --menu            Update models men[u] content."
 			echo
-			echo -e "-v, --viewer         Update models [v]iewer content."
+			echo -e "-v, --viewer          Update models [v]iewer content."
 			echo
-			echo -e "-x, --index          Update website inde[x]ing sitemap."
+			echo -e "-x, --index           Update website inde[x]ing sitemap."
 			echo
-			echo -e "-h, --help           Show [h]elp and usage information."
+			echo -e "-h, --help            Show [h]elp and usage information."
 			echo
-			echo -e "'${script}'          [ Version // ${version} ]"
+			echo -e "'${script}'           [ Version // ${version} ]"
 			echo
 
 			exit
