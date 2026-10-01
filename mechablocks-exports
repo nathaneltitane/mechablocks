@@ -181,7 +181,5 @@ done
 list=()
 
 frobulator.inf "Models" "[ ${count} ]"
-echo
 
 frobulator.cpt "Complete" "[ Exports ]"
-echo

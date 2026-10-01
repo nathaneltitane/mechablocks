@@ -165,10 +165,8 @@ baseplate_directory="${PWD}"/baseplate
 # functions ////////////////////////////////////////////////////////////////////
 
 frobulator.inf "Generating model entries"
-echo
 
 frobulator.fwd "Writing..."
-echo
 
 # values
 
@@ -5822,7 +5820,5 @@ cat << 3D-MODEL-PAGE ->> "${model_directory}/index.html"
 done
 
 frobulator.inf "Models" "[ ${count} ]"
-echo
 
 frobulator.cpt "Complete" "[ Viewer ]"
-echo

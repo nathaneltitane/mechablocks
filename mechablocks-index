@@ -360,7 +360,6 @@ schema_homepage_update () {
 	if [ ! -f "${index_homepage}" ]
 	then
 		frobulator.wrn "Homepage not found" "[ ${index_homepage} ]"
-		echo
 
 		return 1
 	fi
@@ -369,7 +368,6 @@ schema_homepage_update () {
 	   ! grep -q "${marker_schema_end}" "${index_homepage}"
 	then
 		frobulator.wrn "Schema markers not found" "[ ${index_homepage} ]"
-		echo
 
 		return 1
 	fi
@@ -415,14 +413,12 @@ schema_homepage_update () {
 	rm -f "${output_schema}"
 
 	frobulator.inf "Schema updated" "[ ${index_homepage} ]"
-	echo
 
 }
 
 # initialize ///////////////////////////////////////////////////////////////////
 
 frobulator.fwd "Writing..."
-echo
 
 # write header /////////////////////////////////////////////////////////////////
 
@@ -473,22 +469,16 @@ FOOTER
 if [ "${page_count}" -eq 0 ]
 then
 	frobulator.err "No URLs found" "[ ${url_site} ]"
-	echo
 
 	frobulator.wrn "Script must be run from site root directory."
-	echo
 
 	exit 1
 else
 	frobulator.inf "Sitemap written" "[ ${output_sitemap} ]"
-	echo
 
 	frobulator.inf "URL count" "[ ${page_count} ]"
-	echo
 
 	frobulator.inf "Schema URL count" "[ ${#url_schemas[@]} ]"
-	echo
 
 	frobulator.cpt "Complete" "[ Sitemap ]"
-	echo
 fi

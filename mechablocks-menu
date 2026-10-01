@@ -163,10 +163,8 @@ modules_directory="${PWD}"/modules
 # functions ////////////////////////////////////////////////////////////////////
 
 frobulator.inf "Generating model entries"
-echo
 
 frobulator.fwd "Writing..."
-echo
 
 # generate header
 
@@ -384,7 +382,5 @@ cat << FOOTER ->> "${modules_directory}/"menu.html
 FOOTER
 
 frobulator.inf "Models" "[ ${count} ]"
-echo
 
 frobulator.cpt "Complete" "[ Menu ]"
-echo
