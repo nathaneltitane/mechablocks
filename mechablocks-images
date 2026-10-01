@@ -188,7 +188,6 @@ synchronize () {
 frobulator.directory "${server_directory}" images
 
 frobulator.fwd "Copying..."
-echo
 
 # values
 
@@ -269,7 +268,6 @@ done
 # update random background generator with new image file count
 
 frobulator.inf "Updating" "[ Images ]"
-echo
 
 sed															\
 	-i														\
@@ -277,7 +275,5 @@ sed															\
 															"${server_javascript_directory}"/background.js
 
 frobulator.inf "Models" "[ ${count} ]"
-echo
 
 frobulator.cpt "Complete" "[ Images ]"
-echo

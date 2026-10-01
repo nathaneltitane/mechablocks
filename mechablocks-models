@@ -172,7 +172,6 @@ server_javascript_directory="${server_directory}"/javascript
 # synchronize //////////////////////////////////////////////////////////////////
 
 frobulator.inf "Synchronizing entries" "[ models ]"
-echo
 
 if [[ ! -d "${server_models_directory}" ]]
 then
@@ -194,4 +193,3 @@ rsync							\
 frobulator.progress sync
 
 frobulator.cpt "Complete" "[ Models ]"
-echo
