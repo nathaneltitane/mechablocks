@@ -282,7 +282,7 @@ do
 			color="green"
 		fi
 
-		if [[ -f "${model_directory}"/work-in-progress ]] || \
+		if [[ -f "${model_directory}"/work-in-progress ]] ||
 		   [[ "${model_paypal_id}" = "" ]]
 		then
 			model_paypal_id="N/A"
@@ -5146,7 +5146,7 @@ keywords_list=(
 	super
 )
 
-if [[ -f "${model_directory}"/options ]] || \
+if [[ -f "${model_directory}"/options ]] ||
    [[ -f "${model_directory}"/modes   ]]
 then
 
