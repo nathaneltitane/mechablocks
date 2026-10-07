@@ -69,29 +69,29 @@ version="2026-10-04"
 
 # variables ────────────────────────────────────────────────────────────────────
 
-server_directory="${PWD}"
+directory_server="${PWD}"
 
-site_address='https://mechablocks.com'
+address_site='https://mechablocks.com'
 
-site_name='MechaBlocks'
+name_site='MechaBlocks'
 
-site_name_stylized='MECHA // BLOCKS'
+name_site_stylized='MECHA // BLOCKS'
 
-site_description='Custom LEGO® Mecha MOCs, 3D Viewer & Building Instructions'
+description_site='Custom LEGO® Mecha MOCs, 3D Viewer & Building Instructions'
 
-site_slogan='Where LEGO® meets Open Source'
+slogan_site='Where LEGO® meets Open Source'
 
-site_logo='logo/logo-red.png'
+path_logo='logo/logo-red.png'
 
-output_sitemap='sitemap.xml'
+file_sitemap='sitemap.xml'
 
-index_homepage='./index.html'
+file_homepage='./index.html'
 
 marker_schema_begin='<!-- schema-itemlist-begin -->'
 
 marker_schema_end='<!-- schema-itemlist-end -->'
 
-directories_exclude_list=(
+list_directories_excluded=(
 	'./.git/'
 	'./.github/'
 	'./node_modules/'
@@ -108,29 +108,29 @@ directories_exclude_list=(
 	'./renders/'
 )
 
-directories_schema_list=(
+list_directories_schema=(
 	'./models/'
 )
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
-url_site="${site_address%/}"
+url_site="${address_site%/}"
 
-page_count=0
+count_pages=0
 
 position=0
 
-url_schemas=()
+list_urls_schema=()
 
 # functions ────────────────────────────────────────────────────────────────────
 
 directory_excluded_check () {
 
-	file_path="${1}"
+	path_file="${1}"
 
-	for directory_path in "${directories_exclude_list[@]}"
+	for path_directory in "${list_directories_excluded[@]}"
 	do
-		if [[ "${file_path}" == "${directory_path}"* ]]
+		if [[ "${path_file}" == "${path_directory}"* ]]
 		then
 			return 0
 		fi
@@ -142,11 +142,11 @@ directory_excluded_check () {
 
 schema_included_check () {
 
-	file_path="${1}"
+	path_file="${1}"
 
-	for directory_path in "${directories_schema_list[@]}"
+	for path_directory in "${list_directories_schema[@]}"
 	do
-		if [[ "${file_path}" == "${directory_path}"* ]]
+		if [[ "${path_file}" == "${path_directory}"* ]]
 		then
 			return 0
 		fi
@@ -158,24 +158,24 @@ schema_included_check () {
 
 url_prepare () {
 
-	url_path="${1}"
+	path_url="${1}"
 
-	url_path="${url_path#./}"
-	url_path="${url_path#index.html}"
-	url_path="${url_path%index.html}"
-	url_path="${url_path%/}"
+	path_url="${path_url#./}"
+	path_url="${path_url#index.html}"
+	path_url="${path_url%index.html}"
+	path_url="${path_url%/}"
 
-	if [ "${url_path}" = "." ] ||
-	   [ "${url_path}" = ""  ]
+	if [ "${path_url}" = "." ] ||
+	   [ "${path_url}" = ""  ]
 	then
-		url_path="/"
+		path_url="/"
 	else
-		url_path="/${url_path}/"
+		path_url="/${path_url}/"
 	fi
 
-	url_path="${url_path//\/\//\/}"
+	path_url="${path_url//\/\//\/}"
 
-	url_full="${url_site}${url_path}"
+	url_full="${url_site}${path_url}"
 
 }
 
@@ -183,15 +183,15 @@ url_index () {
 
 	url_prepare "${1}"
 
-	file_path="${2}"
+	path_file="${2}"
 
-	date_modified="$(date -u -r "${file_path}" '+%Y-%m-%d')"
+	date_modified="$(date -u -r "${path_file}" '+%Y-%m-%d')"
 
 	frequency_change="weekly"
 
 	priority="0.80"
 
-	cat >> "${output_sitemap}" << URL
+	cat >> "${file_sitemap}" << URL
 
 	<url>
 
@@ -206,17 +206,17 @@ url_index () {
 	</url>
 URL
 
-	(( page_count++ ))
+	(( count_pages ++ ))
 
 }
 
 schema_itemlist_write () {
 
-	output_schema="${1}"
+	file_schema="${1}"
 
-	schema_count="${#url_schemas[@]}"
+	count_schema="${#list_urls_schema[@]}"
 
-	cat > "${output_schema}" << SCHEMA-BEGIN
+	cat > "${file_schema}" << SCHEMA-BEGIN
 
 		<script type="application/ld+json">
 
@@ -225,28 +225,28 @@ schema_itemlist_write () {
 			"@graph": [
 				{
 					"@type": "WebSite",
-					"@id": "${site_address}/#website",
-					"name": "${site_name}",
-					"alternateName": "${site_name_stylized}",
-					"url": "${site_address}/",
-					"description": "${site_description}",
+					"@id": "${address_site}/#website",
+					"name": "${name_site}",
+					"alternateName": "${name_site_stylized}",
+					"url": "${address_site}/",
+					"description": "${description_site}",
 					"publisher": {
-						"@id": "${site_address}/#organization"
+						"@id": "${address_site}/#organization"
 					}
 				},
 				{
 					"@type": "Organization",
-					"@id": "${site_address}/#organization",
-					"name": "${site_name}",
+					"@id": "${address_site}/#organization",
+					"name": "${name_site}",
 					"alternateName": [
-						"${site_name_stylized}",
-						"${site_name}"
+						"${name_site_stylized}",
+						"${name_site}"
 					],
-					"url": "${site_address}/",
-					"slogan": "${site_slogan}",
+					"url": "${address_site}/",
+					"slogan": "${slogan_site}",
 					"logo": {
 						"@type": "ImageObject",
-						"url": "${site_address}/${site_logo}"
+						"url": "${address_site}/${path_logo}"
 					},
 					"founder": {
 						"@type": "Person",
@@ -255,43 +255,43 @@ schema_itemlist_write () {
 				},
 				{
 					"@type": "BreadcrumbList",
-					"@id": "${site_address}/#breadcrumbs",
+					"@id": "${address_site}/#breadcrumbs",
 					"itemListElement": [
 						{
 							"@type": "ListItem",
 							"position": 1,
 							"name": "Home",
-							"item": "${site_address}/"
+							"item": "${address_site}/"
 						}
 					]
 				},
 				{
 					"@type": "CollectionPage",
-					"@id": "${site_address}/#collection",
-					"name": "${site_name} - LEGO® Mecha MOCs",
-					"url": "${site_address}/",
-					"description": "${site_description}",
+					"@id": "${address_site}/#collection",
+					"name": "${name_site} - LEGO® Mecha MOCs",
+					"url": "${address_site}/",
+					"description": "${description_site}",
 					"isPartOf": {
-						"@id": "${site_address}/#website"
+						"@id": "${address_site}/#website"
 					},
 					"mainEntity": {
 						"@type": "ItemList",
-						"numberOfItems": ${schema_count},
+						"numberOfItems": ${count_schema},
 						"itemListElement": [
 SCHEMA-BEGIN
 
-	for url_schema in "${url_schemas[@]}"
+	for url_schema in "${list_urls_schema[@]}"
 	do
-		(( position++ ))
+		(( position ++ ))
 
-		if [ "${position}" -lt "${schema_count}" ]
+		if [ "${position}" -lt "${count_schema}" ]
 		then
 			separator=','
 		else
 			separator=''
 		fi
 
-		cat >> "${output_schema}" << SCHEMA-ITEM
+		cat >> "${file_schema}" << SCHEMA-ITEM
 							{
 								"@type": "ListItem",
 								"position": ${position},
@@ -300,11 +300,11 @@ SCHEMA-BEGIN
 SCHEMA-ITEM
 	done
 
-	cat >> "${output_schema}" << SCHEMA-END
+	cat >> "${file_schema}" << SCHEMA-END
 						]
 					},
 					"breadcrumb": {
-						"@id": "${site_address}/#breadcrumbs"
+						"@id": "${address_site}/#breadcrumbs"
 					}
 				}
 			]
@@ -315,36 +315,36 @@ SCHEMA-END
 
 schema_homepage_update () {
 
-	if [ ! -f "${index_homepage}" ]
+	if [ ! -f "${file_homepage}" ]
 	then
-		frobulator.wrn "Homepage not found" "[ ${index_homepage} ]"
+		frobulator.wrn "Homepage not found" "[ ${file_homepage} ]"
 
 		return 1
 	fi
 
-	if ! grep -q "${marker_schema_begin}" "${index_homepage}" ||
-	   ! grep -q "${marker_schema_end}" "${index_homepage}"
+	if ! grep -q "${marker_schema_begin}" "${file_homepage}" ||
+	   ! grep -q "${marker_schema_end}" "${file_homepage}"
 	then
-		frobulator.wrn "Schema markers not found" "[ ${index_homepage} ]"
+		frobulator.wrn "Schema markers not found" "[ ${file_homepage} ]"
 
 		return 1
 	fi
 
-	output_schema="$(mktemp)"
+	file_schema="$(mktemp)"
 
-	output_homepage="$(mktemp)"
+	file_homepage_output="$(mktemp)"
 
-	schema_itemlist_write "${output_schema}"
+	schema_itemlist_write "${file_schema}"
 
 	awk												\
 		-v marker_begin="${marker_schema_begin}"	\
 		-v marker_end="${marker_schema_end}"		\
-		-v output_schema="${output_schema}"			\
+		-v file_schema="${file_schema}"				\
 		'
 			index($0, marker_begin) {
 				print
 
-				while ((getline line < output_schema) > 0) {
+				while ((getline line < file_schema) > 0) {
 					print line
 				}
 
@@ -364,13 +364,13 @@ schema_homepage_update () {
 			skip != 1 {
 				print
 			}
-		' "${index_homepage}" > "${output_homepage}"
+		' "${file_homepage}" > "${file_homepage_output}"
 
-	mv "${output_homepage}" "${index_homepage}"
+	mv "${file_homepage_output}" "${file_homepage}"
 
-	rm -f "${output_schema}"
+	rm -f "${file_schema}"
 
-	frobulator.inf "Schema updated" "[ ${index_homepage} ]"
+	frobulator.inf "Schema updated" "[ ${file_homepage} ]"
 
 }
 
@@ -380,7 +380,7 @@ frobulator.fwd "Writing..."
 
 # write header ─────────────────────────────────────────────────────────────────
 
-cat > "${output_sitemap}" << HEADER
+cat > "${file_sitemap}" << HEADER
 <?xml version="1.0" encoding="UTF-8"?>
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -390,22 +390,22 @@ HEADER
 
 IFS=$'\n'
 
-index_files=$(find . -type f -name 'index.html' | sort)
+list_files_index=$(find . -type f -name 'index.html' | sort)
 
-for file_path in ${index_files}
+for path_file in ${list_files_index}
 do
-	if directory_excluded_check "${file_path}"
+	if directory_excluded_check "${path_file}"
 	then
 		continue
 	fi
 
-	url_index "${file_path}" "${file_path}"
+	url_index "${path_file}" "${path_file}"
 
-	if schema_included_check "${file_path}"
+	if schema_included_check "${path_file}"
 	then
-		url_prepare "${file_path}"
+		url_prepare "${path_file}"
 
-		url_schemas+=("${url_full}")
+		list_urls_schema+=("${url_full}")
 	fi
 done
 
@@ -417,14 +417,14 @@ schema_homepage_update
 
 # write footer ─────────────────────────────────────────────────────────────────
 
-cat >> "${output_sitemap}" << FOOTER
+cat >> "${file_sitemap}" << FOOTER
 
 </urlset>
 FOOTER
 
 # report ───────────────────────────────────────────────────────────────────────
 
-if [ "${page_count}" -eq 0 ]
+if [ "${count_pages}" -eq 0 ]
 then
 	frobulator.err "No URLs found" "[ ${url_site} ]"
 
@@ -432,11 +432,11 @@ then
 
 	exit 1
 else
-	frobulator.inf "Sitemap written" "[ ${output_sitemap} ]"
+	frobulator.inf "Sitemap written" "[ ${file_sitemap} ]"
 
-	frobulator.inf "URL count" "[ ${page_count} ]"
+	frobulator.inf "URL count" "[ ${count_pages} ]"
 
-	frobulator.inf "Schema URL count" "[ ${#url_schemas[@]} ]"
+	frobulator.inf "Schema URL count" "[ ${#list_urls_schema[@]} ]"
 
 	frobulator.cpt "Complete" "[ Sitemap ]"
 fi

@@ -69,7 +69,7 @@ version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
-while (($#))
+while (( $# ))
 do
 	case "${1}"
 	in
@@ -114,9 +114,9 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
-models_directory="${PWD}"/models
-minifigs_directory="${PWD}"/minifigs
-baseplate_directory="${PWD}"/baseplate
+directory_models="${PWD}"/models
+directory_minifigs="${PWD}"/minifigs
+directory_baseplate="${PWD}"/baseplate
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
@@ -128,147 +128,147 @@ frobulator.fwd "Writing..."
 
 # values
 
-extensions_list+=(
+list_extensions+=(
 	dae
 )
 
-for extension in ${extensions_list[@]}
+for extension in ${list_extensions[@]}
 do
-	count=1
+	count_models=1
 
-	models_list=( $(find ${models_directory} -type f -iname "*.${extension}" ! -iname "*instructions*") )
+	list_models=( $(find ${directory_models} -type f -iname "*.${extension}" ! -iname "*instructions*") )
 
 	# set IFS
 
 	IFS=$'\n'
 
-	for model_path in ${models_list[@]}
+	for path_model in ${list_models[@]}
 	do
-		model_path=$(echo "${model_path}" | cut -d '/' -f6-)
+		path_model=$(echo "${path_model}" | cut -d '/' -f6-)
 
 		# get model file name from path
 
-		model_file="${model_path##*/}"
+		file_model="${path_model##*/}"
 
 		# strip extension from model file name
 
-		model_name="${model_file%.*}"
+		name_model="${file_model%.*}"
 
 		# use model directory as root
 
-		model_directory="${model_path%/*/*}"
+		directory_model="${path_model%/*/*}"
 
 		# define model category
 
-		model_category_directory="${model_path%/*/*/*}"
+		directory_category="${path_model%/*/*/*}"
 
-		model_category_title=$(cat "${model_path%/*/*/*}"/title)
+		title_collection=$(cat "${path_model%/*/*/*}"/title)
 
 		# define model output directories
 
-		export_directory="${model_directory}"/exports
+		directory_export="${directory_model}"/exports
 
-		instructions_directory="${model_directory}"/instructions
+		directory_instructions="${directory_model}"/instructions
 
-		instructions_samples_directory="${instructions_directory}"/samples
+		directory_samples_instructions="${directory_instructions}"/samples
 
-		render_directory="${model_directory}"/renders
+		directory_render="${directory_model}"/renders
 
-		flat_directory="${render_directory}"/flat
+		directory_flat="${directory_render}"/flat
 
-		overlay_directory="${render_directory}"/overlay
+		directory_overlay="${directory_render}"/overlay
 
-		thumbnail_directory="${render_directory}"/thumbnail
+		directory_thumbnail="${directory_render}"/thumbnail
 
 		# define model specific directories
 
-		model_category=$(cat "${model_directory%/*}"/title)
+		title_category=$(cat "${directory_model%/*}"/title)
 
-		model_title=$(cat "${model_directory}"/title)
+		title_model=$(cat "${directory_model}"/title)
 
-		model_title_string=$(echo ${model_title//\<\/\br\>/})
+		text_title=$(echo ${title_model//\<\/\br\>/})
 
-		paypal_currency="US\$"
+		currency_paypal="US\$"
 
-		model_paypal="${model_directory}"/paypal
+		file_paypal="${directory_model}"/paypal
 
-		model_paypal_id=$(cat "${model_paypal}")
+		id_paypal=$(cat "${file_paypal}")
 
-		model_paypal_url_base='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id'
+		url_paypal_base='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id'
 
-		model_paypal_url="${model_paypal_url_base}=${model_paypal_id}"
+		url_paypal="${url_paypal_base}=${id_paypal}"
 
-		model_pieces="${model_directory}"/pieces
+		file_pieces="${directory_model}"/pieces
 
-		model_pieces_count=$(cat "${model_pieces}")
+		count_pieces=$(cat "${file_pieces}")
 
-		model_instructions="${model_directory}"/instructions
+		path_instructions="${directory_model}"/instructions
 
-		model_price="${model_directory}"/price
+		file_price="${directory_model}"/price
 
-		model_instructions_price=$(cat "${model_price}")
+		price_instructions=$(cat "${file_price}")
 
 		# randomize minifig helper color
 
-		minifig_prefix="minifig-"
+		prefix_minifig="minifig-"
 
-		minifigs_list=$(find ${minifigs_directory} -type f -iname "*.${extension}" )
+		list_minifigs=$(find ${directory_minifigs} -type f -iname "*.${extension}" )
 
-		for minifig_path in ${minifigs_list[@]}
+		for path_minifig in ${list_minifigs[@]}
 		do
-			minifig_file="${minifig_path##*/}"
+			file_minifig="${path_minifig##*/}"
 
-			file_color=${minifig_file#"${minifig_prefix}"}
+			file_color=${file_minifig#"${prefix_minifig}"}
 
-			color=${file_color%.*}
+			name_color=${file_color%.*}
 
-			colors_list+=("$color")
+			list_colors+=("$name_color")
 		done
 
-		colors_list_count=${#colors_list[@]}
+		count_colors=${#list_colors[@]}
 
-		color_index_random=$(( RANDOM % colors_list_count ))
+		index_color_random=$(( RANDOM % count_colors ))
 
-		color_minifig=${colors_list[color_index_random]}
+		color_minifig=${list_colors[index_color_random]}
 
 		# generate 3d model page
 
-		if [[ -f "${model_directory}"/work-in-progress ]]
+		if [[ -f "${directory_model}"/work-in-progress ]]
 		then
-			color="orange"
+			name_color="orange"
 		else
-			color="green"
+			name_color="green"
 		fi
 
-		if [[ -f "${model_directory}"/work-in-progress ]] ||
-		   [[ "${model_paypal_id}" = "" ]]
+		if [[ -f "${directory_model}"/work-in-progress ]] ||
+		   [[ "${id_paypal}" = "" ]]
 		then
-			model_paypal_id="N/A"
+			id_paypal="N/A"
 
-			status_font_indicator="status-font-progress"
+			class_status_font="status-font-progress"
 
-			status_message="NOT AVAILABLE FOR PURCHASE"
+			message_status="NOT AVAILABLE FOR PURCHASE"
 
-			status_button_message="INSTRUCTIONS NOT AVAILABLE"
+			message_status_button="INSTRUCTIONS NOT AVAILABLE"
 
-			status_button_color="status-button-progress"
+			class_status_button="status-button-progress"
 
-			marker_html="div"
+			tag_purchase="div"
 		else
-			model_paypal_id="${model_paypal_id}"
+			id_paypal="${id_paypal}"
 
-			status_font_indicator="status-font-available"
+			class_status_font="status-font-available"
 
-			status_message="AVAILABLE FOR PURCHASE"
+			message_status="AVAILABLE FOR PURCHASE"
 
-			status_button_message="PURCHASE INSTRUCTIONS"
+			message_status_button="PURCHASE INSTRUCTIONS"
 
-			status_button_color="status-button-available"
+			class_status_button="status-button-available"
 
-			marker_html="a"
+			tag_purchase="a"
 		fi
 
-cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
+cat << 3D-MODEL-PAGE-HEADER -> "${directory_model}/index.html"
 <!DOCTYPE html>
 
 <html lang="en">
@@ -293,16 +293,16 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 
 		<!-- title -->
 
-		<title>MECHA // BLOCKS [ MechaBlocks  - ${model_title_string} - LEGO® Mecha MOC - 3D Preview & Instructions</title>
+		<title>MECHA // BLOCKS [ MechaBlocks  - ${text_title} - LEGO® Mecha MOC - 3D Preview & Instructions</title>
 
 		<!-- page -->
 
-		<meta name="title"					content="MECHA // BLOCKS [ MechaBlocks ]  - ${model_title_string} - LEGO® Mecha MOC - 3D Preview & Instructions">
-		<meta name="description"			content="Build the ${model_title_string} from the ${model_category_title} collection: interactive 3D preview, dimensions, and LEGO® MOC building instructions.">
+		<meta name="title"					content="MECHA // BLOCKS [ MechaBlocks ]  - ${text_title} - LEGO® Mecha MOC - 3D Preview & Instructions">
+		<meta name="description"			content="Build the ${text_title} from the ${title_collection} collection: interactive 3D preview, dimensions, and LEGO® MOC building instructions.">
 
 		<!-- domain -->
 
-		<link rel="canonical" href="https://mechablocks.com/${model_directory}/">
+		<link rel="canonical" href="https://mechablocks.com/${directory_model}/">
 
 		<!-- favicon -->
 
@@ -334,17 +334,17 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 
 		<meta property="og:type"			content="website">
 		<meta property="og:site_name"		content="MECHA // BLOCKS">
-		<meta property="og:url"				content="https://mechablocks.com/${model_directory}">
-		<meta property="og:title"			content="${model_title_string} - MECHA // BLOCKS [ MechaBlocks ]  - LEGO® Mecha MOC - 3D Preview & Instructions">
-		<meta property="og:description"		content="Build the ${model_title_string} from the ${model_category_title} collection: interactive 3D preview, dimensions, and LEGO® MOC building instructions.">
-		<meta property="og:image"			content="https://mechablocks.com/${overlay_directory}/overlay.png">
+		<meta property="og:url"				content="https://mechablocks.com/${directory_model}">
+		<meta property="og:title"			content="${text_title} - MECHA // BLOCKS [ MechaBlocks ]  - LEGO® Mecha MOC - 3D Preview & Instructions">
+		<meta property="og:description"		content="Build the ${text_title} from the ${title_collection} collection: interactive 3D preview, dimensions, and LEGO® MOC building instructions.">
+		<meta property="og:image"			content="https://mechablocks.com/${directory_overlay}/overlay.png">
 
 		<meta name="twitter:card"			content="summary_large_image">
 		<meta property="twitter:domain"		content="mechablocks.com">
-		<meta property="twitter:url"		content="https://mechablocks.com/${model_directory}">
-		<meta name="twitter:title"			content="${model_title_string} - MECHA // BLOCKS [ MechaBlocks ]  - LEGO® Mecha MOC - 3D Preview & Instructions">
-		<meta name="twitter:description"	content="Build the ${model_title_string} from the ${model_category_title} collection: interactive 3D preview, dimensions, and LEGO® MOC building instructions.">
-		<meta name="twitter:image"			content="https://mechablocks.com/${overlay_directory}/overlay.png">
+		<meta property="twitter:url"		content="https://mechablocks.com/${directory_model}">
+		<meta name="twitter:title"			content="${text_title} - MECHA // BLOCKS [ MechaBlocks ]  - LEGO® Mecha MOC - 3D Preview & Instructions">
+		<meta name="twitter:description"	content="Build the ${text_title} from the ${title_collection} collection: interactive 3D preview, dimensions, and LEGO® MOC building instructions.">
+		<meta name="twitter:image"			content="https://mechablocks.com/${directory_overlay}/overlay.png">
 
 		<!-- libraries -->
 
@@ -395,7 +395,7 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 					"name": "What do I get when I purchase?",
 					"acceptedAnswer": {
 						"@type": "Answer",
-						"text": "A digital set of step-by-step building instructions for the '${model_title}' LEGO® MOC."
+						"text": "A digital set of step-by-step building instructions for the '${title_model}' LEGO® MOC."
 					}
 				},
 				{
@@ -418,26 +418,26 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 	{
 		"@context": "https://schema.org",
 		"@type": "Product",
-		"name": "${model_title} – LEGO® MOC Instructions",
+		"name": "${title_model} – LEGO® MOC Instructions",
 		"brand": { "@type": "Brand", "name": "MechaBlocks" },
 		"category": "LEGO® MOC",
 		"description": "Custom LEGO® MOC with interactive 3D preview. Purchase step-by-step building instructions (digital download).",
 		"image": [
-			"https://mechablocks.com/${overlay_directory}/overlay.png",
-			"https://mechablocks.com/${instructions_samples_directory}/sample-01.png",
-			"https://mechablocks.com/${instructions_samples_directory}/sample-02.png",
-			"https://mechablocks.com/${instructions_samples_directory}/sample-03.png",
-			"https://mechablocks.com/${instructions_samples_directory}/sample-04.png",
-			"https://mechablocks.com/${instructions_samples_directory}/sample-05.png",
-			"https://mechablocks.com/${instructions_samples_directory}/sample-06.png"
+			"https://mechablocks.com/${directory_overlay}/overlay.png",
+			"https://mechablocks.com/${directory_samples_instructions}/sample-01.png",
+			"https://mechablocks.com/${directory_samples_instructions}/sample-02.png",
+			"https://mechablocks.com/${directory_samples_instructions}/sample-03.png",
+			"https://mechablocks.com/${directory_samples_instructions}/sample-04.png",
+			"https://mechablocks.com/${directory_samples_instructions}/sample-05.png",
+			"https://mechablocks.com/${directory_samples_instructions}/sample-06.png"
 		],
-		"url": "https://mechablocks.com/${model_directory}",
+		"url": "https://mechablocks.com/${directory_model}",
 		"offers": {
 			"@type": "Offer",
-			"price": "${model_instructions_price}",
+			"price": "${price_instructions}",
 			"priceCurrency": "USD",
 			"availability": "https://schema.org/InStock",
-			"url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=${model_paypal_id}",
+			"url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=${id_paypal}",
 			"shippingDetails": {
 				"@type": "OfferShippingDetails",
 				"shippingRate": {
@@ -473,20 +473,20 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 		},
 		"aggregateRating": {
 			"@type": "AggregateRating",
-			"ratingValue": "${model_average_rating}",
-			"reviewCount": "${model_review_count}"
+			"ratingValue": "${rating_average}",
+			"reviewCount": "${count_reviews}"
 		},
 		"review": [
 			{
 				"@type": "Review",
 				"reviewRating": {
 					"@type": "Rating",
-					"ratingValue": "${model_rating_value}",
+					"ratingValue": "${value_rating}",
 					"bestRating": "5"
 				},
 				"author": {
 					"@type": "Person",
-					"name": "${model_customer_name}"
+					"name": "${name_customer}"
 				},
 				"reviewBody": "Instructions were super clear, built without any issues."
 			}
@@ -502,12 +502,12 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 		{
 			"@context": "https://schema.org",
 			"@type": "WebPage",
-			"name": "${model_title} – LEGO® MOC 3D Preview + Instructions",
-			"url": "https://mechablocks.com/${model_directory}",
-			"description": "Build the '${model_title}' LEGO® MOC. Preview the model in 3D, see dimensions, and purchase step-by-step instructions (digital download).",
+			"name": "${title_model} – LEGO® MOC 3D Preview + Instructions",
+			"url": "https://mechablocks.com/${directory_model}",
+			"description": "Build the '${title_model}' LEGO® MOC. Preview the model in 3D, see dimensions, and purchase step-by-step instructions (digital download).",
 			"primaryImageOfPage": {
 				"@type": "ImageObject",
-				"url": "https://mechablocks.com/${overlay_directory}/overlay.png"
+				"url": "https://mechablocks.com/${directory_overlay}/overlay.png"
 			},
 			"isPartOf": {
 				"@type": "WebSite",
@@ -541,13 +541,13 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 				{
 					"@type": "ListItem",
 					"position": 3,
-					"name": "${model_category_title}",
-					"item": "https://mechablocks.com/${model_category_directory}/"
+					"name": "${title_collection}",
+					"item": "https://mechablocks.com/${directory_category}/"
 				},
 				{
 					"@type": "ListItem",
 					"position": 4,
-					"name": "https://mechablocks.com/${model_category_directory}/${model_title}"
+					"name": "https://mechablocks.com/${directory_category}/${title_model}"
 				}
 			]
 		}
@@ -561,10 +561,10 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "${model_title} – LEGO® MOC (Collada / DAE)",
+			"name": "${title_model} – LEGO® MOC (Collada / DAE)",
 			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/${model_path}",
-			"isBasedOn": "${model_category_title}",
+			"contentUrl": "https://mechablocks.com/${path_model}",
+			"isBasedOn": "${title_collection}",
 			"creator": {
 				"@type": "Person",
 				"name": "Nathanel Titane"
@@ -577,14 +577,14 @@ cat << 3D-MODEL-PAGE-HEADER -> "${model_directory}/index.html"
 
 3D-MODEL-PAGE-HEADER
 
-cat << 3D-MODEL-PAGE-VIEWER ->> "${model_directory}/index.html"
+cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 	<body>
 
 		<header class="footing">
 
 			<p>
 
-				This MOC is a custom LEGO® mecha from the '${model_category_title}' collection.
+				This MOC is a custom LEGO® mecha from the '${title_collection}' collection.
 
 				<br/>
 
@@ -602,7 +602,7 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${model_directory}/index.html"
 
 			<h1>
 
-				${model_title_string}
+				${text_title}
 
 			</h1>
 
@@ -879,8 +879,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${model_directory}/index.html"
 
 					// model state //
 
-					console_overlay_line ( 'model', 'identifier', '${model_paypal_id}' ) ;
-					console_overlay_line ( 'model', 'pieces', '${model_pieces_count}' ) ;
+					console_overlay_line ( 'model', 'identifier', '${id_paypal}' ) ;
+					console_overlay_line ( 'model', 'pieces', '${count_pieces}' ) ;
 					console_overlay_line ( 'model', 'load', self.colladaImport ? 'yes' : 'no' ) ;
 
 					if ( self.colladaImport ) {
@@ -1789,7 +1789,7 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${model_directory}/index.html"
 
 					// get parts count
 
-					const pieces_count = '${model_pieces_count}';
+					const pieces_count = '${count_pieces}';
 
 					// label maker
 
@@ -4758,7 +4758,7 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${model_directory}/index.html"
 
 				var model = loader.load (
 
-					'/${model_path}',
+					'/${path_model}',
 
 						function ( collada ) {
 
@@ -5100,15 +5100,15 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${model_directory}/index.html"
 
 3D-MODEL-PAGE-VIEWER
 
-keywords_list=(
+list_keywords=(
 	super
 )
 
-if [[ -f "${model_directory}"/options ]] ||
-   [[ -f "${model_directory}"/modes   ]]
+if [[ -f "${directory_model}"/options ]] ||
+   [[ -f "${directory_model}"/modes   ]]
 then
 
-	cat <<- 3D-MODEL-SELECTIONS ->> "${model_directory}/index.html"
+	cat <<- 3D-MODEL-SELECTIONS ->> "${directory_model}/index.html"
 			<!-- selections -->
 
 			<div id="selections">
@@ -5139,60 +5139,60 @@ then
 
 	3D-MODEL-SELECTIONS
 
-	if [[ -f "${model_directory}"/options ]]
+	if [[ -f "${directory_model}"/options ]]
 	then
 		# set IFS
 
 		IFS=$'\n'
 
-		model_options_list=($(cat "${model_directory}"/options ) )
+		list_options_model=($(cat "${directory_model}"/options ) )
 
-		for model_option in ${model_options_list[@]}
+		for option_model in ${list_options_model[@]}
 		do
-			model_option_directory=${model_directory}
+			directory_option=${directory_model}
 
-			model_option_prefix=${model_option_directory%%-*}
+			prefix_option=${directory_option%%-*}
 
-			model_option_suffix=${model_option_directory##*-}
+			suffix_option=${directory_option##*-}
 
-			if [[ "${model_option_suffix}" =~ ${keywords_list[@]} ]]
+			if [[ "${suffix_option}" =~ ${list_keywords[@]} ]]
 			then
-				flag=keyword
+				state_keyword=keyword
 
-				model_option_directory=${model_option_directory/-${model_mode_suffix}/}
+				directory_option=${directory_option/-${suffix_mode}/}
 
-				model_option_prefix=${model_option_directory%*-}
+				prefix_option=${directory_option%*-}
 
-				model_option_suffix=${model_option_directory##*-}
+				suffix_option=${directory_option##*-}
 			fi
 
-			model_option_suffix_length=${#model_option_suffix}
+			length_suffix_option=${#suffix_option}
 
-			model_option_base_label=${model_option_directory::-${model_option_suffix_length}}
+			label_base_option=${directory_option::-${length_suffix_option}}
 
-			model_option_path_label="${model_option_base_label}${model_option}"
+			label_path_option="${label_base_option}${option_model}"
 
-			if [[ "${flag}" = "keyword" ]]
+			if [[ "${state_keyword}" = "keyword" ]]
 			then
-				model_option_path_label="${model_option_path_label}-super"
+				label_path_option="${label_path_option}-super"
 
-				unset flag
+				unset state_keyword
 			fi
 
-			model_option_label=${model_option/-/ }
+			label_option=${option_model/-/ }
 
-			model_option_label=${model_option_label^^}
+			label_option=${label_option^^}
 
-			cat <<- 3D-MODEL-OPTIONS ->> "${model_directory}/index.html"
+			cat <<- 3D-MODEL-OPTIONS ->> "${directory_model}/index.html"
 							<!-- selection - option -->
 
 							<div class="flex flex-column flex-middle selections-button option">
 
 								<div class="flex-cell">
 
-									<a class="text-center" href="/${model_mode_path_label}"/>
+									<a class="text-center" href="/${label_path_mode}"/>
 
-										<img src="/${model_mode_path_label}/renders/overlay/overlay.png" alt="${model_title} LEGO® MOC - ${model_mode_label}"/>
+										<img src="/${label_path_mode}/renders/overlay/overlay.png" alt="${title_model} LEGO® MOC - ${label_mode}"/>
 
 									</a>
 
@@ -5200,7 +5200,7 @@ then
 
 								<div class="flex-cell selections-label text-bold">
 
-									${model_mode_label}
+									${label_mode}
 
 								</div>
 
@@ -5212,51 +5212,51 @@ then
 
 	fi
 
-	if [[ -f "${model_directory}"/modes ]]
+	if [[ -f "${directory_model}"/modes ]]
 	then
-		modes_count=$(cat "${model_directory}"/modes | wc -l)
+		count_modes=$(cat "${directory_model}"/modes | wc -l)
 
 		# set IFS
 
 		IFS=$'\n'
 
-		model_modes_list=($(cat "${model_directory}"/modes ) )
+		list_modes_model=($(cat "${directory_model}"/modes ) )
 
-		for model_mode in ${model_modes_list[@]}
+		for mode_model in ${list_modes_model[@]}
 		do
-			model_mode_directory=${model_directory}
+			directory_mode=${directory_model}
 
-			model_mode_prefix=${model_mode_directory%%-*}
+			prefix_mode=${directory_mode%%-*}
 
-			model_mode_suffix=${model_mode_directory##*-}
+			suffix_mode=${directory_mode##*-}
 
-			if [[ "${model_mode_suffix}" =~ ${keywords_list[@]} ]]
+			if [[ "${suffix_mode}" =~ ${list_keywords[@]} ]]
 			then
-				flag=keyword
+				state_keyword=keyword
 
-				model_mode_directory=${model_mode_directory/-${model_mode_suffix}/}
+				directory_mode=${directory_mode/-${suffix_mode}/}
 
-				model_mode_prefix=${model_mode_directory%*-}
+				prefix_mode=${directory_mode%*-}
 
-				model_mode_suffix=${model_mode_directory##*-}
+				suffix_mode=${directory_mode##*-}
 			fi
 
-			model_mode_suffix_length=${#model_mode_suffix}
-			model_mode_base_label=${model_mode_directory::-${model_mode_suffix_length}}
-			model_mode_path_label="${model_mode_base_label}${model_mode}"
+			length_suffix_mode=${#suffix_mode}
+			label_base_mode=${directory_mode::-${length_suffix_mode}}
+			label_path_mode="${label_base_mode}${mode_model}"
 
-			if [[ "${flag}" = "keyword" ]]
+			if [[ "${state_keyword}" = "keyword" ]]
 			then
-				model_mode_path_label="${model_mode_path_label}-super"
+				label_path_mode="${label_path_mode}-super"
 
-				unset flag
+				unset state_keyword
 			fi
 
-			model_mode_label=${model_mode/-/ }
+			label_mode=${mode_model/-/ }
 
-			model_mode_label=${model_mode_label^^}
+			label_mode=${label_mode^^}
 
-			cat <<- 3D-MODEL-MODES ->> "${model_directory}/index.html"
+			cat <<- 3D-MODEL-MODES ->> "${directory_model}/index.html"
 
 							<!-- selection - mode -->
 
@@ -5264,9 +5264,9 @@ then
 
 								<div class="flex-cell">
 
-									<a class="text-center" href="/${model_mode_path_label}"/>
+									<a class="text-center" href="/${label_path_mode}"/>
 
-										<img src="/${model_mode_path_label}/renders/overlay/overlay.png" alt="${model_title} LEGO® MOC - ${model_mode_label}"/>
+										<img src="/${label_path_mode}/renders/overlay/overlay.png" alt="${title_model} LEGO® MOC - ${label_mode}"/>
 
 									</a>
 
@@ -5274,7 +5274,7 @@ then
 
 								<div class="flex-cell selections-label text-bold">
 
-									${model_mode_label}
+									${label_mode}
 
 								</div>
 
@@ -5286,7 +5286,7 @@ then
 
 	fi
 
-	cat <<- 3D-MODEL-SELECTIONS ->> "${model_directory}/index.html"
+	cat <<- 3D-MODEL-SELECTIONS ->> "${directory_model}/index.html"
 						<!-- end -->
 
 						<div id="selections-end">
@@ -5311,7 +5311,7 @@ fi
 
 IFS=''
 
-cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
+cat << 3D-MODEL-PAGE-SAMPLES ->> "${directory_model}/index.html"
 		<!-- samples -->
 
 		<div id="samples">
@@ -5346,7 +5346,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 										<dd>
 
-											A: You receive a digital set of step-by-step building instructions for the '${model_title}' LEGO® MOC.
+											A: You receive a digital set of step-by-step building instructions for the '${title_model}' LEGO® MOC.
 
 										</dd>
 
@@ -5406,7 +5406,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 							<div class="grid-span-3 text-right">
 
-								${model_title}
+								${title_model}
 
 							</div>
 
@@ -5418,7 +5418,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 							<div class="grid-span-3 text-right">
 
-								${model_pieces_count}
+								${count_pieces}
 
 							</div>
 
@@ -5430,7 +5430,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 							<div class="grid-span-3 text-right">
 
-								${paypal_currency} ${model_instructions_price}
+								${currency_paypal} ${price_instructions}
 
 							</div>
 
@@ -5446,9 +5446,9 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 							</div>
 
-							<div class="grid-span-3 ${status_font_indicator} text-right">
+							<div class="grid-span-3 ${class_status_font} text-right">
 
-								${status_message}
+								${message_status}
 
 							</div>
 
@@ -5458,9 +5458,9 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 							</div>
 
-							<div class="grid-span-3 ${status_font_indicator} text-right">
+							<div class="grid-span-3 ${class_status_font} text-right">
 
-								${model_paypal_id}
+								${id_paypal}
 
 							</div>
 
@@ -5474,11 +5474,11 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 							<div class="grid-span-4 text-center">
 
-								<${marker_html} href=${model_paypal_url} class="button purchase ${status_button_color}">
+								<${tag_purchase} href=${url_paypal} class="button purchase ${class_status_button}">
 
-									${status_button_message}
+									${message_status_button}
 
-								</${marker_html}>
+								</${tag_purchase}>
 
 							</div>
 
@@ -5498,7 +5498,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 						<div>
 
-							<img src="/${instructions_samples_directory}/sample-01.png" alt="${model_title} LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/${directory_samples_instructions}/sample-01.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5510,7 +5510,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 						<div>
 
-							<img src="/${instructions_samples_directory}/sample-02.png" alt="${model_title} LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/${directory_samples_instructions}/sample-02.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5522,7 +5522,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 						<div>
 
-							<img src="/${instructions_samples_directory}/sample-03.png" alt="${model_title} LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/${directory_samples_instructions}/sample-03.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5534,7 +5534,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 						<div>
 
-							<img src="/${instructions_samples_directory}/sample-04.png" alt="${model_title} LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/${directory_samples_instructions}/sample-04.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5546,7 +5546,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 						<div>
 
-							<img src="/${instructions_samples_directory}/sample-05.png" alt="${model_title} LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/${directory_samples_instructions}/sample-05.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5558,7 +5558,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 						<div>
 
-							<img src="/${instructions_samples_directory}/sample-06.png" alt="${model_title} LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/${directory_samples_instructions}/sample-06.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 
@@ -5572,7 +5572,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${model_directory}/index.html"
 
 3D-MODEL-PAGE-SAMPLES
 
-cat << 3D-MODEL-PAGE-HELPER ->> "${model_directory}/index.html"
+cat << 3D-MODEL-PAGE-HELPER ->> "${directory_model}/index.html"
 		<!-- helper -->
 
 		<div id="helper">
@@ -5581,7 +5581,7 @@ cat << 3D-MODEL-PAGE-HELPER ->> "${model_directory}/index.html"
 
 3D-MODEL-PAGE-HELPER
 
-cat << 3D-MODEL-PAGE-DRAWER ->> "${model_directory}/index.html"
+cat << 3D-MODEL-PAGE-DRAWER ->> "${directory_model}/index.html"
 		<!-- drawer -->
 
 		<div id="drawer">
@@ -5590,7 +5590,7 @@ cat << 3D-MODEL-PAGE-DRAWER ->> "${model_directory}/index.html"
 
 3D-MODEL-PAGE-DRAWER
 
-cat << 3D-MODEL-PAGE-COLORS ->> "${model_directory}/index.html"
+cat << 3D-MODEL-PAGE-COLORS ->> "${directory_model}/index.html"
 		<!-- colors -->
 
 		<div id="colors">
@@ -5599,7 +5599,7 @@ cat << 3D-MODEL-PAGE-COLORS ->> "${model_directory}/index.html"
 
 3D-MODEL-PAGE-COLORS
 
-cat << 3D-MODEL-PAGE-FOOTER ->> "${model_directory}/index.html"
+cat << 3D-MODEL-PAGE-FOOTER ->> "${directory_model}/index.html"
 		<div id="footer">
 
 			<!-- edge border overlay -->
@@ -5627,10 +5627,10 @@ cat << 3D-MODEL-PAGE-FOOTER ->> "${model_directory}/index.html"
 					</div>
 3D-MODEL-PAGE-FOOTER
 
-if [ -f "${model_paypal}" ]
+if [ -f "${file_paypal}" ]
 then
 
-cat << 3D-MODEL-NAVIGATION ->> "${model_directory}/index.html"
+cat << 3D-MODEL-NAVIGATION ->> "${directory_model}/index.html"
 					<!-- navigation -->
 
 					<!-- browse -->
@@ -5641,7 +5641,7 @@ cat << 3D-MODEL-NAVIGATION ->> "${model_directory}/index.html"
 
 3D-MODEL-NAVIGATION
 
-cat << 3D-MODEL-PAYPAL ->> "${model_directory}/index.html"
+cat << 3D-MODEL-PAYPAL ->> "${directory_model}/index.html"
 					<!-- paypal -->
 
 					<div id="paypal">
@@ -5650,7 +5650,7 @@ cat << 3D-MODEL-PAYPAL ->> "${model_directory}/index.html"
 
 3D-MODEL-PAYPAL
 
-cat << 3D-MODEL-PAGE-HELPERS ->> "${model_directory}/index.html"
+cat << 3D-MODEL-PAGE-HELPERS ->> "${directory_model}/index.html"
 					<!-- helpers -->
 
 					<!-- controls -->
@@ -5765,18 +5765,18 @@ cat << 3D-MODEL-PAGE-HELPERS ->> "${model_directory}/index.html"
 
 fi
 
-cat << 3D-MODEL-PAGE ->> "${model_directory}/index.html"
+cat << 3D-MODEL-PAGE ->> "${directory_model}/index.html"
 	</body>
 
 </html>
 
 3D-MODEL-PAGE
 
-	((count++))
+	(( count_models ++ ))
 
 	done
 done
 
-frobulator.inf "Models" "[ ${count} ]"
+frobulator.inf "Models" "[ ${count_models} ]"
 
 frobulator.cpt "Complete" "[ Viewer ]"

@@ -69,7 +69,7 @@ version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
-while (($#))
+while (( $# ))
 do
 	case "${1}"
 	in
@@ -138,6 +138,6 @@ done
 
 list=()
 
-frobulator.inf "Models" "[ ${count} ]"
+frobulator.inf "Models" "[ ${count_models} ]"
 
 frobulator.cpt "Complete" "[ Exports ]"

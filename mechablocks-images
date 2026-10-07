@@ -69,7 +69,7 @@ version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
-while (($#))
+while (( $# ))
 do
 	case "${1}"
 	in
@@ -114,13 +114,13 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
-local_directory=/media/internal/Lego
-local_models_directory="${local_directory}"/models
+directory_local=/media/internal/Lego
+directory_models_local="${directory_local}"/models
 
-server_directory="${PWD}"
-server_models_directory="${server_directory}"/models
-server_images_directory="${server_directory}"/images
-server_javascript_directory="${server_directory}"/javascript
+directory_server="${PWD}"
+directory_models_server="${directory_server}"/models
+directory_images_server="${directory_server}"/images
+directory_javascript_server="${directory_server}"/javascript
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
@@ -143,30 +143,30 @@ synchronize () {
 
 # prepare update
 
-frobulator.directory "${server_directory}" images
+frobulator.directory "${directory_server}" images
 
 frobulator.fwd "Copying..."
 
 # values
 
-extensions_list+=(
+list_extensions+=(
 	png
 )
 
-for extension in ${extensions_list[@]}
+for extension in ${list_extensions[@]}
 do
-	directories_list=(
+	list_directories=(
 		flat
 		overlay
 		social
 		thumbnail
 	)
 
-	for directory in ${directories_list[@]}
+	for directory in ${list_directories[@]}
 	do
-		frobulator.directory "${server_images_directory}" "${directory}"
+		frobulator.directory "${directory_images_server}" "${directory}"
 
-		count=0
+		count_images=0
 
 		# set IFS
 
@@ -175,43 +175,43 @@ do
 		# shuffle models directories list:
 		# creates random showcase of all models on each update
 
-		for image_path in $(find ${local_models_directory} -type f -not -path "work-in-progress" -iname "${directory}"."${extension}" | sort)
+		for path_image in $(find ${directory_models_local} -type f -not -path "work-in-progress" -iname "${directory}"."${extension}" | sort)
 		do
 			# get model directory
 
-			model_directory="${image_path%/*/*/*}"
+			directory_model="${path_image%/*/*/*}"
 
-			if [ -f "${model_directory}"/background ]
+			if [ -f "${directory_model}"/background ]
 			then
 
-				image_count=$(printf "%03d" "${count}")
+				number_image=$(printf "%03d" "${count_images}")
 
 				# get model image base directory from path
 
-				image_directory="${image_path%/*}"
+				directory_image="${path_image%/*}"
 
 				# get model image file name from path
 
-				image_file="${image_path##*/}"
+				file_image="${path_image##*/}"
 
 				# get model image file extension from path
 
-				image_extension="${image_file##*.}"
+				extension_image="${file_image##*.}"
 
 				# strip extension from model file name
 
-				image_name="${image_file%.*}"
+				name_image="${file_image%.*}"
 
 				# set synchronization paths
 
-				local_path="${image_path}"
+				path_local="${path_image}"
 
-				server_path="${server_images_directory}"/${directory}/${image_name}-"${image_count}"."${extension}"
+				path_server="${directory_images_server}"/${directory}/${name_image}-"${number_image}"."${extension}"
 
-				synchronize "${image_path}" "${server_path}"
+				synchronize "${path_image}" "${path_server}"
 			fi
 
-			((count++))
+			(( count_images ++ ))
 
 		done
 
@@ -229,9 +229,9 @@ frobulator.inf "Updating" "[ Images ]"
 
 sed															\
 	-i														\
-	-e "s/var count = .*/var count = ${count};/g"		\
-															"${server_javascript_directory}"/background.js
+	-e "s/var count = .*/var count = ${count_images};/g"		\
+															"${directory_javascript_server}"/background.js
 
-frobulator.inf "Models" "[ ${count} ]"
+frobulator.inf "Models" "[ ${count_images} ]"
 
 frobulator.cpt "Complete" "[ Images ]"

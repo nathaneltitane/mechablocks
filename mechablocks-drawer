@@ -69,7 +69,7 @@ version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
-while (($#))
+while (( $# ))
 do
 	case "${1}"
 	in
@@ -114,10 +114,10 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
-models_directory="${PWD}"/models
-modules_directory="${PWD}"/modules
+directory_models="${PWD}"/models
+directory_modules="${PWD}"/modules
 
-stamp=$(date +"%m-%d-%Y")
+date_version=$(date +"%m-%d-%Y")
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
@@ -129,7 +129,7 @@ frobulator.fwd "Writing..."
 
 # generate header
 
-cat << MODEL-DRAWER-HEADER -> "${modules_directory}"/drawer.html
+cat << MODEL-DRAWER-HEADER -> "${directory_modules}"/drawer.html
 <!-- scripts -->
 
 <script src="/javascript/drawer.js" type="text/javascript"></script>
@@ -236,121 +236,121 @@ MODEL-DRAWER-HEADER
 
 # values
 
-extensions_list+=(
+list_extensions+=(
 	dae
 )
 
-for extension in ${extensions_list[@]}
+for extension in ${list_extensions[@]}
 do
-	count=1
+	count_models=1
 
-	models_list=( $(find "${models_directory}" -type f -iname "work-in-progress*.${extension}" ! -iname "*instructions*" | sort) )
+	list_models=( $(find "${directory_models}" -type f -iname "work-in-progress*.${extension}" ! -iname "*instructions*" | sort) )
 
-	models_list+=( $(find "${models_directory}" -type f -iname "*.${extension}" ! -iname "work-in-progress*" ! -iname "*instructions*"  | sort) )
+	list_models+=( $(find "${directory_models}" -type f -iname "*.${extension}" ! -iname "work-in-progress*" ! -iname "*instructions*"  | sort) )
 
 	# set IFS
 
 	IFS=$'\n'
 
-	for model_path in ${models_list[@]}
+	for path_model in ${list_models[@]}
 	do
-		model_path=$(echo "${model_path}" | cut -d '/' -f6-)
+		path_model=$(echo "${path_model}" | cut -d '/' -f6-)
 
 		# get model file name from path
 
-		model_file="${model_path##*/}"
+		file_model="${path_model##*/}"
 
 		# strip extension from model file name
 
-		model_name="${model_file%.*}"
+		name_model="${file_model%.*}"
 
 		# use model directory as root
 
-		model_directory="${model_path%/*/*}"
+		directory_model="${path_model%/*/*}"
 
 		# define model output directories
 
-		render_directory="${model_directory}"/renders
+		directory_render="${directory_model}"/renders
 
-		export_directory="${render_directory}"/exports
+		directory_export="${directory_render}"/exports
 
-		flat_directory="${render_directory}"/flat
+		directory_flat="${directory_render}"/flat
 
-		thumbnail_directory="${render_directory}"/thumbnail
+		directory_thumbnail="${directory_render}"/thumbnail
 
 		# define model specific directories
 
-		model_category=$(cat "${model_directory%/*}"/title)
+		title_category=$(cat "${directory_model%/*}"/title)
 
-		model_drawer_entry="${model_directory}"/drawer
+		file_drawer="${directory_model}"/drawer
 
-		model_title=$(cat "${model_directory}"/title)
+		title_model=$(cat "${directory_model}"/title)
 
-		model_title_string=$(echo ${model_title//\<\/\br\>/})
+		text_title=$(echo ${title_model//\<\/\br\>/})
 
-		model_paypal="${model_directory}"/paypal
+		file_paypal="${directory_model}"/paypal
 
-		model_paypal_id=$(cat "${model_paypal}")
+		id_paypal=$(cat "${file_paypal}")
 
-		model_pieces="${model_directory}"/pieces
+		file_pieces="${directory_model}"/pieces
 
-		model_pieces_count=$(cat "${model_pieces}")
+		count_pieces=$(cat "${file_pieces}")
 
-		model_instructions="${model_directory}"/instructions
+		path_instructions="${directory_model}"/instructions
 
-		model_price="${model_directory}"/price
+		file_price="${directory_model}"/price
 
-		model_instructions_price=$(cat "${model_price}")
+		price_instructions=$(cat "${file_price}")
 
 		# generate model drawer entries
 
-		if [[ "${model_directory}" = *work-in-progress* ]]
+		if [[ "${directory_model}" = *work-in-progress* ]]
 		then
-			color="yellow"
+			color_logo="yellow"
 
-			marker="work-in-progress"
+			class_status="work-in-progress"
 
-		elif [[ -f "${model_directory}"/work-in-progress ]]
+		elif [[ -f "${directory_model}"/work-in-progress ]]
 		then
-			color="orange"
+			color_logo="orange"
 
-			unset marker
+			unset class_status
 		else
-			color="green"
+			color_logo="green"
 
-			unset marker
+			unset class_status
 		fi
 
-		if [[ -f "${model_directory}"/drawer ]]
+		if [[ -f "${directory_model}"/drawer ]]
 		then
 
-cat << MODEL-DRAWER-CONTENT ->> "${modules_directory}"/drawer.html
+cat << MODEL-DRAWER-CONTENT ->> "${directory_modules}"/drawer.html
 
 			<div class="flex flex-column">
 
-				<div class="container ${marker}">
+				<div class="container ${class_status}">
 
 					<div class="flex flex-row flex-middle section">
 
 						<div class="flex-cell-start">
 
-							<div class="icon icon-flex icon-center logo-${color}"></div>
+							<div class="icon icon-flex icon-center logo-${color_logo}"></div>
 
 						</div>
 
 						<div class="flex-cell label text-right">
 
-							${model_title} </br> ${model_pieces_count} PIECES
+							${title_model} </br> ${count_pieces} PIECES
 
 						</div>
 
 					</div>
 
-					<a class="flex flex-column flex-middle" href="/${model_directory}">
+					<a class="flex flex-column flex-middle" href="/${directory_model}">
 
 						<div class="flex-cell">
 
-							<img src="/${thumbnail_directory}/thumbnail.png"/>
+							<img src="/${directory_thumbnail}/thumbnail.png"/>
 
 						</div>
 
@@ -364,14 +364,14 @@ MODEL-DRAWER-CONTENT
 
 		fi
 
-	((count++))
+	(( count_models ++ ))
 
 	done
 done
 
 # generate footer
 
-cat << MODEL-DRAWER-FOOTER ->> "${modules_directory}"/drawer.html
+cat << MODEL-DRAWER-FOOTER ->> "${directory_modules}"/drawer.html
 			</div>
 
 		</div>
@@ -450,7 +450,7 @@ cat << MODEL-DRAWER-FOOTER ->> "${modules_directory}"/drawer.html
 
 						<div class="flex-cell text-center">
 
-							Version // ${stamp}</br>
+							Version // ${date_version}</br>
 							Mecha // Blocks - Where LEGO® meets Open Source</br>
 							N Λ T H Λ N E L - ©  <text id="year"></text>
 
@@ -470,6 +470,6 @@ cat << MODEL-DRAWER-FOOTER ->> "${modules_directory}"/drawer.html
 
 MODEL-DRAWER-FOOTER
 
-frobulator.inf "Models" "[ ${count} ]"
+frobulator.inf "Models" "[ ${count_models} ]"
 
 frobulator.cpt "Complete" "[ Drawer ]"

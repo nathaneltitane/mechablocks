@@ -69,7 +69,7 @@ version="2026-10-04"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
-while (($#))
+while (( $# ))
 do
 	case "${1}"
 	in
@@ -114,7 +114,7 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
-modules_directory="${PWD}"/modules
+directory_modules="${PWD}"/modules
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
@@ -126,7 +126,7 @@ frobulator.fwd "Writing..."
 
 # generate header
 
-cat << 'MODELS-MENU-HEADER' -> "${modules_directory}/"menu.html
+cat << 'MODELS-MENU-HEADER' -> "${directory_modules}/"menu.html
 		<script>
 
 			$(function(){
@@ -148,83 +148,83 @@ MODELS-MENU-HEADER
 
 # values
 
-extensions_list+=(
+list_extensions+=(
 	dae
 )
 
-for extension in ${extensions_list[@]}
+for extension in ${list_extensions[@]}
 do
-	count=1
+	count_models=1
 
-	models_list=( $(find "${models_directory}" -type f -iname "*.${extension}" ! -iname "*instructions*" | sort) )
+	list_models=( $(find "${directory_models}" -type f -iname "*.${extension}" ! -iname "*instructions*" | sort) )
 
 	# set IFS
 
 	IFS=$'\n'
 
-	for model_path in ${models_list[@]}
+	for path_model in ${list_models[@]}
 	do
-		model_path=$(echo "${model_path}" | cut -d '/' -f6-)
+		path_model=$(echo "${path_model}" | cut -d '/' -f6-)
 
 		# get model file name from path
 
-		model_file="${model_path##*/}"
+		file_model="${path_model##*/}"
 
 		# strip extension from model file name
 
-		model_name="${model_file%.*}"
+		name_model="${file_model%.*}"
 
 		# use model directory as root
 
-		model_directory="${model_path%/*/*}"
+		directory_model="${path_model%/*/*}"
 
 		# define model output directories
 
-		export_directory="${render_directory}"/exports
+		directory_export="${directory_render}"/exports
 
-		render_directory="${model_directory}"/renders
+		directory_render="${directory_model}"/renders
 
-		flat_directory="${render_directory}"/flat
+		directory_flat="${directory_render}"/flat
 
-		thumbnail_directory="${render_directory}"/thumbnail
+		directory_thumbnail="${directory_render}"/thumbnail
 
 		# define model specific directories
 
-		model_category=$(cat "${model_directory%/*}"/title)
+		title_category=$(cat "${directory_model%/*}"/title)
 
-		model_title=$(cat "${model_directory}"/title)
+		title_model=$(cat "${directory_model}"/title)
 
-		model_title_string=$(echo ${model_title//\<\/\br\>/})
+		text_title=$(echo ${title_model//\<\/\br\>/})
 
-		model_paypal="${model_directory}"/paypal
+		file_paypal="${directory_model}"/paypal
 
-		model_paypal_id=$(cat "${model_paypal}")
+		id_paypal=$(cat "${file_paypal}")
 
-		model_pieces="${model_directory}"/pieces
+		file_pieces="${directory_model}"/pieces
 
-		model_pieces_count=$(cat "${model_pieces}")
+		count_pieces=$(cat "${file_pieces}")
 
-		model_instructions="${model_directory}"/instructions
+		path_instructions="${directory_model}"/instructions
 
-		model_price="${model_directory}"/price
+		file_price="${directory_model}"/price
 
-		model_instructions_price=$(cat "${model_price}")
+		price_instructions=$(cat "${file_price}")
 
 		# keep first container visible
 
-		if [ "${count}" -eq 1 ]
+		if [ "${count_models}" -eq 1 ]
 		then
-			hidden=""
+			class_hidden=""
 		else
-			hidden="hidden"
+			class_hidden="hidden"
 		fi
 
 # generate model container
 
-cat << MODEL-CONTAINER ->> "${modules_directory}/"menu.html
+cat << MODEL-CONTAINER ->> "${directory_modules}/"menu.html
 <!-- BEGIN CONTAINER -->
 
-<div id=${model_title_string/ /-} class='container ${hidden}'>
+<div id=${text_title/ /-} class='container ${class_hidden}'>
 
 	<div class='flex flex-column flex-center flex-around flex-wrap'>
 
@@ -242,15 +242,15 @@ cat << MODEL-CONTAINER ->> "${modules_directory}/"menu.html
 
 MODEL-CONTAINER
 
-if [ -d "${model_instructions}" ]
+if [ -d "${path_instructions}" ]
 then
 
-cat << MODEL-TITLE ->> "${modules_directory}/"menu.html
+cat << MODEL-TITLE ->> "${directory_modules}/"menu.html
 	<div id="menu" class="menu section flex flex-column flex-stretch">
 
 		<div class="category flex-cell text-left">
 
-			${model_category}
+			${title_category}
 
 		</div>
 
@@ -266,7 +266,7 @@ cat << MODEL-TITLE ->> "${modules_directory}/"menu.html
 
 				<div class="flex-cell text-center">
 
-					${model_title_string}
+					${text_title}
 
 				</div>
 
@@ -284,12 +284,12 @@ MODEL-TITLE
 
 else
 
-cat << MODEL-TITLE ->> "${modules_directory}/"menu.html
+cat << MODEL-TITLE ->> "${directory_modules}/"menu.html
 	<div id="menu" class="menu section flex flex-column flex-stretch">
 
 		<div class="category flex-cell text-left">
 
-			${model_category}
+			${title_category}
 
 		</div>
 
@@ -305,7 +305,7 @@ cat << MODEL-TITLE ->> "${modules_directory}/"menu.html
 
 				<div class="flex-cell text-center">
 
-					${model_title_string}
+					${text_title}
 
 				</div>
 
@@ -323,14 +323,14 @@ MODEL-TITLE
 
 fi
 
-	((count++))
+	(( count_models ++ ))
 
 	done
 done
 
 # generate footer
 
-cat << FOOTER ->> "${modules_directory}/"menu.html
+cat << FOOTER ->> "${directory_modules}/"menu.html
 <!-- END MODELS MENU -->
 
 <div id="anchors" class="section">
@@ -339,6 +339,6 @@ cat << FOOTER ->> "${modules_directory}/"menu.html
 
 FOOTER
 
-frobulator.inf "Models" "[ ${count} ]"
+frobulator.inf "Models" "[ ${count_models} ]"
 
 frobulator.cpt "Complete" "[ Menu ]"
