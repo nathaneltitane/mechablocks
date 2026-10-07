@@ -194,6 +194,10 @@ do
 
 		id_paypal=$(cat "${file_paypal}")
 
+		# paypal button id - spaces and line breaks removed
+
+		id_paypal="${id_paypal//[[:space:]]/}"
+
 		url_paypal_base='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id'
 
 		url_paypal="${url_paypal_base}=${id_paypal}"
@@ -470,27 +474,7 @@ cat << 3D-MODEL-PAGE-HEADER -> "${directory_model}/index.html"
 				"applicableCountry": "US",
 				"returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
 			}
-		},
-		"aggregateRating": {
-			"@type": "AggregateRating",
-			"ratingValue": "${rating_average}",
-			"reviewCount": "${count_reviews}"
-		},
-		"review": [
-			{
-				"@type": "Review",
-				"reviewRating": {
-					"@type": "Rating",
-					"ratingValue": "${value_rating}",
-					"bestRating": "5"
-				},
-				"author": {
-					"@type": "Person",
-					"name": "${name_customer}"
-				},
-				"reviewBody": "Instructions were super clear, built without any issues."
-			}
-		]
+		}
 	}
 
 	</script>
@@ -5159,7 +5143,7 @@ then
 			then
 				state_keyword=keyword
 
-				directory_option=${directory_option/-${suffix_mode}/}
+				directory_option=${directory_option/-${suffix_option}/}
 
 				prefix_option=${directory_option%*-}
 
@@ -5190,9 +5174,9 @@ then
 
 								<div class="flex-cell">
 
-									<a class="text-center" href="/${label_path_mode}"/>
+									<a class="text-center" href="/${label_path_option}"/>
 
-										<img src="/${label_path_mode}/renders/overlay/overlay.png" alt="${title_model} LEGO® MOC - ${label_mode}"/>
+										<img src="/${label_path_option}/renders/overlay/overlay.png" alt="${title_model} LEGO® MOC - ${label_option}"/>
 
 									</a>
 
@@ -5200,7 +5184,7 @@ then
 
 								<div class="flex-cell selections-label text-bold">
 
-									${label_mode}
+									${label_option}
 
 								</div>
 
