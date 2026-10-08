@@ -114,6 +114,7 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+directory_models="${PWD}"/models
 directory_modules="${PWD}"/modules
 
 # defaults ─────────────────────────────────────────────────────────────────────
@@ -180,9 +181,9 @@ do
 
 		# define model output directories
 
-		directory_export="${directory_render}"/exports
-
 		directory_render="${directory_model}"/renders
+
+		directory_export="${directory_render}"/exports
 
 		directory_flat="${directory_render}"/flat
 
@@ -230,9 +231,9 @@ cat << MODEL-CONTAINER ->> "${directory_modules}/"menu.html
 
 		<div class='flex-cell'>
 
-			<a href="models/${path[1]}/${path[2]}"'>
+			<a href="${directory_model}">
 
-				<img src="/${path[0]}/${path[1]}/${path[2]}/${path[3]}/${path[4]}/${path[5]}"/>
+				<img src="/${directory_thumbnail}/thumbnail.png"/>
 
 			</a>
 
@@ -254,7 +255,7 @@ cat << MODEL-TITLE ->> "${directory_modules}/"menu.html
 
 		</div>
 
-		<a class="container" href="models/${path[1]}/${path[2]}/">
+		<a class="container" href="${directory_model}/">
 
 			<div class="flex flex-row flex-middle">
 
@@ -293,7 +294,7 @@ cat << MODEL-TITLE ->> "${directory_modules}/"menu.html
 
 		</div>
 
-		<a class="container" href="models/${path[1]}/${path[2]}/">
+		<a class="container" href="${directory_model}/">
 
 			<div class="flex flex-row flex-middle">
 
