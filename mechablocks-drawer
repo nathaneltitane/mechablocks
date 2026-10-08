@@ -242,7 +242,7 @@ list_extensions+=(
 
 for extension in ${list_extensions[@]}
 do
-	count_models=1
+	count_models=0
 
 	list_models=( $(find "${directory_models}" -type f -iname "work-in-progress*.${extension}" ! -iname "*instructions*" | sort) )
 

@@ -131,8 +131,16 @@ else
     )
 fi
 
+count_models=0
+
 for directory in ${list[@]}
 do
+	# model files exported by l2cu - instructions excluded
+
+	mapfile -t list_models < <(find "${directory}" -type f -iname "*.mpd" ! -iname "*instructions*")
+
+	count_models=$(( count_models + ${#list_models[@]} ))
+
 	"${SHELL}" ../l2cu/l2cu --file mpd --export collada --directory "${directory}"
 done
 

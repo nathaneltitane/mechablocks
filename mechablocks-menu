@@ -155,15 +155,13 @@ list_extensions+=(
 
 for extension in ${list_extensions[@]}
 do
-	count_models=1
+	count_models=0
 
-	list_models=( $(find "${directory_models}" -type f -iname "*.${extension}" ! -iname "*instructions*" | sort) )
+	# one model path per line - paths with spaces kept whole
 
-	# set IFS
+	mapfile -t list_models < <(find "${directory_models}" -type f -iname "*.${extension}" ! -iname "*instructions*" | sort)
 
-	IFS=$'\n'
-
-	for path_model in ${list_models[@]}
+	for path_model in "${list_models[@]}"
 	do
 		path_model=$(echo "${path_model}" | cut -d '/' -f6-)
 
@@ -213,7 +211,7 @@ do
 
 		# keep first container visible
 
-		if [ "${count_models}" -eq 1 ]
+		if [ "${count_models}" -eq 0 ]
 		then
 			class_hidden=""
 		else
@@ -225,7 +223,7 @@ do
 cat << MODEL-CONTAINER ->> "${directory_modules}/"menu.html
 <!-- BEGIN CONTAINER -->
 
-<div id=${text_title/ /-} class='container ${class_hidden}'>
+<div id="${text_title// /-}" class='container ${class_hidden}'>
 
 	<div class='flex flex-column flex-center flex-around flex-wrap'>
 
