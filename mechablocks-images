@@ -164,18 +164,22 @@ do
 
 	for directory in ${list_directories[@]}
 	do
+		# images regenerated from scratch - no leftover from earlier runs or removed backgrounds
+
+		if [ -d "${directory_images_server}/${directory}" ]
+		then
+			frobulator.delete "${directory_images_server}" "${directory}"
+		fi
+
 		frobulator.directory "${directory_images_server}" "${directory}"
 
 		count_images=0
 
-		# set IFS
+		# model renders - one path per line - work in progress excluded
 
-		IFS=$'\n'
+		mapfile -t list_paths_image < <(find "${directory_models_local}" -type f -not -path "*/work-in-progress/*" -iname "${directory}.${extension}" | sort)
 
-		# shuffle models directories list:
-		# creates random showcase of all models on each update
-
-		for path_image in $(find ${directory_models_local} -type f -not -path "work-in-progress" -iname "${directory}"."${extension}" | sort)
+		for path_image in "${list_paths_image[@]}"
 		do
 			# get model directory
 
@@ -209,17 +213,15 @@ do
 				path_server="${directory_images_server}"/${directory}/${name_image}-"${number_image}"."${extension}"
 
 				synchronize "${path_image}" "${path_server}"
-			fi
 
-			(( count_images ++ ))
+				# background images only - numbering without gaps
+
+				(( count_images ++ ))
+			fi
 
 		done
 
 	done
-
-	# reset IFS
-
-	IFS=''
 
 done
 
