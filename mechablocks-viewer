@@ -272,6 +272,15 @@ do
 			tag_purchase="a"
 		fi
 
+		# file versions - modification time in seconds - browsers reload changed files
+
+		version_model="$(date -r "${path_model}" +%s 2> "${sink}")"
+
+		for index_sample in 1 2 3 4 5 6
+		do
+			list_versions_sample[index_sample]="$(date -r "${directory_samples_instructions}/sample-0${index_sample}.png" +%s 2> "${sink}")"
+		done
+
 cat << 3D-MODEL-PAGE-HEADER -> "${directory_model}/index.html"
 <!DOCTYPE html>
 
@@ -4742,7 +4751,7 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				var model = loader.load (
 
-					'/${path_model}',
+					'/${path_model}?version=${version_model}',
 
 						function ( collada ) {
 
@@ -5167,6 +5176,10 @@ then
 
 			label_option=${label_option^^}
 
+			# overlay version - modification time in seconds
+
+			version_overlay_option="$(date -r "${label_path_option}/renders/overlay/overlay.png" +%s 2> "${sink}")"
+
 			cat <<- 3D-MODEL-OPTIONS ->> "${directory_model}/index.html"
 							<!-- selection - option -->
 
@@ -5176,7 +5189,7 @@ then
 
 									<a class="text-center" href="/${label_path_option}"/>
 
-										<img src="/${label_path_option}/renders/overlay/overlay.png" alt="${title_model} LEGO® MOC - ${label_option}"/>
+										<img src="/${label_path_option}/renders/overlay/overlay.png?version=${version_overlay_option}" alt="${title_model} LEGO® MOC - ${label_option}"/>
 
 									</a>
 
@@ -5240,6 +5253,10 @@ then
 
 			label_mode=${label_mode^^}
 
+			# overlay version - modification time in seconds
+
+			version_overlay_mode="$(date -r "${label_path_mode}/renders/overlay/overlay.png" +%s 2> "${sink}")"
+
 			cat <<- 3D-MODEL-MODES ->> "${directory_model}/index.html"
 
 							<!-- selection - mode -->
@@ -5250,7 +5267,7 @@ then
 
 									<a class="text-center" href="/${label_path_mode}"/>
 
-										<img src="/${label_path_mode}/renders/overlay/overlay.png" alt="${title_model} LEGO® MOC - ${label_mode}"/>
+										<img src="/${label_path_mode}/renders/overlay/overlay.png?version=${version_overlay_mode}" alt="${title_model} LEGO® MOC - ${label_mode}"/>
 
 									</a>
 
@@ -5482,7 +5499,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${directory_model}/index.html"
 
 						<div>
 
-							<img src="/${directory_samples_instructions}/sample-01.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/${directory_samples_instructions}/sample-01.png?version=${list_versions_sample[1]}" alt="${title_model} LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5494,7 +5511,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${directory_model}/index.html"
 
 						<div>
 
-							<img src="/${directory_samples_instructions}/sample-02.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/${directory_samples_instructions}/sample-02.png?version=${list_versions_sample[2]}" alt="${title_model} LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5506,7 +5523,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${directory_model}/index.html"
 
 						<div>
 
-							<img src="/${directory_samples_instructions}/sample-03.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/${directory_samples_instructions}/sample-03.png?version=${list_versions_sample[3]}" alt="${title_model} LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5518,7 +5535,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${directory_model}/index.html"
 
 						<div>
 
-							<img src="/${directory_samples_instructions}/sample-04.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/${directory_samples_instructions}/sample-04.png?version=${list_versions_sample[4]}" alt="${title_model} LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5530,7 +5547,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${directory_model}/index.html"
 
 						<div>
 
-							<img src="/${directory_samples_instructions}/sample-05.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/${directory_samples_instructions}/sample-05.png?version=${list_versions_sample[5]}" alt="${title_model} LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5542,7 +5559,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${directory_model}/index.html"
 
 						<div>
 
-							<img src="/${directory_samples_instructions}/sample-06.png" alt="${title_model} LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/${directory_samples_instructions}/sample-06.png?version=${list_versions_sample[6]}" alt="${title_model} LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

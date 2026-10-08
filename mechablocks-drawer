@@ -278,6 +278,10 @@ do
 
 		directory_thumbnail="${directory_render}"/thumbnail
 
+		# thumbnail version - modification time in seconds - browsers reload changed files
+
+		version_thumbnail="$(date -r "${directory_thumbnail}/thumbnail.png" +%s 2> "${sink}")"
+
 		# define model specific directories
 
 		title_category=$(cat "${directory_model%/*}"/title)
@@ -350,7 +354,7 @@ cat << MODEL-DRAWER-CONTENT ->> "${directory_modules}"/drawer.html
 
 						<div class="flex-cell">
 
-							<img src="/${directory_thumbnail}/thumbnail.png"/>
+							<img src="/${directory_thumbnail}/thumbnail.png?version=${version_thumbnail}"/>
 
 						</div>
 
