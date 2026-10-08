@@ -1,6 +1,6 @@
 // background //
 
-var count = 191;
+var count = 164;
 
 function pad ( str, max ) {
 
