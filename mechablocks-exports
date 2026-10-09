@@ -141,7 +141,9 @@ do
 
 	count_models=$(( count_models + ${#list_models[@]} ))
 
-	"${SHELL}" ../l2cu/l2cu --file mpd --export collada --directory "${directory}"
+	# visible surface only - compressed - no part names or placements
+
+	"${SHELL}" ../l2cu/l2cu --file mpd --export collada surface kmz --directory "${directory}"
 done
 
 list=()

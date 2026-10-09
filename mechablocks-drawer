@@ -237,7 +237,7 @@ MODEL-DRAWER-HEADER
 # values
 
 list_extensions+=(
-	dae
+	kmz
 )
 
 for extension in ${list_extensions[@]}

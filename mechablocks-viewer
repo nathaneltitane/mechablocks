@@ -129,7 +129,7 @@ frobulator.fwd "Writing..."
 # values
 
 list_extensions+=(
-	dae
+	kmz
 )
 
 for extension in ${list_extensions[@]}
@@ -216,7 +216,9 @@ do
 
 		prefix_minifig="minifig-"
 
-		list_minifigs=$(find ${directory_minifigs} -type f -iname "*.${extension}" )
+		# minifig helpers stay collada - models are kmz
+
+		list_minifigs=$(find ${directory_minifigs} -type f -iname "*.dae" )
 
 		for path_minifig in ${list_minifigs[@]}
 		do
@@ -554,8 +556,8 @@ cat << 3D-MODEL-PAGE-HEADER -> "${directory_model}/index.html"
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "${title_model} – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
+			"name": "${title_model} – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
 			"contentUrl": "https://mechablocks.com/${path_model}",
 			"isBasedOn": "${title_collection}",
 			"creator": {
@@ -610,6 +612,7 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4725,9 +4728,9 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
