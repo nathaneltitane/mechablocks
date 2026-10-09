@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "ZGMF-X56S IMPULSE // SWORD – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/mobile-suits/zgmf-x56s-impulse-sword/exports/zgmf-x56s-impulse-sword.dae",
+			"name": "ZGMF-X56S IMPULSE // SWORD – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/mobile-suits/zgmf-x56s-impulse-sword/exports/zgmf-x56s-impulse-sword.kmz",
 			"isBasedOn": "MOBILE SUITS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/mobile-suits/zgmf-x56s-impulse-sword/exports/zgmf-x56s-impulse-sword.dae?version=1774560787',
+					'/models/mobile-suits/zgmf-x56s-impulse-sword/exports/zgmf-x56s-impulse-sword.kmz?version=1791571570',
 
 						function ( collada ) {
 
@@ -4841,7 +4842,7 @@
 
 <a class="text-center" href="/models/mobile-suits/zgmf-x56s-impulse-impulse"/>
 
-<img src="/models/mobile-suits/zgmf-x56s-impulse-impulse/renders/overlay/overlay.png?version=1780526817" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - IMPULSE"/>
+<img src="/models/mobile-suits/zgmf-x56s-impulse-impulse/renders/overlay/overlay.png?version=1791577729" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - IMPULSE"/>
 
 </a>
 
@@ -4864,7 +4865,7 @@ IMPULSE
 
 <a class="text-center" href="/models/mobile-suits/zgmf-x56s-impulse-blast"/>
 
-<img src="/models/mobile-suits/zgmf-x56s-impulse-blast/renders/overlay/overlay.png?version=1780526814" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - BLAST"/>
+<img src="/models/mobile-suits/zgmf-x56s-impulse-blast/renders/overlay/overlay.png?version=1791577718" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - BLAST"/>
 
 </a>
 
@@ -4887,7 +4888,7 @@ BLAST
 
 <a class="text-center" href="/models/mobile-suits/zgmf-x56s-impulse-force"/>
 
-<img src="/models/mobile-suits/zgmf-x56s-impulse-force/renders/overlay/overlay.png?version=1780526815" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - FORCE"/>
+<img src="/models/mobile-suits/zgmf-x56s-impulse-force/renders/overlay/overlay.png?version=1791577724" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - FORCE"/>
 
 </a>
 
@@ -5103,7 +5104,7 @@ FORCE
 
 						<div>
 
-							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-01.png?version=1774562356" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-01.png?version=" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5115,7 +5116,7 @@ FORCE
 
 						<div>
 
-							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-02.png?version=1774562358" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-02.png?version=" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5127,7 +5128,7 @@ FORCE
 
 						<div>
 
-							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-03.png?version=1774562359" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-03.png?version=" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5139,7 +5140,7 @@ FORCE
 
 						<div>
 
-							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-04.png?version=1774562361" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-04.png?version=" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5151,7 +5152,7 @@ FORCE
 
 						<div>
 
-							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-05.png?version=1774562362" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-05.png?version=" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5163,7 +5164,7 @@ FORCE
 
 						<div>
 
-							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-06.png?version=1774562363" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/mobile-suits/zgmf-x56s-impulse-sword/instructions/samples/sample-06.png?version=" alt="ZGMF-X56S IMPULSE // SWORD LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

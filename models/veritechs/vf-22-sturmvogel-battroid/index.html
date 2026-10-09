@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "VF-22 STURMVOGEL // BATTROID – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/veritechs/vf-22-sturmvogel-battroid/exports/vf-22-sturmvogel-battroid.dae",
+			"name": "VF-22 STURMVOGEL // BATTROID – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/veritechs/vf-22-sturmvogel-battroid/exports/vf-22-sturmvogel-battroid.kmz",
 			"isBasedOn": "VERITECHS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -2603,7 +2604,7 @@
 
 					loader.load (
 
-						'/minifigs/exports/minifig-white.dae',
+						'/minifigs/exports/minifig-black.dae',
 
 						function ( collada ) {
 
@@ -2809,7 +2810,7 @@
 
 						function ( error ) {
 
-							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-white.dae', error );
+							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-black.dae', error );
 
 						}
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/veritechs/vf-22-sturmvogel-battroid/exports/vf-22-sturmvogel-battroid.dae?version=1774404302',
+					'/models/veritechs/vf-22-sturmvogel-battroid/exports/vf-22-sturmvogel-battroid.kmz?version=1791575220',
 
 						function ( collada ) {
 
@@ -4841,7 +4842,7 @@
 
 <a class="text-center" href="/models/veritechs/vf-22-sturmvogel-fighter"/>
 
-<img src="/models/veritechs/vf-22-sturmvogel-fighter/renders/overlay/overlay.png?version=1780526926" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - FIGHTER"/>
+<img src="/models/veritechs/vf-22-sturmvogel-fighter/renders/overlay/overlay.png?version=1791578108" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - FIGHTER"/>
 
 </a>
 
@@ -4864,7 +4865,7 @@ FIGHTER
 
 <a class="text-center" href="/models/veritechs/vf-22-sturmvogel-gerwalk"/>
 
-<img src="/models/veritechs/vf-22-sturmvogel-gerwalk/renders/overlay/overlay.png?version=1780526928" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - GERWALK"/>
+<img src="/models/veritechs/vf-22-sturmvogel-gerwalk/renders/overlay/overlay.png?version=1791578116" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - GERWALK"/>
 
 </a>
 
@@ -5080,7 +5081,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-01.png?version=1767111294" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-01.png?version=1791579959" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5092,7 +5093,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-02.png?version=1767111295" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-02.png?version=1791579960" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5104,7 +5105,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-03.png?version=1767111297" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-03.png?version=1791579961" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5116,7 +5117,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-04.png?version=1767111298" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-04.png?version=1791579963" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5128,7 +5129,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-05.png?version=1767111299" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-05.png?version=1791579964" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5140,7 +5141,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-06.png?version=1767111301" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/veritechs/vf-22-sturmvogel-battroid/instructions/samples/sample-06.png?version=1791579966" alt="VF-22 STURMVOGEL // BATTROID LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

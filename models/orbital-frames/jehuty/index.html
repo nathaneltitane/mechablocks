@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "JEHUTY – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/orbital-frames/jehuty/exports/jehuty.dae",
+			"name": "JEHUTY – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/orbital-frames/jehuty/exports/jehuty.kmz",
 			"isBasedOn": "ORBITAL FRAMES",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/orbital-frames/jehuty/exports/jehuty.dae?version=1756740291',
+					'/models/orbital-frames/jehuty/exports/jehuty.kmz?version=1791572040',
 
 						function ( collada ) {
 
@@ -4990,7 +4991,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-01.png?version=1774562410" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-01.png?version=1791579097" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5002,7 +5003,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-02.png?version=1774562411" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-02.png?version=1791579098" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5014,7 +5015,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-03.png?version=1774562413" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-03.png?version=1791579099" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5026,7 +5027,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-04.png?version=1774562414" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-04.png?version=1791579100" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5038,7 +5039,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-05.png?version=1774562415" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-05.png?version=1791579101" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5050,7 +5051,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-06.png?version=1774562417" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/orbital-frames/jehuty/instructions/samples/sample-06.png?version=1791579103" alt="JEHUTY LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "TH-NX-01 BUSHWACKER // BATTLE FRAME – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/tank-heads/th-nx-01-bushwacker-frame/exports/th-nx-01-bushwacker-battle-frame.dae",
+			"name": "TH-NX-01 BUSHWACKER // BATTLE FRAME – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/tank-heads/th-nx-01-bushwacker-frame/exports/th-nx-01-bushwacker-battle-frame.kmz",
 			"isBasedOn": "TANK HEADS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/tank-heads/th-nx-01-bushwacker-frame/exports/th-nx-01-bushwacker-battle-frame.dae?version=1756740301',
+					'/models/tank-heads/th-nx-01-bushwacker-frame/exports/th-nx-01-bushwacker-battle-frame.kmz?version=1791572751',
 
 						function ( collada ) {
 
@@ -4841,7 +4842,7 @@
 
 <a class="text-center" href="/models/tank-heads/th-nx-01-bushwacker-tank"/>
 
-<img src="/models/tank-heads/th-nx-01-bushwacker-tank/renders/overlay/overlay.png?version=1780526852" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - TANK"/>
+<img src="/models/tank-heads/th-nx-01-bushwacker-tank/renders/overlay/overlay.png?version=1791577856" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - TANK"/>
 
 </a>
 
@@ -5057,7 +5058,7 @@ TANK
 
 						<div>
 
-							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-01.png?version=1774562616" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-01.png?version=1791579299" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5069,7 +5070,7 @@ TANK
 
 						<div>
 
-							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-02.png?version=1774562618" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-02.png?version=1791579301" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5081,7 +5082,7 @@ TANK
 
 						<div>
 
-							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-03.png?version=1774562619" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-03.png?version=1791579302" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5093,7 +5094,7 @@ TANK
 
 						<div>
 
-							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-04.png?version=1774562621" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-04.png?version=1791579304" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5105,7 +5106,7 @@ TANK
 
 						<div>
 
-							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-05.png?version=1774562622" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-05.png?version=1791579305" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5117,7 +5118,7 @@ TANK
 
 						<div>
 
-							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-06.png?version=1774562624" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/tank-heads/th-nx-01-bushwacker-frame/instructions/samples/sample-06.png?version=1791579307" alt="TH-NX-01 BUSHWACKER // BATTLE FRAME LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

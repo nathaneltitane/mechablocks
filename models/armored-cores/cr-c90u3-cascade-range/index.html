@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "CR-C90U3 CASCADE RANGE – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/armored-cores/cr-c90u3-cascade-range/exports/cr-c90u3-cascade-range.dae",
+			"name": "CR-C90U3 CASCADE RANGE – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/armored-cores/cr-c90u3-cascade-range/exports/cr-c90u3-cascade-range.kmz",
 			"isBasedOn": "ARMORED CORES",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -2603,7 +2604,7 @@
 
 					loader.load (
 
-						'/minifigs/exports/minifig-fuschia.dae',
+						'/minifigs/exports/minifig-white.dae',
 
 						function ( collada ) {
 
@@ -2809,7 +2810,7 @@
 
 						function ( error ) {
 
-							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-fuschia.dae', error );
+							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-white.dae', error );
 
 						}
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/armored-cores/cr-c90u3-cascade-range/exports/cr-c90u3-cascade-range.dae?version=1756740220',
+					'/models/armored-cores/cr-c90u3-cascade-range/exports/cr-c90u3-cascade-range.kmz?version=1791566510',
 
 						function ( collada ) {
 
@@ -4990,7 +4991,7 @@
 
 						<div>
 
-							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-01.png?version=1766799340" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-01.png?version=1791578265" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5002,7 +5003,7 @@
 
 						<div>
 
-							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-02.png?version=1766799341" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-02.png?version=1791578266" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5014,7 +5015,7 @@
 
 						<div>
 
-							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-03.png?version=1766799342" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-03.png?version=1791578268" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5026,7 +5027,7 @@
 
 						<div>
 
-							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-04.png?version=1766799343" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-04.png?version=1791578269" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5038,7 +5039,7 @@
 
 						<div>
 
-							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-05.png?version=1766799344" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-05.png?version=1791578271" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5050,7 +5051,7 @@
 
 						<div>
 
-							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-06.png?version=1766799346" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/armored-cores/cr-c90u3-cascade-range/instructions/samples/sample-06.png?version=1791578272" alt="CR-C90U3 CASCADE RANGE LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

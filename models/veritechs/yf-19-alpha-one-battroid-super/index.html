@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "YF-19S ALPHA ONE // SUPER BATTROID – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/veritechs/yf-19-alpha-one-battroid-super/exports/yf-19-alpha-one-battroid-super.dae",
+			"name": "YF-19S ALPHA ONE // SUPER BATTROID – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/veritechs/yf-19-alpha-one-battroid-super/exports/yf-19-alpha-one-battroid-super.kmz",
 			"isBasedOn": "VERITECHS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/veritechs/yf-19-alpha-one-battroid-super/exports/yf-19-alpha-one-battroid-super.dae?version=1774560842',
+					'/models/veritechs/yf-19-alpha-one-battroid-super/exports/yf-19-alpha-one-battroid-super.kmz?version=1791575818',
 
 						function ( collada ) {
 
@@ -4841,7 +4842,7 @@
 
 <a class="text-center" href="/models/veritechs/yf-19-alpha-one-fighter-super"/>
 
-<img src="/models/veritechs/yf-19-alpha-one-fighter-super/renders/overlay/overlay.png?version=1780526943" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - FIGHTER"/>
+<img src="/models/veritechs/yf-19-alpha-one-fighter-super/renders/overlay/overlay.png?version=1791578168" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - FIGHTER"/>
 
 </a>
 
@@ -4864,7 +4865,7 @@ FIGHTER
 
 <a class="text-center" href="/models/veritechs/yf-19-alpha-one-gerwalk-super"/>
 
-<img src="/models/veritechs/yf-19-alpha-one-gerwalk-super/renders/overlay/overlay.png?version=1780526946" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - GERWALK"/>
+<img src="/models/veritechs/yf-19-alpha-one-gerwalk-super/renders/overlay/overlay.png?version=1791578179" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - GERWALK"/>
 
 </a>
 
@@ -4887,7 +4888,7 @@ GERWALK
 
 <a class="text-center" href="/models/veritechs/yf-19-alpha-one-battroid-super"/>
 
-<img src="/models/veritechs/yf-19-alpha-one-battroid-super/renders/overlay/overlay.png?version=1780526939" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - BATTROID"/>
+<img src="/models/veritechs/yf-19-alpha-one-battroid-super/renders/overlay/overlay.png?version=1791578154" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - BATTROID"/>
 
 </a>
 
@@ -5103,7 +5104,7 @@ BATTROID
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-01.png?version=1767111431" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-01.png?version=1791580083" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5115,7 +5116,7 @@ BATTROID
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-02.png?version=1767111433" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-02.png?version=1791580084" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5127,7 +5128,7 @@ BATTROID
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-03.png?version=1767111434" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-03.png?version=1791580087" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5139,7 +5140,7 @@ BATTROID
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-04.png?version=1767111435" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-04.png?version=1791580088" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5151,7 +5152,7 @@ BATTROID
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-05.png?version=1767111436" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-05.png?version=1791580089" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5163,7 +5164,7 @@ BATTROID
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-06.png?version=1767111438" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/veritechs/yf-19-alpha-one-battroid-super/instructions/samples/sample-06.png?version=1791580090" alt="YF-19S ALPHA ONE // SUPER BATTROID LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

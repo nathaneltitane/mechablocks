@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "RT-7138 FIREBAT // ROVER – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/titans/rt-7138-firebat-rover/exports/rt-7138-firebat-rover.dae",
+			"name": "RT-7138 FIREBAT // ROVER – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/titans/rt-7138-firebat-rover/exports/rt-7138-firebat-rover.kmz",
 			"isBasedOn": "TITANS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/titans/rt-7138-firebat-rover/exports/rt-7138-firebat-rover.dae?version=1756740306',
+					'/models/titans/rt-7138-firebat-rover/exports/rt-7138-firebat-rover.kmz?version=1791573097',
 
 						function ( collada ) {
 
@@ -4841,7 +4842,7 @@
 
 <a class="text-center" href="/models/titans/rt-7138-firebat-titan"/>
 
-<img src="/models/titans/rt-7138-firebat-titan/renders/overlay/overlay.png?version=1780526865" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - TITAN"/>
+<img src="/models/titans/rt-7138-firebat-titan/renders/overlay/overlay.png?version=1791577897" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - TITAN"/>
 
 </a>
 
@@ -5057,7 +5058,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-01.png?version=1774562735" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-01.png?version=1791579419" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5069,7 +5070,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-02.png?version=1774562737" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-02.png?version=1791579420" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5081,7 +5082,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-03.png?version=1774562738" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-03.png?version=1791579422" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5093,7 +5094,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-04.png?version=1774562740" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-04.png?version=1791579423" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5105,7 +5106,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-05.png?version=1774562742" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-05.png?version=1791579426" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5117,7 +5118,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-06.png?version=1774562743" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/titans/rt-7138-firebat-rover/instructions/samples/sample-06.png?version=1791579427" alt="RT-7138 FIREBAT // ROVER LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

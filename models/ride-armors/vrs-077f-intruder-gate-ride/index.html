@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "VRS-077F INTRUDER GATE // RIDE – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/ride-armors/vrs-077f-intruder-gate-ride/exports/vrs-077f-intruder-gate-ride.dae",
+			"name": "VRS-077F INTRUDER GATE // RIDE – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/ride-armors/vrs-077f-intruder-gate-ride/exports/vrs-077f-intruder-gate-ride.kmz",
 			"isBasedOn": "RIDE ARMORS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/ride-armors/vrs-077f-intruder-gate-ride/exports/vrs-077f-intruder-gate-ride.dae?version=1756740298',
+					'/models/ride-armors/vrs-077f-intruder-gate-ride/exports/vrs-077f-intruder-gate-ride.kmz?version=1791572610',
 
 						function ( collada ) {
 
@@ -4841,7 +4842,7 @@
 
 <a class="text-center" href="/models/ride-armors/vrs-077f-intruder-gate-armor"/>
 
-<img src="/models/ride-armors/vrs-077f-intruder-gate-armor/renders/overlay/overlay.png?version=1780526841" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - ARMOR"/>
+<img src="/models/ride-armors/vrs-077f-intruder-gate-armor/renders/overlay/overlay.png?version=1791577824" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - ARMOR"/>
 
 </a>
 
@@ -5057,7 +5058,7 @@ ARMOR
 
 						<div>
 
-							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-01.png?version=1774562554" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-01.png?version=1791579229" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5069,7 +5070,7 @@ ARMOR
 
 						<div>
 
-							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-02.png?version=1774562555" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-02.png?version=1791579230" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5081,7 +5082,7 @@ ARMOR
 
 						<div>
 
-							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-03.png?version=1774562556" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-03.png?version=1791579232" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5093,7 +5094,7 @@ ARMOR
 
 						<div>
 
-							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-04.png?version=1774562558" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-04.png?version=1791579233" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5105,7 +5106,7 @@ ARMOR
 
 						<div>
 
-							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-05.png?version=1774562559" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-05.png?version=1791579234" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5117,7 +5118,7 @@ ARMOR
 
 						<div>
 
-							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-06.png?version=1774562560" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/ride-armors/vrs-077f-intruder-gate-ride/instructions/samples/sample-06.png?version=1791579236" alt="VRS-077F INTRUDER GATE // RIDE LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

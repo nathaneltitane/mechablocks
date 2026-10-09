@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "YF-19S ALPHA ONE // GERWALK – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/veritechs/yf-19-alpha-one-gerwalk/exports/yf-19-alpha-one-gerwalk.dae",
+			"name": "YF-19S ALPHA ONE // GERWALK – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/veritechs/yf-19-alpha-one-gerwalk/exports/yf-19-alpha-one-gerwalk.kmz",
 			"isBasedOn": "VERITECHS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/veritechs/yf-19-alpha-one-gerwalk/exports/yf-19-alpha-one-gerwalk.dae?version=1774560846',
+					'/models/veritechs/yf-19-alpha-one-gerwalk/exports/yf-19-alpha-one-gerwalk.kmz?version=1791576139',
 
 						function ( collada ) {
 
@@ -4840,7 +4841,7 @@
 
 <a class="text-center" href="/models/veritechs/yf-19-alpha-one-fast-packs"/>
 
-<img src="/models/veritechs/yf-19-alpha-one-fast-packs/renders/overlay/overlay.png?version=1780526942" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - FAST PACKS"/>
+<img src="/models/veritechs/yf-19-alpha-one-fast-packs/renders/overlay/overlay.png?version=1791578162" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - FAST PACKS"/>
 
 </a>
 
@@ -4863,7 +4864,7 @@ FAST PACKS
 
 <a class="text-center" href="/models/veritechs/yf-19-alpha-one-battroid"/>
 
-<img src="/models/veritechs/yf-19-alpha-one-battroid/renders/overlay/overlay.png?version=1780526941" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - BATTROID"/>
+<img src="/models/veritechs/yf-19-alpha-one-battroid/renders/overlay/overlay.png?version=1791578160" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - BATTROID"/>
 
 </a>
 
@@ -4886,7 +4887,7 @@ BATTROID
 
 <a class="text-center" href="/models/veritechs/yf-19-alpha-one-fighter"/>
 
-<img src="/models/veritechs/yf-19-alpha-one-fighter/renders/overlay/overlay.png?version=1780526945" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - FIGHTER"/>
+<img src="/models/veritechs/yf-19-alpha-one-fighter/renders/overlay/overlay.png?version=1791578173" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - FIGHTER"/>
 
 </a>
 
@@ -5102,7 +5103,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-01.png?version=1767111512" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-01.png?version=1791580163" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5114,7 +5115,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-02.png?version=1767111513" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-02.png?version=1791580164" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5126,7 +5127,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-03.png?version=1767111514" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-03.png?version=1791580166" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5138,7 +5139,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-04.png?version=1767111515" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-04.png?version=1791580168" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5150,7 +5151,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-05.png?version=1767111516" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-05.png?version=1791580169" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5162,7 +5163,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-06.png?version=1767111517" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/veritechs/yf-19-alpha-one-gerwalk/instructions/samples/sample-06.png?version=1791580171" alt="YF-19S ALPHA ONE // GERWALK LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

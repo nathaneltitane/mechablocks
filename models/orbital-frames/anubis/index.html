@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "ANUBIS – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/orbital-frames/anubis/exports/anubis.dae",
+			"name": "ANUBIS – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/orbital-frames/anubis/exports/anubis.kmz",
 			"isBasedOn": "ORBITAL FRAMES",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -2603,7 +2604,7 @@
 
 					loader.load (
 
-						'/minifigs/exports/minifig-white.dae',
+						'/minifigs/exports/minifig-grey.dae',
 
 						function ( collada ) {
 
@@ -2809,7 +2810,7 @@
 
 						function ( error ) {
 
-							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-white.dae', error );
+							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-grey.dae', error );
 
 						}
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/orbital-frames/anubis/exports/anubis.dae?version=1756740290',
+					'/models/orbital-frames/anubis/exports/anubis.kmz?version=1791571966',
 
 						function ( collada ) {
 
@@ -4990,7 +4991,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/anubis/instructions/samples/sample-01.png?version=1774562397" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/orbital-frames/anubis/instructions/samples/sample-01.png?version=1791579083" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5002,7 +5003,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/anubis/instructions/samples/sample-02.png?version=1774562398" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/orbital-frames/anubis/instructions/samples/sample-02.png?version=1791579085" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5014,7 +5015,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/anubis/instructions/samples/sample-03.png?version=1774562399" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/orbital-frames/anubis/instructions/samples/sample-03.png?version=1791579086" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5026,7 +5027,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/anubis/instructions/samples/sample-04.png?version=1774562401" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/orbital-frames/anubis/instructions/samples/sample-04.png?version=1791579087" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5038,7 +5039,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/anubis/instructions/samples/sample-05.png?version=1774562402" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/orbital-frames/anubis/instructions/samples/sample-05.png?version=1791579089" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5050,7 +5051,7 @@
 
 						<div>
 
-							<img src="/models/orbital-frames/anubis/instructions/samples/sample-06.png?version=1774562404" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/orbital-frames/anubis/instructions/samples/sample-06.png?version=1791579090" alt="ANUBIS LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

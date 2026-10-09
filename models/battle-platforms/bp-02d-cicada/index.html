@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "BP-02D CICADA – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/battle-platforms/bp-02d-cicada/exports/bp-02d-cicada.dae",
+			"name": "BP-02D CICADA – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/battle-platforms/bp-02d-cicada/exports/bp-02d-cicada.kmz",
 			"isBasedOn": "BATTLE PLATFORMS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/battle-platforms/bp-02d-cicada/exports/bp-02d-cicada.dae?version=1756740224',
+					'/models/battle-platforms/bp-02d-cicada/exports/bp-02d-cicada.kmz?version=1791566834',
 
 						function ( collada ) {
 
@@ -4990,7 +4991,7 @@
 
 						<div>
 
-							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-01.png?version=1766781340" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-01.png?version=1791578320" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5002,7 +5003,7 @@
 
 						<div>
 
-							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-02.png?version=1766781341" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-02.png?version=1791578322" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5014,7 +5015,7 @@
 
 						<div>
 
-							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-03.png?version=1766781342" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-03.png?version=1791578323" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5026,7 +5027,7 @@
 
 						<div>
 
-							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-04.png?version=1766781343" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-04.png?version=1791578325" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5038,7 +5039,7 @@
 
 						<div>
 
-							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-05.png?version=1766781344" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-05.png?version=1791578326" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5050,7 +5051,7 @@
 
 						<div>
 
-							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-06.png?version=1766781346" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/battle-platforms/bp-02d-cicada/instructions/samples/sample-06.png?version=1791578331" alt="BP-02D CICADA LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

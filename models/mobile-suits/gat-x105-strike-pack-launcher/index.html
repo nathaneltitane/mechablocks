@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "GAT-X105 STRIKE // LAUNCHER PACK – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/mobile-suits/gat-x105-strike-pack-launcher/exports/gat-x105-strike-pack-launcher.dae",
+			"name": "GAT-X105 STRIKE // LAUNCHER PACK – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/mobile-suits/gat-x105-strike-pack-launcher/exports/gat-x105-strike-pack-launcher.kmz",
 			"isBasedOn": "MOBILE SUITS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/mobile-suits/gat-x105-strike-pack-launcher/exports/gat-x105-strike-pack-launcher.dae?version=1756740260',
+					'/models/mobile-suits/gat-x105-strike-pack-launcher/exports/gat-x105-strike-pack-launcher.kmz?version=1791568478',
 
 						function ( collada ) {
 
@@ -4840,7 +4841,7 @@
 
 <a class="text-center" href="/models/mobile-suits/gat-x105-strike-pack-aile"/>
 
-<img src="/models/mobile-suits/gat-x105-strike-pack-aile/renders/overlay/overlay.png?version=1780526760" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - AILE"/>
+<img src="/models/mobile-suits/gat-x105-strike-pack-aile/renders/overlay/overlay.png?version=1791577486" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - AILE"/>
 
 </a>
 
@@ -4862,7 +4863,7 @@ AILE
 
 <a class="text-center" href="/models/mobile-suits/gat-x105-strike-pack-sword"/>
 
-<img src="/models/mobile-suits/gat-x105-strike-pack-sword/renders/overlay/overlay.png?version=1780526762" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - SWORD"/>
+<img src="/models/mobile-suits/gat-x105-strike-pack-sword/renders/overlay/overlay.png?version=1791577494" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - SWORD"/>
 
 </a>
 
@@ -5078,7 +5079,7 @@ SWORD
 
 						<div>
 
-							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-01.png?version=1774562165" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-01.png?version=1791578869" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5090,7 +5091,7 @@ SWORD
 
 						<div>
 
-							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-02.png?version=1774562166" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-02.png?version=1791578871" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5102,7 +5103,7 @@ SWORD
 
 						<div>
 
-							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-03.png?version=1774562167" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-03.png?version=1791578872" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5114,7 +5115,7 @@ SWORD
 
 						<div>
 
-							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-04.png?version=1774562168" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-04.png?version=1791578873" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5126,7 +5127,7 @@ SWORD
 
 						<div>
 
-							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-05.png?version=1774562170" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-05.png?version=1791578875" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5138,7 +5139,7 @@ SWORD
 
 						<div>
 
-							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-06.png?version=1774562170" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/mobile-suits/gat-x105-strike-pack-launcher/instructions/samples/sample-06.png?version=1791578876" alt="GAT-X105 STRIKE // LAUNCHER PACK LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "VF-5000 STAR MIRAGE // BATTROID – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/veritechs/vf-5000-star-mirage-battroid/exports/vf-5000-star-mirage-battroid.dae",
+			"name": "VF-5000 STAR MIRAGE // BATTROID – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/veritechs/vf-5000-star-mirage-battroid/exports/vf-5000-star-mirage-battroid.kmz",
 			"isBasedOn": "VERITECHS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -586,7 +587,7 @@
 					// model state //
 
 					console_overlay_line ( 'model', 'identifier', '4VH4VD8S3PDNA' ) ;
-					console_overlay_line ( 'model', 'pieces', '887' ) ;
+					console_overlay_line ( 'model', 'pieces', '888' ) ;
 					console_overlay_line ( 'model', 'load', self.colladaImport ? 'yes' : 'no' ) ;
 
 					if ( self.colladaImport ) {
@@ -1495,7 +1496,7 @@
 
 					// get parts count
 
-					const pieces_count = '887';
+					const pieces_count = '888';
 
 					// label maker
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/veritechs/vf-5000-star-mirage-battroid/exports/vf-5000-star-mirage-battroid.dae?version=1774404307',
+					'/models/veritechs/vf-5000-star-mirage-battroid/exports/vf-5000-star-mirage-battroid.kmz?version=1791575632',
 
 						function ( collada ) {
 
@@ -4841,7 +4842,7 @@
 
 <a class="text-center" href="/models/veritechs/vf-5000-star-mirage-fighter"/>
 
-<img src="/models/veritechs/vf-5000-star-mirage-fighter/renders/overlay/overlay.png?version=1780526936" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - FIGHTER"/>
+<img src="/models/veritechs/vf-5000-star-mirage-fighter/renders/overlay/overlay.png?version=1791578143" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - FIGHTER"/>
 
 </a>
 
@@ -4864,7 +4865,7 @@ FIGHTER
 
 <a class="text-center" href="/models/veritechs/vf-5000-star-mirage-gerwalk"/>
 
-<img src="/models/veritechs/vf-5000-star-mirage-gerwalk/renders/overlay/overlay.png?version=1780526937" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - GERWALK"/>
+<img src="/models/veritechs/vf-5000-star-mirage-gerwalk/renders/overlay/overlay.png?version=1791578148" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - GERWALK"/>
 
 </a>
 
@@ -5000,7 +5001,7 @@ GERWALK
 
 							<div class="grid-span-3 text-right">
 
-								887
+								888
 
 							</div>
 
@@ -5080,7 +5081,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-01.png?version=1772926018" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-01.png?version=1791580041" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5092,7 +5093,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-02.png?version=1772926016" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-02.png?version=1791580043" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5104,7 +5105,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-03.png?version=1772926017" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-03.png?version=1791580044" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5116,7 +5117,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-04.png?version=1772926017" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-04.png?version=1791580045" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5128,7 +5129,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-05.png?version=1772926017" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-05.png?version=1791580046" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5140,7 +5141,7 @@ GERWALK
 
 						<div>
 
-							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-06.png?version=1772926017" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/veritechs/vf-5000-star-mirage-battroid/instructions/samples/sample-06.png?version=1791580048" alt="VF-5000 STAR MIRAGE // BATTROID LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

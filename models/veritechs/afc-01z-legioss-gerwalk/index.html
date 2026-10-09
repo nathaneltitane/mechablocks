@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "AFC-01Z LEGIOSS // GERWALK – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/veritechs/afc-01z-legioss-gerwalk/exports/afc-01z-legioss-gerwalk.dae",
+			"name": "AFC-01Z LEGIOSS // GERWALK – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/veritechs/afc-01z-legioss-gerwalk/exports/afc-01z-legioss-gerwalk.kmz",
 			"isBasedOn": "VERITECHS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/veritechs/afc-01z-legioss-gerwalk/exports/afc-01z-legioss-gerwalk.dae?version=1774404286',
+					'/models/veritechs/afc-01z-legioss-gerwalk/exports/afc-01z-legioss-gerwalk.kmz?version=1791573974',
 
 						function ( collada ) {
 
@@ -4841,7 +4842,7 @@
 
 <a class="text-center" href="/models/veritechs/afc-01z-legioss-battroid"/>
 
-<img src="/models/veritechs/afc-01z-legioss-battroid/renders/overlay/overlay.png?version=1780526890" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - BATTROID"/>
+<img src="/models/veritechs/afc-01z-legioss-battroid/renders/overlay/overlay.png?version=1791577975" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - BATTROID"/>
 
 </a>
 
@@ -4864,7 +4865,7 @@ BATTROID
 
 <a class="text-center" href="/models/veritechs/afc-01z-legioss-fighter"/>
 
-<img src="/models/veritechs/afc-01z-legioss-fighter/renders/overlay/overlay.png?version=1780526891" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - FIGHTER"/>
+<img src="/models/veritechs/afc-01z-legioss-fighter/renders/overlay/overlay.png?version=1791577980" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - FIGHTER"/>
 
 </a>
 
@@ -5080,7 +5081,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-01.png?version=1767111063" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-01.png?version=1791579678" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5092,7 +5093,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-02.png?version=1767111065" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-02.png?version=1791579679" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5104,7 +5105,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-03.png?version=1767111066" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-03.png?version=1791579681" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5116,7 +5117,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-04.png?version=1767111067" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-04.png?version=1791579682" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5128,7 +5129,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-05.png?version=1767111068" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-05.png?version=1791579683" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5140,7 +5141,7 @@ FIGHTER
 
 						<div>
 
-							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-06.png?version=1767111070" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/veritechs/afc-01z-legioss-gerwalk/instructions/samples/sample-06.png?version=1791579685" alt="AFC-01Z LEGIOSS // GERWALK LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 

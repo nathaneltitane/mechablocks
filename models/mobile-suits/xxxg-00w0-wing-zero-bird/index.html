@@ -270,9 +270,9 @@
 		{
 			"@context": "https://schema.org",
 			"@type": "3DModel",
-			"name": "XXXG-00W0 WING ZERO // NEO BIRD – LEGO® MOC (Collada / DAE)",
-			"encodingFormat": "model/vnd.collada+xml",
-			"contentUrl": "https://mechablocks.com/models/mobile-suits/xxxg-00w0-wing-zero-bird/exports/xxxg-00w0-wing-zero-bird.dae",
+			"name": "XXXG-00W0 WING ZERO // NEO BIRD – LEGO® MOC (Collada / KMZ)",
+			"encodingFormat": "application/vnd.google-earth.kmz",
+			"contentUrl": "https://mechablocks.com/models/mobile-suits/xxxg-00w0-wing-zero-bird/exports/xxxg-00w0-wing-zero-bird.kmz",
 			"isBasedOn": "MOBILE SUITS",
 			"creator": {
 				"@type": "Person",
@@ -323,6 +323,7 @@
 			import * as THREE from 'three';
 
 			import { ColladaLoader } from 'three/addons/loaders/ColladaLoader.js';
+			import { KMZLoader } from 'three/addons/loaders/KMZLoader.js';
 
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -4438,9 +4439,9 @@
 
 				}
 
-				// loader
+				// loader - model compressed as kmz - collada inside
 
-				var loader = new ColladaLoader ( ) ;
+				var loader = new KMZLoader ( ) ;
 
 				// global vars for edges
 
@@ -4464,7 +4465,7 @@
 
 				var model = loader.load (
 
-					'/models/mobile-suits/xxxg-00w0-wing-zero-bird/exports/xxxg-00w0-wing-zero-bird.dae?version=1756740272',
+					'/models/mobile-suits/xxxg-00w0-wing-zero-bird/exports/xxxg-00w0-wing-zero-bird.kmz?version=1791569787',
 
 						function ( collada ) {
 
@@ -4841,7 +4842,7 @@
 
 <a class="text-center" href="/models/mobile-suits/xxxg-00w0-wing-zero-suit"/>
 
-<img src="/models/mobile-suits/xxxg-00w0-wing-zero-suit/renders/overlay/overlay.png?version=1780526790" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - SUIT"/>
+<img src="/models/mobile-suits/xxxg-00w0-wing-zero-suit/renders/overlay/overlay.png?version=1791577614" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - SUIT"/>
 
 </a>
 
@@ -5057,7 +5058,7 @@ SUIT
 
 						<div>
 
-							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-01.png?version=1774562300" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-01.png?version=1791578995" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5069,7 +5070,7 @@ SUIT
 
 						<div>
 
-							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-02.png?version=1774562300" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-02.png?version=1791578995" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5081,7 +5082,7 @@ SUIT
 
 						<div>
 
-							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-03.png?version=1774562300" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-03.png?version=1791578995" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5093,7 +5094,7 @@ SUIT
 
 						<div>
 
-							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-04.png?version=1774562300" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-04.png?version=1791578995" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5105,7 +5106,7 @@ SUIT
 
 						<div>
 
-							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-05.png?version=1774562300" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-05.png?version=1791578995" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5117,7 +5118,7 @@ SUIT
 
 						<div>
 
-							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-06.png?version=1774562300" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/mobile-suits/xxxg-00w0-wing-zero-bird/instructions/samples/sample-06.png?version=1791578995" alt="XXXG-00W0 WING ZERO // NEO BIRD LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 
