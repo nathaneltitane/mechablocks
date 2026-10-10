@@ -144,6 +144,14 @@ rsync							\
 	--exclude='*.mpd'			\
 	--exclude='*.pdf'			\
 	--exclude='*.dae'			\
+	--exclude='*.obj'			\
+	--exclude='*.mtl'			\
+	--exclude='*.3ds'			\
+	--exclude='*.blend'			\
+	--exclude='*.csv'			\
+	--exclude='*.stl'			\
+	--exclude='*.io'			\
+	--exclude='*.lxf'			\
 	--exclude="configuration"	\
 	--exclude='LPub3D'			\
 	--delete					\
