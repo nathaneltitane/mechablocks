@@ -2643,7 +2643,7 @@
 
 					loader.load (
 
-						'/minifigs/exports/minifig-red.dae',
+						'/minifigs/exports/minifig-yellow.dae',
 
 						function ( collada ) {
 
@@ -2862,7 +2862,7 @@
 
 							self.minifig_loading = false;
 
-							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-red.dae', error );
+							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-yellow.dae', error );
 
 						}
 
@@ -4119,6 +4119,22 @@
 					requestAnimationFrame ( self.render );
 				}
 
+				// render loop start - ignored when already running
+
+				this.render_running = false;
+
+				this.render_start = function ( ) {
+
+					if ( self.render_running ) {
+
+						return;
+					}
+
+					self.render_running = true;
+
+					self.render ( );
+				}
+
 				// keycode references
 
 				// letters
@@ -4859,6 +4875,10 @@
 						self.scene.add ( self.get_transform_controls ( ) );
 
 						self.get_transform_controls ( ).attach ( self.colladaImport );
+
+						// render loop - started here once
+
+						self.render_start ( );
 
 					},
 
