@@ -1,47 +1,16 @@
 // contact //
 
-$(document).ready(function() {
+// model id and name filled from the model page - empty elsewhere
+// delegated from the document - contact buttons and modal are loaded as modules after the page
 
-	var field_id = $("#contact form input[name='part-id']");
+$( document ).on ( 'click', "[for='modal-contact']:not(.modal-close):not(.modal-background)", function ( ) {
 
-	var field_name = $("#contact form input[name='part-name']");
+	var id = $( '.model-id' ).first ( ).text ( ).trim ( ).toUpperCase ( );
 
-	var button = $("#footer [for='modal-contact']");
+	var name = $( '.model-name' ).first ( ).text ( ).trim ( ).toUpperCase ( );
 
+	$( "#contact-modal form input[name='model-id']" ).val ( id );
 
-	$.each(
+	$( "#contact-modal form input[name='model-name']" ).val ( name );
 
-		$(".product"),
-
-		function (index, product) {
-
-			var id = $(product).find (".product-identifier")[0].innerText;
-
-			var name = $(product).find (".product-name")[0].innerText;
-
-			id = id.trim ();
-
-			id = id.toUpperCase ();
-
-			name = name.trim ();
-
-			name = name.toUpperCase ();
-
-			$(button).on (
-				"click",
-
-				function (event) {
-
-					$(field_id).attr ("value", id);
-
-					$(field_name).attr ("value", name);
-
-				}
-
-			);
-
-		}
-
-	);
-
-});
+} );

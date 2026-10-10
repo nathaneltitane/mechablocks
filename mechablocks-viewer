@@ -5578,7 +5578,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${directory_model}/index.html"
 
 							</div>
 
-							<div class="grid-span-3 text-right">
+							<div class="grid-span-3 text-right model-name">
 
 								${title_model}
 
@@ -5632,7 +5632,7 @@ cat << 3D-MODEL-PAGE-SAMPLES ->> "${directory_model}/index.html"
 
 							</div>
 
-							<div class="grid-span-3 ${class_status_font} text-right">
+							<div class="grid-span-3 ${class_status_font} text-right model-id">
 
 								${id_paypal}
 
