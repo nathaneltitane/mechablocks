@@ -322,8 +322,8 @@ schema_homepage_update () {
 		return 1
 	fi
 
-	if ! grep -q "${marker_schema_begin}" "${file_homepage}" ||
-	   ! grep -q "${marker_schema_end}" "${file_homepage}"
+	if [ "$(grep -c "${marker_schema_begin}" "${file_homepage}")" -eq 0 ] ||
+	   [ "$(grep -c "${marker_schema_end}" "${file_homepage}")" -eq 0 ]
 	then
 		frobulator.wrn "Schema markers not found" "[ ${file_homepage} ]"
 
@@ -394,14 +394,22 @@ list_files_index=$(find . -type f -name 'index.html' | sort)
 
 for path_file in ${list_files_index}
 do
-	if directory_excluded_check "${path_file}"
+	directory_excluded_check "${path_file}"
+
+	status_excluded="${?}"
+
+	if [ "${status_excluded}" -eq 0 ]
 	then
 		continue
 	fi
 
 	url_index "${path_file}" "${path_file}"
 
-	if schema_included_check "${path_file}"
+	schema_included_check "${path_file}"
+
+	status_included="${?}"
+
+	if [ "${status_included}" -eq 0 ]
 	then
 		url_prepare "${path_file}"
 
