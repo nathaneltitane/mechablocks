@@ -71,7 +71,7 @@
 
 .modal-message {
 	background: #ddddddff;
-	border-radius: 0px;
+	border-radius: 0px 0px 20px 20px;
 	border: none;
 	color: #666666ff;
 	padding: 10px 10px 10px 10px;
