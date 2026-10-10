@@ -1071,6 +1071,56 @@
 
 				// helpers
 
+				// dispose - frees geometry, material and texture memory of a removed object
+
+				this.dispose_object = function ( object ) {
+
+					if ( ! object ) {
+
+						return;
+					}
+
+					object.traverse ( function ( node ) {
+
+						if ( node.geometry ) {
+
+							node.geometry.dispose ( );
+						}
+
+						if ( node.material ) {
+
+							const materials = Array.isArray ( node.material ) ? node.material : [ node.material ];
+
+							materials.forEach ( function ( material ) {
+
+								if ( material.map ) {
+
+									material.map.dispose ( );
+								}
+
+								material.dispose ( );
+							} );
+						}
+					} );
+				}
+
+				// release - removes a stored object from the scene, frees it and clears its reference
+				// rebuilt by its get_ function the next time it is shown
+
+				this.release_object = function ( name ) {
+
+					if ( ! self[name] ) {
+
+						return;
+					}
+
+					self.scene.remove ( self[name] );
+
+					self.dispose_object ( self[name] );
+
+					self[name] = null;
+				}
+
 				// axes helper
 
 				this.axesHelper = null;
@@ -1097,7 +1147,7 @@
 
 						this.axesHelper_visible = false;
 
-						self.scene.remove ( self.get_axesHelper ( ) );
+						self.release_object ( 'axesHelper' );
 					}
 
 					else {
@@ -1259,7 +1309,7 @@
 
 						this.bounding_box_helper_visible = false;
 
-						self.scene.remove ( self.get_bounding_box_helper ( ) );
+						self.release_object ( 'bounding_box_helper' );
 
 						bounding_box_helper_visible = false;
 
@@ -1303,7 +1353,7 @@
 
 						this.camera_helper_visible = false;
 
-						self.scene.remove ( self.get_camera_helper ( ) );
+						self.release_object ( 'camera_helper' );
 
 					}
 
@@ -1457,6 +1507,8 @@
 
 							self.dimension_labels.forEach ( label => self.scene.remove ( label ) );
 
+							self.dimension_labels.forEach ( label => self.dispose_object ( label ) );
+
 							self.dimension_labels = null;
 
 							dimension_labels_visible = false;
@@ -1597,6 +1649,8 @@
 
 							self.pieces_count_label.forEach ( label => self.scene.remove ( label ) );
 
+							self.pieces_count_label.forEach ( label => self.dispose_object ( label ) );
+
 							self.pieces_count_label = null;
 
 							pieces_count_label_visible = false;
@@ -1627,7 +1681,7 @@
 
 					if ( ! self.hemisphere_light_helper ) {
 
-						self.hemisphere_light_helper = new THREE.Hemisphere_light_helper ( self.hemisphereLight, 0.25 , this.hemisphere_light_helper_color );
+						self.hemisphere_light_helper = new THREE.HemisphereLightHelper ( self.hemisphereLight, 0.25 , this.hemisphere_light_helper_color );
 
 						console.log ( "helper [ light / hemisphere ]" );
 
@@ -1643,7 +1697,7 @@
 
 						this.hemisphere_light_helper_visible = false;
 
-						self.scene.remove ( self.get_hemisphere_light_helper ( ) );
+						self.release_object ( 'hemisphere_light_helper' );
 
 					}
 
@@ -1667,7 +1721,7 @@
 
 					if ( ! self.point_light_helper ) {
 
-						self.point_light_helper = new THREE.Point_light_helper ( self.pointLight, 0.25 , this.point_light_helper_color )
+						self.point_light_helper = new THREE.PointLightHelper ( self.pointLight, 0.25 , this.point_light_helper_color )
 
 						console.log ( "helper [ light / point ]" );
 
@@ -1683,7 +1737,7 @@
 
 						this.point_light_helper_visible = false;
 
-						self.scene.remove ( self.get_point_light_helper ( ) );
+						self.release_object ( 'point_light_helper' );
 
 					}
 
@@ -1707,7 +1761,7 @@
 
 					if ( ! self.directional_light_0_helper ) {
 
-						self.directional_light_0_helper = new THREE.Directional_light_helper ( self.directional_light_0, 0.25 , this.directional_light_0_helper_color )
+						self.directional_light_0_helper = new THREE.DirectionalLightHelper ( self.directional_light_0, 0.25 , this.directional_light_0_helper_color )
 
 						console.log ( "helper [ light / directional / 0 ]" );
 					}
@@ -1722,7 +1776,7 @@
 
 						this.directional_light_0_helper_visible = false;
 
-						self.scene.remove ( self.get_directional_light_0_helper ( ) );
+						self.release_object ( 'directional_light_0_helper' );
 
 					}
 
@@ -1746,7 +1800,7 @@
 
 					if ( ! self.directional_light_1_helper ) {
 
-						self.directional_light_1_helper = new THREE.Directional_light_helper ( self.directional_light_1, 0.25 , this.directional_light_1_helper_color )
+						self.directional_light_1_helper = new THREE.DirectionalLightHelper ( self.directional_light_1, 0.25 , this.directional_light_1_helper_color )
 
 						console.log ( "helper [ light / directional / 1 ]" );
 
@@ -1762,7 +1816,7 @@
 
 						this.directional_light_1_helper_visible = false;
 
-						self.scene.remove ( self.get_directional_light_1_helper ( ) );
+						self.release_object ( 'directional_light_1_helper' );
 
 					}
 
@@ -1786,7 +1840,7 @@
 
 					if ( ! self.directional_light_2_helper ) {
 
-						self.directional_light_2_helper = new THREE.Directional_light_helper ( self.directional_light_2, 0.25 , this.directional_light_2_helper_color )
+						self.directional_light_2_helper = new THREE.DirectionalLightHelper ( self.directional_light_2, 0.25 , this.directional_light_2_helper_color )
 
 						console.log ( "helper [ light / directional / 2 ]" );
 
@@ -1802,7 +1856,7 @@
 
 						this.directional_light_2_helper_visible = false;
 
-						self.scene.remove ( self.get_directional_light_2_helper ( ) );
+						self.release_object ( 'directional_light_2_helper' );
 
 					}
 
@@ -1826,7 +1880,7 @@
 
 					if ( ! self.spot_light_helper ) {
 
-						self.spot_light_helper = new THREE.Spot_light_helper ( self.spotLight, 0.25 , this.spot_light_helper_color )
+						self.spot_light_helper = new THREE.SpotLightHelper ( self.spotLight, this.spot_light_helper_color )
 
 						console.log ( "helper [ light / spot ]" );
 					}
@@ -1841,7 +1895,7 @@
 
 						this.spot_light_helper_visible = false;
 
-						self.scene.remove ( self.get_spot_light_helper ( ) );
+						self.release_object ( 'spot_light_helper' );
 
 					}
 
@@ -1861,33 +1915,15 @@
 
 					// remove orthogonal grid
 
-					if ( self.orthogonal_grid_helper ) {
-
-						self.scene.remove ( self.orthogonal_grid_helper );
-
-						self.orthogonal_grid_helper = null;
-
-					}
+					self.release_object ( 'orthogonal_grid_helper' );
 
 					// remove height grid
 
-					if ( self.height_grid_helper ) {
-
-						self.scene.remove ( self.height_grid_helper );
-
-						self.height_grid_helper = null;
-
-					}
+					self.release_object ( 'height_grid_helper' );
 
 					// remove polar grid
 
-					if ( self.polar_grid_helper ) {
-
-						self.scene.remove ( self.polar_grid_helper );
-
-						self.polar_grid_helper = null;
-
-					}
+					self.release_object ( 'polar_grid_helper' );
 
 					// rebuild visible helpers
 
@@ -1974,7 +2010,7 @@
 
 						this.polar_grid_helper_visible = false;
 
-						self.scene.remove ( self.get_polar_grid_helper ( ) );
+						self.release_object ( 'polar_grid_helper' );
 
 					}
 
@@ -2219,9 +2255,9 @@
 
 						this.orthogonal_grid_helper_visible = false;
 
-						self.scene.remove ( self.get_orthogonal_grid_helper ( ) );
+						self.release_object ( 'orthogonal_grid_helper' );
 
-						self.scene.remove ( self.get_height_grid_helper ( ) );
+						self.release_object ( 'height_grid_helper' );
 
 					}
 
@@ -2506,9 +2542,9 @@
 
 						self.orthogonal_grid_helper_visible = false ;
 
-						self.scene.remove ( self.get_orthogonal_grid_helper ( ) ) ;
+						self.release_object ( 'orthogonal_grid_helper' ) ;
 
-						self.scene.remove ( self.get_height_grid_helper ( ) ) ;
+						self.release_object ( 'height_grid_helper' ) ;
 
 						self.polar_grid_helper_visible = true ;
 
@@ -2526,7 +2562,7 @@
 
 						self.polar_grid_helper_visible = false ;
 
-						self.scene.remove ( self.get_polar_grid_helper ( ) ) ;
+						self.release_object ( 'polar_grid_helper' ) ;
 
 						console.log ( "helper [ grid cycle ] : off" ) ;
 
@@ -2578,18 +2614,19 @@
 
 						this.minifig_visible = false;
 
-						if ( self.minifig ) {
-
-							self.minifig.visible = false;
-
-							if ( self.minifigTransform ) self.minifigTransform.visible = false;
-
-						}
+						self.minifig_release ( );
 
 						return;
 					}
 
 					this.minifig_visible = true;
+
+					// already loading - visibility applied when it arrives
+
+					if ( self.minifig_loading ) {
+
+						return;
+					}
 
 					if ( self.minifig ) {
 
@@ -2602,11 +2639,15 @@
 
 					const loader = new ColladaLoader ( ) ;
 
+					self.minifig_loading = true;
+
 					loader.load (
 
-						'/minifigs/exports/minifig-white.dae',
+						'/minifigs/exports/minifig-grey.dae',
 
 						function ( collada ) {
+
+							self.minifig_loading = false;
 
 							const minifig = collada.scene;
 
@@ -2790,6 +2831,15 @@
 
 							self.minifigTransform = transform;
 
+							// toggled off while loading
+
+							if ( ! self.minifig_visible ) {
+
+								self.minifig_release ( );
+
+								return;
+							}
+
 							console.log ( 'minifig [ status ] : load ok' );
 
 							console.log ( 'minifig [ height / raw ] : ', raw_minifig_height );
@@ -2810,13 +2860,43 @@
 
 						function ( error ) {
 
-							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-white.dae', error );
+							self.minifig_loading = false;
+
+							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-grey.dae', error );
 
 						}
 
 					);
 
 				};
+
+				// minifig release - detached, removed and freed - edges list emptied
+
+				this.minifig_release = function ( ) {
+
+					if ( ! self.minifig ) {
+
+						return;
+					}
+
+					if ( self.minifigTransform ) {
+
+						if ( self.minifigTransform.object === self.minifig ) {
+
+							self.minifigTransform.detach ( );
+						}
+
+						self.minifigTransform.visible = false;
+					}
+
+					minifig_edges.length = 0;
+
+					self.release_object ( 'minifig' );
+
+					self.minifigTransform = null;
+
+					console.log ( 'minifig [ status ] : released' );
+				}
 
 				// generate globally bound entry point so helper buttons can call it safely
 
@@ -2852,17 +2932,7 @@
 
 						this.baseplate_visible = false;
 
-						if ( self.baseplate ) {
-
-							self.baseplate.visible = false;
-
-							if ( self.baseplateTransform ) {
-
-								self.baseplateTransform.visible = false;
-
-							}
-
-						}
+						self.baseplate_release ( );
 
 						// revert grid sizing back to model
 
@@ -2880,6 +2950,13 @@
 					// toggle on
 
 					this.baseplate_visible = true;
+
+					// already loading - visibility applied when it arrives
+
+					if ( self.baseplate_loading ) {
+
+						return;
+					}
 
 					// already loaded
 
@@ -2945,6 +3022,8 @@
 
 							console.warn ( 'baseplate [ status ] : no baseplate large enough for rounded model footprint' );
 
+							self.baseplate_loading = false;
+
 							return;
 
 						}
@@ -2987,6 +3066,10 @@
 								) {
 
 									console.log ( 'baseplate [ skip ] : ' + baseplate_candidate.name );
+
+									// candidate too small - freed before the next one loads
+
+									self.dispose_object ( baseplate );
 
 									load_baseplate_candidate ( index + 1 );
 
@@ -3103,6 +3186,17 @@
 
 								self.baseplateTransform = transform;
 
+								self.baseplate_loading = false;
+
+								// toggled off while loading - released - grids keep the model footprint
+
+								if ( ! self.baseplate_visible ) {
+
+									self.baseplate_release ( );
+
+									return;
+								}
+
 								// authoritative footprint source for grids
 
 								self.baseplate_grid_box = new THREE.Box3 ( ).setFromObject ( baseplate );
@@ -3146,9 +3240,39 @@
 
 					}
 
+					self.baseplate_loading = true;
+
 					load_baseplate_candidate ( 0 );
 
 				};
+
+				// baseplate release - detached, removed and freed - edges list emptied
+
+				this.baseplate_release = function ( ) {
+
+					if ( ! self.baseplate ) {
+
+						return;
+					}
+
+					if ( self.baseplateTransform ) {
+
+						if ( self.baseplateTransform.object === self.baseplate ) {
+
+							self.baseplateTransform.detach ( );
+						}
+
+						self.baseplateTransform.visible = false;
+					}
+
+					baseplate_edges.length = 0;
+
+					self.release_object ( 'baseplate' );
+
+					self.baseplateTransform = null;
+
+					console.log ( 'baseplate [ status ] : released' );
+				}
 
 				// generate globally bound entry point so helper buttons can call it safely
 
@@ -3918,7 +4042,7 @@
 						self.transform_controls.showY = false;
 						self.transform_controls.showZ = false;
 
-						self.transform_controls.addEventListener ( 'change', self.render );
+						self.transform_controls.addEventListener ( 'change', self.render_frame );
 					}
 
 					return self.transform_controls;
@@ -3970,7 +4094,9 @@
 
 				}
 
-				this.render = function ( ) {
+				// single frame - safe to call from events
+
+				this.render_frame = function ( ) {
 
 					if ( self.resize ( self.renderer ) ) {
 
@@ -3981,6 +4107,14 @@
 					}
 
 					self.renderer.render ( self.scene, self.camera );
+				}
+
+				// render loop - started once - event listeners must use render_frame
+				// calling render again starts another loop - every frame drawn once more per loop
+
+				this.render = function ( ) {
+
+					self.render_frame ( );
 
 					requestAnimationFrame ( self.render );
 				}
@@ -4491,7 +4625,23 @@
 						self.colladaImport.updateMatrixWorld ( true );
 
 						self.boundingBox = null;
-						self.bounding_box_helper = null;
+
+						self.release_object ( 'bounding_box_helper' );
+
+						if ( self.dimension_labels ) {
+
+							self.dimension_labels.forEach ( label => self.scene.remove ( label ) );
+
+							self.dimension_labels.forEach ( label => self.dispose_object ( label ) );
+						}
+
+						if ( self.pieces_count_label ) {
+
+							self.pieces_count_label.forEach ( label => self.scene.remove ( label ) );
+
+							self.pieces_count_label.forEach ( label => self.dispose_object ( label ) );
+						}
+
 						self.dimension_labels = null;
 						self.pieces_count_label = null;
 
