@@ -136,7 +136,7 @@ then
 	mkdir -p "${directory_models_server}"
 fi
 
-rsync							\
+frobulator.background quiet sync -- rsync							\
 	--archive					\
 	--quiet						\
 	--recursive					\
@@ -155,8 +155,6 @@ rsync							\
 	--exclude="configuration"	\
 	--exclude='LPub3D'			\
 	--delete					\
-								"${directory_models_local}"/* "${directory_models_server}" > "${sink}" 2>&1 &
-
-frobulator.progress sync
+								"${directory_models_local}"/* "${directory_models_server}"
 
 frobulator.cpt "Complete" "[ Models ]"
