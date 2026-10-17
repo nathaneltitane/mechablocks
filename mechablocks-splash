@@ -230,10 +230,10 @@ splash_cell () {
 	cat << SPLASH-CELL
 					<!-- featured model: ${path_model} -->
 
-					<td width="20%" align="center" valign="top" style="padding:${padding_top}px 4px 0 4px;">
-						<a href="${url_model}" target="_blank" style="color:#222222; text-decoration:none; ${style_plain}"><img src="${url_model}renders/thumbnail/thumbnail.png?v=${version_thumbnail}" width="220" height="220" alt="${text_alt}" border="0" style="${style_plain} padding:0 !important; background:none !important; display:block; margin:0 auto; width:100%; max-width:220px; height:auto;"></a>
+					<td width="20%" align="center" valign="top" style="padding:${padding_top}px 0 0 0;">
+						<a href="${url_model}" target="_blank" style="color:#666666; text-decoration:none; ${style_plain}"><img src="${url_model}renders/thumbnail/thumbnail.png?v=${version_thumbnail}" width="220" height="220" alt="${text_alt}" border="0" style="${style_plain} padding:0 !important; background:none !important; display:block; margin:0 auto; width:100%; max-width:220px; height:auto;"></a>
 						<br>
-						<a href="${url_model}" target="_blank" style="color:#222222; text-decoration:none;"><font face="${font_mono}" color="#222222" style="font-size:12px; font-weight:bold; letter-spacing:1px; white-space:nowrap;">${text_label}</font></a>
+						<a href="${url_model}" target="_blank" style="color:#666666; text-decoration:none;"><font face="${font_mono}" color="#666666" style="font-size:12px; font-weight:bold; letter-spacing:1px; white-space:nowrap;">${text_label}</font></a>
 					</td>
 SPLASH-CELL
 }
@@ -300,7 +300,7 @@ for (( index_model = 0 ; index_model < ${#list_featured[@]} ; index_model++ ))
 do
 	index_column=$(( index_model % count_columns ))
 
-	padding_top=32
+	padding_top=10
 
 	if [ "${index_model}" -lt "${count_columns}" ]
 	then
@@ -329,7 +329,7 @@ cat << SPLASH-PAGE > "${file_splash}"
 	<!-- banner -->
 
 	<tr>
-		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:32px 56px;">
+		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:10px;">
 			<table width="100%" cellpadding="0" cellspacing="0" border="0">
 				<tr>
 
@@ -377,17 +377,17 @@ cat << SPLASH-PAGE > "${file_splash}"
 	<!-- welcome -->
 
 	<tr>
-		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:36px 56px 8px 56px;">
-			<font face="${font_mono}" color="#222222" style="font-size:18px; font-weight:bold; letter-spacing:2px;">WELCOME TO THE STORE</font>
+		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:10px;">
+			<font face="${font_mono}" color="#666666" style="font-size:18px; font-weight:bold; letter-spacing:2px;">WELCOME TO THE STORE</font>
 			<br><br>
-			<font face="Arial, Helvetica, sans-serif" color="#444444" style="font-size:16px; line-height:1.7;">This is the parts store behind <b>MECHA // BLOCKS</b>: custom LEGO&reg; mecha MOCs, modeled and rendered with open source tools and inspired by anime, science fiction and video games.<br><br>Every model on the site comes with an interactive 3D viewer, a parts list and building instructions - preview a build there, then pick up its pieces here.</font>
+			<font face="${font_mono}" color="#666666" style="font-size:16px; line-height:1.7;">This is the parts store behind <b>MECHA // BLOCKS</b>: custom LEGO&reg; mecha MOCs, modeled and rendered with open source tools and inspired by anime, science fiction and video games.<br><br>Every model on the site comes with an interactive 3D viewer, a parts list and building instructions - preview a build there, then pick up its pieces here.</font>
 		</td>
 	</tr>
 
 	<!-- divider: full width -->
 
 	<tr>
-		<td style="padding:36px 0 0 0;">
+		<td style="padding:10px 0;">
 			<hr style="border:none; border-top:1px solid #bbbbbb; height:0; margin:0; padding:0; width:100%;">
 		</td>
 	</tr>
@@ -395,15 +395,15 @@ cat << SPLASH-PAGE > "${file_splash}"
 	<!-- featured: heading -->
 
 	<tr>
-		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:36px 56px 0 56px;">
-			<font face="${font_mono}" color="#888888" style="font-size:13px; font-weight:bold; letter-spacing:3px;">FEATURED MODELS</font>
+		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:10px 10px 0 10px;">
+			<font face="${font_mono}" color="#666666" style="font-size:13px; font-weight:bold; letter-spacing:3px;">FEATURED MODELS</font>
 		</td>
 	</tr>
 
 	<!-- featured: models - five per row -->
 
 	<tr>
-		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:20px 40px 40px 40px;">
+		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:10px;">
 			<table width="100%" cellpadding="0" cellspacing="0" border="0">
 ${text_grid}			</table>
 		</td>
