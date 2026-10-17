@@ -119,6 +119,10 @@ do
 			option="index"
 		;;
 
+		-b|--bricklink)
+			option="splash"
+		;;
+
 		-h|--help)
 			echo
 			echo -e "Usage: ./${script} [DIRECTORY] | [OPTION] [PARAMETER]"
@@ -146,6 +150,8 @@ do
 			echo -e "-v, --viewer          Update models [v]iewer content."
 			echo
 			echo -e "-x, --index           Update website inde[x]ing sitemap."
+			echo
+			echo -e "-b, --bricklink       Update [b]ricklink store splash page."
 			echo
 			echo -e "-h, --help            Show [h]elp and usage information."
 			echo
@@ -246,6 +252,7 @@ then
 #		mechablocks-menu
 		mechablocks-viewer
 		mechablocks-index
+		mechablocks-splash
 	)
 fi
 
@@ -309,6 +316,13 @@ if [[ "${option}" = "index" ]]
 then
 	list+=(
 		mechablocks-index
+	)
+fi
+
+if [[ "${option}" = "splash" ]]
+then
+	list+=(
+		mechablocks-splash
 	)
 fi
 

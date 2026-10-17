@@ -1,0 +1,418 @@
+#!/bin/bash
+
+# dependencies ─────────────────────────────────────────────────────────────────
+
+script="$(basename -- "${BASH_SOURCE[0]}")"
+
+# script arguments for escalation
+
+self_arguments=("${@}")
+
+if [ "${frobulator_loaded}" != "true" ]
+then
+	echo
+	echo "[  >  ] Checking..."
+	echo
+
+	# root through sudo keeps using the user's frobulator
+
+	if [ -n "${SUDO_USER}" ]
+	then
+		USER="${SUDO_USER}"
+		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
+	fi
+
+	frobulator="${HOME}/.local/bin/frobulator"
+	frobulator_download="$(mktemp)"
+
+	mkdir -p "${HOME}/.local/bin"
+
+	# latest release - curl or wget - local copy replaced only by a newer one
+
+	curl -s -L -o "${frobulator_download}" get.frbltr.app 2> /dev/null ||
+	wget -q -O "${frobulator_download}" get.frbltr.app 2> /dev/null
+
+	version_online="$(grep -m 1 '^update=' "${frobulator_download}")"
+	version_local="$(grep -m 1 '^update=' "${frobulator}" 2> /dev/null)"
+
+	if [[ "${version_online}" > "${version_local}" ]]
+	then
+		mv -f "${frobulator_download}" "${frobulator}"
+
+		chmod +x "${frobulator}"
+	fi
+
+	rm -f "${frobulator_download}"
+
+	if [ ! -f "${frobulator}" ]
+	then
+		echo "[  !  ] Unable to fetch frobulator ── [ get.frbltr.app ]"
+		echo
+
+		exit 1
+	fi
+
+	source "${frobulator}"
+fi
+
+# superuser ────────────────────────────────────────────────────────────────────
+# superuser ────────────────────────────────────────────────────────────────────
+
+frobulator.escalate
+
+# script ───────────────────────────────────────────────────────────────────────
+
+frobulator.script
+
+# version ──────────────────────────────────────────────────────────────────────
+
+version="2026-10-17"
+
+# usage ────────────────────────────────────────────────────────────────────────
+
+while (( $# ))
+do
+	case "${1}"
+	in
+		-r|--rows)
+			count_rows="${2}"
+
+			shift
+		;;
+
+		-h|--help)
+			echo
+			echo -e "Usage: ./${script} -r [ROWS] | -h"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "Note:         Generates the BrickLink store splash page - 'bricklink-splash.html'."
+			echo -e "              One featured model per category - instructions for sale only."
+			echo
+			echo -e "-r, --rows    Number of featured model [r]ows - five models each."
+			echo -e "              [ 3 ] [ Default ]"
+			echo
+			echo -e "-h, --help    Show [h]elp and usage information."
+			echo
+			echo -e "'${script}'   [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
+		;;
+
+		*)
+			echo
+			echo -e "Usage: ./${script} -r [ROWS] | -h"
+			echo
+			echo -e "Unknown option: '${script} ${1}':"
+			echo -e "Type './${script} -h' for help and usage information."
+			echo
+
+			exit 1
+
+		;;
+
+		esac
+
+	shift
+
+done
+
+# variables ────────────────────────────────────────────────────────────────────
+
+directory_models="${PWD}"/models
+file_splash="${PWD}"/bricklink-splash.html
+
+url_site="https://mechablocks.com"
+
+font_mono="Courier New, Courier, monospace"
+style_plain="border:none !important; outline:none !important; box-shadow:none !important;"
+
+# defaults ─────────────────────────────────────────────────────────────────────
+
+count_rows="${count_rows:-3}"
+
+count_columns=5
+
+# functions ────────────────────────────────────────────────────────────────────
+
+splash_eligible () {
+
+	# true when the model is shown on the site with instructions for sale - false otherwise
+
+	local path_model="${1}"
+
+	local directory_model="${directory_models}/${path_model}"
+
+	if [[ "${path_model}" = work-in-progress/* ]]
+	then
+		echo "false"
+
+		return
+	fi
+
+	if [ ! -d "${directory_model}" ] || [ -e "${directory_model}"/work-in-progress ] || [ ! -f "${directory_model}"/index.html ]
+	then
+		echo "false"
+
+		return
+	fi
+
+	if [ ! -s "${directory_model}"/paypal ] || [ ! -s "${directory_model}"/price ] || [ ! -d "${directory_model}"/instructions ]
+	then
+		echo "false"
+
+		return
+	fi
+
+	if [ ! -f "${directory_model}"/renders/thumbnail/thumbnail.png ] || [ ! -s "${directory_model}"/title ]
+	then
+		echo "false"
+
+		return
+	fi
+
+	echo "true"
+}
+
+splash_label () {
+
+	# short label under the image - leading designation dropped when words remain - variant kept
+
+	local text_title="${1}"
+
+	local word_first
+	local text_rest
+
+	text_title="${text_title//<\/br>/ }"
+	text_title="${text_title//<br>/ }"
+	text_title="${text_title// \/\/ / }"
+
+	word_first="${text_title%% *}"
+	text_rest="${text_title#* }"
+
+	if [[ "${word_first}" == *[0-9]* ]] && [ "${text_rest}" != "${text_title}" ]
+	then
+		text_title="${text_rest}"
+	fi
+
+	echo "${text_title}"
+}
+
+splash_cell () {
+
+	# one featured model - image and label - both linked to the model page
+
+	local path_model="${1}"
+	local padding_top="${2}"
+
+	local directory_model="${directory_models}/${path_model}"
+	local url_model="${url_site}/models/${path_model}/"
+
+	local text_title
+	local text_alt
+	local text_label
+	local version_thumbnail
+
+	text_title="$(cat "${directory_model}"/title)"
+	text_alt="${text_title//<\/br>/ }"
+	text_label="$(splash_label "${text_title}")"
+
+	version_thumbnail="$(date -r "${directory_model}"/renders/thumbnail/thumbnail.png +%s)"
+
+	cat << SPLASH-CELL
+					<!-- featured model: ${path_model} -->
+
+					<td width="20%" align="center" valign="top" style="padding:${padding_top}px 4px 0 4px;">
+						<a href="${url_model}" target="_blank" style="color:#222222; text-decoration:none; ${style_plain}"><img src="${url_model}renders/thumbnail/thumbnail.png?v=${version_thumbnail}" width="220" height="220" alt="${text_alt}" border="0" style="${style_plain} padding:0 !important; background:none !important; display:block; margin:0 auto; width:100%; max-width:220px; height:auto;"></a>
+						<br>
+						<a href="${url_model}" target="_blank" style="color:#222222; text-decoration:none;"><font face="${font_mono}" color="#222222" style="font-size:12px; font-weight:bold; letter-spacing:1px; white-space:nowrap;">${text_label}</font></a>
+					</td>
+SPLASH-CELL
+}
+
+# requirements ─────────────────────────────────────────────────────────────────
+
+if [ ! -d "${directory_models}" ]
+then
+	frobulator.err "Models directory not found - run from the mechablocks directory" "[ ${directory_models} ]"
+
+	exit 1
+fi
+
+if [[ ! "${count_rows}" =~ ^[1-9][0-9]*$ ]]
+then
+	frobulator.err "Invalid number of rows" "[ '${count_rows}' ]"
+
+	exit 1
+fi
+
+# selection ────────────────────────────────────────────────────────────────────
+
+frobulator.inf "Selecting featured models"
+
+count_featured=$(( count_rows * count_columns ))
+
+list_featured=()
+
+# first eligible model of each category - categories in order until the rows are full
+
+for directory_category in "${directory_models}"/*/
+do
+	if [ "${#list_featured[@]}" -ge "${count_featured}" ]
+	then
+		break
+	fi
+
+	name_category="$(basename -- "${directory_category}")"
+
+	for directory_model in "${directory_category}"*/
+	do
+		path_model="${name_category}/$(basename -- "${directory_model}")"
+
+		state_eligible="$(splash_eligible "${path_model}")"
+
+		if [ "${state_eligible}" = "true" ]
+		then
+			list_featured+=("${path_model}")
+
+			break
+		fi
+	done
+done
+
+frobulator.inf "Featured models" "[ ${#list_featured[@]} ]"
+
+# splash ───────────────────────────────────────────────────────────────────────
+
+frobulator.fwd "Writing..."
+
+text_grid=""
+
+for (( index_model = 0 ; index_model < ${#list_featured[@]} ; index_model++ ))
+do
+	index_column=$(( index_model % count_columns ))
+
+	padding_top=32
+
+	if [ "${index_model}" -lt "${count_columns}" ]
+	then
+		padding_top=0
+	fi
+
+	if [ "${index_column}" -eq 0 ]
+	then
+		text_grid+=$'\n\t\t\t\t'"<!-- featured row: $(( index_model / count_columns + 1 )) -->"$'\n\n'
+		text_grid+=$'\t\t\t\t'"<tr>"$'\n'
+	fi
+
+	text_grid+=$'\n'"$(splash_cell "${list_featured[${index_model}]}" "${padding_top}")"$'\n'
+
+	if [ "${index_column}" -eq $(( count_columns - 1 )) ] || [ "${index_model}" -eq $(( ${#list_featured[@]} - 1 )) ]
+	then
+		text_grid+=$'\t\t\t\t'"</tr>"$'\n'
+	fi
+done
+
+cat << SPLASH-PAGE > "${file_splash}"
+<!-- splash: mecha // blocks bricklink store - generated by ${script} -->
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;">
+
+	<!-- banner -->
+
+	<tr>
+		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:32px 56px;">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+
+					<!-- banner: title and subtitle - left -->
+
+					<td width="50%" align="left" valign="middle">
+						<font face="${font_mono}" color="#666666" style="font-size:34px; font-weight:bold; letter-spacing:4px;">MECHA // BLOCKS</font>
+						<br>
+						<font face="${font_mono}" color="#666666" style="font-size:13px; letter-spacing:3px;">WHERE LEGO&reg; MEETS OPEN SOURCE</font>
+					</td>
+
+					<!-- banner: visit button and note - right -->
+
+					<td width="50%" align="right" valign="middle">
+						<table cellpadding="0" cellspacing="0" border="0" style="margin-left:auto; margin-right:0;">
+
+							<!-- banner: visit button -->
+
+							<tr>
+								<td align="right">
+									<table cellpadding="0" cellspacing="0" border="0" style="margin-left:auto; margin-right:0; border-collapse:separate; border-radius:20px; background-color:#dddddd;">
+										<tr>
+											<td align="center" bgcolor="#dddddd" style="background-color:#dddddd; border-radius:20px; padding:12px 36px;">
+												<a href="${url_site}/?utm_source=bricklink&amp;utm_medium=store-splash" target="_blank" style="color:#666666; text-decoration:none;"><font face="${font_mono}" color="#666666" style="font-size:15px; font-weight:bold; letter-spacing:3px;">VISIT MECHABLOCKS.COM</font></a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+
+							<!-- banner: visit note -->
+
+							<tr>
+								<td align="right" style="padding-top:12px; text-align:right;">
+									<font face="${font_mono}" color="#666666" style="font-size:15px;">3D previews, parts lists and building instructions for every model.</font>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+
+	<!-- welcome -->
+
+	<tr>
+		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:36px 56px 8px 56px;">
+			<font face="${font_mono}" color="#222222" style="font-size:18px; font-weight:bold; letter-spacing:2px;">WELCOME TO THE STORE</font>
+			<br><br>
+			<font face="Arial, Helvetica, sans-serif" color="#444444" style="font-size:16px; line-height:1.7;">This is the parts store behind <b>MECHA // BLOCKS</b>: custom LEGO&reg; mecha MOCs, modeled and rendered with open source tools and inspired by anime, science fiction and video games.<br><br>Every model on the site comes with an interactive 3D viewer, a parts list and building instructions - preview a build there, then pick up its pieces here.</font>
+		</td>
+	</tr>
+
+	<!-- divider: full width -->
+
+	<tr>
+		<td style="padding:36px 0 0 0;">
+			<hr style="border:none; border-top:1px solid #bbbbbb; height:0; margin:0; padding:0; width:100%;">
+		</td>
+	</tr>
+
+	<!-- featured: heading -->
+
+	<tr>
+		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:36px 56px 0 56px;">
+			<font face="${font_mono}" color="#888888" style="font-size:13px; font-weight:bold; letter-spacing:3px;">FEATURED MODELS</font>
+		</td>
+	</tr>
+
+	<!-- featured: models - five per row -->
+
+	<tr>
+		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:20px 40px 40px 40px;">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+${text_grid}			</table>
+		</td>
+	</tr>
+</table>
+
+<!-- splash: end -->
+SPLASH-PAGE
+
+frobulator.inf "Splash page" "[ ${file_splash#"${PWD}"/} ]"
+
+frobulator.scs "Done" "[ Splash ]"
