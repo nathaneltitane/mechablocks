@@ -184,7 +184,7 @@ splash_eligible () {
 
 splash_label () {
 
-	# short label under the image - leading designation dropped when words remain - variant kept
+	# short label under the image - leading designation dropped when words remain - mode kept after '//' like on the site
 
 	local text_title="${1}"
 
@@ -193,7 +193,6 @@ splash_label () {
 
 	text_title="${text_title//<\/br>/ }"
 	text_title="${text_title//<br>/ }"
-	text_title="${text_title// \/\/ / }"
 
 	word_first="${text_title%% *}"
 	text_rest="${text_title#* }"
@@ -336,7 +335,7 @@ cat << SPLASH-PAGE > "${file_splash}"
 					<!-- banner: title and subtitle - left -->
 
 					<td width="50%" align="left" valign="middle">
-						<font face="${font_mono}" color="#666666" style="font-size:34px; font-weight:bold; letter-spacing:4px;">MECHA // BLOCKS</font>
+						<a href="${url_site}" target="_blank" style="color:#666666; text-decoration:none;"><font face="${font_mono}" color="#666666" style="font-size:34px; font-weight:bold; letter-spacing:4px;">MECHA // BLOCKS</font></a>
 						<br>
 						<font face="${font_mono}" color="#666666" style="font-size:13px; letter-spacing:3px;">WHERE LEGO&reg; MEETS OPEN SOURCE</font>
 					</td>
@@ -388,7 +387,7 @@ cat << SPLASH-PAGE > "${file_splash}"
 		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:10px;">
 			<font face="${font_mono}" color="#666666" style="font-size:18px; font-weight:bold; letter-spacing:2px;">WELCOME TO THE STORE</font>
 			<br><br>
-			<font face="${font_mono}" color="#666666" style="font-size:16px; line-height:1.7;">This is the parts store behind <b>MECHA // BLOCKS</b>: custom LEGO&reg; mecha MOCs, modeled and rendered with open source tools and inspired by anime, science fiction and video games.<br><br>Every model on the site comes with an interactive 3D viewer, a parts list and building instructions - preview a build there, then pick up its pieces here.</font>
+			<font face="${font_mono}" color="#666666" style="font-size:16px; line-height:1.7;">This is the parts store behind <a href="${url_site}" target="_blank" style="color:#666666; text-decoration:none;"><b>MECHA // BLOCKS</b></a>: custom LEGO&reg; mecha MOCs, modeled and rendered with open source tools and inspired by anime, science fiction and video games.<br><br>Every model on the site comes with an interactive 3D viewer, a parts list and building instructions - preview a build there, then pick up its pieces here.</font>
 		</td>
 	</tr>
 
