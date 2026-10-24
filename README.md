@@ -56,4 +56,4 @@ This repository hosts the website dedicated to showcasing AFOL Lego models and t
 
 [[ Mecha // Blocks // Project Page ]](https://github.com/nathaneltitane/mechablocks) [ Version // 2023-01-21 ]
 
-### Enjoying Mecha // Blocks? Show your appreciation with a PayPal donation! [![Donate](https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&logo=paypal&label=Donate)](https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ)
+### [![Donate](https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&logo=paypal&label=Donate)](https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ) Enjoying Mecha // Blocks? Show your appreciation with a PayPal donation!
