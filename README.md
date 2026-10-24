@@ -10,7 +10,7 @@ Useful? Star the repository - it helps others find it.
 
 ---
 
-[[ Mecha // Blocks // Project Page ]](https://github.com/nathaneltitane/mechablocks)-----------------------------------------------------------------------------[ Version // 2023-01-21 ]
+[[ Mecha // Blocks // Project Page ]](https://github.com/nathaneltitane/mechablocks)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;[ Version // 2023-01-21 ]
 
 ---
 
@@ -60,7 +60,7 @@ This repository hosts the website dedicated to showcasing AFOL Lego models and t
 
 ---
 
-[[ Mecha // Blocks // Project Page ]](https://github.com/nathaneltitane/mechablocks)-----------------------------------------------------------------------------[ Version // 2023-01-21 ]
+[[ Mecha // Blocks // Project Page ]](https://github.com/nathaneltitane/mechablocks)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;[ Version // 2023-01-21 ]
 
 ---
 
