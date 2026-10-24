@@ -2,11 +2,11 @@
 
 <table>
 <tr>
-<td><a href="https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ"><img src="https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&amp;logo=paypal&amp;label=Donate" alt="Donate"></a></td>
+<td><a href="https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ"><img src="https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&amp;logo=paypal&amp;label=Donate" alt="Donate" align="absmiddle"></a></td>
 <td>Show your appreciation with a PayPal donation!</td>
 </tr>
 <tr>
-<td><a href="https://github.com/nathaneltitane/mechablocks"><img src="https://img.shields.io/github/stars/nathaneltitane/mechablocks.svg?style=for-the-badge&amp;logo=github&amp;label=Star&amp;color=2f343f" alt="Star"></a></td>
+<td><a href="https://github.com/nathaneltitane/mechablocks"><img src="https://img.shields.io/github/stars/nathaneltitane/mechablocks.svg?style=for-the-badge&amp;logo=github&amp;label=Star&amp;color=2f343f" alt="Star" align="absmiddle"></a></td>
 <td>Useful? Star the repository - it helps others find it.</td>
 </tr>
 </table>
@@ -65,7 +65,7 @@ This repository hosts the website dedicated to showcasing AFOL Lego models and t
 
 <table>
 <tr>
-<td><a href="https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ"><img src="https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&amp;logo=paypal&amp;label=Donate" alt="Donate"></a></td>
+<td><a href="https://www.paypal.com/donate?hosted_button_id=ZW3CDCANHJCWJ"><img src="https://img.shields.io/badge/Paypal-2f343f.svg?style=for-the-badge&amp;logo=paypal&amp;label=Donate" alt="Donate" align="absmiddle"></a></td>
 <td><strong>Enjoying Mecha // Blocks? Show your appreciation with a PayPal donation!</strong></td>
 </tr>
 </table>
