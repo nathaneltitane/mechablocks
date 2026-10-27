@@ -16,9 +16,9 @@ Useful? Star the repository - it helps others find it.
 
 ### Welcome to [Mecha // Blocks](https://mechablocks.com)
 
-Mecha // Blocks - Where Lego and Linux meet!
+Mecha // Blocks - Where LEGO® and Linux meet!
 
-This repository hosts the website dedicated to showcasing AFOL Lego models and their associated LDraw-based instructions.
+This repository hosts the website dedicated to showcasing AFOL LEGO® models and their associated LDraw-based instructions.
 
 ### Repositories:
 
