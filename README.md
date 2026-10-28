@@ -52,6 +52,8 @@ This repository hosts the website dedicated to showcasing AFOL LEGO® models and
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/mechablocks?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=MECHA%20//%20BLOCKS)](https://github.com/nathaneltitane/mechablocks)
 
+[![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/studworks?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=STUDWORKS)](https://github.com/nathaneltitane/studworks)
+
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/pixtrm?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=PIXTRM)](https://github.com/nathaneltitane/pixtrm)
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/nathaneltitane?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=NATHANEL%20%2b%20TITANE)](https://github.com/nathaneltitane/nathaneltitane)
