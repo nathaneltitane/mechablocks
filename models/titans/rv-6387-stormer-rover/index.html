@@ -2321,184 +2321,145 @@
 						const rounded_model_top =
 							model_box.min.y + rounded_model_height;
 
-						const positions_minor = [];
+						// one wall per footprint side
 
-						const positions_major = [];
+						const get_height_grid_wall = function ( axis, position ) {
 
-						// back grid ( x / y )
+							const positions_minor = [];
 
-						for (
+							const positions_major = [];
 
-							let x = footprint_box.min.x;
-							x <= footprint_box.max.x + 0.000001;
-							x += stud_width
+							// wall point from run and height
 
-						) {
+							const get_wall_point = function ( run, y ) {
 
-							positions_minor.push (
+								return axis === 'x' ?
+									[ run, y, position ] :
+									[ position, y, run ];
 
-								x,
-								model_box.min.y,
-								footprint_box.min.z,
+							}
 
-								x,
-								rounded_model_top,
-								footprint_box.min.z
+							const run_min = axis === 'x' ? footprint_box.min.x : footprint_box.min.z;
 
-							);
+							const run_max = axis === 'x' ? footprint_box.max.x : footprint_box.max.z;
 
-						}
+							// vertical lines every stud
 
-						for (
+							for (
 
-							let y = model_box.min.y;
-							y <= rounded_model_top + 0.000001;
-							y += plate_height
+								let run = run_min;
+								run <= run_max + 0.000001;
+								run += stud_width
 
-						) {
+							) {
 
-							positions_minor.push (
+								positions_minor.push (
 
-								footprint_box.min.x,
-								y,
-								footprint_box.min.z,
+									...get_wall_point ( run, model_box.min.y ),
+									...get_wall_point ( run, rounded_model_top )
 
-								footprint_box.max.x,
-								y,
-								footprint_box.min.z
+								);
 
-							);
+							}
 
-						}
+							// horizontal lines every plate
 
-						// right grid ( z / y )
+							for (
 
-						for (
+								let y = model_box.min.y;
+								y <= rounded_model_top + 0.000001;
+								y += plate_height
 
-							let z = footprint_box.min.z;
-							z <= footprint_box.max.z + 0.000001;
-							z += stud_width
+							) {
 
-						) {
+								positions_minor.push (
 
-							positions_minor.push (
+									...get_wall_point ( run_min, y ),
+									...get_wall_point ( run_max, y )
 
-								footprint_box.max.x,
-								model_box.min.y,
-								z,
+								);
 
-								footprint_box.max.x,
-								rounded_model_top,
-								z
+							}
+
+							// center height marker
+
+							positions_major.push (
+
+								...get_wall_point ( 0, model_box.min.y ),
+								...get_wall_point ( 0, rounded_model_top )
 
 							);
 
-						}
+							const minor_geometry = new THREE.BufferGeometry ( );
 
-						for (
+							minor_geometry.setAttribute (
 
-							let y = model_box.min.y;
-							y <= rounded_model_top + 0.000001;
-							y += plate_height
+								'position',
 
-						) {
-
-							positions_minor.push (
-
-								footprint_box.max.x,
-								y,
-								footprint_box.min.z,
-
-								footprint_box.max.x,
-								y,
-								footprint_box.max.z
+								new THREE.Float32BufferAttribute ( positions_minor, 3 )
 
 							);
 
+							const major_geometry = new THREE.BufferGeometry ( );
+
+							major_geometry.setAttribute (
+
+								'position',
+
+								new THREE.Float32BufferAttribute ( positions_major, 3 )
+
+							);
+
+							const minor_material = new THREE.LineBasicMaterial ( {
+
+								color: self.height_grid_helper_color_minor
+
+							} );
+
+							const major_material = new THREE.LineBasicMaterial ( {
+
+								color: self.height_grid_helper_color_major
+
+							} );
+
+							const wall = new THREE.Group ( );
+
+							wall.add ( new THREE.LineSegments ( minor_geometry, minor_material ) );
+
+							wall.add ( new THREE.LineSegments ( major_geometry, major_material ) );
+
+							return wall;
+
 						}
-
-						// center height markers
-						// back grid
-
-						positions_major.push (
-
-							0,
-							model_box.min.y,
-							footprint_box.min.z,
-
-							0,
-							rounded_model_top,
-							footprint_box.min.z
-
-						);
-
-						// side grid
-
-						positions_major.push (
-
-							footprint_box.max.x,
-							model_box.min.y,
-							0,
-
-							footprint_box.max.x,
-							rounded_model_top,
-							0
-
-						);
-
-						const minor_geometry = new THREE.BufferGeometry ( );
-
-						minor_geometry.setAttribute (
-
-							'position',
-
-							new THREE.Float32BufferAttribute ( positions_minor, 3 )
-
-						);
-
-						const major_geometry = new THREE.BufferGeometry ( );
-
-						major_geometry.setAttribute (
-
-							'position',
-
-							new THREE.Float32BufferAttribute ( positions_major, 3 )
-
-						);
-
-						const minor_material = new THREE.LineBasicMaterial ( {
-
-							color: self.height_grid_helper_color_minor
-
-						} );
-
-						const major_material = new THREE.LineBasicMaterial ( {
-
-							color: self.height_grid_helper_color_major
-
-						} );
-
-						const minor_lines = new THREE.LineSegments (
-
-							minor_geometry,
-							minor_material
-
-						);
-
-						const major_lines = new THREE.LineSegments (
-
-							major_geometry,
-							major_material
-
-						);
 
 						self.height_grid_helper = new THREE.Group ( );
 
 						self.height_grid_helper.name = 'height-grid-helper';
 
-						self.height_grid_helper.add ( minor_lines );
+						self.height_grid_helper.userData.walls = {
 
-						self.height_grid_helper.add ( major_lines );
+							back: get_height_grid_wall ( 'x', footprint_box.min.z ),
+							front: get_height_grid_wall ( 'x', footprint_box.max.z ),
+							left: get_height_grid_wall ( 'z', footprint_box.min.x ),
+							right: get_height_grid_wall ( 'z', footprint_box.max.x )
+
+						};
+
+						self.height_grid_helper.userData.center = new THREE.Vector3 (
+
+							( footprint_box.min.x + footprint_box.max.x ) / 2,
+							0,
+							( footprint_box.min.z + footprint_box.max.z ) / 2
+
+						);
+
+						Object.values ( self.height_grid_helper.userData.walls ).forEach ( function ( wall ) {
+
+							self.height_grid_helper.add ( wall );
+
+						} );
+
+						self.update_height_grid_helper ( );
 
 						console.log ( "helper [ grid / height ]" );
 
@@ -2519,6 +2480,38 @@
 					}
 
 					return self.height_grid_helper;
+
+				}
+
+				// height grid walls behind model
+
+				this.update_height_grid_helper = function ( ) {
+
+					if ( ! self.height_grid_helper || ! self.camera ) {
+
+						return;
+
+					}
+
+					// show walls away from camera
+
+					const walls = self.height_grid_helper.userData.walls;
+
+					const center = self.height_grid_helper.localToWorld ( self.height_grid_helper.userData.center.clone ( ) );
+
+					const camera_position = self.camera.getWorldPosition ( new THREE.Vector3 ( ) );
+
+					const camera_back = camera_position.z > center.z;
+
+					const camera_right = camera_position.x > center.x;
+
+					walls.back.visible = camera_back;
+
+					walls.front.visible = ! camera_back;
+
+					walls.left.visible = camera_right;
+
+					walls.right.visible = ! camera_right;
 
 				}
 
@@ -4106,11 +4099,17 @@
 
 					}
 
+					// keep height grid behind model
+
+					self.update_height_grid_helper ( );
+
+					// draw frame
+
 					self.renderer.render ( self.scene, self.camera );
+
 				}
 
-				// render loop - started once - event listeners must use render_frame
-				// calling render again starts another loop - every frame drawn once more per loop
+				// render loop started once
 
 				this.render = function ( ) {
 
@@ -4615,7 +4614,7 @@
 
 				var model = loader.load (
 
-					'/models/titans/rv-6387-stormer-rover/exports/rv-6387-stormer-rover.kmz?version=1791573318',
+					'/models/titans/rv-6387-stormer-rover/exports/rv-6387-stormer-rover.kmz?version=1793337754',
 
 						function ( collada ) {
 
@@ -5012,7 +5011,7 @@
 
 <a class="text-center" href="/models/titans/rv-6387-stormer-titan"/>
 
-<img src="/models/titans/rv-6387-stormer-titan/renders/overlay/overlay.png?version=1791577925" alt="RV-6387 STORMER // ROVER LEGO® MOC - TITAN"/>
+<img src="/models/titans/rv-6387-stormer-titan/renders/overlay/overlay.png?version=1793342194" alt="RV-6387 STORMER // ROVER LEGO® MOC - TITAN"/>
 
 </a>
 
@@ -5228,7 +5227,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-01.png?version=1791579499" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 1"/>
+							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-01.png?version=1793343704" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 1"/>
 
 						</div>
 
@@ -5240,7 +5239,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-02.png?version=1791579500" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 2"/>
+							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-02.png?version=1793343704" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 2"/>
 
 						</div>
 
@@ -5252,7 +5251,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-03.png?version=1791579501" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 3"/>
+							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-03.png?version=1793343705" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 3"/>
 
 						</div>
 
@@ -5264,7 +5263,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-04.png?version=1791579502" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 4"/>
+							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-04.png?version=1793343706" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 4"/>
 
 						</div>
 
@@ -5276,7 +5275,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-05.png?version=1791579504" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 5"/>
+							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-05.png?version=1793343708" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 5"/>
 
 						</div>
 
@@ -5288,7 +5287,7 @@ TITAN
 
 						<div>
 
-							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-06.png?version=1791579505" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 6"/>
+							<img src="/models/titans/rv-6387-stormer-rover/instructions/samples/sample-06.png?version=1793343710" alt="RV-6387 STORMER // ROVER LEGO® MOC - Instruction Sample - Page 6"/>
 
 						</div>
 
@@ -5442,6 +5441,12 @@ TITAN
 					<!-- github -->
 
 					<div id="github">
+
+					</div>
+
+					<!-- studworks -->
+
+					<div id="studworks">
 
 					</div>
 
