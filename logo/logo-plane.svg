@@ -125,22 +125,22 @@
        transform="translate(0,65.54841)">
       <path
          id="path12"
-         style="fill:#00aad4;fill-opacity:1;stroke-width:0.396462"
+         style="fill:#88cc00;fill-opacity:1;stroke-width:0.396462"
          d="m 50.316825,247.83864 v 32.77422 l 85.149835,49.16134 v -32.77423 z" />
       <path
-         style="fill:#55ddff;fill-opacity:1;stroke-width:0.396462"
+         style="fill:#aaee00;fill-opacity:1;stroke-width:0.396462"
          d="m 135.46667,198.67738 -85.150087,49.16129 85.150087,49.16129 85.15009,-49.16129 z"
          id="path3824" />
       <path
-         style="fill:#00aad4;fill-opacity:1;stroke-width:0.512097"
+         style="fill:#88cc00;fill-opacity:1;stroke-width:0.512097"
          d="m 135.46667,229.40319 a 36.870965,18.435482 0 0 0 -16.87419,2.04838 H 98.595704 v 16.3871 a 36.870965,18.435482 0 0 0 36.870966,18.43548 z"
          id="path3876" />
       <path
-         style="fill:#0088aa;fill-opacity:1;stroke-width:0.512097"
+         style="fill:#669900;fill-opacity:1;stroke-width:0.512097"
          d="m 135.46667,229.40319 v 36.87096 a 36.870965,18.435482 0 0 0 36.87097,-18.43548 v -16.3871 h -20.05579 a 36.870965,18.435482 0 0 0 -16.81518,-2.04838 z"
          id="ellipse3866" />
       <ellipse
-         style="fill:#aaeeff;fill-opacity:1;stroke-width:0.512096"
+         style="fill:#ddff88;fill-opacity:1;stroke-width:0.512096"
          id="ellipse3868"
          cx="135.46666"
          cy="231.45158"
@@ -148,7 +148,7 @@
          ry="18.435482" />
       <path
          id="path15"
-         style="fill:#0088aa;fill-opacity:1;stroke-width:0.396462"
+         style="fill:#669900;fill-opacity:1;stroke-width:0.396462"
          d="m 220.61602,247.83864 v 32.77422 l -85.14984,49.16134 v -32.77423 z" />
     </g>
   </g>
