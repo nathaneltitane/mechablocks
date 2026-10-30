@@ -144,46 +144,6 @@ cat << MODEL-DRAWER-HEADER -> "${directory_modules}"/drawer.html
 
 	<div class="flex flex-column">
 
-		<!-- notice -->
-
-		<div class="section notice">
-
-			<div class="flex flex-column section">
-
-				<div class="flex-cell text-bold text-center">
-
-					// NOTICE //</br>
-
-					</br>
-
-				</div>
-
-				<div class="flex-cell text-center">
-
-					INSTRUCTIONS ARE MADE AVAILABLE PROGRESSIVELY:</br>
-
-					</br>
-
-					PURCHASING AN INSTRUCTION SET PRIORITIZES AVAILABILITY FOR THAT MODEL!</br>
-
-					</br>
-
-					 YOU CAN <label for="modal-contact" class="modal-item contact cursor-pointer text-bold">// CONTACT //</label> US REGARDING ANY SPECIFIC MODEL, ANYTIME!</br>
-
-					 </br>
-
-				</div>
-
-				<div class="flex-cell text-bold text-center">
-
-					THANK YOU FOR YOUR SUPPORT!</br>
-
-				</div>
-
-			</div>
-
-		</div>
-
 		<!-- studworx -->
 
 		<div class="section studworx">
@@ -438,6 +398,46 @@ cat << MODEL-DRAWER-FOOTER ->> "${directory_modules}"/drawer.html
 
 		</div>
 
+		<!-- notice -->
+
+		<div class="section notice">
+
+			<div class="flex flex-column section">
+
+				<div class="flex-cell text-bold text-center">
+
+					// NOTICE //</br>
+
+					</br>
+
+				</div>
+
+				<div class="flex-cell text-center">
+
+					INSTRUCTIONS ARE MADE AVAILABLE PROGRESSIVELY:</br>
+
+					</br>
+
+					PURCHASING AN INSTRUCTION SET PRIORITIZES AVAILABILITY FOR THAT MODEL!</br>
+
+					</br>
+
+					 YOU CAN <label for="modal-contact" class="modal-item contact cursor-pointer text-bold">// CONTACT //</label> US REGARDING ANY SPECIFIC MODEL, ANYTIME!</br>
+
+					 </br>
+
+				</div>
+
+				<div class="flex-cell text-bold text-center">
+
+					THANK YOU FOR YOUR SUPPORT!</br>
+
+				</div>
+
+			</div>
+
+		</div>
+
 		<!-- disclaimer -->
 
 		<div class="section disclaimer">
@@ -513,7 +513,7 @@ cat << MODEL-DRAWER-FOOTER ->> "${directory_modules}"/drawer.html
 						<div class="flex-cell text-center">
 
 							Version // ${date_version}</br>
-							Mecha // Blocks - Where LEGO® meets Open Source</br>
+							MechaBlocks - Where LEGO® meets Open Source</br>
 							N Λ T H Λ N E L - ©  <text id="year"></text>
 
 						</div>

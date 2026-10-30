@@ -10,13 +10,13 @@ Useful? Star the repository - it helps others find it.
 
 ---
 
-[[ Mecha // Blocks // Project Page ]](https://github.com/nathaneltitane/mechablocks)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;[ Version // 2023-01-21 ]
+[[ MechaBlocks // Project Page ]](https://github.com/nathaneltitane/mechablocks)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;[ Version // 2023-01-21 ]
 
 ---
 
-### Welcome to [Mecha // Blocks](https://mechablocks.com)
+### Welcome to [MechaBlocks](https://mechablocks.com)
 
-Mecha // Blocks - Where LEGO® and Linux meet!
+MechaBlocks - Where LEGO® meets Open Source!
 
 This repository hosts the website dedicated to showcasing AFOL LEGO® models and their associated LDraw-based instructions.
 
@@ -62,7 +62,7 @@ This repository hosts the website dedicated to showcasing AFOL LEGO® models and
 
 ---
 
-[[ Mecha // Blocks // Project Page ]](https://github.com/nathaneltitane/mechablocks)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;[ Version // 2023-01-21 ]
+[[ MechaBlocks // Project Page ]](https://github.com/nathaneltitane/mechablocks)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;[ Version // 2023-01-21 ]
 
 ---
 

@@ -18,6 +18,14 @@
 	overflow-y: scroll;
 }
 
+.drawer > .flex-column {
+	min-height: 100%;
+}
+
+.drawer .notice {
+	margin-top: auto;
+}
+
 .drawer a {
 	margin: 0px 0px 0px 0px;
 	overflow: hidden;
