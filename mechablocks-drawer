@@ -136,6 +136,8 @@ cat << MODEL-DRAWER-HEADER -> "${directory_modules}"/drawer.html
 
 <script src="/javascript/year.js" type="text/javascript"></script>
 
+<script src="/javascript/search.js" type="text/javascript"></script>
+
 <!-- drawer -->
 
 <div class="drawer">
@@ -258,6 +260,28 @@ cat << MODEL-DRAWER-HEADER -> "${directory_modules}"/drawer.html
 
 		</div>
 
+		<!-- search -->
+
+		<div class="search">
+
+			<div class="flex flex-column">
+
+				<div class="flex-cell text-bold text-center">
+
+					// SEARCH //
+
+				</div>
+
+				<input class="search-field" id="search-field" type="search" placeholder="SEARCH MODELS..." autocomplete="off" spellcheck="false"/>
+
+				<div class="search-chips" id="search-chips"></div>
+
+				<div class="search-count text-center" id="search-count"></div>
+
+			</div>
+
+		</div>
+
 		<!-- models -->
 
 		<div class="section models">
@@ -346,6 +370,8 @@ do
 
 			class_status="work-in-progress"
 
+			title_category="WORK IN PROGRESS"
+
 		elif [[ -f "${directory_model}"/work-in-progress ]]
 		then
 			color_logo="orange"
@@ -362,7 +388,7 @@ do
 
 cat << MODEL-DRAWER-CONTENT ->> "${directory_modules}"/drawer.html
 
-			<div class="flex flex-column">
+			<div class="flex flex-column model" data-series="${title_category}" data-search="${text_title} ${title_category} ${count_pieces} PIECES">
 
 				<div class="container ${class_status}">
 
