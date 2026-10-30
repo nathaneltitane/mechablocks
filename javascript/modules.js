@@ -46,6 +46,12 @@ $( function ( ) {
 
 	} ) ;
 
+	$.get ( '/modules/studworks.html', function ( data ) {
+
+		$( '#studworks' ).append ( data ) ;
+
+	} ) ;
+
 	$.get ( '/modules/donations.html', function ( data ) {
 
 		$( '#donations' ).append ( data ) ;

@@ -182,6 +182,36 @@ cat << MODEL-DRAWER-HEADER -> "${directory_modules}"/drawer.html
 
 		</div>
 
+		<!-- studworks -->
+
+		<div class="section studworks">
+
+			<a class="container" href="https://github.com/nathaneltitane/studworks">
+
+				<div class="flex flex-row flex-middle section">
+
+					<div class="flex-cell-start">
+
+						<div class="icon icon-flex icon-center logo-studworks"></div>
+
+					</div>
+
+					<div class="flex-cell text-right">
+
+						<span class="text-bold">// STUDWORKS //</span></br>
+
+						DESIGN YOUR OWN MOCS WITH STUDWORKS,</br>
+
+						THE FREE AND OPEN SOURCE LEGO® CAD!</br>
+
+					</div>
+
+				</div>
+
+			</a>
+
+		</div>
+
 		<!-- status available -->
 
 		<div class="section status-available">

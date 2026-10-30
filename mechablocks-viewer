@@ -2610,8 +2610,7 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 						const rounded_model_top =
 							model_box.min.y + rounded_model_height;
 
-						// one wall on each side of the footprint
-						// only the two away from the camera are shown
+						// one wall per footprint side
 
 						const get_height_grid_wall = function ( axis, position ) {
 
@@ -2619,7 +2618,7 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 							const positions_major = [];
 
-							// wall point from its run along the wall and its height
+							// wall point from run and height
 
 							const get_wall_point = function ( run, y ) {
 
@@ -2773,15 +2772,17 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				}
 
-				// height grid walls follow the camera
-				// the walls on the far side of the footprint stay behind the model
+				// height grid walls behind model
 
 				this.update_height_grid_helper = function ( ) {
 
 					if ( ! self.height_grid_helper || ! self.camera ) {
 
 						return;
+
 					}
+
+					// show walls away from camera
 
 					const walls = self.height_grid_helper.userData.walls;
 
@@ -4387,13 +4388,17 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 					}
 
+					// keep height grid behind model
+
 					self.update_height_grid_helper ( );
 
+					// draw frame
+
 					self.renderer.render ( self.scene, self.camera );
+
 				}
 
-				// render loop - started once - event listeners must use render_frame
-				// calling render again starts another loop - every frame drawn once more per loop
+				// render loop started once
 
 				this.render = function ( ) {
 
@@ -5904,6 +5909,12 @@ cat << 3D-MODEL-PAGE-HELPERS ->> "${directory_model}/index.html"
 					<!-- github -->
 
 					<div id="github">
+
+					</div>
+
+					<!-- studworks -->
+
+					<div id="studworks">
 
 					</div>
 
