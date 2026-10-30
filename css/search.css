@@ -43,6 +43,16 @@
 	cursor: pointer;
 }
 
+/* desktop chips fill each row edge to edge */
+
+@media (min-width: 800px) {
+
+	.search-chip {
+		flex-grow: 1;
+	}
+
+}
+
 .search-chip:hover {
 	font-weight: bold;
 }
