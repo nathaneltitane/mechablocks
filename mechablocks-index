@@ -238,10 +238,7 @@ schema_itemlist_write () {
 					"@type": "Organization",
 					"@id": "${address_site}/#organization",
 					"name": "${name_site}",
-					"alternateName": [
-						"${name_site_stylized}",
-						"${name_site}"
-					],
+					"alternateName": "${name_site_stylized}",
 					"url": "${address_site}/",
 					"slogan": "${slogan_site}",
 					"logo": {

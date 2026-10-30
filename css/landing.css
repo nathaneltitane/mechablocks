@@ -25,3 +25,61 @@
 	}
 
 }
+
+/* logo over the landing background */
+
+.landing-logo {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+
+	height: min(52vw, 52vh, 460px);
+	width: min(52vw, 52vh, 460px);
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	transform: translate(-50%, -55%);
+
+	pointer-events: none;
+
+	transition: opacity 0.5s ease;
+
+	animation: logo-reveal 1.25s ease 0.25s backwards;
+}
+
+@keyframes logo-reveal {
+
+	from {
+		opacity: 0;
+		transform: translate(-50%, -45%) scale(0.85);
+	}
+
+	to {
+		opacity: 1;
+		transform: translate(-50%, -55%) scale(1);
+	}
+
+}
+
+/* logo clears the edge reveal */
+
+#background.hover-background ~ .landing-logo {
+	opacity: 0;
+}
+
+/* phone logo centered between the landing texts */
+
+@media (max-width: 520px), (max-height: 560px) {
+
+	.landing-logo {
+		height: min(56vw, 40vh, 260px);
+		width: min(56vw, 40vh, 260px);
+
+		transform: translate(-50%, -50%);
+
+		animation-name: landing-reveal;
+	}
+
+}

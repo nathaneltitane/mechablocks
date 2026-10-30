@@ -11,16 +11,31 @@
 
 	opacity: 0;
 
+	transition: opacity 0.5s ease, transform 0.5s ease;
+
 	position: absolute;
 
 	z-index: -1;
 }
 
 #background {
+	opacity: 0.12;
+
 	animation-name: background-reveal;
-	animation-delay: 0.5s;
-	animation-duration: 1.25s;
-	animation-fill-mode: forwards;
+	animation-duration: 2s;
+	animation-timing-function: ease;
+}
+
+/* edges show over the render without catching the hover */
+
+#background-overlay {
+	pointer-events: none;
+}
+
+/* render shows in full before the edge reveal */
+
+#background.hover-background {
+	opacity: 1;
 }
 
 @keyframes background-reveal {
@@ -31,7 +46,7 @@
 	}
 
 	100% {
-		opacity: 1;
+		opacity: 0.12;
 		transform: scale(1);
 	}
 
