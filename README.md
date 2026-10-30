@@ -12,10 +12,6 @@ Useful? Star the repository - it helps others find it.
 
 ---
 
-[[ MechaBlocks // Project Page ]](https://github.com/nathaneltitane/mechablocks)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;[ Version // 2023-01-21 ]
-
----
-
 ### Welcome to [MechaBlocks](https://mechablocks.com)
 
 This repository hosts the website dedicated to showcasing AFOL LEGO® models and their associated LDraw-based instructions.
@@ -59,10 +55,6 @@ This repository hosts the website dedicated to showcasing AFOL LEGO® models and
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/nathaneltitane?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=NATHANEL%20%2b%20TITANE)](https://github.com/nathaneltitane/nathaneltitane)
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/nathaneltitane/pewpewprints?style=for-the-badge&logo=gnubash&logoColor=ffffff&label=PEW%21%20PEW%21%20PRINTS)](https://github.com/nathaneltitane/pewpewprints)
-
----
-
-[[ MechaBlocks // Project Page ]](https://github.com/nathaneltitane/mechablocks)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;[ Version // 2023-01-21 ]
 
 ---
 
