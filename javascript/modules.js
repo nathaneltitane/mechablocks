@@ -46,9 +46,9 @@ $( function ( ) {
 
 	} ) ;
 
-	$.get ( '/modules/studworks.html', function ( data ) {
+	$.get ( '/modules/studworx.html', function ( data ) {
 
-		$( '#studworks' ).append ( data ) ;
+		$( '#studworx' ).append ( data ) ;
 
 	} ) ;
 

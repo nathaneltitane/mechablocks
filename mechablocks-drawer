@@ -182,25 +182,25 @@ cat << MODEL-DRAWER-HEADER -> "${directory_modules}"/drawer.html
 
 		</div>
 
-		<!-- studworks -->
+		<!-- studworx -->
 
-		<div class="section studworks">
+		<div class="section studworx">
 
-			<a class="container" href="https://github.com/nathaneltitane/studworks">
+			<a class="container" href="https://github.com/nathaneltitane/studworx">
 
 				<div class="flex flex-row flex-middle section">
 
 					<div class="flex-cell-start">
 
-						<div class="icon icon-flex icon-center logo-studworks"></div>
+						<div class="icon icon-flex icon-center logo-studworx"></div>
 
 					</div>
 
 					<div class="flex-cell text-right">
 
-						<span class="text-bold">// STUDWORKS //</span></br>
+						<span class="text-bold">// STUDWORX //</span></br>
 
-						DESIGN YOUR OWN MOCS WITH STUDWORKS,</br>
+						DESIGN YOUR OWN MOCS WITH STUDWORX,</br>
 
 						THE FREE AND OPEN SOURCE LEGO® CAD!</br>
 
