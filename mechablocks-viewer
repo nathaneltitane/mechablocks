@@ -321,8 +321,11 @@ cat << 3D-MODEL-PAGE-HEADER -> "${directory_model}/index.html"
 
 		<!-- favicon -->
 
-		<link rel="icon"				href="https://mechablocks.com/logo/logo-red.svg" type="image/svg+xml">
-		<link rel="apple-touch-icon"	href="https://mechablocks.com/logo/logo-red.svg">
+		<link rel="icon"				href="https://mechablocks.com/resources/web/favicon.svg" type="image/svg+xml">
+		<link rel="icon"				href="https://mechablocks.com/resources/web/favicon-32x32.png" type="image/png" sizes="32x32">
+		<link rel="icon"				href="https://mechablocks.com/resources/web/favicon-16x16.png" type="image/png" sizes="16x16">
+		<link rel="apple-touch-icon"	href="https://mechablocks.com/resources/web/apple-touch-icon.png">
+		<link rel="manifest"		href="https://mechablocks.com/resources/web/site.webmanifest">
 
 		<!-- css -->
 
