@@ -115,9 +115,9 @@ done
 # variables ────────────────────────────────────────────────────────────────────
 
 directory_server="${PWD}"
-path_web="resources/web"
+path_social="resources/social"
 
-directory_web="${directory_server}/${path_web}"
+directory_social="${directory_server}/${path_social}"
 
 file_page="index-social.html"
 file_preview="social.png"
@@ -362,7 +362,7 @@ card_render () {
 				--disable-gpu									\
 				--hide-scrollbars								\
 				--window-size="${width_card},${height_card}"	\
-				--screenshot="${directory_web}/${file_preview}"	\
+				--screenshot="${directory_social}/${file_preview}"	\
 																"file://${directory_server}/${file_page}" > "${sink}" 2>&1
 
 			return
@@ -383,7 +383,7 @@ then
 	exit 1
 fi
 
-frobulator.directory "${directory_server}" "${path_web}"
+frobulator.directory "${directory_server}" "${path_social}"
 
 # social ───────────────────────────────────────────────────────────────────────
 
