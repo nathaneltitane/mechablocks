@@ -4,3 +4,8 @@
 	height: auto;
 }
 
+/* links in the copyright line stay inline */
+
+.copyright .flex-cell a {
+	display: inline;
+}
