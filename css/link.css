@@ -19,3 +19,9 @@ a:hover {
 	text-decoration: none;
 	outline: none;
 }
+
+/* links inside running text stay inline */
+
+p a {
+	display: inline;
+}
