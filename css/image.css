@@ -6,11 +6,12 @@ img {
 .drawer a .flex-cell,
 .product > div {
 	border-radius: 3px;
-	overflow: hidden;
+	overflow: visible;
 }
 
 .drawer a .flex-cell img,
 .product img {
+	border-radius: 3px;
 	transition: transform 0.4s ease;
 }
 

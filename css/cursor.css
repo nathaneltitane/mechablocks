@@ -135,10 +135,10 @@
 }
 
 .cursor-zoom-in {
-	cursor: zoom-in;
+	cursor: pointer;
 }
 
 .cursor-zoom-out {
-	cursor: zoom-out;
+	cursor: pointer;
 }
 
