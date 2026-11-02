@@ -61,6 +61,18 @@
 	height: auto;
 }
 
+.footer-button .icon {
+	transition: transform 0.2s ease;
+}
+
+.footer-button:hover .icon {
+	transform: translateY(-3px);
+}
+
+.footer-button:hover {
+	color: #222222ff;
+}
+
 .footer-start {
 	border-top: 10px solid #00000000;
 	border-bottom: 10px solid #00000000;
