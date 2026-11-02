@@ -66,7 +66,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-17"
+version="2026-11-01"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -131,6 +131,7 @@ directory_models="${PWD}"/models
 file_splash="${PWD}"/bricklink-splash.html
 
 url_site="https://mechablocks.com"
+url_studworx="https://studworx.app"
 
 font_mono="Courier New, Courier, monospace"
 style_plain="border:none !important; outline:none !important; box-shadow:none !important;"
@@ -413,6 +414,41 @@ cat << SPLASH-PAGE > "${file_splash}"
 		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:10px;">
 			<table width="100%" cellpadding="0" cellspacing="0" border="0">
 ${text_grid}			</table>
+		</td>
+	</tr>
+
+	<!-- divider: full width - before studworx banner -->
+
+	<tr>
+		<td style="padding:10px 0;">
+			<hr style="border:none; border-top:1px solid #bbbbbb; height:0; margin:0; padding:0; width:100%;">
+		</td>
+	</tr>
+
+	<!-- studworx banner -->
+
+	<tr>
+		<td bgcolor="#ffffff" style="background-color:#ffffff; padding:10px;">
+			<a href="${url_studworx}/?utm_source=bricklink&amp;utm_medium=store-splash" target="_blank" style="color:#666666; text-decoration:none; display:block;">
+				<table width="100%" cellpadding="0" cellspacing="0" border="0">
+					<tr>
+
+						<!-- studworx banner: logo - left -->
+
+						<td width="160" align="left" valign="middle">
+							<img src="${url_site}/logo/logo-studworx.svg" width="128" height="128" alt="StudWorx" border="0" style="${style_plain} padding:0 !important; background:none !important; display:block; width:128px; height:128px;">
+						</td>
+
+						<!-- studworx banner: text - right -->
+
+						<td align="right" valign="middle" style="text-align:right;">
+							<font face="${font_mono}" color="#666666" style="font-size:18px; font-weight:bold; letter-spacing:2px;">// STUDWORX //</font>
+							<br>
+							<font face="${font_mono}" color="#666666" style="font-size:16px; line-height:1.7;">EVERY MODEL HERE IS BUILT WITH STUDWORX,<br>THE FREE LDRAW / LEGO&reg; MODEL BUILDER.<br>BUILD. DESIGN. CREATE. - YOUR MOC IS NEXT!</font>
+						</td>
+					</tr>
+				</table>
+			</a>
 		</td>
 	</tr>
 </table>
