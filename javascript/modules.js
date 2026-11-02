@@ -52,6 +52,12 @@ $( function ( ) {
 
 	} ) ;
 
+	$.get ( '/modules/l2cu.html', function ( data ) {
+
+		$( '#l2cu' ).append ( data ) ;
+
+	} ) ;
+
 	$.get ( '/modules/donations.html', function ( data ) {
 
 		$( '#donations' ).append ( data ) ;
