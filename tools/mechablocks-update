@@ -194,6 +194,8 @@ frobulator.clear
 
 export directory="${directory}"
 
+directory_tools="${PWD}"/tools
+
 # defaults ─────────────────────────────────────────────────────────────────────
 
 # functions ────────────────────────────────────────────────────────────────────
@@ -217,7 +219,7 @@ option () {
 
 	for script in ${list[@]}
 	do
-		"${SHELL}" "${PWD}"/"${script}"
+		"${SHELL}" "${directory_tools}"/"${script}"
 	done
 
 	upload "Models update" &

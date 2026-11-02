@@ -1,14 +1,14 @@
 User-agent: *
 
-Disallow: /avatar/
-Disallow: /baseplate/
-Disallow: /css/
-Disallow: /images/
-Disallow: /javascript/
-Disallow: /logo/
-Disallow: /minifigs/
-Disallow: /modules/
 Disallow: /renders/
+Disallow: /resources/avatar/
+Disallow: /resources/baseplate/
+Disallow: /resources/css/
+Disallow: /resources/images/
+Disallow: /resources/javascript/
+Disallow: /resources/logo/
+Disallow: /resources/minifigures/
+Disallow: /resources/modules/
 Disallow: /work-in-progress/
 
 Allow: /

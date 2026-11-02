@@ -115,7 +115,7 @@ done
 # variables ────────────────────────────────────────────────────────────────────
 
 directory_models="${PWD}"/models
-directory_modules="${PWD}"/modules
+directory_modules="${PWD}"/resources/modules
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
@@ -132,7 +132,7 @@ cat << 'MODELS-MENU-HEADER' -> "${directory_modules}/"menu.html
 
 			$(function(){
 
-				$.get("/modules/anchors.html", function (data) {
+				$.get("/resources/modules/anchors.html", function (data) {
 
 					$("#anchors").append(data);
 

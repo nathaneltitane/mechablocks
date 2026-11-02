@@ -115,8 +115,8 @@ done
 # variables ────────────────────────────────────────────────────────────────────
 
 directory_models="${PWD}"/models
-directory_minifigs="${PWD}"/minifigs
-directory_baseplate="${PWD}"/baseplate
+directory_minifigs="${PWD}"/resources/minifigures
+directory_baseplate="${PWD}"/resources/baseplate
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
@@ -333,7 +333,7 @@ cat << 3D-MODEL-PAGE-HEADER -> "${directory_model}/index.html"
 
 		<!-- css -->
 
-		<link rel="stylesheet" href="/css/css.css" type="text/css" />
+		<link rel="stylesheet" href="/resources/css/css.css" type="text/css" />
 
 		<!-- charset -->
 
@@ -370,23 +370,23 @@ cat << 3D-MODEL-PAGE-HEADER -> "${directory_model}/index.html"
 
 		<!-- libraries -->
 
-		<script src="/javascript/jquery-3.7.0.min.js" type="text/javascript"></script>
+		<script src="/resources/javascript/jquery-3.7.0.min.js" type="text/javascript"></script>
 
 		<!-- scripts -->
 
-		<script src="/javascript/modules.js" type="text/javascript"></script>
+		<script src="/resources/javascript/modules.js" type="text/javascript"></script>
 
-		<script src="/javascript/hover.js" type="text/javascript"></script>
+		<script src="/resources/javascript/hover.js" type="text/javascript"></script>
 
-		<script src="/javascript/helper.js" type="text/javascript"></script>
+		<script src="/resources/javascript/helper.js" type="text/javascript"></script>
 
-		<script src="/javascript/labels.js" type="text/javascript"></script>
+		<script src="/resources/javascript/labels.js" type="text/javascript"></script>
 
-		<script src="/javascript/samples.js" type="text/javascript"></script>
+		<script src="/resources/javascript/samples.js" type="text/javascript"></script>
 
-		<script src="/javascript/selections.js" type="text/javascript"></script>
+		<script src="/resources/javascript/selections.js" type="text/javascript"></script>
 
-		<script src="/javascript/footer.js" type="text/javascript"></script>
+		<script src="/resources/javascript/footer.js" type="text/javascript"></script>
 
 		<script type="importmap">
 
@@ -394,9 +394,9 @@ cat << 3D-MODEL-PAGE-HEADER -> "${directory_model}/index.html"
 
 				"imports": {
 
-					"three": "/javascript/three/three.module.js",
+					"three": "/resources/javascript/three/three.module.js",
 
-					"three/addons/": "/javascript/three/modules/"
+					"three/addons/": "/resources/javascript/three/modules/"
 
 				}
 
@@ -631,11 +631,11 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 			import { TransformControls } from 'three/addons/controls/TransformControls.js';
 
-			// import { LineSegments2 } from '/javascript/three/modules/lines/LineSegments2.js';
+			// import { LineSegments2 } from '/resources/javascript/three/modules/lines/LineSegments2.js';
 
-			// import { LineMaterial } from '/javascript/three/modules/lines/LineMaterial.js';
+			// import { LineMaterial } from '/resources/javascript/three/modules/lines/LineMaterial.js';
 
-			// import { LineGeometry } from '/javascript/three/modules/lines/LineGeometry.js';
+			// import { LineGeometry } from '/resources/javascript/three/modules/lines/LineGeometry.js';
 
 			function operating_system ( ) {
 
@@ -2938,7 +2938,7 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 					loader.load (
 
-						'/minifigs/exports/minifig-${color_minifig}.dae',
+						'/resources/minifigures/exports/minifig-${color_minifig}.dae',
 
 						function ( collada ) {
 
@@ -3157,7 +3157,7 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 							self.minifig_loading = false;
 
-							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-${color_minifig}.dae', error );
+							console.error ( 'minifig [ status ] : load failed - /resources/minifigures/exports/minifig-${color_minifig}.dae', error );
 
 						}
 
@@ -3294,17 +3294,17 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 						{
 							name: 'small',
-							path: '/baseplate/exports/baseplate-small.dae'
+							path: '/resources/baseplate/exports/baseplate-small.dae'
 						},
 
 						{
 							name: 'medium',
-							path: '/baseplate/exports/baseplate-medium.dae'
+							path: '/resources/baseplate/exports/baseplate-medium.dae'
 						},
 
 						{
 							name: 'large',
-							path: '/baseplate/exports/baseplate-large.dae'
+							path: '/resources/baseplate/exports/baseplate-large.dae'
 						}
 
 					];

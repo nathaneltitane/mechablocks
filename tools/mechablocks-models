@@ -119,121 +119,42 @@ directory_models_local="${directory_local}"/models
 
 directory_server="${PWD}"
 directory_models_server="${directory_server}"/models
-directory_images_server="${directory_server}"/images
-directory_javascript_server="${directory_server}"/javascript
+
+directory_backgrounds_server="${directory_server}"/background
+directory_javascript_server="${directory_server}"/resources/javascript
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
 # functions ────────────────────────────────────────────────────────────────────
 
-synchronize () {
+# synchronize ──────────────────────────────────────────────────────────────────
 
-	source="${1}"
-	destination="${2}"
+frobulator.inf "Synchronizing entries" "[ models ]"
 
-	rsync				\
-		--archive		\
-		--quiet			\
-		--recursive		\
-						"${source}" "${destination}" > "${sink}" 2>&1
+if [[ ! -d "${directory_models_server}" ]]
+then
+	mkdir -p "${directory_models_server}"
+fi
 
-}
+frobulator.background quiet sync -- rsync							\
+	--archive					\
+	--quiet						\
+	--recursive					\
+	--exclude='*.ldr'			\
+	--exclude='*.mpd'			\
+	--exclude='*.pdf'			\
+	--exclude='*.dae'			\
+	--exclude='*.obj'			\
+	--exclude='*.mtl'			\
+	--exclude='*.3ds'			\
+	--exclude='*.blend'			\
+	--exclude='*.csv'			\
+	--exclude='*.stl'			\
+	--exclude='*.io'			\
+	--exclude='*.lxf'			\
+	--exclude="configuration"	\
+	--exclude='LPub3D'			\
+	--delete					\
+								"${directory_models_local}"/* "${directory_models_server}"
 
-# background ───────────────────────────────────────────────────────────────────
-
-# prepare update
-
-frobulator.directory "${directory_server}" images
-
-frobulator.fwd "Copying..."
-
-# values
-
-list_extensions+=(
-	png
-)
-
-for extension in ${list_extensions[@]}
-do
-	list_directories=(
-		flat
-		overlay
-		social
-		thumbnail
-	)
-
-	for directory in ${list_directories[@]}
-	do
-		# images regenerated from scratch - no leftover from earlier runs or removed backgrounds
-
-		if [ -d "${directory_images_server}/${directory}" ]
-		then
-			frobulator.delete "${directory_images_server}" "${directory}"
-		fi
-
-		frobulator.directory "${directory_images_server}" "${directory}"
-
-		count_images=0
-
-		# model renders - one path per line - work in progress excluded
-
-		mapfile -t list_paths_image < <(find "${directory_models_local}" -type f -not -path "*/work-in-progress/*" -iname "${directory}.${extension}" | sort)
-
-		for path_image in "${list_paths_image[@]}"
-		do
-			# get model directory
-
-			directory_model="${path_image%/*/*/*}"
-
-			if [ -f "${directory_model}"/background ]
-			then
-
-				number_image=$(printf "%03d" "${count_images}")
-
-				# get model image base directory from path
-
-				directory_image="${path_image%/*}"
-
-				# get model image file name from path
-
-				file_image="${path_image##*/}"
-
-				# get model image file extension from path
-
-				extension_image="${file_image##*.}"
-
-				# strip extension from model file name
-
-				name_image="${file_image%.*}"
-
-				# set synchronization paths
-
-				path_local="${path_image}"
-
-				path_server="${directory_images_server}"/${directory}/${name_image}-"${number_image}"."${extension}"
-
-				synchronize "${path_image}" "${path_server}"
-
-				# background images only - numbering without gaps
-
-				(( count_images ++ ))
-			fi
-
-		done
-
-	done
-
-done
-
-# update random background generator with new image file count
-
-frobulator.inf "Updating" "[ Images ]"
-
-sed															\
-	-i														\
-	-e "s/var count = .*/var count = ${count_images};/g"		\
-															"${directory_javascript_server}"/background.js
-
-frobulator.inf "Models" "[ ${count_images} ]"
-
-frobulator.cpt "Complete" "[ Images ]"
+frobulator.cpt "Complete" "[ Models ]"

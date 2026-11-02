@@ -12,8 +12,8 @@ function pad ( str, max ) {
 
 var number = pad ( Math.floor ( Math.random ( ) * count ), 3 );
 
-var flat = "/images/flat/flat-" + number + ".png";
-var overlay = "/images/overlay/overlay-" + number + ".png";
+var flat = "/resources/images/flat/flat-" + number + ".png";
+var overlay = "/resources/images/overlay/overlay-" + number + ".png";
 
 var image_flat = new Image ( );
 var overlay_image = new Image ( );

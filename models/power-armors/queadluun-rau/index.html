@@ -47,7 +47,7 @@
 
 		<!-- css -->
 
-		<link rel="stylesheet" href="/css/css.css" type="text/css" />
+		<link rel="stylesheet" href="/resources/css/css.css" type="text/css" />
 
 		<!-- charset -->
 
@@ -84,23 +84,23 @@
 
 		<!-- libraries -->
 
-		<script src="/javascript/jquery-3.7.0.min.js" type="text/javascript"></script>
+		<script src="/resources/javascript/jquery-3.7.0.min.js" type="text/javascript"></script>
 
 		<!-- scripts -->
 
-		<script src="/javascript/modules.js" type="text/javascript"></script>
+		<script src="/resources/javascript/modules.js" type="text/javascript"></script>
 
-		<script src="/javascript/hover.js" type="text/javascript"></script>
+		<script src="/resources/javascript/hover.js" type="text/javascript"></script>
 
-		<script src="/javascript/helper.js" type="text/javascript"></script>
+		<script src="/resources/javascript/helper.js" type="text/javascript"></script>
 
-		<script src="/javascript/labels.js" type="text/javascript"></script>
+		<script src="/resources/javascript/labels.js" type="text/javascript"></script>
 
-		<script src="/javascript/samples.js" type="text/javascript"></script>
+		<script src="/resources/javascript/samples.js" type="text/javascript"></script>
 
-		<script src="/javascript/selections.js" type="text/javascript"></script>
+		<script src="/resources/javascript/selections.js" type="text/javascript"></script>
 
-		<script src="/javascript/footer.js" type="text/javascript"></script>
+		<script src="/resources/javascript/footer.js" type="text/javascript"></script>
 
 		<script type="importmap">
 
@@ -108,9 +108,9 @@
 
 				"imports": {
 
-					"three": "/javascript/three/three.module.js",
+					"three": "/resources/javascript/three/three.module.js",
 
-					"three/addons/": "/javascript/three/modules/"
+					"three/addons/": "/resources/javascript/three/modules/"
 
 				}
 
@@ -342,11 +342,11 @@
 
 			import { TransformControls } from 'three/addons/controls/TransformControls.js';
 
-			// import { LineSegments2 } from '/javascript/three/modules/lines/LineSegments2.js';
+			// import { LineSegments2 } from '/resources/javascript/three/modules/lines/LineSegments2.js';
 
-			// import { LineMaterial } from '/javascript/three/modules/lines/LineMaterial.js';
+			// import { LineMaterial } from '/resources/javascript/three/modules/lines/LineMaterial.js';
 
-			// import { LineGeometry } from '/javascript/three/modules/lines/LineGeometry.js';
+			// import { LineGeometry } from '/resources/javascript/three/modules/lines/LineGeometry.js';
 
 			function operating_system ( ) {
 
@@ -2649,7 +2649,7 @@
 
 					loader.load (
 
-						'/minifigs/exports/minifig-orange.dae',
+						'/resources/minifigures/exports/minifig-orange.dae',
 
 						function ( collada ) {
 
@@ -2868,7 +2868,7 @@
 
 							self.minifig_loading = false;
 
-							console.error ( 'minifig [ status ] : load failed - /minifigs/exports/minifig-orange.dae', error );
+							console.error ( 'minifig [ status ] : load failed - /resources/minifigures/exports/minifig-orange.dae', error );
 
 						}
 
@@ -3005,17 +3005,17 @@
 
 						{
 							name: 'small',
-							path: '/baseplate/exports/baseplate-small.dae'
+							path: '/resources/baseplate/exports/baseplate-small.dae'
 						},
 
 						{
 							name: 'medium',
-							path: '/baseplate/exports/baseplate-medium.dae'
+							path: '/resources/baseplate/exports/baseplate-medium.dae'
 						},
 
 						{
 							name: 'large',
-							path: '/baseplate/exports/baseplate-large.dae'
+							path: '/resources/baseplate/exports/baseplate-large.dae'
 						}
 
 					];

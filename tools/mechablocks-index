@@ -81,7 +81,7 @@ description_site='Custom LEGO® Mecha MOCs, 3D Viewer & Building Instructions'
 
 slogan_site='Where LEGO® meets Open Source'
 
-path_logo='logo/logo-red.png'
+path_logo='resources/logo/logo-red.png'
 
 file_sitemap='sitemap.xml'
 
@@ -96,16 +96,9 @@ list_directories_excluded=(
 	'./.github/'
 	'./node_modules/'
 	'./assets/'
-	'./avatar/'
-	'./baseplate/'
-	'./css/'
 	'./exports/'
-	'./images/'
-	'./javascript/'
-	'./logo/'
-	'./minifigs/'
-	'./modules/'
 	'./renders/'
+	'./resources/'
 )
 
 list_directories_schema=(

@@ -86,7 +86,7 @@ do
 			echo
 			echo -e "Options:"
 			echo
-			echo -e "Note:         Generates the BrickLink store splash page - 'bricklink-splash.html'."
+			echo -e "Note:         Generates the BrickLink store splash page"
 			echo -e "              One featured model per category - instructions for sale only."
 			echo
 			echo -e "-r, --rows    Number of featured model [r]ows - five models each."
@@ -128,7 +128,7 @@ done
 # variables ────────────────────────────────────────────────────────────────────
 
 directory_models="${PWD}"/models
-file_splash="${PWD}"/bricklink-splash.html
+file_splash="${PWD}"/index-bricklink.html
 
 url_site="https://mechablocks.com"
 url_studworx="https://studworx.app"
@@ -436,7 +436,7 @@ ${text_grid}			</table>
 						<!-- studworx banner: logo - left -->
 
 						<td width="160" align="left" valign="middle">
-							<img src="${url_site}/logo/logo-studworx.svg" width="128" height="128" alt="StudWorx" border="0" style="${style_plain} padding:0 !important; background:none !important; display:block; width:128px; height:128px;">
+							<img src="${url_site}/resources/logo/logo-studworx.svg" width="128" height="128" alt="StudWorx" border="0" style="${style_plain} padding:0 !important; background:none !important; display:block; width:128px; height:128px;">
 						</td>
 
 						<!-- studworx banner: text - right -->

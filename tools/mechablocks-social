@@ -1,0 +1,400 @@
+#!/bin/bash
+
+# dependencies ─────────────────────────────────────────────────────────────────
+
+script="$(basename -- "${BASH_SOURCE[0]}")"
+
+# script arguments for escalation
+
+self_arguments=("${@}")
+
+if [ "${frobulator_loaded}" != "true" ]
+then
+	echo
+	echo "[  >  ] Checking..."
+	echo
+
+	# root through sudo keeps using the user's frobulator
+
+	if [ -n "${SUDO_USER}" ]
+	then
+		USER="${SUDO_USER}"
+		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
+	fi
+
+	frobulator="${HOME}/.local/bin/frobulator"
+	frobulator_download="$(mktemp)"
+
+	mkdir -p "${HOME}/.local/bin"
+
+	# latest release - curl or wget - local copy replaced only by a newer one
+
+	curl -s -L -o "${frobulator_download}" get.frbltr.app 2> /dev/null ||
+	wget -q -O "${frobulator_download}" get.frbltr.app 2> /dev/null
+
+	version_online="$(grep -m 1 '^update=' "${frobulator_download}")"
+	version_local="$(grep -m 1 '^update=' "${frobulator}" 2> /dev/null)"
+
+	if [[ "${version_online}" > "${version_local}" ]]
+	then
+		mv -f "${frobulator_download}" "${frobulator}"
+
+		chmod +x "${frobulator}"
+	fi
+
+	rm -f "${frobulator_download}"
+
+	if [ ! -f "${frobulator}" ]
+	then
+		echo "[  !  ] Unable to fetch frobulator ── [ get.frbltr.app ]"
+		echo
+
+		exit 1
+	fi
+
+	source "${frobulator}"
+fi
+
+# superuser ────────────────────────────────────────────────────────────────────
+
+frobulator.escalate
+
+# script ───────────────────────────────────────────────────────────────────────
+
+frobulator.script
+
+# version ──────────────────────────────────────────────────────────────────────
+
+version="2026-11-02"
+
+# usage ────────────────────────────────────────────────────────────────────────
+
+while (( $# ))
+do
+	case "${1}"
+	in
+		-h|--help)
+			echo
+			echo -e "Usage: ./${script} -h"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help    Show [h]elp and usage information."
+			echo
+			echo -e "'${script}'   [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
+		;;
+
+		*)
+			echo
+			echo -e "Usage: ./${script} -h"
+			echo
+			echo -e "Unknown option: '${script} ${1}':"
+			echo -e "Type './${script} -h' for help and usage information."
+			echo
+
+			exit 1
+
+		;;
+
+		esac
+
+	shift
+
+done
+
+# variables ────────────────────────────────────────────────────────────────────
+
+directory_server="${PWD}"
+path_web="resources/web"
+
+directory_web="${directory_server}/${path_web}"
+
+file_page="index-social.html"
+file_preview="social.png"
+
+title_card="MechaBlocks"
+subtitle_card="CUSTOM LEGO® MECHA MOCS"
+tagline_card="WHERE LEGO® MEETS OPEN SOURCE."
+domain_card="mechablocks.com"
+logo_card="resources/logo/logo-red.svg"
+theme_card="light"
+accent_card="#cc575d"
+backdrop_card="resources/images/flat/flat-154.png"
+
+width_card=1280
+height_card=640
+
+color_stroke_logo="#000000"
+width_stroke_logo="12.7"
+
+list_browsers=(
+	google-chrome
+	chromium
+	chromium-browser
+)
+
+# defaults ─────────────────────────────────────────────────────────────────────
+
+# theme colors
+
+declare -A colors_background=(
+	[dark]="#2f343f"
+	[light]="#ffffff"
+	[black]="#000000"
+	[grey]="#333333"
+)
+
+declare -A colors_text=(
+	[dark]="#a7b0b7"
+	[light]="#666666"
+	[black]="#999999"
+	[grey]="#aaaaaa"
+)
+
+declare -A colors_heading=(
+	[dark]="#f5f6f7"
+	[light]="#222222"
+	[black]="#f5f6f7"
+	[grey]="#f5f6f7"
+)
+
+declare -A opacities_backdrop=(
+	[dark]=".2"
+	[light]=".12"
+	[black]=".25"
+	[grey]=".15"
+)
+
+color_background="${colors_background[${theme_card}]}"
+color_text="${colors_text[${theme_card}]}"
+color_heading="${colors_heading[${theme_card}]}"
+opacity_backdrop="${opacities_backdrop[${theme_card}]}"
+
+# functions ────────────────────────────────────────────────────────────────────
+
+logo_generate () {
+
+	# stroke logos drawn in accent color
+
+	local text_svg
+
+	if grep -q "stroke:${color_stroke_logo}" "${logo_card}"
+	then
+		text_svg="$(tr '\n' ' ' < "${logo_card}")"
+
+		[[ ${text_svg} =~ viewBox=\"([^\"]+)\" ]]
+
+		text_logo="<svg class=\"logo\" viewBox=\"${BASH_REMATCH[1]}\"><g fill=\"none\" stroke=\"${accent_card}\" stroke-width=\"${width_stroke_logo}\" stroke-linecap=\"round\">"
+
+		while [[ ${text_svg} == *"<path"* ]]
+		do
+			text_svg="${text_svg#*"<path"}"
+
+			if [[ ${text_svg%%"/>"*} =~ [[:space:]]d=\"([^\"]+)\" ]]
+			then
+				text_logo+="<path d=\"${BASH_REMATCH[1]}\"/>"
+			fi
+		done
+
+		text_logo+="</g></svg>"
+	else
+		text_logo="<img class=\"logo\" src=\"${logo_card}\">"
+	fi
+}
+
+backdrop_generate () {
+
+	# backdrop image or ascii art
+
+	local text_art
+
+	if [ -z "${backdrop_card}" ]
+	then
+		text_backdrop=""
+
+	elif [[ "${backdrop_card}" = ascii:* ]]
+	then
+		text_art="$(sed -e 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g' "${backdrop_card#ascii:}")"
+		text_backdrop=$'\t\t'"<div class=\"backdrop ascii\"><pre>${text_art}</pre></div>"$'\n\n'
+	else
+		text_backdrop=$'\t\t'"<div class=\"backdrop\" style=\"background-image:url('${backdrop_card}')\"></div>"$'\n\n'
+	fi
+}
+
+page_write () {
+
+	cat > "${file_page}" << PAGE-SOCIAL
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<meta charset="utf-8">
+
+		<style>
+
+			* {
+				font-family: monospace;
+				box-sizing: border-box;
+				margin: 0;
+			}
+
+			body {
+				width: ${width_card}px;
+				height: ${height_card}px;
+				background: ${color_background};
+				color: ${color_text};
+				position: relative;
+				overflow: hidden;
+			}
+
+			.backdrop {
+				position: absolute;
+				inset: 0;
+				background: center / cover no-repeat;
+				opacity: ${opacity_backdrop};
+			}
+
+			.backdrop.ascii {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.backdrop pre {
+				font-size: 14px;
+				line-height: 1.2;
+				color: ${color_text};
+			}
+
+			.head {
+				position: absolute;
+				top: 28px;
+				left: 32px;
+			}
+
+			h1 {
+				color: ${color_heading};
+				font-size: 56px;
+				line-height: 1.1;
+			}
+
+			.head p {
+				font-size: 22px;
+				margin-top: 6px;
+			}
+
+			.logo {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 300px;
+				height: 300px;
+				transform: translate(-50%, -50%);
+			}
+
+			.foot {
+				position: absolute;
+				right: 32px;
+				bottom: 28px;
+				text-align: right;
+			}
+
+			.foot h2 {
+				color: ${color_heading};
+				font-size: 34px;
+				letter-spacing: .3em;
+				margin-right: -.3em;
+			}
+
+			.foot p {
+				font-size: 20px;
+				margin-top: 8px;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+${text_backdrop}		<div class="head">
+			<h1>${title_card}</h1>
+			<p>${subtitle_card}</p>
+		</div>
+
+		${text_logo}
+
+		<div class="foot">
+			<h2>${tagline_card}</h2>
+			<p>${domain_card}</p>
+		</div>
+
+	</body>
+
+</html>
+PAGE-SOCIAL
+}
+
+card_render () {
+
+	# render with first browser found
+
+	local name_browser
+
+	for name_browser in "${list_browsers[@]}"
+	do
+		if command -v "${name_browser}" > "${sink}"
+		then
+			"${name_browser}"									\
+				--headless=new									\
+				--disable-gpu									\
+				--hide-scrollbars								\
+				--window-size="${width_card},${height_card}"	\
+				--screenshot="${directory_web}/${file_preview}"	\
+																"file://${directory_server}/${file_page}" > "${sink}" 2>&1
+
+			return
+		fi
+	done
+
+	frobulator.err "No browser found" "[ ${list_browsers[*]} ]"
+
+	exit 1
+}
+
+# requirements ─────────────────────────────────────────────────────────────────
+
+if [ ! -f "${logo_card}" ]
+then
+	frobulator.err "Logo not found - run from the mechablocks directory" "[ ${logo_card} ]"
+
+	exit 1
+fi
+
+frobulator.directory "${directory_server}" "${path_web}"
+
+# social ───────────────────────────────────────────────────────────────────────
+
+frobulator.fwd "Writing..."
+
+logo_generate
+
+backdrop_generate
+
+page_write
+
+card_render
+
+frobulator.cpt "Complete" "[ ${file_preview} // ${width_card}x${height_card} ]"
