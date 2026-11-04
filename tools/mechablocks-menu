@@ -8,13 +8,15 @@ script="$(basename -- "${BASH_SOURCE[0]}")"
 
 self_arguments=("${@}")
 
+# load frobulator once
+
 if [ "${frobulator_loaded}" != "true" ]
 then
 	echo
 	echo "[  >  ] Checking..."
 	echo
 
-	# root through sudo keeps using the user's frobulator
+	# keep the sudo user home
 
 	if [ -n "${SUDO_USER}" ]
 	then
@@ -22,15 +24,19 @@ then
 		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
 	fi
 
+	# local copy and download
+
 	frobulator="${HOME}/.local/bin/frobulator"
 	frobulator_download="$(mktemp)"
 
 	mkdir -p "${HOME}/.local/bin"
 
-	# latest release - curl or wget - local copy replaced only by a newer one
+	# fetch the latest release
 
 	curl -s -L -o "${frobulator_download}" get.frbltr.app 2> /dev/null ||
 	wget -q -O "${frobulator_download}" get.frbltr.app 2> /dev/null
+
+	# keep only a newer release
 
 	version_online="$(grep -m 1 '^update=' "${frobulator_download}")"
 	version_local="$(grep -m 1 '^update=' "${frobulator}" 2> /dev/null)"
@@ -42,7 +48,11 @@ then
 		chmod +x "${frobulator}"
 	fi
 
+	# drop the download
+
 	rm -f "${frobulator_download}"
+
+	# stop without frobulator
 
 	if [ ! -f "${frobulator}" ]
 	then
@@ -51,6 +61,8 @@ then
 
 		exit 1
 	fi
+
+	# load the library
 
 	source "${frobulator}"
 fi
@@ -114,6 +126,8 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# models and output folders
+
 directory_models="${PWD}"/models
 directory_modules="${PWD}"/resources/modules
 
@@ -121,11 +135,13 @@ directory_modules="${PWD}"/resources/modules
 
 # functions ────────────────────────────────────────────────────────────────────
 
+# report progress
+
 frobulator.inf "Generating model entries"
 
 frobulator.fwd "Writing..."
 
-# generate header
+# page header
 
 cat << 'MODELS-MENU-HEADER' -> "${directory_modules}/"menu.html
 		<script>
@@ -147,7 +163,7 @@ cat << 'MODELS-MENU-HEADER' -> "${directory_modules}/"menu.html
 
 MODELS-MENU-HEADER
 
-# values
+# file types
 
 list_extensions+=(
 	kmz
@@ -157,27 +173,29 @@ for extension in ${list_extensions[@]}
 do
 	count_models=0
 
-	# one model path per line - paths with spaces kept whole
+	# model paths, one per line
 
 	mapfile -t list_models < <(find "${directory_models}" -type f -iname "*.${extension}" ! -iname "*instructions*" | sort)
 
 	for path_model in "${list_models[@]}"
 	do
+		# path below the site root
+
 		path_model=$(echo "${path_model}" | cut -d '/' -f6-)
 
-		# get model file name from path
+		# model file name
 
 		file_model="${path_model##*/}"
 
-		# strip extension from model file name
+		# name without extension
 
 		name_model="${file_model%.*}"
 
-		# use model directory as root
+		# model folder
 
 		directory_model="${path_model%/*/*}"
 
-		# define model output directories
+		# render folders
 
 		directory_render="${directory_model}"/renders
 
@@ -187,11 +205,11 @@ do
 
 		directory_thumbnail="${directory_render}"/thumbnail
 
-		# thumbnail version - modification time in seconds - browsers reload changed files
+		# thumbnail time for reloads
 
 		version_thumbnail="$(date -r "${directory_thumbnail}/thumbnail.png" +%s 2> "${sink}")"
 
-		# define model specific directories
+		# model details
 
 		title_category=$(cat "${directory_model%/*}"/title)
 
@@ -222,7 +240,7 @@ do
 			class_hidden="hidden"
 		fi
 
-# generate model container
+# model containers
 
 cat << MODEL-CONTAINER ->> "${directory_modules}/"menu.html
 <!-- BEGIN CONTAINER -->
@@ -244,6 +262,8 @@ cat << MODEL-CONTAINER ->> "${directory_modules}/"menu.html
 	</div>
 
 MODEL-CONTAINER
+
+# title with or without instructions
 
 if [ -d "${path_instructions}" ]
 then
@@ -326,12 +346,14 @@ MODEL-TITLE
 
 fi
 
+	# count the model
+
 	(( count_models ++ ))
 
 	done
 done
 
-# generate footer
+# page footer
 
 cat << FOOTER ->> "${directory_modules}/"menu.html
 <!-- END MODELS MENU -->
@@ -341,6 +363,8 @@ cat << FOOTER ->> "${directory_modules}/"menu.html
 </div>
 
 FOOTER
+
+# report the result
 
 frobulator.inf "Models" "[ ${count_models} ]"
 

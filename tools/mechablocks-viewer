@@ -8,13 +8,15 @@ script="$(basename -- "${BASH_SOURCE[0]}")"
 
 self_arguments=("${@}")
 
+# load frobulator once
+
 if [ "${frobulator_loaded}" != "true" ]
 then
 	echo
 	echo "[  >  ] Checking..."
 	echo
 
-	# root through sudo keeps using the user's frobulator
+	# keep the sudo user home
 
 	if [ -n "${SUDO_USER}" ]
 	then
@@ -22,15 +24,19 @@ then
 		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
 	fi
 
+	# local copy and download
+
 	frobulator="${HOME}/.local/bin/frobulator"
 	frobulator_download="$(mktemp)"
 
 	mkdir -p "${HOME}/.local/bin"
 
-	# latest release - curl or wget - local copy replaced only by a newer one
+	# fetch the latest release
 
 	curl -s -L -o "${frobulator_download}" get.frbltr.app 2> /dev/null ||
 	wget -q -O "${frobulator_download}" get.frbltr.app 2> /dev/null
+
+	# keep only a newer release
 
 	version_online="$(grep -m 1 '^update=' "${frobulator_download}")"
 	version_local="$(grep -m 1 '^update=' "${frobulator}" 2> /dev/null)"
@@ -42,7 +48,11 @@ then
 		chmod +x "${frobulator}"
 	fi
 
+	# drop the download
+
 	rm -f "${frobulator_download}"
+
+	# stop without frobulator
 
 	if [ ! -f "${frobulator}" ]
 	then
@@ -51,6 +61,8 @@ then
 
 		exit 1
 	fi
+
+	# load the library
 
 	source "${frobulator}"
 fi
@@ -114,6 +126,8 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# models and helper folders
+
 directory_models="${PWD}"/models
 directory_minifigs="${PWD}"/resources/minifigures
 directory_baseplate="${PWD}"/resources/baseplate
@@ -122,11 +136,13 @@ directory_baseplate="${PWD}"/resources/baseplate
 
 # functions ────────────────────────────────────────────────────────────────────
 
+# report progress
+
 frobulator.inf "Generating model entries"
 
 frobulator.fwd "Writing..."
 
-# values
+# file types
 
 list_extensions+=(
 	kmz
@@ -136,25 +152,29 @@ for extension in ${list_extensions[@]}
 do
 	count_models=0
 
+	# every model
+
 	list_models=( $(find ${directory_models} -type f -iname "*.${extension}" ! -iname "*instructions*") )
 
-	# set IFS
+	# split on new lines
 
 	IFS=$'\n'
 
 	for path_model in ${list_models[@]}
 	do
+		# path below the site root
+
 		path_model=$(echo "${path_model}" | cut -d '/' -f6-)
 
-		# get model file name from path
+		# model file name
 
 		file_model="${path_model##*/}"
 
-		# strip extension from model file name
+		# name without extension
 
 		name_model="${file_model%.*}"
 
-		# use model directory as root
+		# model folder
 
 		directory_model="${path_model%/*/*}"
 
@@ -164,7 +184,7 @@ do
 
 		title_collection=$(cat "${path_model%/*/*/*}"/title)
 
-		# define model output directories
+		# render folders
 
 		directory_export="${directory_model}"/exports
 
@@ -180,7 +200,7 @@ do
 
 		directory_thumbnail="${directory_render}"/thumbnail
 
-		# define model specific directories
+		# model details
 
 		title_category=$(cat "${directory_model%/*}"/title)
 
@@ -194,7 +214,7 @@ do
 
 		id_paypal=$(cat "${file_paypal}")
 
-		# paypal button id - spaces and line breaks removed
+		# paypal id without spaces
 
 		id_paypal="${id_paypal//[[:space:]]/}"
 
@@ -212,11 +232,11 @@ do
 
 		price_instructions=$(cat "${file_price}")
 
-		# randomize minifig helper color
+		# random minifig color
 
 		prefix_minifig="minifig-"
 
-		# minifig helpers stay collada - models are kmz
+		# minifig helpers are collada
 
 		list_minifigs=$(find ${directory_minifigs} -type f -iname "*.dae" )
 
@@ -231,13 +251,15 @@ do
 			list_colors+=("$name_color")
 		done
 
+		# pick one color
+
 		count_colors=${#list_colors[@]}
 
 		index_color_random=$(( RANDOM % count_colors ))
 
 		color_minifig=${list_colors[index_color_random]}
 
-		# generate 3d model page
+		# logo color by status
 
 		if [[ -f "${directory_model}"/work-in-progress ]]
 		then
@@ -245,6 +267,8 @@ do
 		else
 			name_color="green"
 		fi
+
+		# purchase state by status
 
 		if [[ -f "${directory_model}"/work-in-progress ]] ||
 		   [[ "${id_paypal}" = "" ]]
@@ -274,7 +298,7 @@ do
 			tag_purchase="a"
 		fi
 
-		# file versions - modification time in seconds - browsers reload changed files
+		# file times for reloads
 
 		version_model="$(date -r "${path_model}" +%s 2> "${sink}")"
 
@@ -282,6 +306,8 @@ do
 		do
 			list_versions_sample[index_sample]="$(date -r "${directory_samples_instructions}/sample-0${index_sample}.png" +%s 2> "${sink}")"
 		done
+
+# 3d model page
 
 cat << 3D-MODEL-PAGE-HEADER -> "${directory_model}/index.html"
 <!DOCTYPE html>
@@ -5278,9 +5304,13 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 3D-MODEL-PAGE-VIEWER
 
+# suffix of super variants
+
 list_keywords=(
 	super
 )
+
+# options and modes selector
 
 if [[ -f "${directory_model}"/options ]] ||
    [[ -f "${directory_model}"/modes   ]]
@@ -5319,7 +5349,7 @@ then
 
 	if [[ -f "${directory_model}"/options ]]
 	then
-		# set IFS
+		# split on new lines
 
 		IFS=$'\n'
 
@@ -5327,6 +5357,8 @@ then
 
 		for option_model in ${list_options_model[@]}
 		do
+			# option folder from the model name
+
 			directory_option=${directory_model}
 
 			prefix_option=${directory_option%%-*}
@@ -5357,11 +5389,13 @@ then
 				unset state_keyword
 			fi
 
+			# option label in capitals
+
 			label_option=${option_model/-/ }
 
 			label_option=${label_option^^}
 
-			# overlay version - modification time in seconds
+			# overlay time for reloads
 
 			version_overlay_option="$(date -r "${label_path_option}/renders/overlay/overlay.png" +%s 2> "${sink}")"
 
@@ -5398,7 +5432,7 @@ then
 	then
 		count_modes=$(cat "${directory_model}"/modes | wc -l)
 
-		# set IFS
+		# split on new lines
 
 		IFS=$'\n'
 
@@ -5406,6 +5440,8 @@ then
 
 		for mode_model in ${list_modes_model[@]}
 		do
+			# mode folder from the model name
+
 			directory_mode=${directory_model}
 
 			prefix_mode=${directory_mode%%-*}
@@ -5434,11 +5470,13 @@ then
 				unset state_keyword
 			fi
 
+			# mode label in capitals
+
 			label_mode=${mode_model/-/ }
 
 			label_mode=${label_mode^^}
 
-			# overlay version - modification time in seconds
+			# overlay time for reloads
 
 			version_overlay_mode="$(date -r "${label_path_mode}/renders/overlay/overlay.png" +%s 2> "${sink}")"
 
@@ -5493,9 +5531,11 @@ then
 
 fi
 
-# unset IFS
+# default splitting
 
 IFS=''
+
+# samples, helper, drawer and colors
 
 cat << 3D-MODEL-PAGE-SAMPLES ->> "${directory_model}/index.html"
 		<!-- samples -->
@@ -5813,6 +5853,8 @@ cat << 3D-MODEL-PAGE-FOOTER ->> "${directory_model}/index.html"
 					</div>
 3D-MODEL-PAGE-FOOTER
 
+# purchase navigation
+
 if [ -f "${file_paypal}" ]
 then
 
@@ -5963,6 +6005,8 @@ cat << 3D-MODEL-PAGE-HELPERS ->> "${directory_model}/index.html"
 
 fi
 
+# close the page
+
 cat << 3D-MODEL-PAGE ->> "${directory_model}/index.html"
 	</body>
 
@@ -5970,10 +6014,14 @@ cat << 3D-MODEL-PAGE ->> "${directory_model}/index.html"
 
 3D-MODEL-PAGE
 
+	# count the model
+
 	(( count_models ++ ))
 
 	done
 done
+
+# report the result
 
 frobulator.inf "Models" "[ ${count_models} ]"
 

@@ -8,13 +8,15 @@ script="$(basename -- "${BASH_SOURCE[0]}")"
 
 self_arguments=("${@}")
 
+# load frobulator once
+
 if [ "${frobulator_loaded}" != "true" ]
 then
 	echo
 	echo "[  >  ] Checking..."
 	echo
 
-	# root through sudo keeps using the user's frobulator
+	# keep the sudo user home
 
 	if [ -n "${SUDO_USER}" ]
 	then
@@ -22,15 +24,19 @@ then
 		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
 	fi
 
+	# local copy and download
+
 	frobulator="${HOME}/.local/bin/frobulator"
 	frobulator_download="$(mktemp)"
 
 	mkdir -p "${HOME}/.local/bin"
 
-	# latest release - curl or wget - local copy replaced only by a newer one
+	# fetch the latest release
 
 	curl -s -L -o "${frobulator_download}" get.frbltr.app 2> /dev/null ||
 	wget -q -O "${frobulator_download}" get.frbltr.app 2> /dev/null
+
+	# keep only a newer release
 
 	version_online="$(grep -m 1 '^update=' "${frobulator_download}")"
 	version_local="$(grep -m 1 '^update=' "${frobulator}" 2> /dev/null)"
@@ -42,7 +48,11 @@ then
 		chmod +x "${frobulator}"
 	fi
 
+	# drop the download
+
 	rm -f "${frobulator_download}"
+
+	# stop without frobulator
 
 	if [ ! -f "${frobulator}" ]
 	then
@@ -51,6 +61,8 @@ then
 
 		exit 1
 	fi
+
+	# load the library
 
 	source "${frobulator}"
 fi
@@ -114,11 +126,17 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# local models
+
 directory_local=/media/internal/Lego
 directory_models_local="${directory_local}"/models
 
+# site models
+
 directory_server="${PWD}"
 directory_models_server="${directory_server}"/models
+
+# site backgrounds and scripts
 
 directory_backgrounds_server="${directory_server}"/background
 directory_javascript_server="${directory_server}"/resources/javascript
@@ -131,30 +149,34 @@ directory_javascript_server="${directory_server}"/resources/javascript
 
 frobulator.inf "Synchronizing entries" "[ models ]"
 
+# site models folder
+
 if [[ ! -d "${directory_models_server}" ]]
 then
 	mkdir -p "${directory_models_server}"
 fi
 
-frobulator.background quiet sync -- rsync							\
-	--archive					\
-	--quiet						\
-	--recursive					\
-	--exclude='*.ldr'			\
-	--exclude='*.mpd'			\
-	--exclude='*.pdf'			\
-	--exclude='*.dae'			\
-	--exclude='*.obj'			\
-	--exclude='*.mtl'			\
-	--exclude='*.3ds'			\
-	--exclude='*.blend'			\
-	--exclude='*.csv'			\
-	--exclude='*.stl'			\
-	--exclude='*.io'			\
-	--exclude='*.lxf'			\
-	--exclude="configuration"	\
-	--exclude='LPub3D'			\
-	--delete					\
+# copy models without sources
+
+frobulator.background quiet sync -- rsync	\
+	--archive								\
+	--quiet									\
+	--recursive								\
+	--exclude='*.ldr'						\
+	--exclude='*.mpd'						\
+	--exclude='*.pdf'						\
+	--exclude='*.dae'						\
+	--exclude='*.obj'						\
+	--exclude='*.mtl'						\
+	--exclude='*.3ds'						\
+	--exclude='*.blend'						\
+	--exclude='*.csv'						\
+	--exclude='*.stl'						\
+	--exclude='*.io'						\
+	--exclude='*.lxf'						\
+	--exclude="configuration"				\
+	--exclude='LPub3D'						\
+	--delete								\
 								"${directory_models_local}"/* "${directory_models_server}"
 
 frobulator.cpt "Complete" "[ Models ]"

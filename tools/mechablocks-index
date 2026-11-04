@@ -8,13 +8,15 @@ script="$(basename -- "${BASH_SOURCE[0]}")"
 
 self_arguments=("${@}")
 
+# load frobulator once
+
 if [ "${frobulator_loaded}" != "true" ]
 then
 	echo
 	echo "[  >  ] Checking..."
 	echo
 
-	# root through sudo keeps using the user's frobulator
+	# keep the sudo user home
 
 	if [ -n "${SUDO_USER}" ]
 	then
@@ -22,15 +24,19 @@ then
 		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
 	fi
 
+	# local copy and download
+
 	frobulator="${HOME}/.local/bin/frobulator"
 	frobulator_download="$(mktemp)"
 
 	mkdir -p "${HOME}/.local/bin"
 
-	# latest release - curl or wget - local copy replaced only by a newer one
+	# fetch the latest release
 
 	curl -s -L -o "${frobulator_download}" get.frbltr.app 2> /dev/null ||
 	wget -q -O "${frobulator_download}" get.frbltr.app 2> /dev/null
+
+	# keep only a newer release
 
 	version_online="$(grep -m 1 '^update=' "${frobulator_download}")"
 	version_local="$(grep -m 1 '^update=' "${frobulator}" 2> /dev/null)"
@@ -42,7 +48,11 @@ then
 		chmod +x "${frobulator}"
 	fi
 
+	# drop the download
+
 	rm -f "${frobulator_download}"
+
+	# stop without frobulator
 
 	if [ ! -f "${frobulator}" ]
 	then
@@ -51,6 +61,8 @@ then
 
 		exit 1
 	fi
+
+	# load the library
 
 	source "${frobulator}"
 fi
@@ -69,6 +81,8 @@ version="2026-10-04"
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# site identity
+
 directory_server="${PWD}"
 
 address_site='https://mechablocks.com'
@@ -83,13 +97,19 @@ slogan_site='Where LEGO® meets Open Source'
 
 path_logo='resources/logo/logo-red.png'
 
+# output and homepage
+
 file_sitemap='sitemap.xml'
 
 file_homepage='./index.html'
 
+# schema block markers
+
 marker_schema_begin='<!-- schema-itemlist-begin -->'
 
 marker_schema_end='<!-- schema-itemlist-end -->'
+
+# folders kept out of the sitemap
 
 list_directories_excluded=(
 	'./.git/'
@@ -101,13 +121,19 @@ list_directories_excluded=(
 	'./resources/'
 )
 
+# folders listed in the schema
+
 list_directories_schema=(
 	'./models/'
 )
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
+# site address without a trailing slash
+
 url_site="${address_site%/}"
+
+# counters and schema list
 
 count_pages=0
 
@@ -118,6 +144,8 @@ list_urls_schema=()
 # functions ────────────────────────────────────────────────────────────────────
 
 directory_excluded_check () {
+
+	# use to test an excluded folder
 
 	path_file="${1}"
 
@@ -135,6 +163,8 @@ directory_excluded_check () {
 
 schema_included_check () {
 
+	# use to test a schema folder
+
 	path_file="${1}"
 
 	for path_directory in "${list_directories_schema[@]}"
@@ -151,12 +181,18 @@ schema_included_check () {
 
 url_prepare () {
 
+	# use to turn a path into url_full
+
 	path_url="${1}"
+
+	# drop index file and slashes
 
 	path_url="${path_url#./}"
 	path_url="${path_url#index.html}"
 	path_url="${path_url%index.html}"
 	path_url="${path_url%/}"
+
+	# site root or folder url
 
 	if [ "${path_url}" = "." ] ||
 	   [ "${path_url}" = ""  ]
@@ -174,15 +210,21 @@ url_prepare () {
 
 url_index () {
 
+	# use to add a page to the sitemap
+
 	url_prepare "${1}"
 
 	path_file="${2}"
+
+	# page date and crawl hints
 
 	date_modified="$(date -u -r "${path_file}" '+%Y-%m-%d')"
 
 	frequency_change="weekly"
 
 	priority="0.80"
+
+	# sitemap entry
 
 	cat >> "${file_sitemap}" << URL
 
@@ -205,9 +247,13 @@ URL
 
 schema_itemlist_write () {
 
+	# use to write the schema block
+
 	file_schema="${1}"
 
 	count_schema="${#list_urls_schema[@]}"
+
+	# site, organization and collection
 
 	cat > "${file_schema}" << SCHEMA-BEGIN
 
@@ -270,9 +316,13 @@ schema_itemlist_write () {
 						"itemListElement": [
 SCHEMA-BEGIN
 
+	# one item per model page
+
 	for url_schema in "${list_urls_schema[@]}"
 	do
 		(( position ++ ))
+
+		# comma between items
 
 		if [ "${position}" -lt "${count_schema}" ]
 		then
@@ -290,6 +340,8 @@ SCHEMA-BEGIN
 SCHEMA-ITEM
 	done
 
+	# close the block
+
 	cat >> "${file_schema}" << SCHEMA-END
 						]
 					},
@@ -305,12 +357,18 @@ SCHEMA-END
 
 schema_homepage_update () {
 
+	# use to put the schema in the homepage
+
+	# stop without a homepage
+
 	if [ ! -f "${file_homepage}" ]
 	then
 		frobulator.wrn "Homepage not found" "[ ${file_homepage} ]"
 
 		return 1
 	fi
+
+	# stop without both markers
 
 	if [ "$(grep -c "${marker_schema_begin}" "${file_homepage}")" -eq 0 ] ||
 	   [ "$(grep -c "${marker_schema_end}" "${file_homepage}")" -eq 0 ]
@@ -320,11 +378,15 @@ schema_homepage_update () {
 		return 1
 	fi
 
+	# temporary schema and page
+
 	file_schema="$(mktemp)"
 
 	file_homepage_output="$(mktemp)"
 
 	schema_itemlist_write "${file_schema}"
+
+	# swap the block between the markers
 
 	awk												\
 		-v marker_begin="${marker_schema_begin}"	\
@@ -356,6 +418,8 @@ schema_homepage_update () {
 			}
 		' "${file_homepage}" > "${file_homepage_output}"
 
+	# replace the page, drop the schema
+
 	mv "${file_homepage_output}" "${file_homepage}"
 
 	rm -f "${file_schema}"
@@ -378,12 +442,16 @@ HEADER
 
 # index pages ──────────────────────────────────────────────────────────────────
 
+# every index page, one per line
+
 IFS=$'\n'
 
 list_files_index=$(find . -type f -name 'index.html' | sort)
 
 for path_file in ${list_files_index}
 do
+	# skip excluded folders
+
 	directory_excluded_check "${path_file}"
 
 	status_excluded="${?}"
@@ -393,7 +461,11 @@ do
 		continue
 	fi
 
+	# sitemap entry
+
 	url_index "${path_file}" "${path_file}"
+
+	# schema entry for model pages
 
 	schema_included_check "${path_file}"
 
@@ -421,6 +493,8 @@ cat >> "${file_sitemap}" << FOOTER
 FOOTER
 
 # report ───────────────────────────────────────────────────────────────────────
+
+# stop when nothing was found
 
 if [ "${count_pages}" -eq 0 ]
 then

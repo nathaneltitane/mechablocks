@@ -8,13 +8,15 @@ script="$(basename -- "${BASH_SOURCE[0]}")"
 
 self_arguments=("${@}")
 
+# load frobulator once
+
 if [ "${frobulator_loaded}" != "true" ]
 then
 	echo
 	echo "[  >  ] Checking..."
 	echo
 
-	# root through sudo keeps using the user's frobulator
+	# keep the sudo user home
 
 	if [ -n "${SUDO_USER}" ]
 	then
@@ -22,15 +24,19 @@ then
 		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
 	fi
 
+	# local copy and download
+
 	frobulator="${HOME}/.local/bin/frobulator"
 	frobulator_download="$(mktemp)"
 
 	mkdir -p "${HOME}/.local/bin"
 
-	# latest release - curl or wget - local copy replaced only by a newer one
+	# fetch the latest release
 
 	curl -s -L -o "${frobulator_download}" get.frbltr.app 2> /dev/null ||
 	wget -q -O "${frobulator_download}" get.frbltr.app 2> /dev/null
+
+	# keep only a newer release
 
 	version_online="$(grep -m 1 '^update=' "${frobulator_download}")"
 	version_local="$(grep -m 1 '^update=' "${frobulator}" 2> /dev/null)"
@@ -42,7 +48,11 @@ then
 		chmod +x "${frobulator}"
 	fi
 
+	# drop the download
+
 	rm -f "${frobulator_download}"
+
+	# stop without frobulator
 
 	if [ ! -f "${frobulator}" ]
 	then
@@ -51,6 +61,8 @@ then
 
 		exit 1
 	fi
+
+	# load the library
 
 	source "${frobulator}"
 fi
@@ -120,7 +132,7 @@ do
 		;;
 
 		-b|--bricklink)
-			option="splash"
+			option="bricklink"
 		;;
 
 		-h|--help)
@@ -128,6 +140,8 @@ do
 			echo -e "Usage: ./${script} [DIRECTORY] | [OPTION] [PARAMETER]"
 			echo
 			echo -e "Options:"
+			echo
+			echo -e "Note:                 Without an option, every step runs."
 			echo
 			echo -e "-d, --directory       Specify [d]irectory to load models from."
 			echo
@@ -192,44 +206,62 @@ frobulator.clear
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# models folder for the tools
+
 export directory="${directory}"
+
+# tools folder
 
 directory_tools="${PWD}"/tools
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
+# without an option every step runs
+
+option="${option:-all}"
+
 # functions ────────────────────────────────────────────────────────────────────
 
 upload () {
 
+	# use to commit and push everything
+
 	message="${1}"
 
-	git add *
+	git add --all
 
-	git commit		\
-		--all		\
+	git commit	\
+		--all	\
 		--message="${message}"
 
 	git push > "${sink}" 2>&1
 
 	echo
+
 }
 
 option () {
 
-	for script in ${list[@]}
+	# use to run the listed tools
+
+	for name_tool in "${list[@]}"
 	do
-		"${SHELL}" "${directory_tools}"/"${script}"
+		bash "${directory_tools}/${name_tool}"
 	done
 
-	upload "Models update" &
+	# publish the results
 
 	frobulator.fwd "Updating..."
 
+	upload "Models update"
+
 	list=()
+
 }
 
 # requirements ─────────────────────────────────────────────────────────────────
+
+# needed commands
 
 list+=(
 	git
@@ -242,9 +274,12 @@ list=()
 
 # update ───────────────────────────────────────────────────────────────────────
 
+# every tool
+
 if [[ "${option}" = "all" ]]
 then
 	list+=(
+		mechablocks-social
 		mechablocks-exports
 		mechablocks-renders
 		mechablocks-instructions
@@ -254,9 +289,11 @@ then
 #		mechablocks-menu
 		mechablocks-viewer
 		mechablocks-index
-		mechablocks-splash
+		mechablocks-bricklink
 	)
 fi
+
+# one tool per option
 
 if [[ "${option}" = "exports" ]]
 then
@@ -321,12 +358,14 @@ then
 	)
 fi
 
-if [[ "${option}" = "splash" ]]
+if [[ "${option}" = "bricklink" ]]
 then
 	list+=(
-		mechablocks-splash
+		mechablocks-bricklink
 	)
 fi
+
+# run and publish
 
 option ${list[@]}
 

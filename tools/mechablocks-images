@@ -8,13 +8,15 @@ script="$(basename -- "${BASH_SOURCE[0]}")"
 
 self_arguments=("${@}")
 
+# load frobulator once
+
 if [ "${frobulator_loaded}" != "true" ]
 then
 	echo
 	echo "[  >  ] Checking..."
 	echo
 
-	# root through sudo keeps using the user's frobulator
+	# keep the sudo user home
 
 	if [ -n "${SUDO_USER}" ]
 	then
@@ -22,15 +24,19 @@ then
 		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
 	fi
 
+	# local copy and download
+
 	frobulator="${HOME}/.local/bin/frobulator"
 	frobulator_download="$(mktemp)"
 
 	mkdir -p "${HOME}/.local/bin"
 
-	# latest release - curl or wget - local copy replaced only by a newer one
+	# fetch the latest release
 
 	curl -s -L -o "${frobulator_download}" get.frbltr.app 2> /dev/null ||
 	wget -q -O "${frobulator_download}" get.frbltr.app 2> /dev/null
+
+	# keep only a newer release
 
 	version_online="$(grep -m 1 '^update=' "${frobulator_download}")"
 	version_local="$(grep -m 1 '^update=' "${frobulator}" 2> /dev/null)"
@@ -42,7 +48,11 @@ then
 		chmod +x "${frobulator}"
 	fi
 
+	# drop the download
+
 	rm -f "${frobulator_download}"
+
+	# stop without frobulator
 
 	if [ ! -f "${frobulator}" ]
 	then
@@ -51,6 +61,8 @@ then
 
 		exit 1
 	fi
+
+	# load the library
 
 	source "${frobulator}"
 fi
@@ -114,8 +126,12 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# local models
+
 directory_local=/media/internal/Lego
 directory_models_local="${directory_local}"/models
+
+# site images and scripts
 
 directory_server="${PWD}"
 directory_models_server="${directory_server}"/models
@@ -128,26 +144,28 @@ directory_javascript_server="${directory_server}"/resources/javascript
 
 synchronize () {
 
+	# use to copy one image
+
 	source="${1}"
 	destination="${2}"
 
-	rsync				\
-		--archive		\
-		--quiet			\
-		--recursive		\
+	rsync			\
+		--archive	\
+		--quiet		\
+		--recursive	\
 						"${source}" "${destination}" > "${sink}" 2>&1
 
 }
 
 # background ───────────────────────────────────────────────────────────────────
 
-# prepare update
+# site images folder
 
 frobulator.directory "${directory_server}" resources/images
 
 frobulator.fwd "Copying..."
 
-# values
+# image types
 
 list_extensions+=(
 	png
@@ -155,6 +173,8 @@ list_extensions+=(
 
 for extension in ${list_extensions[@]}
 do
+	# render views
+
 	list_directories=(
 		flat
 		overlay
@@ -164,7 +184,7 @@ do
 
 	for directory in ${list_directories[@]}
 	do
-		# images regenerated from scratch - no leftover from earlier runs or removed backgrounds
+		# start each view empty
 
 		if [ -d "${directory_images_server}/${directory}" ]
 		then
@@ -173,40 +193,45 @@ do
 
 		frobulator.directory "${directory_images_server}" "${directory}"
 
+		# images copied so far
+
 		count_images=0
 
-		# model renders - one path per line - work in progress excluded
+		# finished model renders
 
 		mapfile -t list_paths_image < <(find "${directory_models_local}" -type f -not -path "*/work-in-progress/*" -iname "${directory}.${extension}" | sort)
 
 		for path_image in "${list_paths_image[@]}"
 		do
-			# get model directory
+			# model folder
 
 			directory_model="${path_image%/*/*/*}"
 
+			# background models only
+
 			if [ -f "${directory_model}"/background ]
 			then
+				# padded image number
 
 				number_image=$(printf "%03d" "${count_images}")
 
-				# get model image base directory from path
+				# image folder
 
 				directory_image="${path_image%/*}"
 
-				# get model image file name from path
+				# image file name
 
 				file_image="${path_image##*/}"
 
-				# get model image file extension from path
+				# image extension
 
 				extension_image="${file_image##*.}"
 
-				# strip extension from model file name
+				# name without extension
 
 				name_image="${file_image%.*}"
 
-				# set synchronization paths
+				# copy paths
 
 				path_local="${path_image}"
 
@@ -214,7 +239,7 @@ do
 
 				synchronize "${path_image}" "${path_server}"
 
-				# background images only - numbering without gaps
+				# numbering without gaps
 
 				(( count_images ++ ))
 			fi
@@ -225,13 +250,13 @@ do
 
 done
 
-# update random background generator with new image file count
+# image count for the backgrounds
 
 frobulator.inf "Updating" "[ Images ]"
 
 sed															\
 	-i														\
-	-e "s/var count = .*/var count = ${count_images};/g"		\
+	-e "s/var count = .*/var count = ${count_images};/g"	\
 															"${directory_javascript_server}"/background.js
 
 frobulator.inf "Models" "[ ${count_images} ]"

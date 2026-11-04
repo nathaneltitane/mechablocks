@@ -8,13 +8,15 @@ script="$(basename -- "${BASH_SOURCE[0]}")"
 
 self_arguments=("${@}")
 
+# load frobulator once
+
 if [ "${frobulator_loaded}" != "true" ]
 then
 	echo
 	echo "[  >  ] Checking..."
 	echo
 
-	# root through sudo keeps using the user's frobulator
+	# keep the sudo user home
 
 	if [ -n "${SUDO_USER}" ]
 	then
@@ -22,15 +24,19 @@ then
 		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
 	fi
 
+	# local copy and download
+
 	frobulator="${HOME}/.local/bin/frobulator"
 	frobulator_download="$(mktemp)"
 
 	mkdir -p "${HOME}/.local/bin"
 
-	# latest release - curl or wget - local copy replaced only by a newer one
+	# fetch the latest release
 
 	curl -s -L -o "${frobulator_download}" get.frbltr.app 2> /dev/null ||
 	wget -q -O "${frobulator_download}" get.frbltr.app 2> /dev/null
+
+	# keep only a newer release
 
 	version_online="$(grep -m 1 '^update=' "${frobulator_download}")"
 	version_local="$(grep -m 1 '^update=' "${frobulator}" 2> /dev/null)"
@@ -42,7 +48,11 @@ then
 		chmod +x "${frobulator}"
 	fi
 
+	# drop the download
+
 	rm -f "${frobulator_download}"
+
+	# stop without frobulator
 
 	if [ ! -f "${frobulator}" ]
 	then
@@ -51,6 +61,8 @@ then
 
 		exit 1
 	fi
+
+	# load the library
 
 	source "${frobulator}"
 fi
@@ -120,6 +132,8 @@ done
 
 # requirements ─────────────────────────────────────────────────────────────────
 
+# given or default models folder
+
 if [[ -z "${directory}" ]]
 then
     list+=(
@@ -131,22 +145,26 @@ else
     )
 fi
 
+# models exported so far
+
 count_models=0
 
 for directory in ${list[@]}
 do
-	# model files exported by l2cu - instructions excluded
+	# models without instructions
 
 	mapfile -t list_models < <(find "${directory}" -type f -iname "*.mpd" ! -iname "*instructions*")
 
 	count_models=$(( count_models + ${#list_models[@]} ))
 
-	# visible surface only - compressed - no part names or placements
+	# compressed visible surface only
 
 	"${SHELL}" ../l2cu/l2cu --file mpd --export collada surface kmz --directory "${directory}"
 done
 
 list=()
+
+# models exported
 
 frobulator.inf "Models" "[ ${count_models} ]"
 
