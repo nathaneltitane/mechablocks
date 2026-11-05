@@ -510,8 +510,6 @@ if [ "${count_pages}" -eq 0 ]
 then
 	frobulator.err "No URLs found" "[ ${url_site} ]"
 
-	frobulator.wrn "Script must be run from site root directory."
-
 	exit 1
 else
 	frobulator.inf "Sitemap written" "[ ${file_sitemap} ]"
