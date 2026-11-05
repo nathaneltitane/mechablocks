@@ -138,10 +138,16 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# script and site folders
+
+frobulator.locate
+
+directory_root="${directory_script%/*}"
+
 # models and output page
 
-directory_models="${PWD}"/models
-file_splash="${PWD}"/index-bricklink.html
+directory_models="${directory_root}"/models
+file_splash="${directory_root}"/index-bricklink.html
 
 # linked sites
 
@@ -278,7 +284,7 @@ SPLASH-CELL
 
 if [ ! -d "${directory_models}" ]
 then
-	frobulator.err "Models directory not found - run from the mechablocks directory" "[ ${directory_models} ]"
+	frobulator.err "Models directory not found" "[ ${directory_models} ]"
 
 	exit 1
 fi
@@ -508,6 +514,6 @@ ${text_grid}			</table>
 <!-- splash: end -->
 SPLASH-PAGE
 
-frobulator.inf "Splash page" "[ ${file_splash#"${PWD}"/} ]"
+frobulator.inf "Splash page" "[ ${file_splash#"${directory_root}"/} ]"
 
 frobulator.scs "Done" "[ Splash ]"

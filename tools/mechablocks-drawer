@@ -126,10 +126,16 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# script and site folders
+
+frobulator.locate
+
+directory_root="${directory_script%/*}"
+
 # models and output folders
 
-directory_models="${PWD}"/models
-directory_modules="${PWD}"/resources/modules
+directory_models="${directory_root}"/models
+directory_modules="${directory_root}"/resources/modules
 
 # version stamp
 
@@ -294,7 +300,7 @@ do
 	do
 		# path below the site root
 
-		path_model=$(echo "${path_model}" | cut -d '/' -f6-)
+		path_model="${path_model#"${directory_root}"/}"
 
 		# model file name
 
@@ -320,29 +326,29 @@ do
 
 		# thumbnail time for reloads
 
-		version_thumbnail="$(date -r "${directory_thumbnail}/thumbnail.png" +%s 2> "${sink}")"
+		version_thumbnail="$(date -r "${directory_root}/${directory_thumbnail}/thumbnail.png" +%s 2> "${sink}")"
 
 		# model details
 
-		title_category=$(cat "${directory_model%/*}"/title)
+		title_category=$(cat "${directory_root}/${directory_model%/*}"/title)
 
-		file_drawer="${directory_model}"/drawer
+		file_drawer="${directory_root}/${directory_model}"/drawer
 
-		title_model=$(cat "${directory_model}"/title)
+		title_model=$(cat "${directory_root}/${directory_model}"/title)
 
 		text_title=$(echo ${title_model//\<\/\br\>/})
 
-		file_paypal="${directory_model}"/paypal
+		file_paypal="${directory_root}/${directory_model}"/paypal
 
 		id_paypal=$(cat "${file_paypal}")
 
-		file_pieces="${directory_model}"/pieces
+		file_pieces="${directory_root}/${directory_model}"/pieces
 
 		count_pieces=$(cat "${file_pieces}")
 
-		path_instructions="${directory_model}"/instructions
+		path_instructions="${directory_root}/${directory_model}"/instructions
 
-		file_price="${directory_model}"/price
+		file_price="${directory_root}/${directory_model}"/price
 
 		price_instructions=$(cat "${file_price}")
 
@@ -356,7 +362,7 @@ do
 
 			title_category="WORK IN PROGRESS"
 
-		elif [[ -f "${directory_model}"/work-in-progress ]]
+		elif [[ -f "${directory_root}/${directory_model}"/work-in-progress ]]
 		then
 			color_logo="orange"
 
@@ -369,7 +375,7 @@ do
 
 		# only models marked for the drawer
 
-		if [[ -f "${directory_model}"/drawer ]]
+		if [[ -f "${directory_root}/${directory_model}"/drawer ]]
 		then
 
 cat << MODEL-DRAWER-CONTENT ->> "${directory_modules}"/drawer.html

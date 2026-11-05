@@ -126,6 +126,12 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# script and site folders
+
+frobulator.locate
+
+directory_root="${directory_script%/*}"
+
 # local models
 
 directory_local=/media/internal/Lego
@@ -133,7 +139,7 @@ directory_models_local="${directory_local}"/models
 
 # site images and scripts
 
-directory_server="${PWD}"
+directory_server="${directory_root}"
 directory_models_server="${directory_server}"/models
 directory_images_server="${directory_server}"/resources/images
 directory_javascript_server="${directory_server}"/resources/javascript

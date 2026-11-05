@@ -126,9 +126,15 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# script and site folders
+
+frobulator.locate
+
+directory_root="${directory_script%/*}"
+
 # output folder and files
 
-directory_server="${PWD}"
+directory_server="${directory_root}"
 path_social="resources/social"
 
 directory_social="${directory_server}/${path_social}"
@@ -214,7 +220,7 @@ logo_generate () {
 
 	# logo source on one line
 
-	text_svg="$(tr '\n' ' ' < "${logo_card}")"
+	text_svg="$(tr '\n' ' ' < "${directory_server}/${logo_card}")"
 
 	# stroke logos keep only their paths
 
@@ -266,7 +272,7 @@ page_write () {
 
 	# use to write the card page
 
-	cat > "${file_page}" << PAGE-SOCIAL
+	cat > "${directory_server}/${file_page}" << PAGE-SOCIAL
 <!DOCTYPE html>
 
 <html>
@@ -421,9 +427,9 @@ card_render () {
 
 # stop outside the repository
 
-if [ ! -f "${logo_card}" ]
+if [ ! -f "${directory_server}/${logo_card}" ]
 then
-	frobulator.err "Logo not found - run from the mechablocks directory" "[ ${logo_card} ]"
+	frobulator.err "Logo not found" "[ ${logo_card} ]"
 
 	exit 1
 fi

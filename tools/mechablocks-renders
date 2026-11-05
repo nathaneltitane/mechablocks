@@ -126,6 +126,12 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# script and site folders
+
+frobulator.locate
+
+directory_root="${directory_script%/*}"
+
 extension="mpd"
 
 # defaults ─────────────────────────────────────────────────────────────────────
@@ -140,7 +146,7 @@ render () {
 	option_render="${2}"
 	directory="${3}"
 
-	"${SHELL}" ../l2cu/l2cu						\
+	"${SHELL}" "${directory_root%/*}"/l2cu/l2cu	\
 					--file ${extension}			\
 					--render ${option_render}	\
 					--directory "${directory}"

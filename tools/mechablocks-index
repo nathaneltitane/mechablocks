@@ -81,9 +81,19 @@ version="2026-10-04"
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# script and site folders
+
+frobulator.locate
+
+directory_root="${directory_script%/*}"
+
+# site paths are relative - no path arguments
+
+cd -- "${directory_root}" || exit 1
+
 # site identity
 
-directory_server="${PWD}"
+directory_server="${directory_root}"
 
 address_site='https://mechablocks.com'
 

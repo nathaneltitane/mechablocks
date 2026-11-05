@@ -126,11 +126,21 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# script and site folders
+
+frobulator.locate
+
+directory_root="${directory_script%/*}"
+
+# site paths are relative - no path arguments
+
+cd -- "${directory_root}" || exit 1
+
 # models and helper folders
 
-directory_models="${PWD}"/models
-directory_minifigs="${PWD}"/resources/minifigures
-directory_baseplate="${PWD}"/resources/baseplate
+directory_models="${directory_root}"/models
+directory_minifigs="${directory_root}"/resources/minifigures
+directory_baseplate="${directory_root}"/resources/baseplate
 
 # defaults ─────────────────────────────────────────────────────────────────────
 

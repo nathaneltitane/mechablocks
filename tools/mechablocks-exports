@@ -126,6 +126,12 @@ done
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# script and site folders
+
+frobulator.locate
+
+directory_root="${directory_script%/*}"
+
 # defaults ─────────────────────────────────────────────────────────────────────
 
 # functions ────────────────────────────────────────────────────────────────────
@@ -159,7 +165,7 @@ do
 
 	# compressed visible surface only
 
-	"${SHELL}" ../l2cu/l2cu --file mpd --export collada surface kmz --directory "${directory}"
+	"${SHELL}" "${directory_root%/*}"/l2cu/l2cu --file mpd --export collada surface kmz --directory "${directory}"
 done
 
 list=()

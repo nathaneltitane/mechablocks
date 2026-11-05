@@ -206,13 +206,19 @@ frobulator.clear
 
 # variables ────────────────────────────────────────────────────────────────────
 
+# script and site folders
+
+frobulator.locate
+
+directory_root="${directory_script%/*}"
+
 # models folder for the tools
 
 export directory="${directory}"
 
 # tools folder
 
-directory_tools="${PWD}"/tools
+directory_tools="${directory_script}"
 
 # defaults ─────────────────────────────────────────────────────────────────────
 
@@ -228,13 +234,13 @@ upload () {
 
 	message="${1}"
 
-	git add --all
+	git -C "${directory_root}" add --all
 
-	git commit	\
+	git -C "${directory_root}" commit	\
 		--all	\
 		--message="${message}"
 
-	git push > "${sink}" 2>&1
+	git -C "${directory_root}" push > "${sink}" 2>&1
 
 	echo
 
