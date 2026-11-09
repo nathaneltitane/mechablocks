@@ -16,6 +16,8 @@ Useful? Star the repository - it helps others find it.
 
 This repository hosts the website dedicated to showcasing AFOL LEGO® models and their associated LDraw-based instructions.
 
+---
+
 ### Repositories:
 
 [Frobulator](https://github.com/nathaneltitane/frobulator) to streamline the scripts and make redundant code a thing of the past.
@@ -30,9 +32,13 @@ This repository hosts the website dedicated to showcasing AFOL LEGO® models and
 
 [GNU/Bash](https://github.com/gitGNU/gnu_bash) as the shell environment on top of which the scripts function.
 
+---
+
 ### Reports:
 
 [Submit bug report or feature request](https://github.com/nathaneltitane/mechablocks/issues)
+
+---
 
 ### Projects:
 
