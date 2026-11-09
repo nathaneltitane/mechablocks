@@ -550,9 +550,11 @@
 
 					console_overlay.innerHTML = '' ;
 
-					function console_overlay_line ( label, context, value ) {
+					// lines collected first - labels padded to one width
 
-						var line = document.createElement ( 'div' ) ;
+					var console_lines = [ ] ;
+
+					function console_overlay_line ( label, context, value ) {
 
 						// 2 arguments passed - shift arguments
 
@@ -571,11 +573,7 @@
 
 						}
 
-						text += ' : ' + value ;
-
-						line.textContent = text ;
-
-						console_overlay.appendChild ( line ) ;
+						console_lines.push ( { label : text, value : value } ) ;
 
 					}
 
@@ -583,9 +581,7 @@
 
 					function device_information_divider ( ) {
 
-						var console_overlay_divider = document.createElement ( 'hr' );
-
-						console_overlay.appendChild ( console_overlay_divider );
+						console_lines.push ( null ) ;
 
 					}
 
@@ -688,7 +684,7 @@
 
 					// console - helpers
 
-					var minifig_shown = self.minifig_visible && self.minifig && self.minifig_height_plates ;
+					var minifigure_shown = self.minifigure_visible && self.minifigure && self.minifigure_height_plates ;
 					var baseplate_shown = self.baseplate_visible && self.baseplate_grid_box && self.baseplate_name ;
 
 					console_overlay_line ( 'helper', 'bounding box', on_off ( self.bounding_box_helper_visible ) ) ;
@@ -703,8 +699,8 @@
 					console_overlay_line ( 'grid', 'polar', on_off ( self.polar_grid_helper_visible ) ) ;
 					console_overlay_line ( 'grid', 'orthogonal + height', on_off ( self.orthogonal_grid_helper_visible ) ) ;
 
-					console_overlay_line ( 'minifig', 'visibility', on_off ( self.minifig_visible ) ) ;
-					console_overlay_line ( 'minifig', 'height', minifig_shown ? self.minifig_height_plates + ' plates' : na ) ;
+					console_overlay_line ( 'minifigure', 'visibility', on_off ( self.minifigure_visible ) ) ;
+					console_overlay_line ( 'minifigure', 'height', minifigure_shown ? self.minifigure_height_plates + ' plates' : na ) ;
 
 					console_overlay_line ( 'baseplate', 'visibility', on_off ( self.baseplate_visible ) ) ;
 					console_overlay_line ( 'baseplate', 'name', baseplate_shown ? self.baseplate_name : na ) ;
@@ -754,6 +750,38 @@
 					console_overlay_line ( 'transform', 'space', transform ? transform.space : na ) ;
 					console_overlay_line ( 'transform', 'snap', transform ? ( snap ? Number ( snap ).toFixed ( 4 ) : 'off' ) : na ) ;
 					console_overlay_line ( 'transform', 'size', transform ? transform.size.toFixed ( 2 ) : na ) ;
+
+					// render lines - null is a divider
+
+					var label_width = 0 ;
+
+					console_lines.forEach ( function ( line ) {
+
+						if ( line && line.label.length > label_width ) {
+
+							label_width = line.label.length ;
+
+						}
+
+					} ) ;
+
+					console_lines.forEach ( function ( line ) {
+
+						if ( ! line ) {
+
+							console_overlay.appendChild ( document.createElement ( 'hr' ) ) ;
+
+							return ;
+
+						}
+
+						var line_element = document.createElement ( 'div' ) ;
+
+						line_element.textContent = line.label.padEnd ( label_width ) + ' : ' + line.value ;
+
+						console_overlay.appendChild ( line_element ) ;
+
+					} ) ;
 
 					// scrollbar fades in when lines overflow
 
@@ -2656,78 +2684,78 @@
 
 				window.grid_toggle_ = this.grid_toggle_.bind ( this ) ;
 
-				// minifig helper
+				// minifigure helper
 
-				this.minifig_toggle_ = function ( ) {
+				this.minifigure_toggle_ = function ( ) {
 
 					const self = this;
 
-					// guard: minifig depends on main model being present
+					// guard: minifigure depends on main model being present
 
 					if ( ! self.colladaImport ) {
 
-						console.warn ( 'minifig : main model not loaded yet (colladaImport is missing)' );
+						console.warn ( 'minifigure : main model not loaded yet (colladaImport is missing)' );
 
 						return;
 					}
 
-					// guard: minifig depends on rounded model grid box
+					// guard: minifigure depends on rounded model grid box
 
 					if ( ! self.model_grid_box ) {
 
-						console.warn ( 'minifig : rounded model grid box not available' );
+						console.warn ( 'minifigure : rounded model grid box not available' );
 
 						return;
 					}
 
-					if ( this.minifig_visible ) {
+					if ( this.minifigure_visible ) {
 
-						this.minifig_visible = false;
+						this.minifigure_visible = false;
 
-						self.minifig_release ( );
+						self.minifigure_release ( );
 
 						return;
 					}
 
-					this.minifig_visible = true;
+					this.minifigure_visible = true;
 
 					// already loading - visibility applied when it arrives
 
-					if ( self.minifig_loading ) {
+					if ( self.minifigure_loading ) {
 
 						return;
 					}
 
-					if ( self.minifig ) {
+					if ( self.minifigure ) {
 
-						self.minifig.visible = true;
+						self.minifigure.visible = true;
 
-						if ( self.minifigTransform ) self.minifigTransform.visible = true;
+						if ( self.minifigureTransform ) self.minifigureTransform.visible = true;
 
 						return;
 					}
 
 					const loader = new ColladaLoader ( ) ;
 
-					self.minifig_loading = true;
+					self.minifigure_loading = true;
 
 					loader.load (
 
-						'/resources/minifigures/exports/minifig-white.dae',
+						'/resources/minifigures/exports/minifigure-yellow.dae',
 
 						function ( collada ) {
 
-							self.minifig_loading = false;
+							self.minifigure_loading = false;
 
-							const minifig = collada.scene;
+							const minifigure = collada.scene;
 
-							minifig.name = 'minifig';
+							minifigure.name = 'minifigure';
 
-							// scale - minifig
+							// scale - minifigure
 
-							minifig.scale.setScalar ( editor_scale );
+							minifigure.scale.setScalar ( editor_scale );
 
-							minifig.updateMatrixWorld ( true );
+							minifigure.updateMatrixWorld ( true );
 
 							// LEGO® unit parameters
 
@@ -2775,72 +2803,72 @@
 
 							const raw_model_box = new THREE.Box3 ( ).setFromObject ( self.colladaImport );
 
-							// define raw minifig bounding box
+							// define raw minifigure bounding box
 
-							const raw_minifig_box = new THREE.Box3 ( ).setFromObject ( minifig );
+							const raw_minifigure_box = new THREE.Box3 ( ).setFromObject ( minifigure );
 
-							const raw_minifig_height = raw_minifig_box.max.y - raw_minifig_box.min.y;
+							const raw_minifigure_height = raw_minifigure_box.max.y - raw_minifigure_box.min.y;
 
-							const rounded_minifig_height = round_up_to_plate ( raw_minifig_height );
+							const rounded_minifigure_height = round_up_to_plate ( raw_minifigure_height );
 
-							const minifig_height_offset = ( rounded_minifig_height - raw_minifig_height ) / 2;
+							const minifigure_height_offset = ( rounded_minifigure_height - raw_minifigure_height ) / 2;
 
-							// define rounded minifig bounding box
+							// define rounded minifigure bounding box
 							// x / z round to stud width
 							// y rounds to plate height, centered around raw height
 
-							const minifig_box = new THREE.Box3 (
+							const minifigure_box = new THREE.Box3 (
 
 								new THREE.Vector3 (
 
-									round_boundary_min_to_stud ( raw_minifig_box.min.x ),
-									raw_minifig_box.min.y - minifig_height_offset,
-									round_boundary_min_to_stud ( raw_minifig_box.min.z )
+									round_boundary_min_to_stud ( raw_minifigure_box.min.x ),
+									raw_minifigure_box.min.y - minifigure_height_offset,
+									round_boundary_min_to_stud ( raw_minifigure_box.min.z )
 
 								),
 
 								new THREE.Vector3 (
 
-									round_boundary_max_to_stud ( raw_minifig_box.max.x ),
-									raw_minifig_box.max.y + minifig_height_offset,
-									round_boundary_max_to_stud ( raw_minifig_box.max.z )
+									round_boundary_max_to_stud ( raw_minifigure_box.max.x ),
+									raw_minifigure_box.max.y + minifigure_height_offset,
+									round_boundary_max_to_stud ( raw_minifigure_box.max.z )
 
 								)
 
 							);
 
-							const minifig_center = minifig_box.getCenter ( new THREE.Vector3 ( ) );
+							const minifigure_center = minifigure_box.getCenter ( new THREE.Vector3 ( ) );
 
-							// compute minifig position
+							// compute minifigure position
 							// x: center on rounded model grid box
-							// y: place raw minifig feet on raw model floor, then add stud height so feet clear grid overlay
-							// z: place rounded back of minifig 20 ldu in front of rounded model front
+							// y: place raw minifigure feet on raw model floor, then add stud height so feet clear grid overlay
+							// z: place rounded back of minifigure 20 ldu in front of rounded model front
 
 							const forward_offset = stud_width;
 
 							const floor_clearance = stud_height - brick_height;
 
-							const minifig_position_x = model_center.x - minifig_center.x;
+							const minifigure_position_x = model_center.x - minifigure_center.x;
 
-							const minifig_position_y = self.model_grid_box.min.y - raw_minifig_box.min.y;
+							const minifigure_position_y = self.model_grid_box.min.y - raw_minifigure_box.min.y;
 
-							const minifig_back_edge_z = raw_minifig_box.min.z;
+							const minifigure_back_edge_z = raw_minifigure_box.min.z;
 
-							const minifig_position_z = model_box.max.z + forward_offset - minifig_back_edge_z;
+							const minifigure_position_z = model_box.max.z + forward_offset - minifigure_back_edge_z;
 
-							// set minifig position
+							// set minifigure position
 
-							minifig.position.set (
+							minifigure.position.set (
 
-								minifig_position_x,
-								minifig_position_y,
-								minifig_position_z
+								minifigure_position_x,
+								minifigure_position_y,
+								minifigure_position_z
 
 							);
 
-							// edges - minifig
+							// edges - minifigure
 
-							minifig.traverse ( function ( node ) {
+							minifigure.traverse ( function ( node ) {
 
 								if ( node.isMesh ) {
 
@@ -2867,17 +2895,19 @@
 
 									edges.scale.copy ( node.scale ) ;
 
-									minifig.add ( edges ) ;
+									edges.visible = model_edges_visible ;
 
-									minifig_edges.push ( edges );
+									minifigure.add ( edges ) ;
+
+									minifigure_edges.push ( edges );
 
 								}
 
 							} ) ;
 
-							// shadows - minifig
+							// shadows - minifigure
 
-							minifig.traverse ( function ( node ) {
+							minifigure.traverse ( function ( node ) {
 
 								if ( node.isMesh ) {
 
@@ -2889,42 +2919,42 @@
 
 							} );
 
-							self.scene.add ( minifig );
+							self.scene.add ( minifigure );
 
 							const transform = self.get_transform_controls ( ) ;
 
 							self.scene.add ( transform );
 
-							transform.attach ( minifig );
+							transform.attach ( minifigure );
 
-							self.minifig = minifig;
+							self.minifigure = minifigure;
 
 
-							self.minifig_height_plates = Math.round ( rounded_minifig_height / plate_height ) ;
-							self.minifigTransform = transform;
+							self.minifigure_height_plates = Math.round ( rounded_minifigure_height / plate_height ) ;
+							self.minifigureTransform = transform;
 
 							// toggled off while loading
 
-							if ( ! self.minifig_visible ) {
+							if ( ! self.minifigure_visible ) {
 
-								self.minifig_release ( );
+								self.minifigure_release ( );
 
 								return;
 							}
 
-							console.log ( 'minifig [ status ] : load ok' );
+							console.log ( 'minifigure [ status ] : load ok' );
 
-							console.log ( 'minifig [ height / raw ] : ', raw_minifig_height );
+							console.log ( 'minifigure [ height / raw ] : ', raw_minifigure_height );
 
-							console.log ( 'minifig [ height / rounded plate ] : ', rounded_minifig_height );
+							console.log ( 'minifigure [ height / rounded plate ] : ', rounded_minifigure_height );
 
-							console.log ( 'minifig [ position / x ] : ', minifig_position_x );
+							console.log ( 'minifigure [ position / x ] : ', minifigure_position_x );
 
-							console.log ( 'minifig [ position / y ] : ', minifig_position_y );
+							console.log ( 'minifigure [ position / y ] : ', minifigure_position_y );
 
-							console.log ( 'minifig [ position / z ] : ', minifig_position_z );
+							console.log ( 'minifigure [ position / z ] : ', minifigure_position_z );
 
-							console.log ( 'scale [ minifig ] : ', minifig.scale );
+							console.log ( 'scale [ minifigure ] : ', minifigure.scale );
 
 						},
 
@@ -2932,9 +2962,9 @@
 
 						function ( error ) {
 
-							self.minifig_loading = false;
+							self.minifigure_loading = false;
 
-							console.error ( 'minifig [ status ] : load failed - /resources/minifigures/exports/minifig-white.dae', error );
+							console.error ( 'minifigure [ status ] : load failed - /resources/minifigures/exports/minifigure-yellow.dae', error );
 
 						}
 
@@ -2942,37 +2972,37 @@
 
 				};
 
-				// minifig release - detached, removed and freed - edges list emptied
+				// minifigure release - detached, removed and freed - edges list emptied
 
-				this.minifig_release = function ( ) {
+				this.minifigure_release = function ( ) {
 
-					if ( ! self.minifig ) {
+					if ( ! self.minifigure ) {
 
 						return;
 					}
 
-					if ( self.minifigTransform ) {
+					if ( self.minifigureTransform ) {
 
-						if ( self.minifigTransform.object === self.minifig ) {
+						if ( self.minifigureTransform.object === self.minifigure ) {
 
-							self.minifigTransform.detach ( );
+							self.minifigureTransform.detach ( );
 						}
 
-						self.minifigTransform.visible = false;
+						self.minifigureTransform.visible = false;
 					}
 
-					minifig_edges.length = 0;
+					minifigure_edges.length = 0;
 
-					self.release_object ( 'minifig' );
+					self.release_object ( 'minifigure' );
 
-					self.minifigTransform = null;
+					self.minifigureTransform = null;
 
-					console.log ( 'minifig [ status ] : released' );
+					console.log ( 'minifigure [ status ] : released' );
 				}
 
 				// generate globally bound entry point so helper buttons can call it safely
 
-				window.minifig_toggle_ = this.minifig_toggle_.bind ( this );
+				window.minifigure_toggle_ = this.minifigure_toggle_.bind ( this );
 
 				// baseplate helper
 
@@ -3358,12 +3388,20 @@
 
 				this.edges_toggle_ = function ( ) {
 
+					// locked while wireframe on
+
+					if ( wireframe_visible ) {
+
+						return;
+
+					}
+
 					// all edge collections
 
 					const edge_groups = [
 
 						model_edges,
-						minifig_edges,
+						minifigure_edges,
 						baseplate_edges
 
 					];
@@ -3473,15 +3511,21 @@
 
 					model_faces_visible = ! model_faces_visible;
 
+					// model and minifigure edges
+
+					var wireframe_edges = model_edges.concat ( minifigure_edges );
+
 					// entering wireframe: hide edges but preserve state
 
 					if ( wireframe_visible ) {
 
 						saved_edge_thickness_state = edge_thickness_state;
 
-						for ( var i = 0; i < model_edges.length; i++ ) {
+						model_edges_visible = false;
 
-							model_edges[i].visible = false;
+						for ( var i = 0; i < wireframe_edges.length; i++ ) {
+
+							wireframe_edges[i].visible = false;
 
 						}
 
@@ -3499,29 +3543,31 @@
 
 						}
 
+						model_edges_visible = edge_thickness_state !== 0;
+
 						// reapply edge state without toggling
 
 						if ( edge_thickness_state === 0 ) {
 
-							for ( var i = 0; i < model_edges.length; i++ ) {
+							for ( var i = 0; i < wireframe_edges.length; i++ ) {
 
-								model_edges[i].visible = false;
+								wireframe_edges[i].visible = false;
 
 							}
 
 						} else {
 
-							for ( var i = 0; i < model_edges.length; i++ ) {
+							for ( var i = 0; i < wireframe_edges.length; i++ ) {
 
-								model_edges[i].visible = true;
+								wireframe_edges[i].visible = true;
 
 								if ( edge_thickness_state === 1 ) {
 
-									model_edges[i].scale.set ( 1, 1, 1 );
+									wireframe_edges[i].scale.set ( 1, 1, 1 );
 
 								} else if ( edge_thickness_state === 2 ) {
 
-									model_edges[i].scale.set ( 1.01, 1.01, 1.01 );
+									wireframe_edges[i].scale.set ( 1.01, 1.01, 1.01 );
 
 								}
 
@@ -3550,6 +3596,16 @@
 						}
 
 					} );
+
+					// edges icon disabled state
+
+					var edges_icon = document.querySelector ( '#edges .icon' );
+
+					if ( edges_icon ) {
+
+						edges_icon.classList.toggle ( 'logo-disabled', wireframe_visible );
+
+					}
 
 					// refresh console values
 
@@ -4333,7 +4389,7 @@
 
 						case 70:
 
-							self.minifig_toggle_ ( ) ;
+							self.minifigure_toggle_ ( ) ;
 
 							break;
 
@@ -4675,7 +4731,7 @@
 
 				var model_edges = [];
 
-				var minifig_edges = [];
+				var minifigure_edges = [];
 
 				var baseplate_edges = [];
 
@@ -5012,11 +5068,11 @@
 
 				} );
 
-				// minifig toggle
+				// minifigure toggle
 
-				document.getElementById ( 'minifig' ).addEventListener ( 'click', function ( ) {
+				document.getElementById ( 'minifigure' ).addEventListener ( 'click', function ( ) {
 
-					self.minifig_toggle_ ( ) ;
+					self.minifigure_toggle_ ( ) ;
 
 				} );
 
@@ -5182,7 +5238,7 @@ ARMOR
 
 											</br>
 
-											TIP: Nothing beats the minifig scale: Toggle the minifig to get an idea of how big the model is!
+											TIP: Nothing beats the minifigure scale: Toggle the minifigure to get an idea of how big the model is!
 
 										</dd>
 
@@ -5469,9 +5525,9 @@ ARMOR
 
 					</div>
 
-					<!-- minifig -->
+					<!-- minifigure -->
 
-					<div id="minifig">
+					<div id="minifigure">
 
 					</div>
 

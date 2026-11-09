@@ -13,7 +13,7 @@ $( document ).ready ( function ( ) {
         '#wireframe-button-label',
         '#controls-button-label',
         '#plane-button-label',
-        '#minifig-button-label'
+        '#minifigure-button-label'
     ];
 
     var classes = [
@@ -25,7 +25,7 @@ $( document ).ready ( function ( ) {
 		'wireframe-label-color',
         'controls-label-color',
         'plane-label-color',
-        'minifig-label-color'
+        'minifigure-label-color'
     ];
 
     var ids = ids.join ( ', ' );

@@ -23,7 +23,21 @@
 }
 
 .drawer .notice {
-	margin-top: auto;
+
+}
+
+.drawer .disclaimer {
+
+}
+
+/* copyright anchored to drawer bottom */
+
+.drawer .copyright {
+	flex-grow: 1;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
 }
 
 .drawer a {

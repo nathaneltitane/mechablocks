@@ -85,3 +85,7 @@
 .logo-console {
 	background-image: url(/resources/logo/logo-console.svg);
 }
+
+.logo-disabled {
+	background-image: url(/resources/logo/logo-disabled.svg);
+}

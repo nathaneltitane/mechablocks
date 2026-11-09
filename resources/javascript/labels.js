@@ -11,7 +11,7 @@ $( document ).ready ( function ( ) {
         '#wireframe-button-label',
         '#controls-button-label',
         '#plane-button-label',
-        '#minifig-button-label'
+        '#minifigure-button-label'
     ];
 
     var ids = ids.join ( ', ' );

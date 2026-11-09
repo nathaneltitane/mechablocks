@@ -110,9 +110,9 @@ $( function ( ) {
 
 		} ) ;
 
-		$.get ( '/resources/modules/minifig.html', function ( data ) {
+		$.get ( '/resources/modules/minifigure.html', function ( data ) {
 
-			$( '#minifig' ).append ( data ) ;
+			$( '#minifigure' ).append ( data ) ;
 
 		} ) ;
 

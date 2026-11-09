@@ -13,7 +13,7 @@ $( document ).ready ( function ( ) {
         '#wireframe',
         '#controls',
         '#plane',
-        '#minifig'
+        '#minifigure'
     ];
 
     var ids = ids.join ( ', ' );

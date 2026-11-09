@@ -1,4 +1,4 @@
-#minifig {
+#minifigure {
 	height: 64px;
 	width: 64px;
 	position: fixed;
@@ -7,29 +7,29 @@
 	padding: 10px 10px 10px 10px;
 }
 
-#minifig-button-label {
+#minifigure-button-label {
 	padding: 0px 10px 0px 0px;
 }
 
-.minifig {
+.minifigure {
 	color: #000000ff;
 	position: fixed;
 	bottom: calc(80px + 64px + 64px + 64px + 64px + 10px + 10px + 10px + 10px + 10px);
 	right: -200px;
 	padding: 10px 5px 10px 10px;
 
-	animation-name: minifig-reveal;
+	animation-name: minifigure-reveal;
 	animation-delay: 1.5s;
 	animation-duration: 1s;
 	animation-fill-mode: forwards;
 }
 
-@keyframes minifig-reveal {
+@keyframes minifigure-reveal {
 	0% {right: -200px;}
 
 	100% {right: 0px;}
 }
 
-.minifig-label-color {
+.minifigure-label-color {
 	 color: #00000000;
 }
