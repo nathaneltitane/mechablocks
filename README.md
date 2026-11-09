@@ -18,22 +18,6 @@ This repository hosts the website dedicated to showcasing AFOL LEGO® models and
 
 ---
 
-### Repositories:
-
-[Frobulator](https://github.com/nathaneltitane/frobulator) to streamline the scripts and make redundant code a thing of the past.
-
-[L²CU](https://github.com/nathaneltitane/l2cu) to automate the exporting, rendering and information parsing of my models for the website.
-
-[LeoCAD](https://github.com/leozide/leocad) to export LDraw models into an exploitable 3D format via L²CU.
-
-[LPub3D](https://github.com/trevorsandy/lpub3d) to generate instructions out of the models submitted to L²CU.
-
-[Three.JS](https://github.com/mrdoob/three.js) to create the viewer used to render and display my models on your web browser.
-
-[GNU/Bash](https://github.com/gitGNU/gnu_bash) as the shell environment on top of which the scripts function.
-
----
-
 ### License:
 
 MechaBlocks is free software released under the GNU General Public License version 3 - see 'LICENSE.md'.
