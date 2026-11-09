@@ -34,6 +34,14 @@ This repository hosts the website dedicated to showcasing AFOL LEGO® models and
 
 ---
 
+### License:
+
+MechaBlocks is free software released under the GNU General Public License version 3 - see 'LICENSE.md'.
+
+LEGO® is a trademark of the LEGO® Group, which does not sponsor, authorize or endorse this project.
+
+---
+
 ### Reports:
 
 [Submit bug report or feature request](https://github.com/nathaneltitane/mechablocks/issues)
