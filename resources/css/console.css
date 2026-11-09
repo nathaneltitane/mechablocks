@@ -14,15 +14,57 @@
 	/* allow scroll interaction */
 	pointer-events: auto;
 
-	padding: 10px 10px 10px 10px;
+	padding: 10px 35px 10px 10px;
 	border-radius: 10px;
 
 	background: #333333cc;
-	color: #ddddddff;
 
 	font-family: system-ui, -apple-system, monospace;
 	line-height: 1;
 
 	white-space: pre;
 	display: block;
+}
+
+#console-overlay {
+	direction: rtl;
+	scrollbar-gutter: stable;
+	color: #dddddd00;
+	border-right-color: #bbbbbb00;
+	transition: color 0.5s, border-right-color 0.5s;
+}
+
+#console-overlay.console-scrolling {
+	color: #ddddddff;
+	border-right-color: #bbbbbbff;
+}
+
+#console-overlay > * {
+	direction: ltr;
+	color: #ddddddff;
+}
+
+#console-overlay::-webkit-scrollbar {
+	width: 25px;
+}
+
+#console-overlay::-webkit-scrollbar-track {
+	background: #00000000;
+	border: none;
+	border-right: 1px solid;
+	border-right-color: inherit;
+	margin-block: 10px;
+}
+
+#console-overlay::-webkit-scrollbar-thumb {
+	background-color: currentColor;
+	background-clip: padding-box;
+	border: none;
+	border-left: 10px solid #00000000;
+	border-right: 10px solid #00000000;
+	border-radius: 12.5px / 2.5px;
+}
+
+#console-overlay::-webkit-scrollbar-thumb:hover {
+	background-color: #ffffffff;
 }

@@ -597,162 +597,167 @@
 
 					device_information_divider ( ) ;
 
+					// fixed line set - missing values report n/a
+
+					var na = 'N/A' ;
+
+					function on_off ( value ) {
+
+						return value ? 'on' : 'off' ;
+
+					}
+
+					function vector_text ( vector, digits ) {
+
+						return vector ? vector.x.toFixed ( digits ) + ', ' + vector.y.toFixed ( digits ) + ', ' + vector.z.toFixed ( digits ) : na ;
+
+					}
+
+					// console - renderer
+
+					var renderer = self.renderer ;
+
+					if ( renderer && ! self.graphics_card ) {
+
+						var context = renderer.getContext ( ) ;
+						var renderer_debug = context.getExtension ( 'WEBGL_debug_renderer_info' ) ;
+						var graphics_card = context.getParameter ( renderer_debug ? renderer_debug.UNMASKED_RENDERER_WEBGL : context.RENDERER ) ;
+						var angle_match = /^ANGLE \((.*)\)/.exec ( graphics_card ) ;
+
+						// angle wraps as vendor, card, driver
+
+						if ( angle_match ) {
+
+							var angle_parts = angle_match [ 1 ].split ( ', ' ) ;
+
+							graphics_card = angle_parts [ 1 ] || angle_parts [ 0 ] ;
+
+						}
+
+						self.graphics_card = graphics_card ;
+
+					}
+
+					console_overlay_line ( 'renderer', 'graphics card', self.graphics_card || na ) ;
+					console_overlay_line ( 'renderer', 'canvas resolution', renderer ? renderer.domElement.width + ' x ' + renderer.domElement.height : na ) ;
+					console_overlay_line ( 'renderer', 'frames per second', self.frames_per_second ? self.frames_per_second.toFixed ( 1 ) : na ) ;
+					console_overlay_line ( 'renderer', 'draw calls', renderer ? renderer.info.render.calls : na ) ;
+					console_overlay_line ( 'renderer', 'triangles', renderer ? renderer.info.render.triangles : na ) ;
+
+					device_information_divider ( ) ;
+
 					// model state //
 
 					console_overlay_line ( 'model', 'identifier', '3A2ER324FQR5Y' ) ;
 					console_overlay_line ( 'model', 'pieces', '290' ) ;
-					console_overlay_line ( 'model', 'load', self.colladaImport ? 'yes' : 'no' ) ;
 
-					if ( self.model_load_time ) {
+					var model = self.colladaImport ;
+					var size = null ;
+					var center = null ;
 
-						console_overlay_line ( 'model', 'load time', self.model_load_time + ' s' ) ;
+					if ( model ) {
 
-					}
+						model.updateMatrixWorld ( true ) ;
 
-					if ( self.colladaImport ) {
+						var box = new THREE.Box3 ( ).setFromObject ( model ) ;
 
-						var scale = self.colladaImport.scale ;
-
-						console_overlay_line ( 'model', 'scale', scale.x.toFixed ( 4 ) + ', ' + scale.y.toFixed ( 4 ) + ', ' + scale.z.toFixed ( 4 ) ) ;
-
-					}
-
-					if ( self.model_dimensions ) {
-
-						console_overlay_line ( 'model', 'dimensions cm', self.model_dimensions.cm ) ;
-						console_overlay_line ( 'model', 'dimensions in', self.model_dimensions.in ) ;
-						console_overlay_line ( 'model', 'dimensions ldu', self.model_dimensions.ldu ) ;
+						size = box.getSize ( new THREE.Vector3 ( ) ) ;
+						center = box.getCenter ( new THREE.Vector3 ( ) ) ;
 
 					}
 
-					if ( self.colladaImport ) {
+					var dimensions = self.model_dimensions || { } ;
 
-						self.colladaImport.updateMatrixWorld ( true ) ;
-
-						var box = new THREE.Box3 ( ).setFromObject ( self.colladaImport ) ;
-						var size = box.getSize ( new THREE.Vector3 ( ) ) ;
-						var center = box.getCenter ( new THREE.Vector3 ( ) ) ;
-
-						console_overlay_line ( 'model', 'bounding box x', size.x.toFixed ( 4 ) ) ;
-						console_overlay_line ( 'model', 'bounding box y', size.y.toFixed ( 4 ) ) ;
-						console_overlay_line ( 'model', 'bounding box z', size.z.toFixed ( 4 ) ) ;
-
-						console_overlay_line ( 'model', 'center x', center.x.toFixed ( 4 ) ) ;
-						console_overlay_line ( 'model', 'center y', center.y.toFixed ( 4 ) ) ;
-						console_overlay_line ( 'model', 'center z', center.z.toFixed ( 4 ) ) ;
-
-					}
+					console_overlay_line ( 'model', 'load', model ? 'yes' : 'no' ) ;
+					console_overlay_line ( 'model', 'load time', self.model_load_time ? self.model_load_time + ' s' : na ) ;
+					console_overlay_line ( 'model', 'scale', vector_text ( model ? model.scale : null, 4 ) ) ;
+					console_overlay_line ( 'model', 'dimensions cm', dimensions.cm || na ) ;
+					console_overlay_line ( 'model', 'dimensions in', dimensions.in || na ) ;
+					console_overlay_line ( 'model', 'dimensions ldu', dimensions.ldu || na ) ;
+					console_overlay_line ( 'model', 'bounding box', vector_text ( size, 4 ) ) ;
+					console_overlay_line ( 'model', 'center', vector_text ( center, 4 ) ) ;
 
 					device_information_divider ( ) ;
 
-					console_overlay_line ( 'faces', 'visibility', model_faces_visible ? 'on' : 'off' ) ;
-					console_overlay_line ( 'wireframe', 'visibility', wireframe_visible ? 'on' : 'off' ) ;
-					console_overlay_line ( 'edge', 'visibility', model_edges_visible ? 'on' : 'off' ) ;
+					console_overlay_line ( 'faces', 'visibility', on_off ( model_faces_visible ) ) ;
+					console_overlay_line ( 'wireframe', 'visibility', on_off ( wireframe_visible ) ) ;
+					console_overlay_line ( 'edge', 'visibility', on_off ( model_edges_visible ) ) ;
 					console_overlay_line ( 'edge', 'thickness', edge_thickness_state ) ;
 
 					device_information_divider ( ) ;
 
 					// console - helpers
 
-					console_overlay_line ( 'helper', 'bounding box', self.bounding_box_helper_visible ? 'on' : 'off' ) ;
-					console_overlay_line ( 'helper', 'camera', self.camera_helper_visible ? 'on' : 'off' ) ;
-					console_overlay_line ( 'helper', 'dimensions', self.dimension_labels_visible ? 'on' : 'off' ) ;
-					console_overlay_line ( 'helper', 'pieces count', self.pieces_count_label_visible ? 'on' : 'off' ) ;
+					var minifig_shown = self.minifig_visible && self.minifig && self.minifig_height_plates ;
+					var baseplate_shown = self.baseplate_visible && self.baseplate_grid_box && self.baseplate_name ;
 
-					console_overlay_line ( 'light', 'hemisphere', self.hemisphere_light_helper_visible ? 'on' : 'off' ) ;
-					console_overlay_line ( 'light', 'point', self.point_light_helper_visible ? 'on' : 'off' ) ;
-					console_overlay_line ( 'light', 'spot', self.spot_light_helper_visible ? 'on' : 'off' ) ;
+					console_overlay_line ( 'helper', 'bounding box', on_off ( self.bounding_box_helper_visible ) ) ;
+					console_overlay_line ( 'helper', 'camera', on_off ( self.camera_helper_visible ) ) ;
+					console_overlay_line ( 'helper', 'dimensions', on_off ( self.dimension_labels_visible ) ) ;
+					console_overlay_line ( 'helper', 'pieces count', on_off ( self.pieces_count_label_visible ) ) ;
 
-					console_overlay_line ( 'grid', 'polar', self.polar_grid_helper_visible ? 'on' : 'off' ) ;
-					console_overlay_line ( 'grid', 'orthogonal + height', self.orthogonal_grid_helper_visible ? 'on' : 'off' ) ;
+					console_overlay_line ( 'light', 'hemisphere', on_off ( self.hemisphere_light_helper_visible ) ) ;
+					console_overlay_line ( 'light', 'point', on_off ( self.point_light_helper_visible ) ) ;
+					console_overlay_line ( 'light', 'spot', on_off ( self.spot_light_helper_visible ) ) ;
 
-					console_overlay_line ( 'minifig', 'visibility', self.minifig_visible ? 'on' : 'off' ) ;
+					console_overlay_line ( 'grid', 'polar', on_off ( self.polar_grid_helper_visible ) ) ;
+					console_overlay_line ( 'grid', 'orthogonal + height', on_off ( self.orthogonal_grid_helper_visible ) ) ;
 
-					if ( self.minifig_visible && self.minifig && self.minifig_height_plates ) {
+					console_overlay_line ( 'minifig', 'visibility', on_off ( self.minifig_visible ) ) ;
+					console_overlay_line ( 'minifig', 'height', minifig_shown ? self.minifig_height_plates + ' plates' : na ) ;
 
-						console_overlay_line ( 'minifig', 'height', self.minifig_height_plates + ' plates' ) ;
-
-					}
-
-					console_overlay_line ( 'baseplate', 'visibility', self.baseplate_visible ? 'on' : 'off' ) ;
-
-					if ( self.baseplate_visible && self.baseplate_grid_box && self.baseplate_name ) {
-
-						console_overlay_line ( 'baseplate', 'name', self.baseplate_name ) ;
-						console_overlay_line ( 'baseplate', 'footprint', self.baseplate_footprint ) ;
-
-					}
+					console_overlay_line ( 'baseplate', 'visibility', on_off ( self.baseplate_visible ) ) ;
+					console_overlay_line ( 'baseplate', 'name', baseplate_shown ? self.baseplate_name : na ) ;
+					console_overlay_line ( 'baseplate', 'footprint', baseplate_shown ? self.baseplate_footprint : na ) ;
 
 					device_information_divider ( ) ;
 
 					// console - camera
 
-					if ( self.camera ) {
+					var camera = self.camera ;
+					var camera_presets = [ 'reset', 'front', 'right', 'back', 'left', 'top', 'bottom' ] ;
+					var camera_type = na ;
 
-						console_overlay_line (
-							'camera', 'type',
-							self.camera.isPerspectiveCamera ? 'perspective' : ( self.camera.isOrthographicCamera ? 'orthographic' : 'other' )
-						) ;
+					if ( camera ) {
 
-						if ( self.camera.fov !== undefined ) {
-
-							console_overlay_line ( 'camera', 'field of view', self.camera.fov ) ;
-
-						}
-
-						console_overlay_line ( 'camera', 'zoom', self.camera.zoom.toFixed ( 4 ) ) ;
-						console_overlay_line ( 'camera', 'near', self.camera.near.toFixed ( 6 ) ) ;
-						console_overlay_line ( 'camera', 'far', self.camera.far.toFixed ( 6 ) ) ;
-
-						console_overlay_line (
-							'camera', 'position',
-							self.camera.position.x.toFixed ( 4 ) + ', ' +
-							self.camera.position.y.toFixed ( 4 ) + ', ' +
-							self.camera.position.z.toFixed ( 4 )
-						) ;
-
-						var camera_presets = [ 'reset', 'front', 'right', 'back', 'left', 'top', 'bottom' ] ;
-
-						console_overlay_line ( 'camera', 'preset', camera_presets [ self.camera_position_cycle_index ] || 'reset' ) ;
+						camera_type = camera.isPerspectiveCamera ? 'perspective' : ( camera.isOrthographicCamera ? 'orthographic' : 'other' ) ;
 
 					}
+
+					console_overlay_line ( 'camera', 'type', camera_type ) ;
+					console_overlay_line ( 'camera', 'field of view', camera && camera.fov !== undefined ? camera.fov : na ) ;
+					console_overlay_line ( 'camera', 'zoom', camera ? camera.zoom.toFixed ( 4 ) : na ) ;
+					console_overlay_line ( 'camera', 'near', camera ? camera.near.toFixed ( 6 ) : na ) ;
+					console_overlay_line ( 'camera', 'far', camera ? camera.far.toFixed ( 6 ) : na ) ;
+					console_overlay_line ( 'camera', 'position', vector_text ( camera ? camera.position : null, 4 ) ) ;
+					console_overlay_line ( 'camera', 'preset', camera_presets [ self.camera_position_cycle_index ] || na ) ;
 
 					device_information_divider ( ) ;
 
-					// console - orbit controls
+					// console - orbit and transform controls
 
-					if ( self.orbitControls ) {
+					var orbit = self.orbitControls ;
+					var transform = self.transform_controls ;
+					var snap = null ;
 
-						console_overlay_line ( 'orbit', 'enabled', self.orbitControls.enabled ? 'yes' : 'no' ) ;
+					if ( transform ) {
 
-						if ( self.orbitControls.target ) {
-
-							console_overlay_line (
-								'orbit', 'target',
-								self.orbitControls.target.x.toFixed ( 4 ) + ', ' +
-								self.orbitControls.target.y.toFixed ( 4 ) + ', ' +
-								self.orbitControls.target.z.toFixed ( 4 )
-							) ;
-
-						}
+						snap = { translate : transform.translationSnap, rotate : transform.rotationSnap, scale : transform.scaleSnap } [ transform.getMode ( ) ] ;
 
 					}
 
-					// console - transform controls
+					console_overlay_line ( 'orbit', 'enabled', orbit ? ( orbit.enabled ? 'yes' : 'no' ) : na ) ;
+					console_overlay_line ( 'orbit', 'target', vector_text ( orbit ? orbit.target : null, 4 ) ) ;
 
-					if ( self.transform_controls ) {
+					console_overlay_line ( 'transform', 'enabled', transform ? ( transform.enabled ? 'yes' : 'no' ) : na ) ;
+					console_overlay_line ( 'transform', 'mode', transform ? transform.getMode ( ) : na ) ;
+					console_overlay_line ( 'transform', 'space', transform ? transform.space : na ) ;
+					console_overlay_line ( 'transform', 'snap', transform ? ( snap ? Number ( snap ).toFixed ( 4 ) : 'off' ) : na ) ;
+					console_overlay_line ( 'transform', 'size', transform ? transform.size.toFixed ( 2 ) : na ) ;
 
-						var transform = self.transform_controls ;
+					// scrollbar fades in when lines overflow
 
-						var snap = { translate : transform.translationSnap, rotate : transform.rotationSnap, scale : transform.scaleSnap } [ transform.getMode ( ) ] ;
-
-						console_overlay_line ( 'transform', 'enabled', transform.enabled ? 'yes' : 'no' ) ;
-						console_overlay_line ( 'transform', 'mode', transform.getMode ( ) ) ;
-						console_overlay_line ( 'transform', 'space', transform.space ) ;
-						console_overlay_line ( 'transform', 'snap', snap ? Number ( snap ).toFixed ( 4 ) : 'off' ) ;
-						console_overlay_line ( 'transform', 'size', transform.size.toFixed ( 2 ) ) ;
-
-					}
+					console_overlay.classList.toggle ( 'console-scrolling', console_overlay.scrollHeight > console_overlay.clientHeight ) ;
 
 				}
 
@@ -4161,13 +4166,27 @@
 
 				this.console_refresh_time = 0;
 
+				this.console_frame_count = 0;
+
+				this.frames_per_second = null;
+
 				this.render = function ( now ) {
 
 					self.render_frame ( );
 
+					self.console_frame_count ++ ;
+
 					// console follows orbit, keys and toggles
 
 					if ( console_overlay_enabled && now - self.console_refresh_time > 250 ) {
+
+						if ( self.console_refresh_time ) {
+
+							self.frames_per_second = self.console_frame_count * 1000 / ( now - self.console_refresh_time );
+
+						}
+
+						self.console_frame_count = 0;
 
 						self.console_refresh_time = now;
 
