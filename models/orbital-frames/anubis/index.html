@@ -603,6 +603,28 @@
 					console_overlay_line ( 'model', 'pieces', '1347' ) ;
 					console_overlay_line ( 'model', 'load', self.colladaImport ? 'yes' : 'no' ) ;
 
+					if ( self.model_load_time ) {
+
+						console_overlay_line ( 'model', 'load time', self.model_load_time + ' s' ) ;
+
+					}
+
+					if ( self.colladaImport ) {
+
+						var scale = self.colladaImport.scale ;
+
+						console_overlay_line ( 'model', 'scale', scale.x.toFixed ( 4 ) + ', ' + scale.y.toFixed ( 4 ) + ', ' + scale.z.toFixed ( 4 ) ) ;
+
+					}
+
+					if ( self.model_dimensions ) {
+
+						console_overlay_line ( 'model', 'dimensions cm', self.model_dimensions.cm ) ;
+						console_overlay_line ( 'model', 'dimensions in', self.model_dimensions.in ) ;
+						console_overlay_line ( 'model', 'dimensions ldu', self.model_dimensions.ldu ) ;
+
+					}
+
 					if ( self.colladaImport ) {
 
 						self.colladaImport.updateMatrixWorld ( true ) ;
@@ -618,19 +640,48 @@
 						console_overlay_line ( 'model', 'center x', center.x.toFixed ( 4 ) ) ;
 						console_overlay_line ( 'model', 'center y', center.y.toFixed ( 4 ) ) ;
 						console_overlay_line ( 'model', 'center z', center.z.toFixed ( 4 ) ) ;
+
 					}
 
 					device_information_divider ( ) ;
 
 					console_overlay_line ( 'faces', 'visibility', model_faces_visible ? 'on' : 'off' ) ;
 					console_overlay_line ( 'wireframe', 'visibility', wireframe_visible ? 'on' : 'off' ) ;
-
-					device_information_divider ( ) ;
-
-
 					console_overlay_line ( 'edge', 'visibility', model_edges_visible ? 'on' : 'off' ) ;
 					console_overlay_line ( 'edge', 'thickness', edge_thickness_state ) ;
 
+					device_information_divider ( ) ;
+
+					// console - helpers
+
+					console_overlay_line ( 'helper', 'bounding box', self.bounding_box_helper_visible ? 'on' : 'off' ) ;
+					console_overlay_line ( 'helper', 'camera', self.camera_helper_visible ? 'on' : 'off' ) ;
+					console_overlay_line ( 'helper', 'dimensions', self.dimension_labels_visible ? 'on' : 'off' ) ;
+					console_overlay_line ( 'helper', 'pieces count', self.pieces_count_label_visible ? 'on' : 'off' ) ;
+
+					console_overlay_line ( 'light', 'hemisphere', self.hemisphere_light_helper_visible ? 'on' : 'off' ) ;
+					console_overlay_line ( 'light', 'point', self.point_light_helper_visible ? 'on' : 'off' ) ;
+					console_overlay_line ( 'light', 'spot', self.spot_light_helper_visible ? 'on' : 'off' ) ;
+
+					console_overlay_line ( 'grid', 'polar', self.polar_grid_helper_visible ? 'on' : 'off' ) ;
+					console_overlay_line ( 'grid', 'orthogonal + height', self.orthogonal_grid_helper_visible ? 'on' : 'off' ) ;
+
+					console_overlay_line ( 'minifig', 'visibility', self.minifig_visible ? 'on' : 'off' ) ;
+
+					if ( self.minifig_visible && self.minifig && self.minifig_height_plates ) {
+
+						console_overlay_line ( 'minifig', 'height', self.minifig_height_plates + ' plates' ) ;
+
+					}
+
+					console_overlay_line ( 'baseplate', 'visibility', self.baseplate_visible ? 'on' : 'off' ) ;
+
+					if ( self.baseplate_visible && self.baseplate_grid_box && self.baseplate_name ) {
+
+						console_overlay_line ( 'baseplate', 'name', self.baseplate_name ) ;
+						console_overlay_line ( 'baseplate', 'footprint', self.baseplate_footprint ) ;
+
+					}
 
 					device_information_divider ( ) ;
 
@@ -649,8 +700,9 @@
 
 						}
 
+						console_overlay_line ( 'camera', 'zoom', self.camera.zoom.toFixed ( 4 ) ) ;
 						console_overlay_line ( 'camera', 'near', self.camera.near.toFixed ( 6 ) ) ;
-						console_overlay_line ( 'camera',  'far', self.camera.far.toFixed ( 6 ) ) ;
+						console_overlay_line ( 'camera', 'far', self.camera.far.toFixed ( 6 ) ) ;
 
 						console_overlay_line (
 							'camera', 'position',
@@ -658,6 +710,10 @@
 							self.camera.position.y.toFixed ( 4 ) + ', ' +
 							self.camera.position.z.toFixed ( 4 )
 						) ;
+
+						var camera_presets = [ 'reset', 'front', 'right', 'back', 'left', 'top', 'bottom' ] ;
+
+						console_overlay_line ( 'camera', 'preset', camera_presets [ self.camera_position_cycle_index ] || 'reset' ) ;
 
 					}
 
@@ -679,6 +735,22 @@
 							) ;
 
 						}
+
+					}
+
+					// console - transform controls
+
+					if ( self.transform_controls ) {
+
+						var transform = self.transform_controls ;
+
+						var snap = { translate : transform.translationSnap, rotate : transform.rotationSnap, scale : transform.scaleSnap } [ transform.getMode ( ) ] ;
+
+						console_overlay_line ( 'transform', 'enabled', transform.enabled ? 'yes' : 'no' ) ;
+						console_overlay_line ( 'transform', 'mode', transform.getMode ( ) ) ;
+						console_overlay_line ( 'transform', 'space', transform.space ) ;
+						console_overlay_line ( 'transform', 'snap', snap ? Number ( snap ).toFixed ( 4 ) : 'off' ) ;
+						console_overlay_line ( 'transform', 'size', transform.size.toFixed ( 2 ) ) ;
 
 					}
 
@@ -1190,8 +1262,6 @@
 
 				// bounding box helper
 
-				var bounding_box_helper_visible = false;
-
 				this.bounding_box_helper = null;
 
 				this.bounding_box_helper_visible = false;
@@ -1324,8 +1394,6 @@
 
 						self.release_object ( 'bounding_box_helper' );
 
-						bounding_box_helper_visible = false;
-
 					}
 
 					else {
@@ -1334,7 +1402,6 @@
 
 						self.scene.add ( self.get_bounding_box_helper ( ) );
 
-						bounding_box_helper_visible = true;
 					}
 				}
 
@@ -1524,8 +1591,6 @@
 
 							self.dimension_labels = null;
 
-							dimension_labels_visible = false;
-
 						}
 					}
 
@@ -1534,8 +1599,6 @@
 						this.dimension_labels_visible = true;
 
 						self.get_dimension_labels ( ).forEach(label => self.scene.add ( label ) );
-
-						dimension_labels_visible = true;
 
 						console.log ( "helper [ dimensions ]" );
 					}
@@ -1666,8 +1729,6 @@
 
 							self.pieces_count_label = null;
 
-							pieces_count_label_visible = false;
-
 						}
 					}
 
@@ -1676,8 +1737,6 @@
 						this.pieces_count_label_visible = true;
 
 						self.get_pieces_count_label ( ).forEach ( label => self.scene.add ( label ) );
-
-						pieces_count_label_visible = true;
 
 						console.log ( "helper [ pieces count ]" );
 					}
@@ -2649,7 +2708,7 @@
 
 					loader.load (
 
-						'/resources/minifigures/exports/minifig-orange.dae',
+						'/resources/minifigures/exports/minifig-yellow.dae',
 
 						function ( collada ) {
 
@@ -2835,6 +2894,8 @@
 
 							self.minifig = minifig;
 
+
+							self.minifig_height_plates = Math.round ( rounded_minifig_height / plate_height ) ;
 							self.minifigTransform = transform;
 
 							// toggled off while loading
@@ -2868,7 +2929,7 @@
 
 							self.minifig_loading = false;
 
-							console.error ( 'minifig [ status ] : load failed - /resources/minifigures/exports/minifig-orange.dae', error );
+							console.error ( 'minifig [ status ] : load failed - /resources/minifigures/exports/minifig-yellow.dae', error );
 
 						}
 
@@ -3207,6 +3268,10 @@
 
 								self.baseplate_grid_box = new THREE.Box3 ( ).setFromObject ( baseplate );
 
+
+								self.baseplate_name = baseplate_candidate.name ;
+
+								self.baseplate_footprint = ( baseplate_footprint_x * 100 ).toFixed ( 2 ) + ' x ' + ( baseplate_footprint_z * 100 ).toFixed ( 2 ) + ' cm' ;
 								// rebuild visible grids
 
 								self.refresh_grid_helpers ( );
@@ -3489,51 +3554,27 @@
 
 				// dimensions toggle
 
-				var bounding_box_helper_visible = false;
-
-				var dimension_labels_visible = false;
-
 				this.dimensions_toggle_ = function ( ) {
 
-					if ( bounding_box_helper_visible && dimension_labels_visible ) {
+					if ( self.bounding_box_helper_visible === self.dimension_labels_visible ) {
 
-						// both on >>> turn both off
+						// both on or off >>> flip both
 
 						self.bounding_box_helper_ ( ) ;
 
 						self.dimension_labels_ ( ) ;
 
-						bounding_box_helper_visible = false;
-
-						dimension_labels_visible = false;
-
-					} else if ( bounding_box_helper_visible && ! dimension_labels_visible ) {
+					} else if ( self.bounding_box_helper_visible ) {
 
 						// bounding box on >>> add dimensions
 
 						self.dimension_labels_ ( ) ;
 
-						dimension_labels_visible = true;
-
-					} else if ( ! bounding_box_helper_visible && dimension_labels_visible ) {
+					} else {
 
 						// dimensions on >>> add bounding box
 
 						self.bounding_box_helper_ ( ) ;
-
-						bounding_box_helper_visible = true;
-
-					} else {
-
-						// both off >>> turn both on
-
-						self.bounding_box_helper_ ( ) ;
-
-						self.dimension_labels_ ( ) ;
-
-						bounding_box_helper_visible = true;
-
-						dimension_labels_visible = true;
 
 					}
 
@@ -3544,8 +3585,6 @@
 				};
 
 				// parts count toggle
-
-				var pieces_count_label_visible = false;
 
 				this.pieces_count_toggle_ = function ( ) {
 
@@ -3782,7 +3821,7 @@
 
 					else {
 
-						var transformStatus = "inctive";
+						var transformStatus = "inactive";
 
 					 }
 
@@ -4022,10 +4061,6 @@
 
 					return self.orbitControls;
 
-					// refresh console values
-
-					console_overlay_refresh ( ) ;
-
 				}
 
 				// transform controls
@@ -4124,9 +4159,21 @@
 
 				// render loop started once
 
-				this.render = function ( ) {
+				this.console_refresh_time = 0;
+
+				this.render = function ( now ) {
 
 					self.render_frame ( );
+
+					// console follows orbit, keys and toggles
+
+					if ( console_overlay_enabled && now - self.console_refresh_time > 250 ) {
+
+						self.console_refresh_time = now;
+
+						console_overlay_refresh ( ) ;
+
+					}
 
 					requestAnimationFrame ( self.render );
 				}
@@ -4836,6 +4883,14 @@
 						const y_in_raw = ( raw_size.y * 39.3701 );
 						const z_in_raw = ( raw_size.z * 39.3701 );
 
+
+						// store for console
+
+						self.model_dimensions = {
+							cm : x_cm.toFixed ( 2 ) + ' x ' + y_cm.toFixed ( 2 ) + ' x ' + z_cm.toFixed ( 2 ),
+							in : x_in.toFixed ( 2 ) + ' x ' + y_in.toFixed ( 2 ) + ' x ' + z_in.toFixed ( 2 ),
+							ldu : x_ldu.toFixed ( 0 ) + ' x ' + y_ldu.toFixed ( 0 ) + ' x ' + z_ldu.toFixed ( 0 )
+						} ;
 						// leocad axis		three.js 	type
 
 						// width 	(x)		z			swapped
@@ -4878,6 +4933,12 @@
 
 						fit_camera_to_box ( self.camera, self.orbitControls, scene_box, 2.50 ) ;
 
+
+						// load time
+
+						self.model_load_time = ( ( performance.now ( ) - start_time ) / 1000 ).toFixed ( 2 ) ;
+
+						console.log ( 'load [ time / s ] = ' + self.model_load_time ) ;
 						// refresh console after model load //
 
 						console_overlay_refresh ( ) ;
@@ -4972,12 +5033,6 @@
 					window.console_toggle_ ( ) ;
 
 				} );
-
-				const endTime = performance.now ( ) ;
-
-				const loadTime = ( ( endTime - start_time ) / 1000).toFixed ( 2 );
-
-				console.log ( 'load [ time / s ] = ' +  loadTime );
 
 			}
 

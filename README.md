@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/nathaneltitane/mechablocks/main/resources/logo/logo-mechablocks.svg" alt="mechablocks"><br><b>Custom LEGO® mecha MOCs</b><br>WHERE LEGO® MEETS OPEN SOURCE.</p>
+<p align="center"><img src="https://raw.githubusercontent.com/nathaneltitane/mechablocks/main/resources/logo/logo-mechablocks.svg" alt="MechaBlocks"><br><b>Custom LEGO® mecha models</b><br>WHERE LEGO® MEETS OPEN SOURCE.</p>
 
 ---
 
@@ -14,7 +14,7 @@ Useful? Star the repository - it helps others find it.
 
 ### Welcome to [MechaBlocks](https://mechablocks.com)
 
-This repository hosts the website dedicated to showcasing AFOL LEGO® models and their associated LDraw-based instructions.
+This repository holds the MechaBlocks website: custom LEGO® mecha models inspired by anime, science fiction and video games, each with an interactive 3D viewer and LDraw based building instructions.
 
 ---
 
