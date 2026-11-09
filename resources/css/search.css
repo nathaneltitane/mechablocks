@@ -64,6 +64,10 @@
 	color: #222222ff;
 }
 
+.search-chip-work-in-progress {
+	background: #ffd100ff;
+}
+
 .search-count {
 	margin: 10px 10px 0px 10px;
 }

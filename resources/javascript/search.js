@@ -18,9 +18,11 @@ $( document ).ready ( function ( ) {
 
 	models.each ( function ( ) {
 
-		var name = $( this ).data ( 'series' );
+		String ( $( this ).data ( 'series' ) ).split ( '|' ).forEach ( function ( name ) {
 
-		counts [ name ] = ( counts [ name ] || 0 ) + 1;
+			counts [ name ] = ( counts [ name ] || 0 ) + 1;
+
+		} );
 
 	} );
 
@@ -52,9 +54,23 @@ $( document ).ready ( function ( ) {
 
 	chip ( '', 'ALL ' + models.length );
 
-	Object.keys ( counts ).sort ( ).forEach ( function ( name ) {
+	// work in progress chip first
+
+	var pinned = String ( models.has ( '.work-in-progress' ).first ( ).data ( 'series' ) ).split ( '|' ) [ 0 ];
+
+	Object.keys ( counts ).sort ( ).sort ( function ( a, b ) {
+
+		return ( b === pinned ) - ( a === pinned );
+
+	} ).forEach ( function ( name ) {
 
 		chip ( name, name + ' ' + counts [ name ] );
+
+		if ( name === pinned ) {
+
+			chips.children ( ).last ( ).addClass ( 'search-chip-work-in-progress' );
+
+		}
 
 	} );
 
@@ -72,7 +88,7 @@ $( document ).ready ( function ( ) {
 
 			var text = String ( model.data ( 'search' ) ).toLowerCase ( );
 
-			var match = ( ! series || model.data ( 'series' ) === series ) && words.every ( function ( word ) {
+			var match = ( ! series || String ( model.data ( 'series' ) ).split ( '|' ).includes ( series ) ) && words.every ( function ( word ) {
 
 				return text.includes ( word );
 

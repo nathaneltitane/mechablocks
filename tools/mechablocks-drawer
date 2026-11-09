@@ -286,11 +286,11 @@ do
 
 	# work in progress first
 
-	list_models=( $(find "${directory_models}" -type f -iname "work-in-progress*.${extension}" ! -iname "*instructions*" | sort) )
+	list_models=( $(find "${directory_models}"/work-in-progress -type f -iname "*.${extension}" ! -iname "*instructions*" | sort) )
 
 	# then finished models
 
-	list_models+=( $(find "${directory_models}" -type f -iname "*.${extension}" ! -iname "work-in-progress*" ! -iname "*instructions*"  | sort) )
+	list_models+=( $(find "${directory_models}" -type f -iname "*.${extension}" ! -path "${directory_models}/work-in-progress/*" ! -iname "*instructions*"  | sort) )
 
 	# split on new lines
 
@@ -332,6 +332,8 @@ do
 
 		title_category=$(cat "${directory_root}/${directory_model%/*}"/title)
 
+		text_category="${title_category}"
+
 		file_drawer="${directory_root}/${directory_model}"/drawer
 
 		title_model=$(cat "${directory_root}/${directory_model}"/title)
@@ -360,7 +362,11 @@ do
 
 			class_status="work-in-progress"
 
-			title_category="WORK IN PROGRESS"
+			title_work_in_progress=$(cat "${directory_models}"/work-in-progress/title)
+
+			title_model="${title_work_in_progress} // ${title_model}"
+
+			title_category="${title_work_in_progress}|${text_category}"
 
 		elif [[ -f "${directory_root}/${directory_model}"/work-in-progress ]]
 		then
@@ -380,7 +386,7 @@ do
 
 cat << MODEL-DRAWER-CONTENT ->> "${directory_modules}"/drawer.html
 
-			<div class="flex flex-column model" data-series="${title_category}" data-search="${text_title} ${title_category} ${count_pieces} PIECES">
+			<div class="flex flex-column model" data-series="${title_category}" data-search="${text_title} ${title_category//|/ } ${count_pieces} PIECES">
 
 				<div class="container ${class_status}">
 
@@ -404,7 +410,7 @@ cat << MODEL-DRAWER-CONTENT ->> "${directory_modules}"/drawer.html
 
 						<div class="flex-cell">
 
-							<img src="/${directory_thumbnail}/thumbnail.png?version=${version_thumbnail}"/>
+							<img src="/${directory_thumbnail}/thumbnail.png?version=${version_thumbnail}" alt="${text_title} LEGO® MOC - ${text_category}"/>
 
 						</div>
 
