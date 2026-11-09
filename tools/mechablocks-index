@@ -432,6 +432,10 @@ schema_homepage_update () {
 
 	mv "${file_homepage_output}" "${file_homepage}"
 
+	# temporary files are private
+
+	chmod 644 "${file_homepage}"
+
 	rm -f "${file_schema}"
 
 	frobulator.inf "Schema updated" "[ ${file_homepage} ]"

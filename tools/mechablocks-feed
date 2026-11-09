@@ -1,0 +1,319 @@
+#!/bin/bash
+
+# dependencies ─────────────────────────────────────────────────────────────────
+
+script="$(basename -- "${BASH_SOURCE[0]}")"
+
+# script arguments for escalation
+
+self_arguments=("${@}")
+
+# load frobulator once
+
+if [ "${frobulator_loaded}" != "true" ]
+then
+	echo
+	echo "[  >  ] Checking..."
+	echo
+
+	# keep the sudo user home
+
+	if [ -n "${SUDO_USER}" ]
+	then
+		USER="${SUDO_USER}"
+		HOME="$(getent passwd "${SUDO_USER}" | cut -d ':' -f 6)"
+	fi
+
+	# local copy and download
+
+	frobulator="${HOME}/.local/bin/frobulator"
+	frobulator_download="$(mktemp)"
+
+	mkdir -p "${HOME}/.local/bin"
+
+	# fetch the latest release
+
+	curl -s -L -o "${frobulator_download}" get.frbltr.app 2> /dev/null ||
+	wget -q -O "${frobulator_download}" get.frbltr.app 2> /dev/null
+
+	# keep only a newer release
+
+	version_online="$(grep -m 1 '^update=' "${frobulator_download}")"
+	version_local="$(grep -m 1 '^update=' "${frobulator}" 2> /dev/null)"
+
+	if [[ "${version_online}" > "${version_local}" ]]
+	then
+		mv -f "${frobulator_download}" "${frobulator}"
+
+		chmod +x "${frobulator}"
+	fi
+
+	# drop the download
+
+	rm -f "${frobulator_download}"
+
+	# stop without frobulator
+
+	if [ ! -f "${frobulator}" ]
+	then
+		echo "[  !  ] Unable to fetch frobulator ── [ get.frbltr.app ]"
+		echo
+
+		exit 1
+	fi
+
+	# load the library
+
+	source "${frobulator}"
+fi
+
+# superuser ────────────────────────────────────────────────────────────────────
+
+frobulator.escalate
+
+# script ───────────────────────────────────────────────────────────────────────
+
+frobulator.script
+
+# version ──────────────────────────────────────────────────────────────────────
+
+version="2026-11-09"
+
+# usage ────────────────────────────────────────────────────────────────────────
+
+while (( $# ))
+do
+	case "${1}"
+	in
+		-h|--help)
+			echo
+			echo -e "Usage: ./${script} -h"
+			echo
+			echo -e "Options:"
+			echo
+			echo -e "-h, --help    Show [h]elp and usage information."
+			echo
+			echo -e "'${script}'   [ Version // ${version} ]"
+			echo
+
+			exit
+		;;
+
+		"")
+			# handle empty argument:
+			# use default values specified in script
+
+			:
+		;;
+
+		*)
+			echo
+			echo -e "Usage: ./${script} -h"
+			echo
+			echo -e "Unknown option: '${script} ${1}':"
+			echo -e "Type './${script} -h' for help and usage information."
+			echo
+
+			exit 1
+
+		;;
+
+		esac
+
+	shift
+
+done
+
+# variables ────────────────────────────────────────────────────────────────────
+
+# script and site folders
+
+frobulator.locate
+
+directory_root="${directory_script%/*}"
+
+directory_models="${directory_root}"/models
+
+# site identity
+
+address_site='https://mechablocks.com'
+
+name_site='MechaBlocks'
+
+description_site='Custom LEGO® Mecha MOCs, 3D Viewer & Building Instructions'
+
+# output feed
+
+file_feed="${directory_root}"/feed.xml
+
+# defaults ─────────────────────────────────────────────────────────────────────
+
+# newest entries kept
+
+count_items_maximum=30
+
+# functions ────────────────────────────────────────────────────────────────────
+
+text_escape () {
+
+	# xml safe text
+
+	local text="${1//&/&amp;}"
+
+	text="${text//</&lt;}"
+
+	text="${text//>/&gt;}"
+
+	printf '%s' "${text}"
+
+}
+
+date_format () {
+
+	# release date as rfc 822
+
+	date -u -d "${1} 12:00" '+%a, %d %b %Y %H:%M:%S +0000'
+
+}
+
+# models ───────────────────────────────────────────────────────────────────────
+
+frobulator.inf "Generating feed entries"
+
+frobulator.fwd "Writing..."
+
+# drawer models with a release, newest first
+
+list_models=()
+
+while IFS= read -r path_drawer
+do
+	directory_model="${path_drawer%/drawer}"
+
+	if [[ -f "${directory_model}"/release ]]
+	then
+		list_models+=( "$(< "${directory_model}"/release) ${directory_model}" )
+	fi
+done < <(find "${directory_models}" -type f -name drawer)
+
+mapfile -t list_models < <(printf '%s\n' "${list_models[@]}" | sort -r | head -n "${count_items_maximum}")
+
+# stop when nothing was found
+
+if [[ "${#list_models[@]}" -eq 0 || -z "${list_models[0]}" ]]
+then
+	frobulator.err "No released models found" "[ ${directory_models} ]"
+
+	exit 1
+fi
+
+# newest release dates the feed
+
+date_build="$(date_format "${list_models[0]%% *}")"
+
+# feed header ──────────────────────────────────────────────────────────────────
+
+cat << FEED-HEADER > "${file_feed}"
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+
+	<channel>
+
+		<title>${name_site}</title>
+
+		<link>${address_site}/</link>
+
+		<description>$(text_escape "${description_site}")</description>
+
+		<language>en</language>
+
+		<lastBuildDate>${date_build}</lastBuildDate>
+
+		<atom:link href="${address_site}/feed.xml" rel="self" type="application/rss+xml"/>
+
+		<image>
+
+			<url>${address_site}/resources/logo/logo-red.png</url>
+
+			<title>${name_site}</title>
+
+			<link>${address_site}/</link>
+
+		</image>
+
+FEED-HEADER
+
+# feed entries ─────────────────────────────────────────────────────────────────
+
+for entry_model in "${list_models[@]}"
+do
+	date_release="${entry_model%% *}"
+
+	directory_model="${entry_model#* }"
+
+	# path below the site root
+
+	path_model="${directory_model#"${directory_root}"/}"
+
+	# model details
+
+	title_model=$(< "${directory_model}"/title)
+
+	text_title="$(text_escape "${title_model//<\/br>/}")"
+
+	text_category="$(text_escape "$(< "${directory_model%/*}"/title)")"
+
+	count_pieces=$(< "${directory_model}"/pieces)
+
+	url_model="${address_site}/${path_model}/"
+
+	# social render as entry image
+
+	path_social="${directory_model}"/renders/social/social.png
+
+	if [[ -f "${path_social}" ]]
+	then
+		size_social="$(stat -c %s "${path_social}")"
+
+		text_enclosure="<enclosure url=\"${address_site}/${path_model}/renders/social/social.png\" type=\"image/png\" length=\"${size_social}\"/>"
+	else
+		text_enclosure=""
+	fi
+
+cat << FEED-ENTRY >> "${file_feed}"
+		<item>
+
+			<title>${text_title}</title>
+
+			<link>${url_model}</link>
+
+			<guid isPermaLink="true">${url_model}</guid>
+
+			<pubDate>$(date_format "${date_release}")</pubDate>
+
+			<category>${text_category}</category>
+
+			<description>Build the ${text_title} from the ${text_category} collection: ${count_pieces} pieces, interactive 3D viewer, dimensions, and LEGO® MOC building instructions.</description>
+
+			${text_enclosure}
+
+		</item>
+
+FEED-ENTRY
+done
+
+# feed footer ──────────────────────────────────────────────────────────────────
+
+cat << FEED-FOOTER >> "${file_feed}"
+	</channel>
+
+</rss>
+FEED-FOOTER
+
+# report ───────────────────────────────────────────────────────────────────────
+
+frobulator.inf "Feed written" "[ ${file_feed#"${directory_root}"/} ]"
+
+frobulator.inf "Entry count" "[ ${#list_models[@]} ]"
+
+frobulator.cpt "Complete" "[ Feed ]"

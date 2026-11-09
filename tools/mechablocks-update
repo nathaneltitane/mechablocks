@@ -131,6 +131,10 @@ do
 			option="index"
 		;;
 
+		-f|--feed)
+			option="feed"
+		;;
+
 		-b|--bricklink)
 			option="bricklink"
 		;;
@@ -164,6 +168,8 @@ do
 			echo -e "-v, --viewer          Update models [v]iewer content."
 			echo
 			echo -e "-x, --index           Update website inde[x]ing sitemap."
+			echo
+			echo -e "-f, --feed            Update model releases [f]eed."
 			echo
 			echo -e "-b, --bricklink       Update [b]ricklink store splash page."
 			echo
@@ -295,6 +301,7 @@ then
 #		mechablocks-menu
 		mechablocks-viewer
 		mechablocks-index
+		mechablocks-feed
 		mechablocks-bricklink
 	)
 fi
@@ -361,6 +368,13 @@ if [[ "${option}" = "index" ]]
 then
 	list+=(
 		mechablocks-index
+	)
+fi
+
+if [[ "${option}" = "feed" ]]
+then
+	list+=(
+		mechablocks-feed
 	)
 fi
 
