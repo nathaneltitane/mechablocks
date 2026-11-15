@@ -21,7 +21,7 @@
 #background {
 	opacity: 0.12;
 
-	animation-name: background-reveal;
+	animation-name: reveal-background;
 	animation-duration: 2s;
 	animation-timing-function: ease;
 }
@@ -34,11 +34,11 @@
 
 /* render shows in full before the edge reveal */
 
-#background.hover-background {
+#background.hover {
 	opacity: 1;
 }
 
-@keyframes background-reveal {
+@keyframes reveal-background {
 
 	0% {
 		opacity: 0;

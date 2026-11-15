@@ -18,13 +18,13 @@
 	right: -200px;
 	padding: 10px 5px 10px 10px;
 
-	animation-name: color-reveal;
+	animation-name: reveal-color;
 	animation-delay: 1.5s;
 	animation-duration: 1s;
 	animation-fill-mode: forwards;
 }
 
-@keyframes color-reveal {
+@keyframes reveal-color {
 	0% {right: -200px;}
 
 	100% {right: 0px;}

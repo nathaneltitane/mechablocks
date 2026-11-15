@@ -36,11 +36,11 @@ $( document ).ready ( function ( ) {
 
 		$( ids ).addClass ( classes );
 
-        colors.removeClass ( 'colors-hide' );
+        colors.removeClass ( 'hide' );
 
         setTimeout ( function ( ) {
 
-            colors.addClass ( 'colors-show' );
+            colors.addClass ( 'show' );
 
         }, 250 );
 
@@ -48,9 +48,9 @@ $( document ).ready ( function ( ) {
 
 	function hide ( ) {
 
-        colors.removeClass ( 'colors-show' );
+        colors.removeClass ( 'show' );
 
-        colors.addClass ( 'colors-hide' );
+        colors.addClass ( 'hide' );
 
         setTimeout ( function ( ) {
 
@@ -62,7 +62,7 @@ $( document ).ready ( function ( ) {
 
     function toggle ( ) {
 
-        if ( colors.hasClass ( 'colors-show' ) ) {
+        if ( colors.hasClass ( 'show' ) ) {
 
             hide ( );
 
@@ -83,7 +83,7 @@ $( document ).ready ( function ( ) {
 
 	$( '#colors' ).click ( function ( event ) {
 
-		if ( colors.hasClass ( 'colors-show' ) ) {
+		if ( colors.hasClass ( 'show' ) ) {
 
 			hide ( );
 

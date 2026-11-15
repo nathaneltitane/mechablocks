@@ -34,11 +34,11 @@ $( document ).ready ( function ( ) {
 
     function show () {
 
-        samples.removeClass ( 'samples-hide' );
+        samples.removeClass ( 'hide' );
 
         setTimeout ( function ( ) {
 
-            samples.addClass ( 'samples-show' );
+            samples.addClass ( 'show' );
 
         }, 250 );
 
@@ -46,9 +46,9 @@ $( document ).ready ( function ( ) {
 
     function hide ( ) {
 
-        samples.removeClass ( 'samples-show' );
+        samples.removeClass ( 'show' );
 
-        samples.addClass ( 'samples-hide' );
+        samples.addClass ( 'hide' );
 
         setTimeout ( function ( ) {
 
@@ -60,7 +60,7 @@ $( document ).ready ( function ( ) {
 
     function toggle ( ) {
 
-        if ( samples.hasClass ( 'samples-show' ) ) {
+        if ( samples.hasClass ( 'show' ) ) {
 
             hide ( );
 
@@ -87,7 +87,7 @@ $( document ).ready ( function ( ) {
 
     $( '#canvas' ).click ( function ( event ) {
 
-        if ( samples.hasClass ( 'samples-show' ) ) {
+        if ( samples.hasClass ( 'show' ) ) {
 
             hide ( );
 

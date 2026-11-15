@@ -28,11 +28,11 @@ $( document ).ready ( function ( ) {
 
 	function chip ( name, label ) {
 
-		var button = $( '<button class="search-chip" type="button"></button>' ).text ( label );
+		var button = $( '<button class="chip" type="button"></button>' ).text ( label );
 
 		if ( name === series ) {
 
-			button.addClass ( 'search-chip-active' );
+			button.addClass ( 'active' );
 
 		}
 
@@ -40,9 +40,9 @@ $( document ).ready ( function ( ) {
 
 			series = name;
 
-			chips.children ( ).removeClass ( 'search-chip-active' );
+			chips.children ( ).removeClass ( 'active' );
 
-			button.addClass ( 'search-chip-active' );
+			button.addClass ( 'active' );
 
 			filter ( );
 
@@ -68,7 +68,7 @@ $( document ).ready ( function ( ) {
 
 		if ( name === pinned ) {
 
-			chips.children ( ).last ( ).addClass ( 'search-chip-work-in-progress' );
+			chips.children ( ).last ( ).addClass ( 'progress' );
 
 		}
 
@@ -94,7 +94,7 @@ $( document ).ready ( function ( ) {
 
 			} );
 
-			model.toggleClass ( 'search-hidden', ! match );
+			model.toggleClass ( 'hide', ! match );
 
 			if ( match ) {
 

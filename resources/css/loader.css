@@ -3,13 +3,13 @@
 
 	opacity: 0;
 
-	animation-name: loader-reveal;
+	animation-name: reveal-loader;
 	animation-delay: 0.5s;
 	animation-duration: 1s;
 	animation-fill-mode: forwards;
 }
 
-@keyframes loader-reveal {
+@keyframes reveal-loader {
 	0% {opacity: 0;}
 
 	100% {opacity: 1;}

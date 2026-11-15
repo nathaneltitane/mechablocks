@@ -23,31 +23,35 @@
 	overflow-y: scroll;
 }
 
-@keyframes helper-reveal {
+@keyframes reveal-helper {
 	0% {height: 0vh;}
 
 	100% {height: calc( 100vh + 20px );}
 }
 
-.helper-show {
+.helper.show {
 	height: 100vh;
 
-	animation: helper-reveal 1s;
+	animation: reveal-helper 1s;
 	animation-delay: 0s;
 	animation-duration: 0.5s;
 	animation-fill-mode: forwards;
 }
 
-@keyframes helper-conceal {
+@keyframes conceal-helper {
 	0% {height: 100vh;}
 
 	100% {height: 0vh;}
 }
 
-.helper-hide {
+/* stay drawn while sliding away */
+
+.helper.hide {
+	display: block;
+
 	height: 0vh;
 
-	animation: helper-conceal 1s;
+	animation: conceal-helper 1s;
 	animation-delay: 0s;
 	animation-duration: 0.5s;
 	animation-fill-mode: forwards;

@@ -153,3 +153,6 @@
 	flex-shrink: 2;
 }
 
+.drawer > .flex-column {
+	min-height: 100%;
+}

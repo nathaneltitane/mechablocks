@@ -27,27 +27,27 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 	function selections_hide ( ) {
 
-		selections_parent.classList.remove ( 'selections-show' ) ;
-		selections.classList.remove ( 'selections-show' ) ;
+		selections_parent.classList.remove ( 'show' ) ;
+		selections.classList.remove ( 'show' ) ;
 
-		selections_parent.classList.remove ( 'selections-tab-show' ) ;
-		selections.classList.remove ( 'selections-tab-show' ) ;
+		selections_parent.classList.remove ( 'peek' ) ;
+		selections.classList.remove ( 'peek' ) ;
 
-		selections_parent.classList.add ( 'selections-hide' ) ;
-		selections.classList.add ( 'selections-hide' ) ;
+		selections_parent.classList.add ( 'hide' ) ;
+		selections.classList.add ( 'hide' ) ;
 
 	}
 
 	function selections_show ( ) {
 
-		selections_parent.classList.remove ( 'selections-hide' ) ;
-		selections.classList.remove ( 'selections-hide' ) ;
+		selections_parent.classList.remove ( 'hide' ) ;
+		selections.classList.remove ( 'hide' ) ;
 
-		selections_parent.classList.remove ( 'selections-tab-show' ) ;
-		selections.classList.remove ( 'selections-tab-show' ) ;
+		selections_parent.classList.remove ( 'peek' ) ;
+		selections.classList.remove ( 'peek' ) ;
 
-		selections_parent.classList.add ( 'selections-show' ) ;
-		selections.classList.add ( 'selections-show' ) ;
+		selections_parent.classList.add ( 'show' ) ;
+		selections.classList.add ( 'show' ) ;
 
 	}
 
@@ -55,16 +55,16 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 		// purge conflicting states
 
-		selections_parent.classList.remove ( 'selections-show' ) ;
-		selections.classList.remove ( 'selections-show' ) ;
+		selections_parent.classList.remove ( 'show' ) ;
+		selections.classList.remove ( 'show' ) ;
 
-		selections_parent.classList.remove ( 'selections-tab-show' ) ;
-		selections.classList.remove ( 'selections-tab-show' ) ;
+		selections_parent.classList.remove ( 'peek' ) ;
+		selections.classList.remove ( 'peek' ) ;
 
 		// hide tab
 
-		selections_parent.classList.add ( 'selections-tab-hide' ) ;
-		selections.classList.add ( 'selections-tab-hide' ) ;
+		selections_parent.classList.add ( 'peek' ) ;
+		selections.classList.add ( 'peek' ) ;
 
 	}
 
@@ -74,19 +74,19 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 			// purge conflicting states
 
-			selections_parent.classList.remove ( 'selections-show' ) ;
-			selections.classList.remove ( 'selections-show' ) ;
+			selections_parent.classList.remove ( 'show' ) ;
+			selections.classList.remove ( 'show' ) ;
 
-			selections_parent.classList.remove ( 'selections-hide' ) ;
-			selections.classList.remove ( 'selections-hide' ) ;
+			selections_parent.classList.remove ( 'hide' ) ;
+			selections.classList.remove ( 'hide' ) ;
 
-			selections_parent.classList.remove ( 'selections-tab-hide' ) ;
-			selections.classList.remove ( 'selections-tab-hide' ) ;
+			selections_parent.classList.remove ( 'peek' ) ;
+			selections.classList.remove ( 'peek' ) ;
 
 			// show tab
 
-			selections_parent.classList.add ( 'selections-tab-show' ) ;
-			selections.classList.add ( 'selections-tab-show' ) ;
+			selections_parent.classList.add ( 'peek' ) ;
+			selections.classList.add ( 'peek' ) ;
 
 		}, 250 ) ;
 
@@ -110,21 +110,21 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 	function open ( ) {
 
-		return selections_parent.classList.contains ( 'selections-show' ) ;
+		return selections_parent.classList.contains ( 'show' ) ;
 
 	}
 
 	function selections_scroll ( ) {
 
-		var arrow_left	= document.querySelector ( '#selections-start .selections-start' ) ;
-		var arrow_right	= document.querySelector ( '#selections-end .selections-end' ) ;
+		var arrow_left	= document.querySelector ( '#selections-start .arrow' ) ;
+		var arrow_right	= document.querySelector ( '#selections-end .arrow' ) ;
 
 		// do not show arrows if load incomplete
 
 		if ( selections.clientWidth <= 0 ) {
 
-			if ( arrow_left ) arrow_left.classList.remove ( 'selections-right' ) ;
-			if ( arrow_right ) arrow_right.classList.remove ( 'selections-left' ) ;
+			if ( arrow_left ) arrow_left.classList.remove ( 'show' ) ;
+			if ( arrow_right ) arrow_right.classList.remove ( 'show' ) ;
 
 			return ;
 
@@ -136,8 +136,8 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 		if ( ! can_scroll ) {
 
-			if ( arrow_left ) arrow_left.classList.remove ( 'selections-right' ) ;
-			if ( arrow_right ) arrow_right.classList.remove ( 'selections-left' ) ;
+			if ( arrow_left ) arrow_left.classList.remove ( 'show' ) ;
+			if ( arrow_right ) arrow_right.classList.remove ( 'show' ) ;
 
 			return ;
 
@@ -149,8 +149,8 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 		if ( selections.scrollLeft <= 0 ) {
 
-			if ( arrow_left ) arrow_left.classList.add ( 'selections-right' ) ;
-			if ( arrow_right ) arrow_right.classList.remove ( 'selections-left' ) ;
+			if ( arrow_left ) arrow_left.classList.add ( 'show' ) ;
+			if ( arrow_right ) arrow_right.classList.remove ( 'show' ) ;
 
 			return ;
 
@@ -158,15 +158,15 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 		// middle
 
-		// if ( arrow_left ) arrow_left.classList.add ( 'selections-right' ) ;
-		// if ( arrow_right ) arrow_right.classList.add ( 'selections-left' ) ;
+		// if ( arrow_left ) arrow_left.classList.add ( 'show' ) ;
+		// if ( arrow_right ) arrow_right.classList.add ( 'show' ) ;
 
 		// end
 
 		if ( selections.scrollLeft >= scroll_maximum - 1 ) {
 
-			if ( arrow_left ) arrow_left.classList.remove ( 'selections-right' ) ;
-			if ( arrow_right ) arrow_right.classList.add ( 'selections-left' ) ;
+			if ( arrow_left ) arrow_left.classList.remove ( 'show' ) ;
+			if ( arrow_right ) arrow_right.classList.add ( 'show' ) ;
 
 			return ;
 
@@ -178,7 +178,7 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 	selections_parent.addEventListener ( 'click', function ( event ) {
 
-		var tab_click = event.target.closest ( '.selections-tab' ) ;
+		var tab_click = event.target.closest ( '.tab' ) ;
 		var tab_pseudo_click = event.target === selections_parent ;
 
 		if ( ! tab_click && ! tab_pseudo_click ) {

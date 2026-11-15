@@ -25,3 +25,14 @@ a:hover {
 p a {
 	display: inline;
 }
+
+.drawer a {
+	margin: 0px 0px 0px 0px;
+	overflow: hidden;
+}
+
+/* links in the copyright line stay inline */
+
+.copyright .flex-cell a {
+	display: inline;
+}

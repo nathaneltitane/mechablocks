@@ -23,31 +23,35 @@
 	padding: 0px 0px 0px 0px;
 }
 
-@keyframes colors-reveal {
+@keyframes reveal-colors {
 	0% {left: -100vw;}
 
 	100% {left: 0px;}
 }
 
-.colors-show {
+#colors.show {
 	left: 0vw;
 
-	animation: colors-reveal 1s;
+	animation: reveal-colors 1s;
 	animation-delay: 0s;
 	animation-duration: 0.5s;
 	animation-fill-mode: forwards;
 }
 
-@keyframes colors-conceal {
+@keyframes conceal-colors {
 	0% {left: 0px;}
 
 	100% {left: -100vw;}
 }
 
-.colors-hide {
+/* stay drawn while sliding away */
+
+#colors.hide {
+	display: block;
+
 	left: -100vw;
 
-	animation: colors-conceal 1s;
+	animation: conceal-colors 1s;
 	animation-delay: 0s;
 	animation-duration: 0.5s;
 	animation-fill-mode: forwards;

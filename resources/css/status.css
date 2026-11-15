@@ -1,45 +1,45 @@
-.status-available {
+.status.available {
 	background: #37a537ff;
 	color: #8de08dff !important;
 	font-weight: bold;
 }
 
-.status-background-available {
+.background.available {
 	background: #37a537ff;
 }
 
-.status-button-available {
+.purchase.available {
 	background: #8de08dff;
 	color: #37a537ff !important;
 	font-weight: bold;
 }
 
-.status-font-available {
+.value.available {
 	color: #8de08dff !important;
 	font-weight: bold;
 }
 
-.status-progress {
+.status.progress {
 	background: #ff9e5eff;
 	color: #b44e0bff !important;
 	font-weight: bold;
 }
 
-.status-background-progress {
+.background.progress {
 	background: #ff9e5eff;
 }
 
-.status-button-progress {
+.purchase.progress {
 	background: #b44e0bff;
 	color: #ff9e5eff !important;
 	font-weight: bold;
 }
 
-.status-font-progress {
+.value.progress {
 	color: #b44e0bff !important;
 	font-weight: bold;
 }
 
-.status-button-available:hover {
+.purchase.available:hover {
 	color: #efefefff !important;
 }

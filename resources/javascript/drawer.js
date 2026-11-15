@@ -30,11 +30,11 @@ $( document ).ready ( function ( ) {
 
     $( ids ).addClass ( classes );
 
-        drawer.removeClass ( 'drawer-hide' );
+        drawer.removeClass ( 'hide' );
 
         setTimeout ( function ( ) {
 
-            drawer.addClass ( 'drawer-show' );
+            drawer.addClass ( 'show' );
 
         }, 250 );
 
@@ -42,9 +42,9 @@ $( document ).ready ( function ( ) {
 
     function hide ( ) {
 
-        drawer.removeClass ( 'drawer-show' );
+        drawer.removeClass ( 'show' );
 
-        drawer.addClass ( 'drawer-hide' );
+        drawer.addClass ( 'hide' );
 
         setTimeout ( function ( ) {
 
@@ -56,7 +56,7 @@ $( document ).ready ( function ( ) {
 
     function toggle ( ) {
 
-        if ( drawer.hasClass ( 'drawer-show' ) ) {
+        if ( drawer.hasClass ( 'show' ) ) {
 
             hide ( );
 
@@ -77,7 +77,7 @@ $( document ).ready ( function ( ) {
 
     $( '.section' ).click ( function ( event ) {
 
-        if ( drawer.hasClass ( 'drawer-show' ) ) {
+        if ( drawer.hasClass ( 'show' ) ) {
 
             hide ( );
 

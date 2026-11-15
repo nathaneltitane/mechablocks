@@ -11,7 +11,7 @@
 	padding: 0px 10px 0px 0px;
 }
 
-@keyframes browse-reveal {
+@keyframes reveal-browse {
 	0% {right: -200px;}
 
 	100% {right: 0px;}
@@ -26,7 +26,7 @@
 	bottom: calc(80px);
 	right: -200px;
 
-	animation-name: browse-reveal;
+	animation-name: reveal-browse;
 	animation-delay: 1.5s;
 	animation-duration: 1s;
 	animation-fill-mode: forwards;

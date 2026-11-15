@@ -34,7 +34,7 @@
 	transition: color 0.5s, border-right-color 0.5s;
 }
 
-#console-overlay.console-scrolling {
+#console-overlay.scroll {
 	color: #ddddddff;
 	border-right-color: #bbbbbbff;
 }

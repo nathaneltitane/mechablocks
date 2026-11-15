@@ -84,11 +84,11 @@ $( document ).ready ( function ( ) {
 
 		}
 
-		background.addClass ( 'hover-background' );
+		background.addClass ( 'hover' );
 
 		settled ( background, 1, function ( ) {
 
-			overlay.addClass ( 'hover-background-overlay' );
+			overlay.addClass ( 'hover' );
 
 		} );
 
@@ -100,11 +100,11 @@ $( document ).ready ( function ( ) {
 
 		step ++;
 
-		overlay.removeClass ( 'hover-background-overlay' );
+		overlay.removeClass ( 'hover' );
 
 		settled ( overlay, 0, function ( ) {
 
-			background.removeClass ( 'hover-background' );
+			background.removeClass ( 'hover' );
 
 		} );
 

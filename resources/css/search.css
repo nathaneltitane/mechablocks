@@ -3,7 +3,7 @@
 	padding: 10px 10px 10px 10px;
 }
 
-.search-field {
+.search .field {
 	background: #ddddddff;
 	color: #666666ff;
 	border: 0px;
@@ -21,11 +21,11 @@
 	user-select: text;
 }
 
-.search-field:focus {
+.search .field:focus {
 	background: #eeeeeeff;
 }
 
-.search-chips {
+.search .chips {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -33,7 +33,7 @@
 	margin: 0px 10px 0px 10px;
 }
 
-.search-chip {
+.search .chip {
 	background: #ccccccff;
 	color: #666666ff;
 	border: 0px;
@@ -47,7 +47,7 @@
 
 @media (min-width: 800px) {
 
-	.search-chip {
+	.search .chip {
 		flex-grow: 1;
 	}
 
@@ -55,35 +55,35 @@
 
 /* color only, bold would reflow the rows */
 
-.search-chip:hover {
+.search .chip:hover {
 	color: #222222ff;
 }
 
-.search-chip-active {
+.search .chip.active {
 	background: #eeeeeeff;
 	color: #222222ff;
 }
 
-.search-chip-work-in-progress {
+.search .chip.progress {
 	background: #ffd100ff;
 }
 
-.search-count {
+.search .count {
 	margin: 10px 10px 0px 10px;
 }
 
 /* matches fade in when shown */
 
 .model {
-	animation: search-reveal 0.5s ease;
+	animation: reveal-search 0.5s ease;
 }
 
-@keyframes search-reveal {
+@keyframes reveal-search {
 	0% {opacity: 0; transform: translateY(10px);}
 
 	100% {opacity: 1; transform: none;}
 }
 
-.model.search-hidden {
+.model.hide {
 	display: none;
 }

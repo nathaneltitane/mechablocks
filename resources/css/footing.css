@@ -11,10 +11,10 @@
 
 	opacity: 0;
 
-	animation: footing-reveal 0.75s ease forwards;
+	animation: reveal-footing 0.75s ease forwards;
 }
 
-@keyframes footing-reveal {
+@keyframes reveal-footing {
 
 	from {
 		opacity: 0;
@@ -26,10 +26,10 @@
 
 }
 
-.footing-open {
+.footing.open {
 	bottom: 80px;
 }
 
-.footing-close {
+.footing.close {
 	bottom: 0px;
 }

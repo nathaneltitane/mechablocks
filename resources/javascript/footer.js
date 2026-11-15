@@ -191,7 +191,7 @@ function footer_init ( ) {
 
 		for ( var i = 0 ; i < footing_list.length ; i ++ ) {
 
-			footing_list [ i ].classList.add ( 'footing-open' ) ;
+			footing_list [ i ].classList.add ( 'open' ) ;
 		}
 	}
 
@@ -201,7 +201,7 @@ function footer_init ( ) {
 
 		for ( var i = 0 ; i < footing_list.length ; i ++ ) {
 
-			footing_list [ i ].classList.remove ( 'footing-open' ) ;
+			footing_list [ i ].classList.remove ( 'open' ) ;
 		}
 	}
 
@@ -211,8 +211,8 @@ function footer_init ( ) {
 
 		footing_close ( ) ;
 
-		footer_id.classList.remove ( 'footer-show' ) ;
-		footer_id.classList.add ( 'footer-hide' ) ;
+		footer_id.classList.remove ( 'show' ) ;
+		footer_id.classList.add ( 'hide' ) ;
 	}
 
 	function show ( ) {
@@ -221,30 +221,30 @@ function footer_init ( ) {
 
 		footing_open ( ) ;
 
-		footer_id.classList.remove ( 'footer-hide' ) ;
-		footer_id.classList.add ( 'footer-show' ) ;
+		footer_id.classList.remove ( 'hide' ) ;
+		footer_id.classList.add ( 'show' ) ;
 	}
 
 	function scroll ( footer ) {
 
 		var arrow_left = document.querySelector (
-			'#footer-start .footer-start'
+			'#footer-start .arrow'
 		) ;
 
 		var arrow_right = document.querySelector (
-			'#footer-end .footer-end'
+			'#footer-end .arrow'
 		) ;
 
 		if ( ! footer || footer.clientWidth <= 0 ) {
 
 			if ( arrow_left ) {
 
-				arrow_left.classList.remove ( 'footer-right' ) ;
+				arrow_left.classList.remove ( 'show' ) ;
 			}
 
 			if ( arrow_right ) {
 
-				arrow_right.classList.remove ( 'footer-left' ) ;
+				arrow_right.classList.remove ( 'show' ) ;
 			}
 
 			return ;
@@ -260,12 +260,12 @@ function footer_init ( ) {
 
 			if ( arrow_left ) {
 
-				arrow_left.classList.remove ( 'footer-right' ) ;
+				arrow_left.classList.remove ( 'show' ) ;
 			}
 
 			if ( arrow_right ) {
 
-				arrow_right.classList.remove ( 'footer-left' ) ;
+				arrow_right.classList.remove ( 'show' ) ;
 			}
 
 			return ;
@@ -275,12 +275,12 @@ function footer_init ( ) {
 
 			if ( arrow_left ) {
 
-				arrow_left.classList.add ( 'footer-right' ) ;
+				arrow_left.classList.add ( 'show' ) ;
 			}
 
 			if ( arrow_right ) {
 
-				arrow_right.classList.remove ( 'footer-left' ) ;
+				arrow_right.classList.remove ( 'show' ) ;
 			}
 
 			return ;
@@ -290,12 +290,12 @@ function footer_init ( ) {
 
 			if ( arrow_left ) {
 
-				arrow_left.classList.remove ( 'footer-right' ) ;
+				arrow_left.classList.remove ( 'show' ) ;
 			}
 
 			if ( arrow_right ) {
 
-				arrow_right.classList.add ( 'footer-left' ) ;
+				arrow_right.classList.add ( 'show' ) ;
 			}
 
 			return ;
@@ -303,12 +303,12 @@ function footer_init ( ) {
 
 		if ( arrow_left ) {
 
-			arrow_left.classList.add ( 'footer-right' ) ;
+			arrow_left.classList.add ( 'show' ) ;
 		}
 
 		if ( arrow_right ) {
 
-			arrow_right.classList.add ( 'footer-left' ) ;
+			arrow_right.classList.add ( 'show' ) ;
 		}
 	}
 

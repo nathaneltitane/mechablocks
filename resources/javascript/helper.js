@@ -36,11 +36,11 @@ $( document ).ready ( function ( ) {
 
     $( ids ).addClass ( classes );
 
-        helper.removeClass ( 'helper-hide' );
+        helper.removeClass ( 'hide' );
 
         setTimeout ( function ( ) {
 
-            helper.addClass ( 'helper-show' );
+            helper.addClass ( 'show' );
 
         }, 250 );
 
@@ -48,9 +48,9 @@ $( document ).ready ( function ( ) {
 
     function hide ( ) {
 
-        helper.removeClass ( 'helper-show' );
+        helper.removeClass ( 'show' );
 
-        helper.addClass ( 'helper-hide' );
+        helper.addClass ( 'hide' );
 
         setTimeout ( function ( ) {
 
@@ -62,7 +62,7 @@ $( document ).ready ( function ( ) {
 
     function toggle ( ) {
 
-        if ( helper.hasClass ( 'helper-show' ) ) {
+        if ( helper.hasClass ( 'show' ) ) {
 
             hide ( );
 
@@ -83,7 +83,7 @@ $( document ).ready ( function ( ) {
 
     $( '.helper' ).click ( function ( event ) {
 
-        if ( helper.hasClass ( 'helper-show' ) ) {
+        if ( helper.hasClass ( 'show' ) ) {
 
             hide ( );
 

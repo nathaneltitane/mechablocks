@@ -9,7 +9,7 @@
 	visibility: hidden;
 }
 
-.modal-background {
+.modal .background {
 	cursor: pointer;
 	top: 0px;
 	right: 0px;
@@ -18,7 +18,7 @@
 	position: absolute;
 }
 
-.modal-content {
+.modal .content {
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
@@ -32,22 +32,22 @@
 	overflow: auto;
 }
 
-.modal-state {
+#contact-modal .state {
 	display: none;
 }
 
-.modal-state:checked + .modal {
+#contact-modal .state:checked + .modal {
 	opacity: 1;
 	visibility: visible;
 }
 
-.modal-state:checked + .modal .modal-content {
+#contact-modal .state:checked + .modal .content {
 	top: 0px;
 	opacity: 1;
 	visibility: visible;
 }
 
-.modal-close {
+.modal .close {
 	background: #00000000;
 	border-radius: 0px;
 	height:20px;
@@ -59,7 +59,7 @@
 	right: 20px;
 }
 
-.modal-input {
+.modal .input {
 	background: #ddddddff;
 	border-radius: 0px;
 	border: none;
@@ -69,7 +69,7 @@
 	width: 100%;
 }
 
-.modal-message {
+.modal .message {
 	background: #ddddddff;
 	border-radius: 0px 0px 20px 20px;
 	border: none;
@@ -79,7 +79,7 @@
 	resize: none;
 }
 
-.modal-button {
+.modal .submit {
 	background: #ddddddff;
 	color: #666666ff;
 	border-radius: 20px;
@@ -91,12 +91,12 @@
 	width: 100%;
 }
 
-.modal-button:active,
-.modal-button:hover {
+.modal .submit:active,
+.modal .submit:hover {
 	color: #ff0000ff;
 }
 
-.modal-text {
+.modal .text {
 	background: #444444ff;
 	border: 1px solid #888888ff;
 	border-radius: 0px 5px 0px 0px;

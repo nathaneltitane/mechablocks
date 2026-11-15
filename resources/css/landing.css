@@ -11,10 +11,10 @@
 
 	opacity: 0;
 
-	animation: landing-reveal 0.75s ease forwards;
+	animation: reveal-landing 0.75s ease forwards;
 }
 
-@keyframes landing-reveal {
+@keyframes reveal-landing {
 
 	from {
 		opacity: 0;
@@ -28,7 +28,7 @@
 
 /* logo over the landing background */
 
-.landing-logo {
+#landing .logo {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -46,10 +46,10 @@
 
 	transition: opacity 0.5s ease;
 
-	animation: logo-reveal 1.25s ease 0.25s backwards;
+	animation: reveal-logo 1.25s ease 0.25s backwards;
 }
 
-@keyframes logo-reveal {
+@keyframes reveal-logo {
 
 	from {
 		opacity: 0;
@@ -65,7 +65,7 @@
 
 /* logo clears the edge reveal */
 
-#background.hover-background ~ .landing-logo {
+#background.hover ~ .logo {
 	opacity: 0;
 }
 
@@ -73,13 +73,13 @@
 
 @media (max-width: 520px), (max-height: 560px) {
 
-	.landing-logo {
+	#landing .logo {
 		height: min(56vw, 40vh, 260px);
 		width: min(56vw, 40vh, 260px);
 
 		transform: translate(-50%, -50%);
 
-		animation-name: landing-reveal;
+		animation-name: reveal-landing;
 	}
 
 }
