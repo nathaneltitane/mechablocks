@@ -5,6 +5,8 @@ a {
 	display: block;
 	border: none;
 	outline: none;
+
+	cursor: pointer;
 }
 
 /* link states without underline */

@@ -23,8 +23,6 @@
 /* footing links above the canvas */
 
 .footing a {
-	cursor: pointer;
-
 	pointer-events: auto;
 }
 
