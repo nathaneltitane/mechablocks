@@ -1,6 +1,10 @@
+/* monospace font everywhere */
+
 * {
 	font-family: monospace !important;
 }
+
+/* page body */
 
 body {
 	background: #00000000;
@@ -11,4 +15,3 @@ body {
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
-

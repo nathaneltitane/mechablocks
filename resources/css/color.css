@@ -1,3 +1,5 @@
+/* color control */
+
 #color {
 	height: 64px;
 	width: 64px;
@@ -7,9 +9,13 @@
 	padding: 10px 10px 10px 10px;
 }
 
+/* color button label */
+
 #color-button-label {
 	padding: 0px 10px 0px 0px;
 }
+
+/* color control content */
 
 .color {
 	color: #000000ff;
@@ -24,11 +30,15 @@
 	animation-fill-mode: forwards;
 }
 
+/* color reveal animation */
+
 @keyframes reveal-color {
 	0% {right: -200px;}
 
 	100% {right: 0px;}
 }
+
+/* color label colour */
 
 .color-label-color {
 	 color: #00000000;

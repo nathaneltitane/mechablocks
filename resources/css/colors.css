@@ -1,3 +1,5 @@
+/* colours panel */
+
 #colors {
 	background: #bbbbbbff;
 	position: fixed;
@@ -16,6 +18,8 @@
 	padding-left: 0px;
 }
 
+/* colour tiles */
+
 .colors {
 	border-radius: 0px 0px 0px 0px;
 	margin: 0px 0px 0px 0px;
@@ -26,7 +30,6 @@
 
 #colors .grid {
 	min-height: 100%;
-
 	grid-auto-rows: 1fr;
 }
 
@@ -34,17 +37,19 @@
 
 .colors::before {
 	content: "";
-
 	display: block;
-
 	padding-top: 100%;
 }
+
+/* colors reveal animation */
 
 @keyframes reveal-colors {
 	0% {left: -100vw;}
 
 	100% {left: 0px;}
 }
+
+/* colours panel shown */
 
 #colors.show {
 	left: 0vw;
@@ -54,6 +59,8 @@
 	animation-duration: 0.5s;
 	animation-fill-mode: forwards;
 }
+
+/* colors conceal animation */
 
 @keyframes conceal-colors {
 	0% {left: 0px;}

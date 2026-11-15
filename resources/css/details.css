@@ -1,3 +1,5 @@
+/* details control */
+
 #details {
 	height: 64px;
 	width: 64px;
@@ -7,9 +9,13 @@
 	padding: 10px 10px 10px 10px;
 }
 
+/* details button label */
+
 #details-button-label {
 	padding: 0px 10px 0px 0px;
 }
+
+/* details control content */
 
 .details {
 	color: #000000ff;
@@ -24,11 +30,15 @@
 	animation-fill-mode: forwards;
 }
 
+/* details reveal animation */
+
 @keyframes reveal-details {
 	0% {right: -200px;}
 
 	100% {right: 0px;}
 }
+
+/* details label colour */
 
 .details-label-color {
 	 color: #00000000;

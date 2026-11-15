@@ -1,144 +1,215 @@
+/* alias cursor */
+
 .cursor-alias {
 	cursor: alias;
 }
+
+/* all scroll cursor */
 
 .cursor-all-scroll {
 	cursor: all-scroll;
 }
 
+/* auto cursor */
+
 .cursor-auto {
 	cursor: auto;
 }
+
+/* cell cursor */
 
 .cursor-cell {
 	cursor: cell;
 }
 
+/* context menu cursor */
+
 .cursor-context-menu {
 	cursor: context-menu;
 }
+
+/* col resize cursor */
 
 .cursor-col-resize {
 	cursor: col-resize;
 }
 
+/* copy cursor */
+
 .cursor-copy {
 	cursor: copy;
 }
+
+/* crosshair cursor */
 
 .cursor-crosshair {
 	cursor: crosshair;
 }
 
+/* default cursor */
+
 .cursor-default {
 	cursor: default;
 }
+
+/* e resize cursor */
 
 .cursor-e-resize {
 	cursor: e-resize;
 }
 
+/* ew resize cursor */
+
 .cursor-ew-resize {
 	cursor: ew-resize;
 }
+
+/* grab cursor */
 
 .cursor-grab {
 	cursor: grab;
 }
 
+/* grabbing cursor */
+
 .cursor-grabbing {
 	cursor: grabbing;
 }
+
+/* help cursor */
 
 .cursor-help {
 	cursor: help;
 }
 
+/* move cursor */
+
 .cursor-move {
 	cursor: move;
 }
+
+/* n resize cursor */
 
 .cursor-n-resize {
 	cursor: n-resize;
 }
 
+/* ne resize cursor */
+
 .cursor-ne-resize {
 	cursor: ne-resize;
 }
+
+/* nesw resize cursor */
 
 .cursor-nesw-resize {
 	cursor: nesw-resize;
 }
 
+/* ns resize cursor */
+
 .cursor-ns-resize {
 	cursor: ns-resize;
 }
+
+/* nw resize cursor */
 
 .cursor-nw-resize {
 	cursor: nw-resize;
 }
 
+/* nwse resize cursor */
+
 .cursor-nwse-resize {
 	cursor: nwse-resize;
 }
+
+/* no drop cursor */
 
 .cursor-no-drop {
 	cursor: no-drop;
 }
 
+/* none cursor */
+
 .cursor-none {
 	cursor: none;
 }
+
+/* not allowed cursor */
 
 .cursor-not-allowed {
 	cursor: not-allowed;
 }
 
+/* pointer cursor */
+
 .cursor-pointer {
 	cursor: pointer;
 }
+
+/* progress cursor */
 
 .cursor-progress {
 	cursor: progress;
 }
 
+/* row resize cursor */
+
 .cursor-row-resize {
 	cursor: row-resize;
 }
+
+/* s resize cursor */
 
 .cursor-s-resize {
 	cursor: s-resize;
 }
 
+/* se resize cursor */
+
 .cursor-se-resize {
 	cursor: se-resize;
 }
+
+/* sw resize cursor */
 
 .cursor-sw-resize {
 	cursor: sw-resize;
 }
 
+/* text cursor */
+
 .cursor-text {
 	cursor: text;
 }
+
+/* vertical text cursor */
 
 .cursor-vertical-text {
 	cursor: vertical-text;
 }
 
+/* w resize cursor */
+
 .cursor-w-resize {
 	cursor: w-resize;
 }
+
+/* wait cursor */
 
 .cursor-wait {
 	cursor: wait;
 }
 
+/* zoom in cursor */
+
 .cursor-zoom-in {
 	cursor: pointer;
 }
 
+/* zoom out cursor */
+
 .cursor-zoom-out {
 	cursor: pointer;
 }
-

@@ -1,3 +1,5 @@
+/* wireframe control */
+
 #wireframe {
 	height: 64px;
 	width: 64px;
@@ -7,9 +9,13 @@
 	padding: 10px 10px 10px 10px;
 }
 
+/* wireframe button label */
+
 #wireframe-button-label {
 	padding: 0px 10px 0px 0px;
 }
+
+/* wireframe control content */
 
 .wireframe {
 	color: #000000ff;
@@ -24,11 +30,15 @@
 	animation-fill-mode: forwards;
 }
 
+/* wireframe reveal animation */
+
 @keyframes reveal-wireframe {
 	0% {right: -200px;}
 
 	100% {right: 0px;}
 }
+
+/* wireframe label colour */
 
 .wireframe-label-color {
 	 color: #00000000;

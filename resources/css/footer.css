@@ -1,3 +1,5 @@
+/* footer bar */
+
 #footer {
 	background: #aaaaaaff;
 	border-radius: 20px 20px 0px 0px;
@@ -7,6 +9,8 @@
 	left: 0px;
 	right: 0px;
 }
+
+/* footer content */
 
 .footer {
 	position: relative;
@@ -26,6 +30,8 @@
 
 	-webkit-overflow-scrolling: touch;
 }
+
+/* footer border */
 
 #footer .border {
 	border: 10px solid #aaaaaaff;
@@ -50,6 +56,8 @@
 		inset -5px 0px 10px #aaaaaaff;
 }
 
+/* footer control */
+
 #footer .control {
 	background: #00000000;
 	color: #666666ff;
@@ -61,17 +69,25 @@
 	height: auto;
 }
 
+/* footer control icon */
+
 #footer .control .icon {
 	transition: transform 0.2s ease;
 }
+
+/* footer control icon hover */
 
 #footer .control:hover .icon {
 	transform: translateY(-3px);
 }
 
+/* footer control hover */
+
 #footer .control:hover {
 	color: #222222ff;
 }
+
+/* footer start arrow */
 
 #footer-start .arrow {
 	border-top: 10px solid #00000000;
@@ -84,6 +100,8 @@
 
 	opacity: 0;
 }
+
+/* footer end arrow */
 
 #footer-end .arrow {
 	border-top: 10px solid #00000000;
@@ -105,9 +123,13 @@
 	bottom: -80px;
 }
 
+/* footer shown */
+
 #footer.show {
 	bottom: 0px;
 }
+
+/* footer arrow shown */
 
 #footer .arrow.show {
 	opacity: 1;

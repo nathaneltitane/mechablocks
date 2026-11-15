@@ -1,3 +1,5 @@
+/* landing text block */
+
 .landing {
 	background: transparent;
 	color: #222222ff;
@@ -13,6 +15,8 @@
 
 	animation: reveal-landing 0.75s ease forwards;
 }
+
+/* landing reveal animation */
 
 @keyframes reveal-landing {
 
@@ -49,6 +53,8 @@
 	animation: reveal-logo 1.25s ease 0.25s backwards;
 }
 
+/* logo reveal animation */
+
 @keyframes reveal-logo {
 
 	from {
@@ -72,6 +78,8 @@
 /* phone logo centered between the landing texts */
 
 @media (max-width: 520px), (max-height: 560px) {
+
+	/* landing logo */
 
 	#landing .logo {
 		height: min(56vw, 40vh, 260px);

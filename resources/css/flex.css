@@ -1,3 +1,5 @@
+/* flex container */
+
 .flex {
 	display: flex;
 
@@ -13,145 +15,219 @@
 	transition: all 0.5s ease;
 }
 
+/* responsive flex width */
+
 .flex-responsive {
+
 	/* media.css */
+
 }
+
+/* inline flex container */
 
 .flex-inline {
 	display: inline-flex;
 }
 
+/* column direction */
+
 .flex-column {
 	flex-direction: column;
 }
+
+/* reversed column direction */
 
 .flex-column-reverse {
 	flex-direction: column-reverse;
 }
 
+/* row direction */
+
 .flex-row {
 	flex-direction: row;
 }
+
+/* reversed row direction */
 
 .flex-row-reverse {
 	flex-direction: row-reverse;
 }
 
+/* items packed left */
+
 .flex-left {
 	justify-content: flex-start;
 }
+
+/* items packed right */
 
 .flex-right {
 	justify-content: flex-end;
 }
 
+/* items packed centre */
+
 .flex-center {
 	justify-content: center;
 }
+
+/* space around items */
 
 .flex-around {
 	justify-content: space-around;
 }
 
+/* space between items */
+
 .flex-between {
 	justify-content: space-between;
 }
+
+/* items aligned to start */
 
 .flex-start {
 	align-items: flex-start;
 }
 
+/* items aligned to end */
+
 .flex-end {
 	align-items: flex-end;
 }
+
+/* items aligned to middle */
 
 .flex-middle {
 	align-items: center;
 }
 
+/* items aligned to baseline */
+
 .flex-baseline {
 	align-items: baseline;
 }
+
+/* items stretched across */
 
 .flex-stretch {
 	align-items: stretch;
 }
 
+/* items wrap */
+
 .flex-wrap {
 	flex-wrap: wrap;
 }
+
+/* items wrap in reverse */
 
 .flex-wrap-reverse {
 	flex-wrap: wrap-reverse;
 }
 
+/* full width cell */
+
 .flex-1 {
 	width: 100%;
 }
+
+/* half width cell */
 
 .flex-2 {
 	width: 50%;
 }
 
+/* third width cell */
+
 .flex-3 {
 	width: 30%;
 }
+
+/* quarter width cell */
 
 .flex-4 {
 	width: 25%;
 }
 
+/* fifth width cell */
+
 .flex-5 {
 	width: 20%;
 }
+
+/* growing flex cell */
 
 .flex-cell {
 	flex: 1;
 }
 
+/* narrow width cell */
+
 .flex-6 {
 	width: 15%;
 }
+
+/* cell sized to content */
 
 .flex-cell-autosize {
 	flex: none;
 }
 
+/* cell shrinks only */
+
 .flex-cell-flex {
 	flex: 0 1 auto;
 }
+
+/* cell placed first */
 
 .flex-cell-first {
 	order: -1;
 }
 
+/* cell aligned to start */
+
 .flex-cell-start {
 	align-self: flex-start;
 }
+
+/* cell aligned to end */
 
 .flex-cell-end {
 	align-self: flex-end;
 }
 
+/* cell aligned to centre */
+
 .flex-cell-center {
 	align-self: center;
 }
+
+/* cell aligned to baseline */
 
 .flex-cell-baseline {
 	align-self: baseline;
 }
 
+/* cell stretched across */
+
 .flex-cell-stretch {
 	align-self: stretch;
 }
+
+/* cell grows to fill */
 
 .flex-cell-grow {
 	flex-grow: 1;
 }
 
+/* cell shrinks faster */
+
 .flex-cell-shrink {
 	flex-shrink: 2;
 }
+
+/* drawer full height column */
 
 .drawer > .flex-column {
 	min-height: 100%;

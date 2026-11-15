@@ -1,3 +1,5 @@
+/* footing text block */
+
 .footing {
 	background: transparent;
 	color: #222222ff;
@@ -14,6 +16,8 @@
 	animation: reveal-footing 0.75s ease forwards;
 }
 
+/* footing reveal animation */
+
 @keyframes reveal-footing {
 
 	from {
@@ -26,9 +30,13 @@
 
 }
 
+/* footing raised */
+
 .footing.open {
 	bottom: 80px;
 }
+
+/* footing lowered */
 
 .footing.close {
 	bottom: 0px;

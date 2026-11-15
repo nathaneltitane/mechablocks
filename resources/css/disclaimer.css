@@ -1,8 +1,12 @@
+/* disclaimer card */
+
 .disclaimer {
 	background: #dc2a30ff;
 	color: #ddeeffff;
 	height: auto;
 }
+
+/* drawer disclaimer */
 
 .drawer .disclaimer {
 

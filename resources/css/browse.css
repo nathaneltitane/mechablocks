@@ -1,3 +1,5 @@
+/* browse control */
+
 #browse {
 	height: 64px;
 	width: 64px;
@@ -7,15 +9,21 @@
 	padding: 10px 10px 10px 10px;
 }
 
+/* browse button label */
+
 #browse-button-label {
 	padding: 0px 10px 0px 0px;
 }
+
+/* browse reveal animation */
 
 @keyframes reveal-browse {
 	0% {right: -200px;}
 
 	100% {right: 0px;}
 }
+
+/* browse control content */
 
 .browse {
 	color: #000000ff;
@@ -31,6 +39,8 @@
 	animation-duration: 1s;
 	animation-fill-mode: forwards;
 }
+
+/* browse label colour */
 
 .browse-label-color {
 	 color: #00000000;

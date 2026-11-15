@@ -1,3 +1,5 @@
+/* modal window */
+
 .modal {
 	background: #00000066;
 	bottom: 0px;
@@ -9,6 +11,8 @@
 	visibility: hidden;
 }
 
+/* modal background */
+
 .modal .background {
 	cursor: pointer;
 	top: 0px;
@@ -17,6 +21,8 @@
 	left: 0px;
 	position: absolute;
 }
+
+/* modal content */
 
 .modal .content {
 	bottom: 0px;
@@ -32,20 +38,28 @@
 	overflow: auto;
 }
 
+/* contact modal toggle */
+
 #contact-modal .state {
 	display: none;
 }
+
+/* contact modal opened */
 
 #contact-modal .state:checked + .modal {
 	opacity: 1;
 	visibility: visible;
 }
 
+/* contact modal content opened */
+
 #contact-modal .state:checked + .modal .content {
 	top: 0px;
 	opacity: 1;
 	visibility: visible;
 }
+
+/* modal close */
 
 .modal .close {
 	background: #00000000;
@@ -59,6 +73,8 @@
 	right: 20px;
 }
 
+/* modal input */
+
 .modal .input {
 	background: #ddddddff;
 	border-radius: 0px;
@@ -69,6 +85,8 @@
 	width: 100%;
 }
 
+/* modal message */
+
 .modal .message {
 	background: #ddddddff;
 	border-radius: 0px 0px 20px 20px;
@@ -78,6 +96,8 @@
 	width: 100%;
 	resize: none;
 }
+
+/* modal submit */
 
 .modal .submit {
 	background: #ddddddff;
@@ -91,10 +111,14 @@
 	width: 100%;
 }
 
+/* modal submit hover and press */
+
 .modal .submit:active,
 .modal .submit:hover {
 	color: #ff0000ff;
 }
+
+/* modal text */
 
 .modal .text {
 	background: #444444ff;
@@ -108,6 +132,8 @@
 	width: 100%;
 	resize: none;
 }
+
+/* number spinners hidden */
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {

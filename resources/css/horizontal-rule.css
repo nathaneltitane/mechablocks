@@ -1,3 +1,5 @@
+/* horizontal rules */
+
 hr {
 	border-top: 1px solid #bbbbbb;
 	border-right: 0px !important;
@@ -6,4 +8,3 @@ hr {
 	margin: 10px 0px 10px 0px;
 	padding: 0px 0px 0px 0px;
 }
-

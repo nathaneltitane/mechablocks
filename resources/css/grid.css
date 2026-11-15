@@ -1,178 +1,272 @@
+/* grid container */
+
 .grid {
 	display: grid;
 }
+
+/* grid packed left */
 
 .grid-left {
     direction: ltr;
 }
 
+/* grid packed right */
+
 .grid-right {
     direction: rtl;
 }
 
+/* responsive grid columns */
+
 .grid-columns-responsive {
+
 	/* /* media.css */
+
 }
+
+/* 5px column gap */
 
 .grid-gap-column-5 {
     column-gap: 5px;
 }
 
+/* 10px column gap */
+
 .grid-gap-column-10 {
     column-gap: 10px;
 }
+
+/* 15px column gap */
 
 .grid-gap-column-15 {
     column-gap: 15px;
 }
 
+/* 20px column gap */
+
 .grid-gap-column-20 {
     column-gap: 20px;
 }
+
+/* 5px row gap */
 
 .grid-gap-row-5 {
     row-gap: 5px;
 }
 
+/* 10px row gap */
+
 .grid-gap-row-10 {
     row-gap: 10px;
 }
+
+/* 15px row gap */
 
 .grid-gap-row-15 {
     row-gap: 15px;
 }
 
+/* 20px row gap */
+
 .grid-gap-row-20 {
     row-gap: 20px;
 }
+
+/* grid of 1 columns */
 
 .grid-columns-1 {
     grid-template-columns: repeat(1, 1fr);
 }
 
+/* grid of 2 columns */
+
 .grid-columns-2 {
     grid-template-columns: repeat(2, 1fr);
 }
+
+/* grid of 3 columns */
 
 .grid-columns-3 {
     grid-template-columns: repeat(3, 1fr);
 }
 
+/* grid of 4 columns */
+
 .grid-columns-4 {
     grid-template-columns: repeat(4, 1fr);
 }
+
+/* grid of 5 columns */
 
 .grid-columns-5 {
     grid-template-columns: repeat(5, 1fr);
 }
 
+/* grid of 6 columns */
+
 .grid-columns-6 {
     grid-template-columns: repeat(6, 1fr);
 }
+
+/* grid of 7 columns */
 
 .grid-columns-7 {
     grid-template-columns: repeat(7, 1fr);
 }
 
+/* grid of 8 columns */
+
 .grid-columns-8 {
     grid-template-columns: repeat(8, 1fr);
 }
+
+/* grid of 9 columns */
 
 .grid-columns-9 {
     grid-template-columns: repeat(9, 1fr);
 }
 
+/* grid of 10 columns */
+
 .grid-columns-10 {
     grid-template-columns: repeat(10, 1fr);
 }
+
+/* grid of 11 columns */
 
 .grid-columns-11 {
     grid-template-columns: repeat(11, 1fr);
 }
 
+/* grid of 12 columns */
+
 .grid-columns-12 {
     grid-template-columns: repeat(12, 1fr);
 }
+
+/* grid of 13 columns */
 
 .grid-columns-13 {
     grid-template-columns: repeat(13, 1fr);
 }
 
+/* grid of 14 columns */
+
 .grid-columns-14 {
     grid-template-columns: repeat(14, 1fr);
 }
+
+/* grid of 15 columns */
 
 .grid-columns-15 {
     grid-template-columns: repeat(15, 1fr);
 }
 
+/* grid of 16 columns */
+
 .grid-columns-16 {
     grid-template-columns: repeat(16, 1fr);
 }
 
+/* responsive grid */
+
 .grid-responsive {
+
 	/* media.css */
+
 }
+
+/* cell spanning 1 columns */
 
 .grid-span-1 {
     grid-column-start: span 1;
 }
 
+/* cell spanning 2 columns */
+
 .grid-span-2 {
     grid-column-start: span 2;
 }
+
+/* cell spanning 3 columns */
 
 .grid-span-3 {
     grid-column-start: span 3;
 }
 
+/* cell spanning 4 columns */
+
 .grid-span-4 {
     grid-column-start: span 4;
 }
+
+/* cell spanning 5 columns */
 
 .grid-span-5 {
     grid-column-start: span 5;
 }
 
+/* cell spanning 6 columns */
+
 .grid-span-6 {
     grid-column-start: span 6;
 }
+
+/* cell spanning 7 columns */
 
 .grid-span-7 {
     grid-column-start: span 7;
 }
 
+/* cell spanning 8 columns */
+
 .grid-span-8 {
     grid-column-start: span 8;
 }
+
+/* cell spanning 9 columns */
 
 .grid-span-9 {
     grid-column-start: span 9;
 }
 
+/* cell spanning 10 columns */
+
 .grid-span-10 {
     grid-column-start: span 10;
 }
+
+/* cell spanning 11 columns */
 
 .grid-span-11 {
     grid-column-start: span 11;
 }
 
+/* cell spanning 12 columns */
+
 .grid-span-12 {
     grid-column-start: span 12;
 }
+
+/* cell spanning 13 columns */
 
 .grid-span-13 {
     grid-column-start: span 13;
 }
 
+/* cell spanning 14 columns */
+
 .grid-span-14 {
     grid-column-start: span 14;
 }
 
+/* cell spanning 15 columns */
+
 .grid-span-15 {
     grid-column-start: span 15;
 }
+
+/* cell spanning 16 columns */
 
 .grid-span-16 {
     grid-column-start: span 16;

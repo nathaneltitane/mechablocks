@@ -2,179 +2,269 @@
 
 @media (max-width: 300px) {
 
+	/* responsive flex width */
+
 	.flex-responsive {
 		width: 100%;
 	}
+
+	/* responsive grid columns */
 
 	.grid-columns-responsive {
 		grid-template-columns: repeat(1, 1fr);
 	}
 
+	/* colour grid columns */
+
 	.grid-colors {
 		grid-template-columns: repeat(4, 1fr);
 	}
+
+	/* modal width */
 
 	.modal-content {
 		width: 95vw;
 	}
 }
+
+/* screens from 300px wide */
 
 @media (min-width: 300px) {
 
+	/* responsive flex width */
+
 	.flex-responsive {
 		width: 100%;
 	}
+
+	/* responsive grid columns */
 
 	.grid-columns-responsive {
 		grid-template-columns: repeat(1, 1fr);
 	}
 
+	/* colour grid columns */
+
 	.grid-colors {
 		grid-template-columns: repeat(4, 1fr);
 	}
+
+	/* modal width */
 
 	.modal-content {
 		width: 95vw;
 	}
 }
+
+/* screens from 400px wide */
 
 @media (min-width: 400px) {
 
+	/* responsive flex width */
+
 	.flex-responsive {
 		width: 100%;
 	}
+
+	/* responsive grid columns */
 
 	.grid-columns-responsive {
 		grid-template-columns: repeat(1, 1fr);
 	}
 
+	/* colour grid columns */
+
 	.grid-colors {
 		grid-template-columns: repeat(4, 1fr);
 	}
+
+	/* modal width */
 
 	.modal-content {
 		width: 95vw;
 	}
 }
 
+/* screens from 600px wide */
+
 @media (min-width: 600px) {
+
+	/* responsive flex width */
 
 	.flex-responsive {
 		width: 100%;
 	}
 
+	/* responsive grid columns */
+
 	.grid-columns-responsive {
 		grid-template-columns: repeat(1, 1fr);
 	}
+
+	/* colour grid columns */
 
 	.grid-colors {
 		grid-template-columns: repeat(6, 1fr);
 	}
+
+	/* modal width */
 
 	.modal-content {
 		width: 85vw;
 	}
 }
 
+/* screens from 800px wide */
+
 @media (min-width: 800px) {
+
+	/* responsive flex width */
 
 	.flex-responsive {
 		width: 50%;
 	}
 
+	/* responsive grid columns */
+
 	.grid-columns-responsive {
 		grid-template-columns: repeat(2, 1fr);
 	}
+
+	/* colour grid columns */
 
 	.grid-colors {
 		grid-template-columns: repeat(6, 1fr);
 	}
 
+	/* modal width */
+
 	.modal-content {
 		width: 75vw;
 	}
 }
 
+/* screens from 1000px wide */
+
 @media (min-width: 1000px) {
+
+	/* responsive flex width */
 
 	.flex-responsive {
 		width: 50%;
 	}
 
+	/* responsive grid columns */
+
 	.grid-columns-responsive {
 		grid-template-columns: repeat(2, 1fr);
 	}
 
+	/* colour grid columns */
+
 	.grid-colors {
 		grid-template-columns: repeat(12, 1fr);
 	}
+
+	/* modal width */
 
 	.modal-content {
 		width: 75vw;
 	}
 }
 
+/* screens from 1200px wide */
+
 @media (min-width: 1200px) {
+
+	/* responsive flex width */
 
 	.flex-responsive {
 		width: 25%;
 	}
 
+	/* responsive grid columns */
+
 	.grid-columns-responsive {
 		grid-template-columns: repeat(4, 1fr);
 	}
+
+	/* colour grid columns */
 
 	.grid-colors {
 		grid-template-columns: repeat(12, 1fr);
 	}
 
+	/* modal width */
+
 	.modal-content {
 		width: 50vw;
 	}
 }
+
+/* screens from 1600px wide */
 
 @media (min-width: 1600px) {
 
+	/* responsive flex width */
+
 	.flex-responsive {
 		width: 20%;
 	}
+
+	/* responsive grid columns */
 
 	.grid-columns-responsive {
 		grid-template-columns: repeat(4, 1fr);
 	}
 
+	/* colour grid columns */
+
 	.grid-colors {
 		grid-template-columns: repeat(12, 1fr);
 	}
+
+	/* modal width */
 
 	.modal-content {
 		width: 50vw;
 	}
 }
 
+/* screens from 2000px wide */
+
 @media (min-width: 2000px) {
+
+	/* responsive flex width */
 
 	.flex-responsive {
 		width: 20%;
 	}
+
+	/* responsive grid columns */
 
 	.grid-columns-responsive {
 		grid-template-columns: repeat(6, 1fr);
 	}
 
+	/* colour grid columns */
+
 	.grid-colors {
 		grid-template-columns: repeat(12, 1fr);
 	}
+
+	/* modal width */
 
 	.modal-content {
 		width: 50vw;
 	}
 }
 
+/* screens from 920px tall */
+
 @media (min-height: 920px) {
 }
 
-
+/* screens up to 920px tall */
 
 @media (max-height: 920px) {
 }
@@ -185,14 +275,22 @@
 and (pointer: coarse)
 and (max-device-width: 600px) {
 
+	/* edges control */
+
 	#edges {
 	}
 
+	/* wireframe control */
+
 	#wireframe {
 	}
-	
+
+	/* controls toggle control */
+
 	#controls {
 	}
+
+	/* drawer button offset */
 
 	.drawer-button {
 		bottom: calc(56px + 80px);
@@ -205,14 +303,22 @@ and (max-device-width: 600px) {
 and (pointer: coarse)
 and (min-device-width: 800px) {
 
+	/* edges control */
+
 	#edges {
 	}
 
+	/* wireframe control */
+
 	#wireframe {
 	}
-	
+
+	/* controls toggle control */
+
 	#controls {
 	}
+
+	/* drawer button offset */
 
 	.drawer-button {
 		bottom: calc(97px + 80px);
@@ -225,12 +331,18 @@ and (min-device-width: 800px) {
 and (pointer: fine)
 and (min-device-width: 600px) {
 
+	/* edges control */
+
 	#edges {
 	}
 
+	/* wireframe control */
+
 	#wireframe {
 	}
-	
+
+	/* controls toggle control */
+
 	#controls {
 	}
 }

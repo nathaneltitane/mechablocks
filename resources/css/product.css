@@ -1,11 +1,17 @@
+/* product cards */
+
 .product {
 	padding: 10px 0px 10px 0px;
 	margin: 0px 0px 0px 0px;
 }
 
+/* product images */
+
 .product img {
 	border-radius: 3px 3px 3px 3px;
 }
+
+/* card image frames */
 
 .drawer a .flex-cell,
 .product > div {
@@ -13,11 +19,15 @@
 	overflow: visible;
 }
 
+/* card image zoom transition */
+
 .drawer a .flex-cell img,
 .product img {
 	border-radius: 3px;
 	transition: transform 0.4s ease;
 }
+
+/* card image zoom on hover */
 
 .drawer a:hover .flex-cell img,
 .product:hover img {

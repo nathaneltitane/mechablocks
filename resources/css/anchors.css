@@ -1,3 +1,5 @@
+/* anchor links container */
+
 #anchors {
 	background: #aaaaaa;
 	position:relative;
@@ -5,4 +7,3 @@
 	right: 0px;
 	left: 0px;
 }
-

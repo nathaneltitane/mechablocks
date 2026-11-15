@@ -1,3 +1,5 @@
+/* paypal control */
+
 #paypal {
 	height: 64px;
 	width: 64px;
@@ -7,9 +9,13 @@
 	padding: 10px 10px 10px 10px;
 }
 
+/* paypal button label */
+
 #paypal-button-label {
 	padding: 0px 10px 0px 0px;
 }
+
+/* paypal control content */
 
 .paypal {
 	color: #000000ff;
@@ -24,11 +30,15 @@
 	animation-fill-mode: forwards;
 }
 
+/* paypal reveal animation */
+
 @keyframes reveal-paypal {
 	0% {right: -200px;}
 
 	100% {right: 0px;}
 }
+
+/* paypal label colour */
 
 .paypal-label-color {
 	 color: #00000000;

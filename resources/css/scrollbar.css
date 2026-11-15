@@ -10,15 +10,21 @@
     width: 5px;
 }
 
+/* scrollbar track */
+
 ::-webkit-scrollbar-track {
     background: #00000000;
     border-right: 5px solid #333333ff;
     margin-block: 0px;
 }
 
+/* scrollbar thumb */
+
 ::-webkit-scrollbar-thumb {
 	border-right: 5px solid #666666ff;
  }
+
+/* scrollbar thumb hover */
 
 ::-webkit-scrollbar-thumb:hover {
 	border-right: 5px solid #999999ff;

@@ -1,8 +1,12 @@
+/* notice card */
+
 .notice {
 	background: #ff9e5eff;
 	color: #ddeeffff;
 	height: auto;
 }
+
+/* drawer notice */
 
 .drawer .notice {
 

@@ -1,3 +1,5 @@
+/* plane control */
+
 #plane {
 	height: 64px;
 	width: 64px;
@@ -7,9 +9,13 @@
 	padding: 10px 10px 10px 10px;
 }
 
+/* plane button label */
+
 #plane-button-label {
 	padding: 0px 10px 0px 0px;
 }
+
+/* plane control content */
 
 .plane {
 	color: #000000ff;
@@ -24,11 +30,15 @@
 	animation-fill-mode: forwards;
 }
 
+/* plane reveal animation */
+
 @keyframes reveal-plane {
 	0% {right: -200px;}
 
 	100% {right: 0px;}
 }
+
+/* plane label colour */
 
 .plane-label-color {
 	 color: #00000000;

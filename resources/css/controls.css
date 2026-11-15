@@ -1,3 +1,5 @@
+/* controls toggle control */
+
 #controls {
 	height: 64px;
 	width: 64px;
@@ -7,9 +9,13 @@
 	padding: 10px 10px 10px 10px;
 }
 
+/* controls button label */
+
 #controls-button-label {
 	padding: 0px 10px 0px 0px;
 }
+
+/* controls toggle content */
 
 .controls {
 	color: #000000ff;
@@ -24,11 +30,15 @@
 	animation-fill-mode: forwards;
 }
 
+/* controls reveal animation */
+
 @keyframes reveal-controls {
 	0% {right: -200px;}
 
 	100% {right: 0px;}
 }
+
+/* controls label colour */
 
 .controls-label-color {
 	 color: #00000000;

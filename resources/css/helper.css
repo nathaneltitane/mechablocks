@@ -1,3 +1,5 @@
+/* controls helper panel */
+
 #helper {
 	position: fixed;
 	bottom: 0px;
@@ -6,6 +8,8 @@
 
 	z-index: 888;
 }
+
+/* helper content */
 
 .helper {
 	background-color: #000000ff;
@@ -23,11 +27,15 @@
 	overflow-y: scroll;
 }
 
+/* helper reveal animation */
+
 @keyframes reveal-helper {
 	0% {height: 0vh;}
 
 	100% {height: calc( 100vh + 20px );}
 }
+
+/* helper shown */
 
 .helper.show {
 	height: 100vh;
@@ -37,6 +45,8 @@
 	animation-duration: 0.5s;
 	animation-fill-mode: forwards;
 }
+
+/* helper conceal animation */
 
 @keyframes conceal-helper {
 	0% {height: 100vh;}

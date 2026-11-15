@@ -1,3 +1,5 @@
+/* dimensions control */
+
 #dimensions {
 	height: 64px;
 	width: 64px;
@@ -7,9 +9,13 @@
 	padding: 10px 10px 10px 10px;
 }
 
+/* dimensions button label */
+
 #dimensions-button-label {
 	padding: 0px 10px 0px 0px;
 }
+
+/* dimensions control content */
 
 .dimensions {
 	color: #000000ff;
@@ -24,11 +30,15 @@
 	animation-fill-mode: forwards;
 }
 
+/* dimensions reveal animation */
+
 @keyframes reveal-dimensions {
 	0% {right: -200px;}
 
 	100% {right: 0px;}
 }
+
+/* dimensions label colour */
 
 .dimensions-label-color {
 	 color: #00000000;

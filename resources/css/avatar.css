@@ -1,3 +1,5 @@
+/* avatar images */
+
 .avatar {
 	background-image: url(/resources/avatar/avatar-bird.png);
 	background-repeat: no-repeat;
@@ -7,11 +9,15 @@
 	margin: 10px 10px 10px 10px;
 }
 
+/* avatar fills its box */
+
 .avatar-flex {
 	background-size: calc(60px - 10px - 10px);
 	height: calc(60px - 10px - 10px);
 	width: calc(60px - 10px - 10px);
 }
+
+/* avatar at 12px */
 
 .avatar-12 {
 	background-size: 12px;
@@ -19,11 +25,15 @@
 	width: 12px;
 }
 
+/* avatar at 16px */
+
 .avatar-16 {
 	background-size: 16px;
 	height: 16px;
 	width: 16px;
 }
+
+/* avatar at 24px */
 
 .avatar-24 {
 	background-size: 24px;
@@ -31,11 +41,15 @@
 	width: 24px;
 }
 
+/* avatar at 32px */
+
 .avatar-32 {
 	background-size: 32px;
 	height: 32px;
 	width: 32px;
 }
+
+/* avatar at 64px */
 
 .avatar-64 {
 	background-size: 64px;
@@ -43,11 +57,15 @@
 	width: 64px;
 }
 
+/* avatar at 96px */
+
 .avatar-96 {
 	background-size: 96px;
 	height: 96px;
 	width: 96px;
 }
+
+/* avatar at 128px */
 
 .avatar-128 {
 	background-size: 128px;
@@ -55,9 +73,10 @@
 	width: 128px;
 }
 
+/* avatar at 256px */
+
 .avatar-256 {
 	background-size: 256px;
 	height: 256px;
 	width: 256px;
 }
-

@@ -1,8 +1,12 @@
+/* rounded buttons */
+
 .button {
 	border-radius: 20px;
 	padding:  10px 10px 10px 10px;
 	margin: 0px 0px 0px 0px;
 }
+
+/* purchase button */
 
 .purchase {
 	color: white;

@@ -1,12 +1,18 @@
+/* available status badge */
+
 .status.available {
 	background: #37a537ff;
 	color: #8de08dff !important;
 	font-weight: bold;
 }
 
+/* available status background */
+
 .background.available {
 	background: #37a537ff;
 }
+
+/* purchase button available */
 
 .purchase.available {
 	background: #8de08dff;
@@ -14,10 +20,14 @@
 	font-weight: bold;
 }
 
+/* available status value */
+
 .value.available {
 	color: #8de08dff !important;
 	font-weight: bold;
 }
+
+/* in progress status badge */
 
 .status.progress {
 	background: #ff9e5eff;
@@ -25,9 +35,13 @@
 	font-weight: bold;
 }
 
+/* in progress status background */
+
 .background.progress {
 	background: #ff9e5eff;
 }
+
+/* purchase button in progress */
 
 .purchase.progress {
 	background: #b44e0bff;
@@ -35,10 +49,14 @@
 	font-weight: bold;
 }
 
+/* in progress status value */
+
 .value.progress {
 	color: #b44e0bff !important;
 	font-weight: bold;
 }
+
+/* available purchase hover */
 
 .purchase.available:hover {
 	color: #efefefff !important;

@@ -1,11 +1,17 @@
+/* control labels */
+
 .label {
     font-weight: normal;
 }
+
+/* labels hidden at rest */
 
 .container:not(:active) .label,
 .container:not(:hover) .label {
     font-weight: normal;
 }
+
+/* labels shown on hover */
 
 .container:active .label,
 .container:hover .label {

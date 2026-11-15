@@ -1,90 +1,136 @@
+/* black logo colour */
+
 .logo-black {
 	background-image: url(/resources/logo/logo-black.svg);
 }
+
+/* blue logo colour */
 
 .logo-blue {
 	background-image: url(/resources/logo/logo-blue.svg);
 }
 
+/* fuschia logo colour */
+
 .logo-fuschia {
 	background-image: url(/resources/logo/logo-fuschia.svg);
 }
+
+/* green logo colour */
 
 .logo-green {
 	background-image: url(/resources/logo/logo-green.svg);
 }
 
+/* grey logo colour */
+
 .logo-grey {
 	background-image: url(/resources/logo/logo-grey.svg);
 }
+
+/* orange logo colour */
 
 .logo-orange {
 	background-image: url(/resources/logo/logo-orange.svg);
 }
 
+/* purple logo colour */
+
 .logo-purple {
 	background-image: url(/resources/logo/logo-purple.svg);
 }
+
+/* red logo colour */
 
 .logo-red {
 	background-image: url(/resources/logo/logo-red.svg);
 }
 
+/* teal logo colour */
+
 .logo-teal {
 	background-image: url(/resources/logo/logo-teal.svg);
 }
+
+/* yellow logo colour */
 
 .logo-yellow {
 	background-image: url(/resources/logo/logo-yellow.svg);
 }
 
+/* camera logo image */
+
 .logo-camera {
 	background-image: url(/resources/logo/logo-camera.svg);
 }
+
+/* color logo image */
 
 .logo-color {
 	background-image: url(/resources/logo/logo-color.svg);
 }
 
+/* controls logo image */
+
 .logo-controls {
 	background-image: url(/resources/logo/logo-controls.svg);
 }
+
+/* details logo image */
 
 .logo-details {
 	background-image: url(/resources/logo/logo-details.svg);
 }
 
+/* drawer logo image */
+
 .logo-drawer {
 	background-image: url(/resources/logo/logo-drawer.svg);
 }
+
+/* edge logo image */
 
 .logo-edge {
 	background-image: url(/resources/logo/logo-edge.svg);
 }
 
+/* paypal logo image */
+
 .logo-paypal {
 	background-image: url(/resources/logo/logo-paypal.svg);
 }
+
+/* studworx logo image */
 
 .logo-studworx {
 	background-image: url(/resources/logo/logo-studworx.svg);
 }
 
+/* baseplate logo image */
+
 .logo-baseplate {
 	background-image: url(/resources/logo/logo-baseplate.svg);
 }
+
+/* grid logo image */
 
 .logo-grid {
 	background-image: url(/resources/logo/logo-grid.svg);
 }
 
+/* wireframe logo image */
+
 .logo-wireframe {
 	background-image: url(/resources/logo/logo-wireframe.svg);
 }
 
+/* console logo image */
+
 .logo-console {
 	background-image: url(/resources/logo/logo-console.svg);
 }
+
+/* disabled logo */
 
 .logo-disabled {
 	background-image: url(/resources/logo/logo-disabled.svg);

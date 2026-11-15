@@ -1,8 +1,12 @@
+/* work in progress card */
+
 .work-in-progress {
 	color: #dc2a30ff;
 	position: relative;
 	z-index: 0;
 }
+
+/* work in progress stripes */
 
 .work-in-progress::before {
 	background: repeating-linear-gradient(

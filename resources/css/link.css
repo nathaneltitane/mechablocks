@@ -1,9 +1,13 @@
+/* plain links */
+
 a {
 	color: #666666ff;
 	display: block;
 	border: none;
 	outline: none;
 }
+
+/* link states without underline */
 
 a:active,
 a:focus,
@@ -12,6 +16,8 @@ a:visited {
 	text-decoration: none;
 	outline: none;
 }
+
+/* link hover and press */
 
 a:active,
 a:hover {
@@ -25,6 +31,8 @@ a:hover {
 p a {
 	display: inline;
 }
+
+/* drawer links */
 
 .drawer a {
 	margin: 0px 0px 0px 0px;

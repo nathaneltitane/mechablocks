@@ -1,54 +1,82 @@
+/* left aligned text */
+
 .text-left {
 	text-align: left;
 }
+
+/* centred text */
 
 .text-center {
 	text-align: center;
 }
 
+/* right aligned text */
+
 .text-right {
 	text-align: right;
 }
+
+/* justified text */
 
 .text-justify {
 	text-align: justify;
 }
 
+/* bold text weight */
+
 .text-bold {
 	font-weight: bold;
 }
+
+/* bolder text weight */
 
 .text-bolder {
 	font-weight: bolder;
 }
 
+/* lighter text weight */
+
 .text-lighter {
 	font-weight: lighter;
 }
+
+/* normal text weight */
 
 .text-normal {
 	font-weight: normal;
 }
 
+/* extra small text */
+
 .text-extra-small {
 	font-size: 0.45em;
 }
+
+/* small text */
 
 .text-small {
 	font-size: 0.65em;
 }
 
+/* medium text */
+
 .text-medium {
 	font-size: 0.75em;
 }
+
+/* normal text weight */
 
 .text-normal {
 	font-size: 1em;
 }
 
+/* large text */
+
 .text-large {
 	font-size: 1.25em;
 }
+
+/* extra large text */
 
 .text-extra-large {
 	font-size: 1.5em;

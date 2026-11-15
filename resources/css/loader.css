@@ -1,3 +1,5 @@
+/* loading overlay */
+
 #loader {
 	display: block;
 
@@ -9,14 +11,16 @@
 	animation-fill-mode: forwards;
 }
 
+/* loader reveal animation */
+
 @keyframes reveal-loader {
 	0% {opacity: 0;}
 
 	100% {opacity: 1;}
 }
 
+/* loader focus outline */
 
 loader:focus {
 	outline: none;
 }
-

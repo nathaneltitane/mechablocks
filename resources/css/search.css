@@ -1,7 +1,11 @@
+/* search box */
+
 .search {
 	margin: 0px 0px 0px 0px;
 	padding: 10px 10px 10px 10px;
 }
+
+/* search field */
 
 .search .field {
 	background: #ddddddff;
@@ -21,9 +25,13 @@
 	user-select: text;
 }
 
+/* search field focused */
+
 .search .field:focus {
 	background: #eeeeeeff;
 }
+
+/* search chips */
 
 .search .chips {
 	display: flex;
@@ -32,6 +40,8 @@
 	gap: 10px 10px;
 	margin: 0px 10px 0px 10px;
 }
+
+/* search chip */
 
 .search .chip {
 	background: #ccccccff;
@@ -47,6 +57,8 @@
 
 @media (min-width: 800px) {
 
+	/* search chip */
+
 	.search .chip {
 		flex-grow: 1;
 	}
@@ -59,14 +71,20 @@
 	color: #222222ff;
 }
 
+/* search chip pressed */
+
 .search .chip.active {
 	background: #eeeeeeff;
 	color: #222222ff;
 }
 
+/* search chip in progress */
+
 .search .chip.progress {
 	background: #ffd100ff;
 }
+
+/* search count */
 
 .search .count {
 	margin: 10px 10px 0px 10px;
@@ -78,11 +96,15 @@
 	animation: reveal-search 0.5s ease;
 }
 
+/* search reveal animation */
+
 @keyframes reveal-search {
 	0% {opacity: 0; transform: translateY(10px);}
 
 	100% {opacity: 1; transform: none;}
 }
+
+/* hidden model cards */
 
 .model.hide {
 	display: none;
