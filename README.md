@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/nathaneltitane/mechablocks/main/resources/logo/logo-mechablocks.svg" alt="MechaBlocks"><br><b>Custom LEGO® mecha models</b><br>WHERE LEGO® MEETS OPEN SOURCE.</p>
+<p align="center"><img src="https://raw.githubusercontent.com/nathaneltitane/mechablocks/main/resources/logo/logo-github.svg" alt="MechaBlocks"><br><b>Custom LEGO® mecha models</b><br>WHERE LEGO® MEETS OPEN SOURCE.</p>
 
 ---
 
