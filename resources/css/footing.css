@@ -23,7 +23,16 @@
 /* footing links above the canvas */
 
 .footing a {
+	color: #000000ff;
+	font-weight: bold;
+
 	pointer-events: auto;
+}
+
+/* footing link hover */
+
+.footing a:hover {
+	color: #666666ff;
 }
 
 /* footing reveal animation */
