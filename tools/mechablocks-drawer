@@ -471,17 +471,17 @@ do
 
 content_cards+="$(cat << MODEL-DRAWER-CARD
 
-						<a class="card${state_active}" href="/${directory_mode}" data-title="${title_card}" data-pieces="${count_pieces_mode}">
+							<a class="card${state_active}" href="/${directory_mode}" data-title="${title_card}" data-pieces="${count_pieces_mode}">
 
-							<img src="/${directory_mode}/renders/thumbnail/thumbnail.png?version=${version_mode}" alt="${title_mode} LEGO® MOC - ${text_category}"/>
+								<img src="/${directory_mode}/renders/thumbnail/thumbnail.png?version=${version_mode}" alt="${title_mode} LEGO® MOC - ${text_category}"/>
 
-						</a>
+							</a>
 MODEL-DRAWER-CARD
 )"$'\n'
 
 content_segments+="$(cat << MODEL-DRAWER-SEGMENT
 
-							<div class="segment${state_active}"></div>
+								<div class="segment${state_active}"></div>
 MODEL-DRAWER-SEGMENT
 )"$'\n'
 
@@ -497,9 +497,13 @@ MODEL-DRAWER-CHIP
 
 content_link="$(cat << MODEL-DRAWER-STACK
 					<div class="stack">
+
+						<div class="frame">
 ${content_cards}
-						<div class="flex flex-column edge">
+							<div class="flex flex-column edge">
 ${content_segments}
+							</div>
+
 						</div>
 
 						<div class="flex flex-row flex-center flex-wrap chips">
