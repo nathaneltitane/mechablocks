@@ -85,6 +85,39 @@ $( document ).ready ( function ( ) {
 
     } );
 
+	// first touch spreads stacked mode cards
+
+	$( document ).on ( 'click', '.stack .card', function ( event ) {
+
+		var stack = $( this ).closest ( '.stack' );
+
+		if (
+			! stack.hasClass ( 'open' ) &&
+			! window.matchMedia ( '(hover: hover)' ).matches
+		) {
+
+			event.preventDefault ( );
+
+			$( '.stack.open' ).removeClass ( 'open' );
+
+			stack.addClass ( 'open' );
+
+		}
+
+	} );
+
+	// touch elsewhere folds the stacks
+
+	$( document ).on ( 'click', function ( event ) {
+
+		if ( ! $( event.target ).closest ( '.stack' ).length ) {
+
+			$( '.stack.open' ).removeClass ( 'open' );
+
+		}
+
+	} );
+
     // keyboard
 
     $( document ).on ( 'keyup', function ( event ) {

@@ -1,0 +1,110 @@
+/* stacked mode cards */
+
+.stack {
+	aspect-ratio: 1 / 1;
+
+	position: relative;
+}
+
+/* card edges behind the front card */
+
+.stack .card {
+	background-color: #bbbbbbff;
+	border-left: 1px solid #999999ff;
+	border-radius: 3px 3px 3px 3px;
+	margin: 10px 0px 10px 0px;
+	overflow: hidden;
+
+	flex: 0 0 10px;
+
+	position: relative;
+
+	transition: flex 0.4s ease, margin 0.4s ease, background-color 0.4s ease;
+}
+
+/* deeper cards sit further back */
+
+.stack .card:nth-child(3) {
+	margin: 20px 0px 20px 0px;
+}
+
+/* deepest cards sit furthest back */
+
+.stack .card:nth-child(n+4) {
+	margin: 30px 0px 30px 0px;
+}
+
+/* front card fills the slot */
+
+.stack .card:first-child {
+	background-color: transparent;
+	border-left: none;
+	margin: 0px 0px 0px 0px;
+
+	flex: 1 1 0px;
+}
+
+/* whole model inside each card */
+
+.stack .card img {
+	height: 100%;
+	width: 100%;
+
+	object-fit: contain;
+
+	transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* back cards show only their edge */
+
+.stack .card:not(:first-child) img,
+.stack .card:not(:first-child) .caption {
+	opacity: 0;
+}
+
+/* mode name on each card */
+
+.stack .caption {
+	background-color: #ffffffcc;
+	border-radius: 3px 3px 3px 3px;
+	color: #333333ff;
+	font-size: 0.75em;
+	margin: 0px auto 0px auto;
+	padding: 0px 5px 0px 5px;
+	width: fit-content;
+
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	right: 5px;
+
+	text-align: center;
+
+	transition: opacity 0.4s ease;
+}
+
+/* cards spread side by side */
+
+.stack:hover .card,
+.stack.open .card {
+	background-color: transparent;
+	border-left: none;
+	margin: 0px 0px 0px 0px;
+
+	flex: 1 1 0px;
+}
+
+/* every mode shown once spread */
+
+.stack:hover .card img,
+.stack:hover .card .caption,
+.stack.open .card img,
+.stack.open .card .caption {
+	opacity: 1;
+}
+
+/* picked card zooms slightly */
+
+.stack .card:hover img {
+	transform: scale(1.05);
+}

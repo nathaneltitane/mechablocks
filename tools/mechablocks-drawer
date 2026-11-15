@@ -384,9 +384,109 @@ do
 		if [[ -f "${directory_root}/${directory_model}"/drawer ]]
 		then
 
+			# model and its other modes
+
+			list_modes=( "${directory_model}" )
+
+			if [[ -f "${directory_root}/${directory_model}"/modes ]]
+			then
+				for mode_model in $(cat "${directory_root}/${directory_model}"/modes)
+				do
+
+					# mode folder from the model name
+
+					directory_mode="${directory_model}"
+
+					suffix_mode="${directory_mode##*-}"
+
+					unset state_keyword
+
+					if [[ "${suffix_mode}" = "super" ]]
+					then
+						state_keyword=keyword
+
+						directory_mode="${directory_mode%-super}"
+
+						suffix_mode="${directory_mode##*-}"
+					fi
+
+					directory_mode="${directory_mode%"${suffix_mode}"}${mode_model}"
+
+					if [[ "${state_keyword}" = "keyword" ]]
+					then
+						directory_mode="${directory_mode}-super"
+					fi
+
+					# only modes with a page and thumbnail
+
+					if [[ -f "${directory_root}/${directory_mode}"/title ]] &&
+						[[ -f "${directory_root}/${directory_mode}"/renders/thumbnail/thumbnail.png ]] &&
+						[[ " ${list_modes[*]} " != *" ${directory_mode} "* ]]
+					then
+						list_modes+=( "${directory_mode}" )
+					fi
+
+				done
+			fi
+
+			# single link or stacked mode cards
+
+			if [[ ${#list_modes[@]} -gt 1 ]]
+			then
+				content_link="					<div class=\"flex flex-row stack\">"$'\n'
+
+				unset text_modes
+
+				for directory_mode in "${list_modes[@]}"
+				do
+
+					# mode name from its title
+
+					title_mode=$(cat "${directory_root}/${directory_mode}"/title)
+
+					title_mode="${title_mode//<\/br>/}"
+
+					label_mode="${title_mode##*// }"
+
+					text_modes="${text_modes} ${label_mode}"
+
+					version_mode="$(date -r "${directory_root}/${directory_mode}/renders/thumbnail/thumbnail.png" +%s 2> "${sink}")"
+
+content_link+="$(cat << MODEL-DRAWER-MODE
+
+						<a class="card" href="/${directory_mode}">
+
+							<img src="/${directory_mode}/renders/thumbnail/thumbnail.png?version=${version_mode}" alt="${title_mode} LEGO® MOC - ${text_category}"/>
+
+							<div class="caption text-bold">${label_mode}</div>
+
+						</a>
+MODEL-DRAWER-MODE
+)"$'\n'
+
+				done
+
+				content_link+=$'\n'"					</div>"
+			else
+				unset text_modes
+
+content_link="$(cat << MODEL-DRAWER-LINK
+					<a class="flex flex-column flex-middle" href="/${directory_model}">
+
+						<div class="flex-cell">
+
+							<img src="/${directory_thumbnail}/thumbnail.png?version=${version_thumbnail}" alt="${text_title} LEGO® MOC - ${text_category}"/>
+
+						</div>
+
+					</a>
+MODEL-DRAWER-LINK
+)"
+			fi
+
 cat << MODEL-DRAWER-CONTENT ->> "${directory_modules}"/drawer.html
 
-			<div class="flex flex-column model" data-series="${title_category}" data-search="${text_title} ${title_category//|/ } ${count_pieces} PIECES">
+			<div class="flex flex-column model" data-series="${title_category}" data-search="${text_title}${text_modes} ${title_category//|/ } ${count_pieces} PIECES">
 
 				<div class="container ${class_status}">
 
@@ -406,15 +506,7 @@ cat << MODEL-DRAWER-CONTENT ->> "${directory_modules}"/drawer.html
 
 					</div>
 
-					<a class="flex flex-column flex-middle" href="/${directory_model}">
-
-						<div class="flex-cell">
-
-							<img src="/${directory_thumbnail}/thumbnail.png?version=${version_thumbnail}" alt="${text_title} LEGO® MOC - ${text_category}"/>
-
-						</div>
-
-					</a>
+${content_link}
 
 				</div>
 
