@@ -57,3 +57,10 @@
 	}
 
 }
+
+/* error pages show grey models */
+
+#background.grey,
+#background-overlay.grey {
+	filter: grayscale(1);
+}
