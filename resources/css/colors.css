@@ -17,10 +17,27 @@
 }
 
 .colors {
-	aspect-ratio: 1/1;
 	border-radius: 0px 0px 0px 0px;
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
+}
+
+/* rows stretch to fill the panel */
+
+#colors .grid {
+	min-height: 100%;
+
+	grid-auto-rows: 1fr;
+}
+
+/* tiles stay at least square */
+
+.colors::before {
+	content: "";
+
+	display: block;
+
+	padding-top: 100%;
 }
 
 @keyframes reveal-colors {
