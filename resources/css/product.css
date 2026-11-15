@@ -27,6 +27,12 @@
 	transition: transform 0.4s ease;
 }
 
+/* no baseline gap under drawer images */
+
+.drawer a .flex-cell img {
+	display: block;
+}
+
 /* card image zoom on hover */
 
 .drawer a:hover .flex-cell img,

@@ -85,34 +85,58 @@ $( document ).ready ( function ( ) {
 
     } );
 
-	// first touch spreads stacked mode cards
+	// focus one mode of a stacked card
 
-	$( document ).on ( 'click', '.stack .card', function ( event ) {
+	function stack_focus ( stack, index ) {
 
-		var stack = $( this ).closest ( '.stack' );
+		var card = stack.find ( '.card' ).eq ( index );
 
-		if (
-			! stack.hasClass ( 'open' ) &&
-			! window.matchMedia ( '(hover: hover)' ).matches
-		) {
+		var label = $( '<div>' ).text ( card.data ( 'title' ) ).html ( ) + ' </br> ' + card.data ( 'pieces' ) + ' PIECES';
 
-			event.preventDefault ( );
+		stack.find ( '.card, .segment, .chip' ).removeClass ( 'active' );
 
-			$( '.stack.open' ).removeClass ( 'open' );
+		card.addClass ( 'active' );
 
-			stack.addClass ( 'open' );
+		stack.find ( '.segment' ).eq ( index ).addClass ( 'active' );
+
+		stack.find ( '.chip' ).eq ( index ).addClass ( 'active' );
+
+		stack.closest ( '.container' ).find ( '.label' ).first ( ).html ( label );
+
+	}
+
+	// hovering a chip or dash shows its mode
+
+	$( document ).on ( 'mouseenter', '.stack .chip, .stack .segment', function ( ) {
+
+		stack_focus ( $( this ).closest ( '.stack' ), $( this ).index ( ) );
+
+	} );
+
+	// leaving the card returns to its own mode
+
+	$( document ).on ( 'mouseleave', '.stack', function ( ) {
+
+		if ( window.matchMedia ( '(hover: hover)' ).matches ) {
+
+			stack_focus ( $( this ), 0 );
 
 		}
 
 	} );
 
-	// touch elsewhere folds the stacks
+	// first touch on a chip shows its mode
 
-	$( document ).on ( 'click', function ( event ) {
+	$( document ).on ( 'click', '.stack .chip', function ( event ) {
 
-		if ( ! $( event.target ).closest ( '.stack' ).length ) {
+		if (
+			! $( this ).hasClass ( 'active' ) &&
+			! window.matchMedia ( '(hover: hover)' ).matches
+		) {
 
-			$( '.stack.open' ).removeClass ( 'open' );
+			event.preventDefault ( );
+
+			stack_focus ( $( this ).closest ( '.stack' ), $( this ).index ( ) );
 
 		}
 

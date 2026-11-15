@@ -433,14 +433,20 @@ do
 
 			if [[ ${#list_modes[@]} -gt 1 ]]
 			then
-				content_link="					<div class=\"flex flex-row stack\">"$'\n'
-
 				unset text_modes
+
+				unset content_cards
+
+				unset content_segments
+
+				unset content_chips
+
+				state_active=" active"
 
 				for directory_mode in "${list_modes[@]}"
 				do
 
-					# mode name from its title
+					# mode name and pieces
 
 					title_mode=$(cat "${directory_root}/${directory_mode}"/title)
 
@@ -448,25 +454,61 @@ do
 
 					label_mode="${title_mode##*// }"
 
+					count_pieces_mode=$(cat "${directory_root}/${directory_mode}"/pieces)
+
 					text_modes="${text_modes} ${label_mode}"
 
 					version_mode="$(date -r "${directory_root}/${directory_mode}/renders/thumbnail/thumbnail.png" +%s 2> "${sink}")"
 
-content_link+="$(cat << MODEL-DRAWER-MODE
+					# drawer title for the model itself
 
-						<a class="card" href="/${directory_mode}">
+					if [[ "${directory_mode}" = "${directory_model}" ]]
+					then
+						title_card="${title_model}"
+					else
+						title_card="${title_mode}"
+					fi
+
+content_cards+="$(cat << MODEL-DRAWER-CARD
+
+						<a class="card${state_active}" href="/${directory_mode}" data-title="${title_card}" data-pieces="${count_pieces_mode}">
 
 							<img src="/${directory_mode}/renders/thumbnail/thumbnail.png?version=${version_mode}" alt="${title_mode} LEGO® MOC - ${text_category}"/>
 
-							<div class="caption text-bold">${label_mode}</div>
-
 						</a>
-MODEL-DRAWER-MODE
+MODEL-DRAWER-CARD
 )"$'\n'
+
+content_segments+="$(cat << MODEL-DRAWER-SEGMENT
+
+							<div class="segment${state_active}"></div>
+MODEL-DRAWER-SEGMENT
+)"$'\n'
+
+content_chips+="$(cat << MODEL-DRAWER-CHIP
+
+							<a class="chip${state_active}" href="/${directory_mode}">${label_mode}</a>
+MODEL-DRAWER-CHIP
+)"$'\n'
+
+					unset state_active
 
 				done
 
-				content_link+=$'\n'"					</div>"
+content_link="$(cat << MODEL-DRAWER-STACK
+					<div class="stack">
+${content_cards}
+						<div class="flex flex-column edge">
+${content_segments}
+						</div>
+
+						<div class="flex flex-row flex-center flex-wrap chips">
+${content_chips}
+						</div>
+
+					</div>
+MODEL-DRAWER-STACK
+)"
 			else
 				unset text_modes
 
