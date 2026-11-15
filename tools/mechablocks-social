@@ -279,15 +279,23 @@ page_write () {
 
 	<head>
 
+		<!-- character set -->
+
 		<meta charset="utf-8">
 
+		<!-- card styles -->
+
 		<style>
+
+			/* base font and sizing */
 
 			* {
 				font-family: monospace;
 				box-sizing: border-box;
 				margin: 0;
 			}
+
+			/* card size and colours */
 
 			body {
 				width: ${width_card}px;
@@ -298,6 +306,8 @@ page_write () {
 				overflow: hidden;
 			}
 
+			/* faded picture behind the card */
+
 			.backdrop {
 				position: absolute;
 				inset: 0;
@@ -305,11 +315,15 @@ page_write () {
 				opacity: ${opacity_backdrop};
 			}
 
+			/* centred ascii art */
+
 			.backdrop.ascii {
 				display: flex;
 				align-items: center;
 				justify-content: center;
 			}
+
+			/* ascii art text */
 
 			.backdrop pre {
 				font-size: 14px;
@@ -317,11 +331,15 @@ page_write () {
 				color: ${color_text};
 			}
 
+			/* title in the top corner */
+
 			.head {
 				position: absolute;
 				top: 28px;
 				left: 32px;
 			}
+
+			/* card title */
 
 			h1 {
 				color: ${color_heading};
@@ -329,10 +347,14 @@ page_write () {
 				line-height: 1.1;
 			}
 
+			/* card subtitle */
+
 			.head p {
 				font-size: 22px;
 				margin-top: 6px;
 			}
+
+			/* logo in the middle */
 
 			.logo {
 				position: absolute;
@@ -343,6 +365,8 @@ page_write () {
 				transform: translate(-50%, -50%);
 			}
 
+			/* tagline in the bottom corner */
+
 			.foot {
 				position: absolute;
 				right: 32px;
@@ -350,12 +374,16 @@ page_write () {
 				text-align: right;
 			}
 
+			/* card tagline */
+
 			.foot h2 {
 				color: ${color_heading};
 				font-size: 34px;
 				letter-spacing: .3em;
 				margin-right: -.3em;
 			}
+
+			/* card domain */
 
 			.foot p {
 				font-size: 20px;
@@ -368,12 +396,18 @@ page_write () {
 
 	<body>
 
-${text_backdrop}		<div class="head">
+${text_backdrop}		<!-- title and subtitle -->
+
+		<div class="head">
 			<h1>${title_card}</h1>
 			<p>${subtitle_card}</p>
 		</div>
 
+		<!-- logo -->
+
 		${text_logo}
+
+		<!-- tagline and domain -->
 
 		<div class="foot">
 			<h2>${tagline_card}</h2>
