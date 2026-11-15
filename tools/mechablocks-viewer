@@ -6096,9 +6096,9 @@ cat << 3D-MODEL-PAGE-HELPERS ->> "${directory_model}/index.html"
 
 					</div>
 
-					<!-- shop -->
+					<!-- bricklink -->
 
-					<div id="shop">
+					<div id="bricklink">
 
 					</div>
 

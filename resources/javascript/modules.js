@@ -34,9 +34,9 @@ $( function ( ) {
 
 	} ) ;
 
-	$.get ( '/resources/modules/shop.html', function ( data ) {
+	$.get ( '/resources/modules/bricklink.html', function ( data ) {
 
-		$( '#shop' ).append ( data ) ;
+		$( '#bricklink' ).append ( data ) ;
 
 	} ) ;
 
