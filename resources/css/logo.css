@@ -135,3 +135,9 @@
 .logo-disabled {
 	background-image: url(/resources/logo/logo-disabled.svg);
 }
+
+/* error pages logo */
+
+.logo-error {
+	background-image: url(/resources/logo/logo-error.svg);
+}
