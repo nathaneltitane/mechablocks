@@ -1521,15 +1521,23 @@
 
 					function generate_label ( message, color ) {
 
-						const canvas = document.createElement ( 'canvas' );
+						const canvas = document.createElement ( 'canvas' ) ;
 
-						// set label canvas ratio -  1:1
+						const label_context = canvas.getContext ( '2d' ) ;
 
-						canvas.width = 1024;
+						// large text keeps zoomed labels sharp
 
-						canvas.height = 1024;
+						const font_size = 128 ;
 
-						const label_context = canvas.getContext ( '2d' );
+						const font = 'bold ' + font_size + 'px monospace' ;
+
+						// canvas fits the text
+
+						label_context.font = font ;
+
+						canvas.width = Math.ceil ( label_context.measureText ( message ).width + font_size ) ;
+
+						canvas.height = Math.ceil ( font_size * 1.5 ) ;
 
 						// label background
 
@@ -1557,7 +1565,7 @@
 
 						// text font
 
-						label_context.font = 'bold 20px monospace';
+						label_context.font = font ;
 
 						// text font alignment
 
@@ -1577,13 +1585,13 @@
 
 						const sprite = new THREE.Sprite ( sprite_material );
 
-						// set label scale factor
+						// same world size as the former 20px text on 1024px
 
-						const label_scale = ( 0.008 * 32 );
+						const label_scale = ( 0.008 * 32 ) / 1024 * 20 / font_size ;
 
 						// set sprite scale
 
-						sprite.scale.set ( label_scale, label_scale, label_scale );
+						sprite.scale.set ( canvas.width * label_scale, canvas.height * label_scale, 1 ) ;
 
 						return sprite;
 
@@ -1664,15 +1672,23 @@
 
 					function generate_label ( message, color ) {
 
-						const canvas = document.createElement ( 'canvas' );
+						const canvas = document.createElement ( 'canvas' ) ;
 
-						// set label canvas ratio - 1:1
+						const label_context = canvas.getContext ( '2d' ) ;
 
-						canvas.width = 1024;
+						// large text keeps zoomed labels sharp
 
-						canvas.height = 1024;
+						const font_size = 128 ;
 
-						const label_context = canvas.getContext ( '2d' );
+						const font = 'bold ' + font_size + 'px monospace' ;
+
+						// canvas fits the text
+
+						label_context.font = font ;
+
+						canvas.width = Math.ceil ( label_context.measureText ( message ).width + font_size ) ;
+
+						canvas.height = Math.ceil ( font_size * 1.5 ) ;
 
 						// label background
 
@@ -1700,7 +1716,7 @@
 
 						// text font
 
-						label_context.font = 'bold 20px monospace';
+						label_context.font = font ;
 
 						// text font alignment
 
@@ -1720,13 +1736,13 @@
 
 						const sprite = new THREE.Sprite ( sprite_material );
 
-						// set label scale factor
+						// same world size as the former 20px text on 1024px
 
-						const label_scale = ( 0.008 * 32 );
+						const label_scale = ( 0.008 * 32 ) / 1024 * 20 / font_size ;
 
 						// set sprite scale
 
-						sprite.scale.set ( label_scale, label_scale, label_scale );
+						sprite.scale.set ( canvas.width * label_scale, canvas.height * label_scale, 1 ) ;
 
 						return sprite;
 
@@ -2742,7 +2758,7 @@
 
 					loader.load (
 
-						'/resources/minifigures/exports/minifigure-yellow.dae',
+						'/resources/minifigures/exports/minifigure-orange.dae',
 
 						function ( collada ) {
 
@@ -2965,7 +2981,7 @@
 
 							self.minifigure_loading = false;
 
-							console.error ( 'minifigure [ status ] : load failed - /resources/minifigures/exports/minifigure-yellow.dae', error );
+							console.error ( 'minifigure [ status ] : load failed - /resources/minifigures/exports/minifigure-orange.dae', error );
 
 						}
 

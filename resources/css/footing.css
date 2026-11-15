@@ -13,7 +13,19 @@
 
 	opacity: 0;
 
+	z-index: 2;
+
+	pointer-events: none;
+
 	animation: reveal-footing 0.75s ease forwards;
+}
+
+/* footing links above the canvas */
+
+.footing a {
+	cursor: pointer;
+
+	pointer-events: auto;
 }
 
 /* footing reveal animation */
