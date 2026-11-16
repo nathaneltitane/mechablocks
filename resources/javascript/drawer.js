@@ -26,6 +26,8 @@ $( document ).ready ( function ( ) {
 
     var classes = classes.join ( ' ' );
 
+    // drawer opens
+
     function show ( ) {
 
     $( ids ).addClass ( classes );
@@ -40,6 +42,8 @@ $( document ).ready ( function ( ) {
 
     };
 
+    // drawer closes
+
     function hide ( ) {
 
         drawer.removeClass ( 'show' );
@@ -53,6 +57,8 @@ $( document ).ready ( function ( ) {
         }, 500 );
 
     };
+
+    // drawer opens or closes
 
     function toggle ( ) {
 
@@ -69,11 +75,15 @@ $( document ).ready ( function ( ) {
         }
     };
 
+    // browse button opens the drawer
+
     $( '#browse' ).click ( function ( event ) {
 
         show ( ) ;
 
     } );
+
+    // click on a section closes it
 
     $( '.section' ).click ( function ( event ) {
 

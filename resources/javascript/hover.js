@@ -16,6 +16,8 @@ $( document ).ready ( function ( ) {
 
 		var current = step;
 
+		// latest hover step only
+
 		function check ( ) {
 
 			if ( current !== step ) {
@@ -47,6 +49,8 @@ $( document ).ready ( function ( ) {
 		check ( );
 
 	};
+
+	// hover fades the overlay in
 
 	background.on ( 'mouseenter touchstart', function ( event ) {
 
@@ -93,6 +97,8 @@ $( document ).ready ( function ( ) {
 		} );
 
 	});
+
+	// leaving fades the overlay out
 
 	background.on ( 'mouseleave touchend touchcancel', function ( event ) {
 

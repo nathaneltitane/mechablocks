@@ -12,6 +12,8 @@ $( document ).ready ( function ( ) {
 
 	var phone = window.matchMedia ( '(max-width: 520px), (max-height: 560px)' );
 
+	// logo placed on phones
+
 	function place ( ) {
 
 		if ( ! phone.matches ) {
@@ -33,6 +35,8 @@ $( document ).ready ( function ( ) {
 	// the footing moves up when the footer opens
 
 	new MutationObserver ( place ).observe ( foot [ 0 ], { attributes: true, attributeFilter: [ 'class' ] } );
+
+	// logo follows resizing
 
 	$( window ).on ( 'resize', place );
 

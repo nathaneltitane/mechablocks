@@ -15,7 +15,7 @@
 	transition: all 0.5s ease;
 }
 
-/* responsive flex width */
+/* flex width responsive */
 
 .flex-responsive {
 
@@ -23,31 +23,31 @@
 
 }
 
-/* inline flex container */
+/* flex container inline */
 
 .flex-inline {
 	display: inline-flex;
 }
 
-/* column direction */
+/* items in a column */
 
 .flex-column {
 	flex-direction: column;
 }
 
-/* reversed column direction */
+/* items in a reversed column */
 
 .flex-column-reverse {
 	flex-direction: column-reverse;
 }
 
-/* row direction */
+/* items in a row */
 
 .flex-row {
 	flex-direction: row;
 }
 
-/* reversed row direction */
+/* items in a reversed row */
 
 .flex-row-reverse {
 	flex-direction: row-reverse;
@@ -65,19 +65,19 @@
 	justify-content: flex-end;
 }
 
-/* items packed centre */
+/* items packed center */
 
 .flex-center {
 	justify-content: center;
 }
 
-/* space around items */
+/* items spaced around */
 
 .flex-around {
 	justify-content: space-around;
 }
 
-/* space between items */
+/* items spaced between */
 
 .flex-between {
 	justify-content: space-between;
@@ -125,43 +125,43 @@
 	flex-wrap: wrap-reverse;
 }
 
-/* full width cell */
+/* cell full width */
 
 .flex-1 {
 	width: 100%;
 }
 
-/* half width cell */
+/* cell half width */
 
 .flex-2 {
 	width: 50%;
 }
 
-/* third width cell */
+/* cell third width */
 
 .flex-3 {
 	width: 30%;
 }
 
-/* quarter width cell */
+/* cell quarter width */
 
 .flex-4 {
 	width: 25%;
 }
 
-/* fifth width cell */
+/* cell fifth width */
 
 .flex-5 {
 	width: 20%;
 }
 
-/* growing flex cell */
+/* cell shares the space */
 
 .flex-cell {
 	flex: 1;
 }
 
-/* narrow width cell */
+/* cell narrow width */
 
 .flex-6 {
 	width: 15%;
@@ -197,7 +197,7 @@
 	align-self: flex-end;
 }
 
-/* cell aligned to centre */
+/* cell aligned to middle */
 
 .flex-cell-center {
 	align-self: center;

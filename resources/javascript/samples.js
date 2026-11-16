@@ -32,6 +32,8 @@ $( document ).ready ( function ( ) {
 
     var classes = classes.join ( ' ' );
 
+    // samples panel opens
+
     function show () {
 
         samples.removeClass ( 'hide' );
@@ -43,6 +45,8 @@ $( document ).ready ( function ( ) {
         }, 250 );
 
     };
+
+    // samples panel closes
 
     function hide ( ) {
 
@@ -57,6 +61,8 @@ $( document ).ready ( function ( ) {
         }, 500 );
 
     };
+
+    // samples panel opens or closes
 
     function toggle ( ) {
 
@@ -73,17 +79,23 @@ $( document ).ready ( function ( ) {
         }
     };
 
+    // paypal button toggles samples
+
     $( '#paypal' ).click ( function ( event ) {
 
         toggle ( ) ;
 
     } );
 
+    // click on samples toggles them
+
     $( '#samples' ).click ( function ( event ) {
 
         toggle ( ) ;
 
     } );
+
+    // canvas click closes samples
 
     $( '#canvas' ).click ( function ( event ) {
 

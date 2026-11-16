@@ -26,6 +26,8 @@ $( document ).ready ( function ( ) {
 
 	} );
 
+	// series filter chip
+
 	function chip ( name, label ) {
 
 		var button = $( '<button class="chip" type="button"></button>' ).text ( label );
@@ -107,6 +109,8 @@ $( document ).ready ( function ( ) {
 		count.text ( shown ? shown + ( shown === 1 ? ' MODEL' : ' MODELS' ) : 'NO MODELS MATCH YOUR SEARCH' );
 
 	};
+
+	// search filters while typing
 
 	field.on ( 'input', filter );
 

@@ -334,6 +334,8 @@ cat << 3D-MODEL-PAGE-HEADER -> "${directory_model}/index.html"
 
 			window.dataLayer = window.dataLayer || [];
 
+			// google analytics queue
+
 			function gtag ( ) { dataLayer.push ( arguments ) ; }
 
 			gtag ( 'js', new Date ( ) );
@@ -706,6 +708,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 			}
 
+			// viewer setup
+
 			function initialize ( ) {
 
 				// scaling unit - 1 stud = 0.008 m = 20 ldu >>> 1 ldu = 0.0004 m
@@ -821,6 +825,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				var console_overlay_enabled = true;
 
+				// device overlay made once
+
 				function create_device_overlay_if_needed ( ) {
 
 					if ( console_overlay ) return;
@@ -835,6 +841,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 				const os = operating_system ( ) ;
 
 				console.log ( 'operating system [ system ] : ' + os );
+
+				// device overlay on or off
 
 				function set_console_overlay_enabled ( enabled ) {
 
@@ -858,6 +866,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				}
 
+				// device overlay text refresh
+
 				function console_overlay_refresh ( ) {
 
 					if ( ! console_overlay_enabled ) {
@@ -879,6 +889,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					// lines collected first - labels padded to one width
 
 					var console_lines = [ ] ;
+
+					// device overlay line
 
 					function console_overlay_line ( label, context, value ) {
 
@@ -923,11 +935,15 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 					var na = 'N/A' ;
 
+					// on or off text
+
 					function on_off ( value ) {
 
 						return value ? 'on' : 'off' ;
 
 					}
+
+					// vector as text
 
 					function vector_text ( vector, digits ) {
 
@@ -1237,6 +1253,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					const button = document.createElement ( 'button' ) ;
 
 					button.textContent = 'reload viewer' ;
+
+					// button reloads the page
 
 					button.onclick = function ( ) {
 
@@ -1571,6 +1589,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.axesHelper_visible = false;
 
+				// axes helper made once
+
 				this.get_axesHelper = function ( ) {
 
 					if ( ! self.axesHelper ) {
@@ -1584,6 +1604,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					return self.axesHelper;
 
 				}
+
+				// axes helper on or off
 
 				this.axesHelper_ = function ( ) {
 
@@ -1606,6 +1628,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.boundingBox = null;
 
+				// model bounding box
+
 				this.get_boundingBox = function ( ) {
 
 					if ( ! self.boundingBox ) {
@@ -1624,6 +1648,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 				this.bounding_box_helper = null;
 
 				this.bounding_box_helper_visible = false;
+
+				// bounding box helper made once
 
 				this.get_bounding_box_helper = function ( ) {
 
@@ -1745,6 +1771,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				}
 
+				// bounding box helper on or off
+
 				this.bounding_box_helper_ = function ( ) {
 
 					if ( this.bounding_box_helper_visible ) {
@@ -1772,6 +1800,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.camera_helper_visible = false;
 
+				// camera helper made once
+
 				this.get_camera_helper = function ( ) {
 
 					if ( ! self.camera_helper) {
@@ -1785,6 +1815,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					return self.camera_helper;
 
 				}
+
+				// camera helper on or off
 
 				this.camera_helper_ = function ( ) {
 
@@ -1811,6 +1843,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 				this.dimension_labels = null;
 
 				this.dimension_labels_visible = false;
+
+				// dimension labels made once
 
 				this.get_dimension_labels = function ( ) {
 
@@ -1944,6 +1978,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				}
 
+				// dimension labels on or off
+
 				this.dimension_labels_ = function ( ) {
 
 					if ( this.dimension_labels_visible ) {
@@ -1976,6 +2012,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 				this.pieces_count_label = null;
 
 				this.pieces_count_label_visible = false;
+
+				// pieces count label made once
 
 				this.get_pieces_count_label = function ( ) {
 
@@ -2090,6 +2128,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				}
 
+				// pieces count label on or off
+
 				this.pieces_count_label_ = function ( ) {
 
 					if ( this.pieces_count_label_visible ) {
@@ -2124,6 +2164,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.hemisphere_light_helper_visible = false;
 
+				// hemisphere light helper made once
+
 				this.get_hemisphere_light_helper = function ( ) {
 
 					if ( ! self.hemisphere_light_helper ) {
@@ -2137,6 +2179,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					return self.hemisphere_light_helper;
 
 				}
+
+				// hemisphere light helper on or off
 
 				this.hemisphere_light_helper_ = function ( ) {
 
@@ -2164,6 +2208,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.point_light_helper_visible = false;
 
+				// point light helper made once
+
 				this.get_point_light_helper = function ( ) {
 
 					if ( ! self.point_light_helper ) {
@@ -2177,6 +2223,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					return self.point_light_helper;
 
 				}
+
+				// point light helper on or off
 
 				this.point_light_helper_ = function ( ) {
 
@@ -2204,6 +2252,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.directional_light_0_helper_visible = false;
 
+				// first light helper made once
+
 				this.get_directional_light_0_helper = function ( ) {
 
 					if ( ! self.directional_light_0_helper ) {
@@ -2216,6 +2266,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					return self.directional_light_0_helper;
 
 				}
+
+				// first light helper on or off
 
 				this.directional_light_0_helper_ = function ( ) {
 
@@ -2243,6 +2295,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.directional_light_1_helper_visible = false;
 
+				// second light helper made once
+
 				this.get_directional_light_1_helper = function ( ) {
 
 					if ( ! self.directional_light_1_helper ) {
@@ -2256,6 +2310,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					return self.directional_light_1_helper;
 
 				}
+
+				// second light helper on or off
 
 				this.directional_light_1_helper_ = function ( ) {
 
@@ -2283,6 +2339,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.directional_light_2_helper_visible = false;
 
+				// third light helper made once
+
 				this.get_directional_light_2_helper = function ( ) {
 
 					if ( ! self.directional_light_2_helper ) {
@@ -2296,6 +2354,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					return self.directional_light_2_helper;
 
 				}
+
+				// third light helper on or off
 
 				this.directional_light_2_helper_ = function ( ) {
 
@@ -2323,6 +2383,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.spot_light_helper_visible = false;
 
+				// spot light helper made once
+
 				this.get_spot_light_helper = function ( ) {
 
 					if ( ! self.spot_light_helper ) {
@@ -2335,6 +2397,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					return self.spot_light_helper;
 
 				}
+
+				// spot light helper on or off
 
 				this.spot_light_helper_ = function ( ) {
 
@@ -2402,6 +2466,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.polar_grid_helper_visible = false;
 
+				// polar grid made once
+
 				this.get_polar_grid_helper = function ( ) {
 
 					if ( ! self.polar_grid_helper ) {
@@ -2450,6 +2516,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					return self.polar_grid_helper;
 
 				}
+
+				// polar grid on or off
 
 				this.polar_grid_helper_ = function ( ) {
 
@@ -2696,6 +2764,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				}
 
+				// orthogonal grid on or off
+
 				this.orthogonal_grid_helper_ = function ( ) {
 
 					if ( this.orthogonal_grid_helper_visible ) {
@@ -2727,6 +2797,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 				this.height_grid_helper_color_major = green;
 
 				this.height_grid_helper = null;
+
+				// height grid made once
 
 				this.get_height_grid_helper = function ( ) {
 
@@ -3123,11 +3195,15 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 							}
 
+							// size rounded up to studs
+
 							function round_boundary_max_to_stud ( value ) {
 
 								return Math.ceil ( value / stud_width ) * stud_width;
 
 							}
+
+							// height rounded up to plates
 
 							function round_up_to_plate ( value ) {
 
@@ -3459,6 +3535,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					];
 
 					const loader = new ColladaLoader ( ) ;
+
+					// next baseplate that fits
 
 					function load_baseplate_candidate ( index ) {
 
@@ -3847,6 +3925,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				var model_faces_visible = true;
 
+				// wireframe on or off
+
 				this.wireframe_toggle_ = function ( ) {
 
 					wireframe_visible = ! wireframe_visible;
@@ -4132,6 +4212,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 				// camera position toggle cycle
 
 				self.camera_position_cycle_index = 0 ;
+
+				// camera cycles through views
 
 				self.camera_position_cycle_ = function ( ) {
 
@@ -4433,6 +4515,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.orbitControls = null;
 
+				// orbit controls made once
+
 				this.get_orbitControls = function ( ) {
 
 					if ( ! this.orbitControls ) {
@@ -4472,6 +4556,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.transform_controls_enabled = false;
 
+				// transform controls made once
+
 				this.get_transform_controls = function ( ) {
 
 					if ( ! self.transform_controls ) {
@@ -4485,6 +4571,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 						self.transform_controls.showX = false;
 						self.transform_controls.showY = false;
 						self.transform_controls.showZ = false;
+
+						// redraw on each change
 
 						self.transform_controls.addEventListener ( 'change', self.render_frame );
 					}
@@ -4568,6 +4656,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 				this.frames_per_second = null;
 
+				// frame drawn
+
 				this.render = function ( now ) {
 
 					self.render_frame ( );
@@ -4598,6 +4688,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 				// render loop start - ignored when already running
 
 				this.render_running = false;
+
+				// drawing loop starts
 
 				this.render_start = function ( ) {
 
@@ -5228,11 +5320,15 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 						const stud = ldu * 20;
 
+						// size rounded down to studs
+
 						function round_boundary_min ( value ) {
 
 							return Math.floor ( value / stud ) * stud;
 
 						}
+
+						// size rounded up to studs
 
 						function round_boundary_max ( value ) {
 
@@ -5383,6 +5479,8 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 				// client window aspect ratio
 
 				window.addEventListener ( 'resize', self.resize );
+
+				// keys move the model
 
 				window.addEventListener ( 'keydown', self.transformKeys );
 
@@ -5997,7 +6095,7 @@ cat << 3D-MODEL-PAGE-FOOTER ->> "${directory_model}/index.html"
 
 				<!-- footer -->
 
-				<div class="flex flex-row flex-middle flex-around">
+				<div class="footer-inner flex flex-row flex-middle flex-around">
 
 					<!-- start -->
 

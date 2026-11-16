@@ -48,7 +48,7 @@
 /* whole model inside the card */
 
 .stack .card img {
-	border-radius: 3px;
+	border-radius: 3px 3px 3px 3px;
 
 	height: 100%;
 	width: 100%;
@@ -80,7 +80,7 @@
 
 .stack .segment {
 	background-color: #aaaaaaff;
-	border-radius: 1px;
+	border-radius: 1px 1px 1px 1px;
 
 	flex: 1 1 0px;
 

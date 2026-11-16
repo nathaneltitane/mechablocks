@@ -2,6 +2,8 @@
 
 var count = 164;
 
+// zero padded number
+
 function pad ( str, max ) {
 
 	str = str.toString ( );
@@ -21,6 +23,8 @@ var overlay_image = new Image ( );
 var flat_ready = false;
 var overlay_ready = false;
 var dom_ready = false;
+
+// images show once all loaded
 
 function apply ( ) {
 
@@ -48,6 +52,8 @@ function apply ( ) {
 
 }
 
+// flat image ready
+
 image_flat.onload = function ( ) {
 
 	flat_ready = true;
@@ -55,6 +61,8 @@ image_flat.onload = function ( ) {
 	apply ( );
 
 };
+
+// overlay image ready
 
 overlay_image.onload = function ( ) {
 
@@ -66,6 +74,8 @@ overlay_image.onload = function ( ) {
 
 image_flat.src = flat;
 overlay_image.src = overlay;
+
+// page ready
 
 document.addEventListener ( 'DOMContentLoaded', function ( ) {
 

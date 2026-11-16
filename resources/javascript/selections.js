@@ -25,6 +25,8 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 	}
 
+	// selections bar hides
+
 	function selections_hide ( ) {
 
 		selections_parent.classList.remove ( 'show' ) ;
@@ -38,6 +40,8 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 	}
 
+	// selections bar shows
+
 	function selections_show ( ) {
 
 		selections_parent.classList.remove ( 'hide' ) ;
@@ -50,6 +54,8 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 		selections.classList.add ( 'show' ) ;
 
 	}
+
+	// selections tab hides
 
 	function tab_hide ( ) {
 
@@ -67,6 +73,8 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 		selections.classList.add ( 'peek' ) ;
 
 	}
+
+	// selections tab shows
 
 	function tab_show ( ) {
 
@@ -92,6 +100,8 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 	}
 
+	// selections tab opens or closes
+
 	function selections_toggle ( ) {
 
 		if ( open ( ) ) {
@@ -108,11 +118,15 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 	}
 
+	// selections tab is open
+
 	function open ( ) {
 
 		return selections_parent.classList.contains ( 'show' ) ;
 
 	}
+
+	// edge arrows follow the scroll
 
 	function selections_scroll ( ) {
 
@@ -195,11 +209,15 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 	var canvas = document.getElementById ( 'canvas' ) ;
 
+	// event lands on the canvas
+
 	function target ( event ) {
 
 		return canvas && ( event.target === canvas || canvas.contains ( event.target ) ) ;
 
 	}
+
+	// canvas press closes selections
 
 	document.addEventListener ( 'pointerdown', function ( event ) {
 
@@ -246,11 +264,15 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 	}, { passive: false } ) ;
 
+	// arrows update on scroll
+
 	selections.addEventListener ( 'scroll', function ( ) {
 
 		selections_scroll ( ) ;
 
 	} ) ;
+
+	// arrows update on resize
 
 	window.addEventListener ( 'resize', function ( ) {
 

@@ -20,6 +20,8 @@ $( document ).ready ( function ( ) {
 
     if ( $( 'body' ).height() < 1000 ) {
 
+        // mode buttons show
+
         function show ( ) {
 
             $( ids ).removeClass ( 'modes-hide' );
@@ -28,6 +30,8 @@ $( document ).ready ( function ( ) {
 
         };
 
+        // mode buttons hide
+
         function hide ( ) {
 
             $( ids ).removeClass ( 'modes-show' );
@@ -35,6 +39,8 @@ $( document ).ready ( function ( ) {
             $( ids ).addClass ( 'modes-hide' );
 
         };
+
+        // mode buttons show or hide
 
         function toggle ( ) {
 
@@ -51,11 +57,15 @@ $( document ).ready ( function ( ) {
             }
         };
 
+        // hovering the modes hides them
+
         $( '#modes' ).hover ( function ( event ) {
 
             hide ( ) ;
 
         } );
+
+        // hovering the canvas shows modes
 
         $( '#canvas, #footer' ).hover ( function ( event ) {
 

@@ -20,6 +20,8 @@ function footer_init ( ) {
 	var reveal_timeout = null ;
 	var version = Date.now ( ) ;
 
+	// source url with a version
+
 	function source_version ( source ) {
 
 		var url ;
@@ -49,6 +51,8 @@ function footer_init ( ) {
 			return source ;
 		}
 	}
+
+	// footer files skip the cache
 
 	function assets_version ( container ) {
 
@@ -98,6 +102,8 @@ function footer_init ( ) {
 			) ;
 		}
 	}
+
+	// footer loads from its source
 
 	function footer_load ( ) {
 
@@ -175,15 +181,21 @@ function footer_init ( ) {
 		} ) ;
 	}
 
+	// footer element
+
 	function footer_get ( ) {
 
 		return footer_id.querySelector ( '.footer' ) ;
 	}
 
+	// footing text blocks
+
 	function footing_get ( ) {
 
 		return document.querySelectorAll ( '.footing' ) ;
 	}
+
+	// footing text moves up
 
 	function footing_open ( ) {
 
@@ -195,6 +207,8 @@ function footer_init ( ) {
 		}
 	}
 
+	// footing text moves down
+
 	function footing_close ( ) {
 
 		var footing_list = footing_get ( ) ;
@@ -204,6 +218,8 @@ function footer_init ( ) {
 			footing_list [ i ].classList.remove ( 'open' ) ;
 		}
 	}
+
+	// footer hides
 
 	function hide ( ) {
 
@@ -215,6 +231,8 @@ function footer_init ( ) {
 		footer_id.classList.add ( 'hide' ) ;
 	}
 
+	// footer shows
+
 	function show ( ) {
 
 		console.log ( 'footer [ state ] : show' ) ;
@@ -224,6 +242,8 @@ function footer_init ( ) {
 		footer_id.classList.remove ( 'hide' ) ;
 		footer_id.classList.add ( 'show' ) ;
 	}
+
+	// edge arrows follow the scroll
 
 	function scroll ( footer ) {
 
@@ -312,6 +332,8 @@ function footer_init ( ) {
 		}
 	}
 
+	// arrows update after layout
+
 	function scroll_update ( footer ) {
 
 		requestAnimationFrame ( function ( ) {
@@ -322,6 +344,8 @@ function footer_init ( ) {
 			} ) ;
 		} ) ;
 	}
+
+	// footer files report loading
 
 	function assets_bind ( footer ) {
 
@@ -340,6 +364,8 @@ function footer_init ( ) {
 
 			asset.dataset.footerAssetBound = 'true' ;
 
+			// file loaded
+
 			asset.addEventListener ( 'load', function ( event ) {
 
 				console.log (
@@ -350,6 +376,8 @@ function footer_init ( ) {
 				scroll_update ( footer ) ;
 
 			}, { once: true } ) ;
+
+			// file failed
 
 			asset.addEventListener ( 'error', function ( event ) {
 
@@ -364,9 +392,13 @@ function footer_init ( ) {
 		}
 	}
 
+	// footer shows once the model draws
+
 	function reveal ( footer ) {
 
 		var canvas = document.getElementById ( 'canvas' ) ;
+
+		// reveal starts again
 
 		function reveal_start ( ) {
 
@@ -393,6 +425,8 @@ function footer_init ( ) {
 			return ;
 		}
 
+		// canvas has drawn
+
 		function canvas_ready ( ) {
 
 			if (
@@ -416,6 +450,8 @@ function footer_init ( ) {
 
 		canvas_ready ( ) ;
 	}
+
+	// footer events
 
 	function bind ( footer ) {
 
@@ -505,10 +541,14 @@ function footer_init ( ) {
 			{ passive: false }
 		) ;
 
+		// arrows update on scroll
+
 		footer.addEventListener ( 'scroll', function ( ) {
 
 			scroll ( footer ) ;
 		} ) ;
+
+		// arrows update on resize
 
 		window.addEventListener ( 'resize', function ( ) {
 
@@ -516,7 +556,11 @@ function footer_init ( ) {
 		} ) ;
 	}
 
+	// footer watches for changes
+
 	function observe ( footer ) {
+
+		// changes refresh the footer
 
 		footer_observer = new MutationObserver (
 			function ( mutations ) {
@@ -547,6 +591,8 @@ function footer_init ( ) {
 			]
 		} ) ;
 	}
+
+	// footer starts once
 
 	function initialize ( ) {
 
@@ -601,6 +647,8 @@ function footer_init ( ) {
 	}
 
 	hide ( ) ;
+
+	// footer starts once it appears
 
 	bootstrap_observer = new MutationObserver (
 		function ( mutations ) {

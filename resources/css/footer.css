@@ -31,6 +31,12 @@
 	-webkit-overflow-scrolling: touch;
 }
 
+/* footer buttons centered */
+
+.footer-inner {
+	margin: 0px auto 0px auto;
+}
+
 /* footer border */
 
 #footer .border {

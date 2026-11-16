@@ -152,6 +152,8 @@ frobulator.fwd "Writing..."
 cat << 'MODELS-MENU-HEADER' -> "${directory_modules}/"menu.html
 		<script>
 
+			// anchors module loads
+
 			$(function(){
 
 				$.get("/resources/modules/anchors.html", function (data) {

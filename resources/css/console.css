@@ -20,7 +20,7 @@
 	pointer-events: auto;
 
 	padding: 10px 35px 10px 10px;
-	border-radius: 10px;
+	border-radius: 10px 10px 10px 10px;
 
 	background: #333333cc;
 
@@ -79,7 +79,7 @@
 	border: none;
 	border-left: 10px solid #00000000;
 	border-right: 10px solid #00000000;
-	border-radius: 12.5px / 2.5px;
+	border-radius: 12.5px 12.5px 12.5px 12.5px / 2.5px 2.5px 2.5px 2.5px;
 }
 
 /* console overlay scrollbar thumb hover */

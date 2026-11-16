@@ -8,6 +8,8 @@ document.addEventListener ( 'DOMContentLoaded', function ( ) {
 
 	var previewVisible = false
 
+	// first tap shows the preview
+
 	wrapper.addEventListener ( 'click', function ( e ) {
 
 		if ( !previewVisible ) {

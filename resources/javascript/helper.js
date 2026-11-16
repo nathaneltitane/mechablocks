@@ -32,6 +32,8 @@ $( document ).ready ( function ( ) {
 
     var classes = classes.join ( ' ' );
 
+    // helper opens
+
     function show () {
 
     $( ids ).addClass ( classes );
@@ -46,6 +48,8 @@ $( document ).ready ( function ( ) {
 
     };
 
+    // helper closes
+
     function hide ( ) {
 
         helper.removeClass ( 'show' );
@@ -59,6 +63,8 @@ $( document ).ready ( function ( ) {
         }, 500 );
 
     };
+
+    // helper opens or closes
 
     function toggle ( ) {
 
@@ -75,11 +81,15 @@ $( document ).ready ( function ( ) {
         }
     };
 
+    // controls button toggles the helper
+
     $( '.controls' ).click ( function ( event ) {
 
         toggle ( ) ;
 
     } );
+
+    // click on the helper closes it
 
     $( '.helper' ).click ( function ( event ) {
 

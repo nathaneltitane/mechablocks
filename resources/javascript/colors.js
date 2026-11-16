@@ -32,6 +32,8 @@ $( document ).ready ( function ( ) {
 
     var classes = classes.join ( ' ' );
 
+    // colors panel opens
+
     function show ( ) {
 
 		$( ids ).addClass ( classes );
@@ -46,6 +48,8 @@ $( document ).ready ( function ( ) {
 
     };
 
+	// colors panel closes
+
 	function hide ( ) {
 
         colors.removeClass ( 'show' );
@@ -59,6 +63,8 @@ $( document ).ready ( function ( ) {
         }, 500 );
 
     };
+
+    // colors panel opens or closes
 
     function toggle ( ) {
 
@@ -75,11 +81,15 @@ $( document ).ready ( function ( ) {
         }
     };
 
+	// color button toggles the panel
+
 	$( '.color' ).click ( function ( event ) {
 
         toggle ( );
 
     } );
+
+	// click on the panel closes it
 
 	$( '#colors' ).click ( function ( event ) {
 
@@ -90,6 +100,8 @@ $( document ).ready ( function ( ) {
 		}
 
 	} );
+
+	// swatch tints the canvas
 
 	$( '.colors' ).click ( function ( event ) {
 
@@ -104,6 +116,8 @@ $( document ).ready ( function ( ) {
         hide ( );
 
     } );
+
+	// swatches show their color
 
 	$( '.colors' ).each ( function ( ) {
 

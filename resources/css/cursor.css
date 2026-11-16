@@ -28,7 +28,7 @@
 	cursor: context-menu;
 }
 
-/* col resize cursor */
+/* column resize cursor */
 
 .cursor-col-resize {
 	cursor: col-resize;
@@ -52,13 +52,13 @@
 	cursor: default;
 }
 
-/* e resize cursor */
+/* east resize cursor */
 
 .cursor-e-resize {
 	cursor: e-resize;
 }
 
-/* ew resize cursor */
+/* east west resize cursor */
 
 .cursor-ew-resize {
 	cursor: ew-resize;
@@ -88,37 +88,37 @@
 	cursor: move;
 }
 
-/* n resize cursor */
+/* north resize cursor */
 
 .cursor-n-resize {
 	cursor: n-resize;
 }
 
-/* ne resize cursor */
+/* north east resize cursor */
 
 .cursor-ne-resize {
 	cursor: ne-resize;
 }
 
-/* nesw resize cursor */
+/* north east south west resize cursor */
 
 .cursor-nesw-resize {
 	cursor: nesw-resize;
 }
 
-/* ns resize cursor */
+/* north south resize cursor */
 
 .cursor-ns-resize {
 	cursor: ns-resize;
 }
 
-/* nw resize cursor */
+/* north west resize cursor */
 
 .cursor-nw-resize {
 	cursor: nw-resize;
 }
 
-/* nwse resize cursor */
+/* north west south east resize cursor */
 
 .cursor-nwse-resize {
 	cursor: nwse-resize;
@@ -130,7 +130,7 @@
 	cursor: no-drop;
 }
 
-/* none cursor */
+/* hidden cursor */
 
 .cursor-none {
 	cursor: none;
@@ -160,19 +160,19 @@
 	cursor: row-resize;
 }
 
-/* s resize cursor */
+/* south resize cursor */
 
 .cursor-s-resize {
 	cursor: s-resize;
 }
 
-/* se resize cursor */
+/* south east resize cursor */
 
 .cursor-se-resize {
 	cursor: se-resize;
 }
 
-/* sw resize cursor */
+/* south west resize cursor */
 
 .cursor-sw-resize {
 	cursor: sw-resize;
@@ -190,7 +190,7 @@
 	cursor: vertical-text;
 }
 
-/* w resize cursor */
+/* west resize cursor */
 
 .cursor-w-resize {
 	cursor: w-resize;
