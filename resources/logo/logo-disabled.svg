@@ -86,53 +86,23 @@
     <g
        id="g882">
       <g
-         id="g2">
+         id="g5">
         <path
-           sodipodi:type="star"
+           id="path1"
            style="fill:#000000;fill-opacity:1;stroke-width:0.264583"
-           id="path3822"
-           sodipodi:sides="6"
-           sodipodi:cx="67.73333"
-           sodipodi:cy="229.26665"
-           sodipodi:r1="65.616669"
-           sodipodi:r2="56.825703"
-           sodipodi:arg1="-1.5707963"
-           sodipodi:arg2="-1.0471975"
-           inkscape:flatsided="true"
-           inkscape:rounded="0"
-           inkscape:randomized="0"
-           d="m 67.733332,163.64998 56.825698,32.80833 0,65.61667 -56.825702,32.80834 -56.825701,-32.80834 2e-6,-65.61667 z"
+           d="M 67.73333 163.64998 L 10.907736 196.45831 L 10.907736 262.07498 L 67.73333 294.88332 L 124.55892 262.07498 L 124.55892 196.45831 L 67.73333 163.64998 z M 67.73333 178.4666 L 111.72742 203.86662 L 111.72742 254.66668 L 67.73333 280.0667 L 23.739244 254.66668 L 23.739244 203.86662 L 67.73333 178.4666 z "
            transform="matrix(1.9354838,0,0,1.9354838,4.3699025,-146.74191)" />
         <g
-           id="g1"
-           style="stroke:#cccccc;stroke-opacity:1">
+           id="g4">
           <path
-             style="fill:none;fill-opacity:1;stroke:#cccccc;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-             d="m 135.46667,198.67738 -85.150087,49.16129 85.150087,49.16129 85.15009,-49.16129 z"
-             id="path3824" />
+             id="path3822"
+             style="fill:#4d4d4d;fill-opacity:1;stroke-width:0.264583"
+             d="M 67.73333 178.4666 L 23.739244 203.86662 L 23.739244 254.66668 L 67.73333 280.0667 L 111.72742 254.66668 L 111.72742 203.86662 L 67.73333 178.4666 z "
+             transform="matrix(1.9354838,0,0,1.9354838,4.3699025,-146.74191)" />
           <path
-             id="path3876"
-             style="fill:none;fill-opacity:1;stroke:#cccccc;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-             d="M 135.46666,249.88709 A 36.870964,18.435482 0 0 1 98.595531,231.46392 v 16.37472 a 36.870965,18.435482 0 0 0 36.871129,18.43556 z" />
-          <path
-             style="fill:none;fill-opacity:1;stroke:#cccccc;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-             d="m 220.61676,247.83867 -85.15009,49.16129 v 98.32257 l 85.15009,-49.16128 z"
-             id="path3834" />
-          <path
-             style="fill:none;fill-opacity:1;stroke:#cccccc;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-             d="M 135.46667,296.99996 50.316583,247.83867 v 98.32258 l 85.150087,49.16128 z"
-             id="path3837" />
-          <path
-             id="ellipse3866"
-             style="fill:none;fill-opacity:1;stroke:#cccccc;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-             d="m 135.46666,249.88709 v 16.38711 a 36.870965,18.435482 0 0 0 36.87114,-18.43556 v -16.38712 a 36.870964,18.435482 0 0 1 -36.87114,18.43557 z" />
-          <ellipse
-             style="fill:none;fill-opacity:1;stroke:#cccccc;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-             id="ellipse3868"
-             cx="135.46666"
-             cy="231.45158"
-             rx="36.870964"
-             ry="18.435482" />
+             id="path3"
+             style="fill:#ff2a2a;stroke:none;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round"
+             d="m 135.46666,228.8801 a 68.119873,68.119873 0 0 0 -68.119867,68.11987 68.119873,68.119873 0 0 0 68.119867,68.11988 68.119873,68.119873 0 0 0 68.11988,-68.11988 68.119873,68.119873 0 0 0 -68.11988,-68.11987 z m 0,19.78587 a 48.333871,48.333871 0 0 1 26.4232,7.86185 l -66.895349,66.89535 a 48.333871,48.333871 0 0 1 -7.861846,-26.4232 48.333871,48.333871 0 0 1 48.333995,-48.334 z m 40.47216,21.91081 a 48.333871,48.333871 0 0 1 7.86185,26.42319 48.333871,48.333871 0 0 1 -48.33401,48.33401 48.333871,48.333871 0 0 1 -26.42319,-7.86185 z" />
         </g>
       </g>
     </g>
