@@ -434,11 +434,8 @@ do
 			if [[ ${#list_modes[@]} -gt 1 ]]
 			then
 				unset text_modes
-
 				unset content_cards
-
 				unset content_segments
-
 				unset content_chips
 
 				state_active=" active"
