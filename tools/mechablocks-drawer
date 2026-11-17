@@ -377,6 +377,7 @@ do
 			color_logo="green"
 
 			unset class_status
+
 		fi
 
 		# only models marked for the drawer

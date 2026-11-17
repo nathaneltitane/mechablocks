@@ -5642,6 +5642,7 @@ then
 				label_path_option="${label_path_option}-super"
 
 				unset state_keyword
+
 			fi
 
 			# option label in capitals
@@ -5723,6 +5724,7 @@ then
 				label_path_mode="${label_path_mode}-super"
 
 				unset state_keyword
+
 			fi
 
 			# mode label in capitals
