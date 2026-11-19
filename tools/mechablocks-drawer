@@ -77,7 +77,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-04"
+version="2026-11-19"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -429,6 +429,48 @@ do
 
 				done
 			fi
+
+			# modes in prescribed order - others keep theirs
+
+			list_order_modes=( fighter gerwalk battroid )
+			list_sorted_modes=()
+
+			for name_order in "${list_order_modes[@]}"
+			do
+				for directory_mode in "${list_modes[@]}"
+				do
+					name_mode="${directory_mode%-super}"
+					name_mode="${name_mode##*-}"
+
+					if [[ "${name_mode}" = "${name_order}" ]]
+					then
+						list_sorted_modes+=( "${directory_mode}" )
+					fi
+				done
+			done
+
+			for directory_mode in "${list_modes[@]}"
+			do
+				name_mode="${directory_mode%-super}"
+				name_mode="${name_mode##*-}"
+
+				unset state_order
+
+				for name_order in "${list_order_modes[@]}"
+				do
+					if [[ "${name_mode}" = "${name_order}" ]]
+					then
+						state_order=order
+					fi
+				done
+
+				if [[ -z "${state_order}" ]]
+				then
+					list_sorted_modes+=( "${directory_mode}" )
+				fi
+			done
+
+			list_modes=( "${list_sorted_modes[@]}" )
 
 			# single link or stacked mode cards
 

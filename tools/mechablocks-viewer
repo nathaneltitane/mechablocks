@@ -77,7 +77,7 @@ frobulator.script
 
 # version ──────────────────────────────────────────────────────────────────────
 
-version="2026-10-04"
+version="2026-11-19"
 
 # usage ────────────────────────────────────────────────────────────────────────
 
@@ -5693,6 +5693,48 @@ then
 		IFS=$'\n'
 
 		list_modes_model=($(cat "${directory_model}"/modes ) )
+
+		# modes in prescribed order - others keep theirs
+
+		list_order_modes=( fighter gerwalk battroid )
+		list_sorted_modes=()
+
+		for name_order in "${list_order_modes[@]}"
+		do
+			for mode_model in "${list_modes_model[@]}"
+			do
+				name_mode="${mode_model%-super}"
+				name_mode="${name_mode##*-}"
+
+				if [[ "${name_mode}" = "${name_order}" ]]
+				then
+					list_sorted_modes+=( "${mode_model}" )
+				fi
+			done
+		done
+
+		for mode_model in "${list_modes_model[@]}"
+		do
+			name_mode="${mode_model%-super}"
+			name_mode="${name_mode##*-}"
+
+			unset state_order
+
+			for name_order in "${list_order_modes[@]}"
+			do
+				if [[ "${name_mode}" = "${name_order}" ]]
+				then
+					state_order=order
+				fi
+			done
+
+			if [[ -z "${state_order}" ]]
+			then
+				list_sorted_modes+=( "${mode_model}" )
+			fi
+		done
+
+		list_modes_model=( "${list_sorted_modes[@]}" )
 
 		for mode_model in ${list_modes_model[@]}
 		do
