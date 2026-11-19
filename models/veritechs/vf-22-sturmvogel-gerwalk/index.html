@@ -696,7 +696,7 @@
 					console_overlay_line ( 'faces', 'visibility', on_off ( model_faces_visible ) ) ;
 					console_overlay_line ( 'wireframe', 'visibility', on_off ( wireframe_visible ) ) ;
 					console_overlay_line ( 'edge', 'visibility', on_off ( model_edges_visible ) ) ;
-					console_overlay_line ( 'edge', 'thickness', edge_thickness_state ) ;
+					console_overlay_line ( 'edge', 'state', edge_state ) ;
 
 					device_information_divider ( ) ;
 
@@ -3504,17 +3504,17 @@
 
 					// cycle state
 
-					edge_thickness_state++;
+					edge_state++;
 
-					if ( edge_thickness_state > 2 ) {
+					if ( edge_state > 1 ) {
 
-						edge_thickness_state = 0;
+						edge_state = 0;
 
 					}
 
 					// state : off
 
-					if ( edge_thickness_state === 0 ) {
+					if ( edge_state === 0 ) {
 
 						model_edges_visible = false;
 
@@ -3528,13 +3528,13 @@
 
 						} );
 
-						console.log ( 'edges [ thickness ] : off' );
+						console.log ( 'edges [ state ] : off' );
 
 					}
 
-					// state : thin
+					// state : on
 
-					if ( edge_thickness_state === 1 ) {
+					if ( edge_state === 1 ) {
 
 						model_edges_visible = true;
 
@@ -3544,41 +3544,14 @@
 
 								edge.visible = true;
 
-								edge.material.linewidth = 1;
-
-								edge.material.needsUpdate = true;
-
 							} );
 
 						} );
 
-						console.log ( 'edges [ thickness ] : thin' );
+						console.log ( 'edges [ state ] : on' );
 
 					}
 
-					// state : thick
-
-					if ( edge_thickness_state === 2 ) {
-
-						model_edges_visible = true;
-
-						edge_groups.forEach ( function ( group ) {
-
-							group.forEach ( function ( edge ) {
-
-								edge.visible = true;
-
-								edge.material.linewidth = 1.5;
-
-								edge.material.needsUpdate = true;
-
-							} );
-
-						} );
-
-						console.log ( 'edges [ thickness ] : thick' );
-
-					}
 
 					// force render refresh
 
@@ -3617,7 +3590,7 @@
 
 					if ( wireframe_visible ) {
 
-						saved_edge_thickness_state = edge_thickness_state;
+						saved_edge_state = edge_state;
 
 						model_edges_visible = false;
 
@@ -3633,19 +3606,19 @@
 
 					else {
 
-						if ( saved_edge_thickness_state !== null ) {
+						if ( saved_edge_state !== null ) {
 
-							edge_thickness_state = saved_edge_thickness_state;
+							edge_state = saved_edge_state;
 
-							saved_edge_thickness_state = null;
+							saved_edge_state = null;
 
 						}
 
-						model_edges_visible = edge_thickness_state !== 0;
+						model_edges_visible = edge_state !== 0;
 
 						// reapply edge state without toggling
 
-						if ( edge_thickness_state === 0 ) {
+						if ( edge_state === 0 ) {
 
 							for ( var i = 0; i < wireframe_edges.length; i++ ) {
 
@@ -3658,16 +3631,6 @@
 							for ( var i = 0; i < wireframe_edges.length; i++ ) {
 
 								wireframe_edges[i].visible = true;
-
-								if ( edge_thickness_state === 1 ) {
-
-									wireframe_edges[i].scale.set ( 1, 1, 1 );
-
-								} else if ( edge_thickness_state === 2 ) {
-
-									wireframe_edges[i].scale.set ( 1.01, 1.01, 1.01 );
-
-								}
 
 							}
 
@@ -4849,13 +4812,13 @@
 
 				console.log ( 'edges [ status ] : ' + model_edges_visible );
 
-				 // 0: none - 1: thin - 2: thick
+				 // 0: off - 1: on
 
-				var edge_thickness_state = 1;
+				var edge_state = 1;
 
-				console.log ( 'edges [ thickness ] : ' + edge_thickness_state );
+				console.log ( 'edges [ state ] : ' + edge_state );
 
-				var saved_edge_thickness_state = null;
+				var saved_edge_state = null;
 
 				var model = loader.load (
 
