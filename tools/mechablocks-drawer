@@ -418,9 +418,10 @@ do
 						directory_mode="${directory_mode}-super"
 					fi
 
-					# only modes with a page and thumbnail
+					# only modes with a page and thumbnail - super variants stay in the selections
 
-					if [[ -f "${directory_root}/${directory_mode}"/title ]] &&
+					if [[ "${mode_model}" != *-super ]] &&
+						[[ -f "${directory_root}/${directory_mode}"/title ]] &&
 						[[ -f "${directory_root}/${directory_mode}"/renders/thumbnail/thumbnail.png ]] &&
 						[[ " ${list_modes[*]} " != *" ${directory_mode} "* ]]
 					then
