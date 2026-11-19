@@ -152,6 +152,34 @@ $( document ).ready ( function ( ) {
 
 	} );
 
+	// touch on the mode dashes - finger position before the phone snaps it to the card
+
+	$( document ).on ( 'touchstart', '.stack .frame', function ( event ) {
+
+		var touch = event.originalEvent.touches [ 0 ];
+
+		var edge = $( this ).find ( '.edge' ) [ 0 ].getBoundingClientRect ( );
+
+		$( this ).data ( 'edge_touched', touch.clientX >= edge.left - 15 );
+
+	} );
+
+	// only the image opens the page
+
+	$( document ).on ( 'click', '.stack .card', function ( event ) {
+
+		var frame = $( this ).closest ( '.frame' );
+
+		if ( frame.data ( 'edge_touched' ) ) {
+
+			event.preventDefault ( );
+
+		}
+
+		frame.data ( 'edge_touched', false );
+
+	} );
+
     // keyboard
 
     $( document ).on ( 'keyup', function ( event ) {
