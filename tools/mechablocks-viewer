@@ -5637,13 +5637,14 @@ then
 
 			label_path_option="${label_base_option}${option_model}"
 
-			if [[ "${state_keyword}" = "keyword" ]]
+			# super page - shared option when it has no super version
+
+			if [[ "${state_keyword}" = "keyword" ]] && [[ -d "${label_path_option}-super" ]]
 			then
 				label_path_option="${label_path_option}-super"
-
-				unset state_keyword
-
 			fi
+
+			unset state_keyword
 
 			# option label in capitals
 
@@ -5694,10 +5695,14 @@ then
 
 		list_modes_model=($(cat "${directory_model}"/modes ) )
 
-		# modes in prescribed order - others keep theirs
+		# modes in prescribed order - others keep theirs - the page's super or normal counterpart last
 
 		list_order_modes=( fighter gerwalk battroid )
 		list_sorted_modes=()
+		list_counterpart_modes=()
+
+		name_mode_page="${directory_model%-super}"
+		name_mode_page="${name_mode_page##*-}"
 
 		for name_order in "${list_order_modes[@]}"
 		do
@@ -5706,7 +5711,7 @@ then
 				name_mode="${mode_model%-super}"
 				name_mode="${name_mode##*-}"
 
-				if [[ "${name_mode}" = "${name_order}" ]]
+				if [[ "${name_mode}" = "${name_order}" ]] && [[ "${name_mode}" != "${name_mode_page}" ]]
 				then
 					list_sorted_modes+=( "${mode_model}" )
 				fi
@@ -5728,13 +5733,16 @@ then
 				fi
 			done
 
-			if [[ -z "${state_order}" ]]
+			if [[ "${name_mode}" = "${name_mode_page}" ]]
+			then
+				list_counterpart_modes+=( "${mode_model}" )
+			elif [[ -z "${state_order}" ]]
 			then
 				list_sorted_modes+=( "${mode_model}" )
 			fi
 		done
 
-		list_modes_model=( "${list_sorted_modes[@]}" )
+		list_modes_model=( "${list_sorted_modes[@]}" "${list_counterpart_modes[@]}" )
 
 		for mode_model in ${list_modes_model[@]}
 		do
@@ -5761,19 +5769,29 @@ then
 			label_base_mode=${directory_mode::-${length_suffix_mode}}
 			label_path_mode="${label_base_mode}${mode_model}"
 
-			if [[ "${state_keyword}" = "keyword" ]]
+			# super page - its own mode links back to the normal page
+
+			if [[ "${state_keyword}" = "keyword" ]] && [[ "${mode_model}" != "${suffix_mode}" ]]
 			then
 				label_path_mode="${label_path_mode}-super"
-
-				unset state_keyword
-
 			fi
+
+			unset state_keyword
 
 			# mode label in capitals
 
-			label_mode=${mode_model/-/ }
+			label_mode=${mode_model%-super}
+
+			label_mode=${label_mode/-/ }
 
 			label_mode=${label_mode^^}
+
+			# label names the page it opens
+
+			if [[ "${label_path_mode}" = *-super ]]
+			then
+				label_mode="SUPER ${label_mode}"
+			fi
 
 			# overlay time for reloads
 
