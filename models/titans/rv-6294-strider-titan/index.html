@@ -451,6 +451,7 @@
 
 				var black    = 0x000000;
 				var charcoal = 0x333333;
+				var slate    = 0x666666;
 				var white    = 0xffffff;
 				var cloud    = 0xfefefe;
 				var grey     = 0xaaaaaa;
@@ -2974,7 +2975,7 @@
 
 									const edgesMaterial = new THREE.LineBasicMaterial ( {
 
-										color: black,
+										color: slate,
 
 										linewidth: 1
 
@@ -3324,7 +3325,7 @@
 
 										const edgesMaterial = new THREE.LineBasicMaterial ( {
 
-											color: black,
+											color: slate,
 
 											linewidth: 1
 
@@ -3567,7 +3568,7 @@
 
 								edge.visible = true;
 
-								edge.material.linewidth = 2;
+								edge.material.linewidth = 1.5;
 
 								edge.material.needsUpdate = true;
 
@@ -4923,7 +4924,7 @@
 
 								var edgesMaterial = new THREE.LineBasicMaterial ( {
 
-									color: black
+									color: slate
 
 								} );
 
