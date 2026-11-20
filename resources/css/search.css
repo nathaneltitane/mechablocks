@@ -70,11 +70,11 @@
 	display: none;
 }
 
-/* clear marker hovered - grey circle, work in progress red, glyph zoom */
+/* clear marker hovered - work in progress red circle, light cross, glyph zoom */
 
 .search .clear:hover {
-	background-color: #666666ff;
-	color: #dc2a30ff;
+	background-color: #dc2a30ff;
+	color: #ddddddff;
 
 	font-size: 17px;
 }
