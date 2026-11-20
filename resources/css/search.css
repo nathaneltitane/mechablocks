@@ -54,6 +54,8 @@
 	color: #666666ff;
 	border: 0px;
 	border-radius: 20px 20px 20px 20px;
+	font-size: 1em;
+	line-height: 20px;
 	padding: 5px 15px 5px 15px;
 
 	cursor: pointer;
