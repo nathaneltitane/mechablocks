@@ -40,30 +40,43 @@
 	appearance: none;
 }
 
-/* text clear marker inside the field */
+/* text clear marker inside the field - circle kept 5px inside the pill */
 
 .search .clear {
 	color: #000000ff;
+	border-radius: 50% 50% 50% 50%;
 
 	font-size: 14px;
 
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
 	position: absolute;
-	top: 50%;
-	right: 20px;
+	top: 10px;
+	right: 10px;
+	bottom: 10px;
+
+	aspect-ratio: 1;
 
 	cursor: pointer;
 
-	transform: translateY( -50% );
-
-	transition: color 0.4s ease, transform 0.4s ease;
+	transition: background-color 0.4s ease, color 0.4s ease, font-size 0.4s ease;
 }
 
-/* clear marker hovered - work in progress red and a slight zoom */
+/* clear marker hidden while the field is empty */
+
+.search .clear.hide {
+	display: none;
+}
+
+/* clear marker hovered - grey circle, work in progress red, glyph zoom */
 
 .search .clear:hover {
+	background-color: #666666ff;
 	color: #dc2a30ff;
 
-	transform: translateY( -50% ) scale( 1.25 );
+	font-size: 17px;
 }
 
 /* search field focused */
