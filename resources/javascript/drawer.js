@@ -123,22 +123,20 @@ $( document ).ready ( function ( ) {
 
 		var frame = $( this ).find ( '.frame' ) [ 0 ].getBoundingClientRect ( );
 
-		var edge = $( this ).find ( '.edge' ) [ 0 ].getBoundingClientRect ( );
-
 		$( this ).data ( 'touched', true );
 
 		$( this ).data ( 'touch_image',
 			touch.clientX >= frame.left &&
-			touch.clientX < edge.left - 15 &&
+			touch.clientX <= frame.right &&
 			touch.clientY >= frame.top &&
 			touch.clientY <= frame.bottom
 		);
 
 	} );
 
-	// hovering a chip or dash shows its mode - touch fakes a hover first
+	// hovering a chip shows its mode - touch fakes a hover first
 
-	$( document ).on ( 'mouseenter', '.stack .chip, .stack .segment', function ( ) {
+	$( document ).on ( 'mouseenter', '.stack .chip', function ( ) {
 
 		var stack = $( this ).closest ( '.stack' );
 

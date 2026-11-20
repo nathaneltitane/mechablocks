@@ -64,16 +64,19 @@
 	transform: scale(1.02);
 }
 
-/* mode count edge line */
+/* mode indicators - chips do the selecting */
 
 .stack .edge {
 	gap: 5px;
 	width: 5px;
 
 	position: absolute;
-	top: 10px;
+	top: 50%;
 	right: 0px;
-	bottom: 10px;
+
+	pointer-events: none;
+
+	transform: translateY( -50% );
 }
 
 /* one dash per mode */
@@ -82,7 +85,9 @@
 	background-color: #aaaaaaff;
 	border-radius: 1px 1px 1px 1px;
 
-	flex: 1 1 0px;
+	height: 20px;
+
+	flex: 0 0 auto;
 
 	transition: background-color 0.4s ease;
 }
