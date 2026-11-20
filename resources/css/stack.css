@@ -5,6 +5,8 @@
 
 	display: flex;
 	flex-direction: column;
+
+	cursor: pointer;
 }
 
 /* cards in a row share one height */
