@@ -2831,7 +2831,7 @@
 
 					loader.load (
 
-						'/resources/minifigures/exports/minifigure-red.dae',
+						'/resources/minifigures/exports/minifigure-yellow.dae',
 
 						function ( collada ) {
 
@@ -3058,7 +3058,7 @@
 
 							self.minifigure_loading = false;
 
-							console.error ( 'minifigure [ status ] : load failed - /resources/minifigures/exports/minifigure-red.dae', error );
+							console.error ( 'minifigure [ status ] : load failed - /resources/minifigures/exports/minifigure-yellow.dae', error );
 
 						}
 
@@ -4712,84 +4712,6 @@
 							self.transform_controls.setSize ( Math.max ( self.transform_controls.size - 0.1, 0.1 ) );
 
 							console.log ( "size [ widget  ] = " + self.transform_controls.size );
-
-							break;
-
-						// T //
-
-						case 84:
-
-							self.mode = "translate"
-
-							self.transform_controls.setMode ( self.mode );
-
-							self.transform_controls.enabled = true;
-
-							self.orbitControls.enabled = false;
-
-							self.transform_controls.showX;
-
-							self.transform_controls.showY;
-
-							self.transform_controls.showZ;
-
-							console.log ( "orbit controls enabled = " + self.orbitControls.enabled );
-
-							console.log ( "transform controls enabled = " + self.transform_controls.enabled );
-
-							console.log ( "mode [ transform ] = " + self.mode );
-
-							break;
-
-						// R //
-
-						case 82:
-
-							self.mode = "rotate"
-
-							self.transform_controls.setMode ( self.mode );
-
-							self.transform_controls.enabled = true;
-
-							self.orbitControls.enabled = false;
-
-							self.transform_controls.showX;
-
-							self.transform_controls.showY;
-
-							self.transform_controls.showZ;
-
-							console.log ( "orbit controls enabled = " + self.orbitControls.enabled );
-
-							console.log ( "transform controls enabled = " + self.transform_controls.enabled );
-
-							console.log ( "mode [ transform ] = " + self.mode );
-
-							break;
-
-						// S //
-
-						case 83:
-
-							self.mode = "scale"
-
-							self.transform_controls.setMode ( self.mode );
-
-							self.transform_controls.enabled = true;
-
-							self.orbitControls.enabled = false;
-
-							self.transform_controls.showX;
-
-							self.transform_controls.showY;
-
-							self.transform_controls.showZ;
-
-							console.log ( "orbit controls enabled = " + self.orbitControls.enabled );
-
-							console.log ( "transform controls enabled = " + self.transform_controls.enabled );
-
-							console.log ( "mode [ transform ] = " + self.mode );
 
 							break;
 					}

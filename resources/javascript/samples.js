@@ -111,7 +111,7 @@ $( document ).ready ( function ( ) {
 
     $( document ).on ( 'keyup', function ( event ) {
 
-        if ( event.key === 'u' ) {
+        if ( event.key === 's' ) {
 
             toggle ( );
 
