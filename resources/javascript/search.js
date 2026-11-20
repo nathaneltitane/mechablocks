@@ -18,7 +18,9 @@ $( document ).ready ( function ( ) {
 
 	// model count lives in the search field
 
-	field.attr ( 'placeholder', 'SEARCH ALL ' + models.length + ' MODELS...' );
+	var placeholder = 'SEARCH ALL ' + models.length + ' MODELS...';
+
+	field.attr ( 'placeholder', placeholder );
 
 	// series chips with model counts
 
@@ -120,7 +122,11 @@ $( document ).ready ( function ( ) {
 
 		count.toggleClass ( 'none', ! shown );
 
-		count.text ( ! words.length && ! series ? '' : ' // ' + ( shown ? shown + ( shown === 1 ? ' MODEL' : ' MODELS' ) : 'NO MATCH' ) );
+		// series chip alone - result replaces the placeholder
+
+		field.attr ( 'placeholder', series && ! words.length ? '' : placeholder );
+
+		count.text ( ! words.length && ! series ? '' : ( words.length ? ' // ' : '' ) + ( shown ? shown + ( shown === 1 ? ' MODEL' : ' MODELS' ) : 'NO MATCH' ) );
 
 		// result joined right after the typed text
 
