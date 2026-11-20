@@ -4992,14 +4992,6 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 							break;
 
-						// SPACE //
-
-						case 32:
-
-							self.transform_toggle_ ( ) ;
-
-							break;
-
 						// X //
 
 						case 88:
@@ -5021,22 +5013,6 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 						case 90:
 
 							self.transform_controls.showZ = ! self.transform_controls.showZ;
-
-							break;
-
-						// SHIFT //
-
-						case 16:
-
-							self.snap_toggle_ ( ) ;
-
-							break;
-
-						// CTRL //
-
-						case 17:
-
-							self.controlsSpace_ ( ) ;
 
 							break;
 

@@ -2855,7 +2855,7 @@
 
 					loader.load (
 
-						'/resources/minifigures/exports/minifigure-white.dae',
+						'/resources/minifigures/exports/minifigure-fuschia.dae',
 
 						function ( collada ) {
 
@@ -3082,7 +3082,7 @@
 
 							self.minifigure_loading = false;
 
-							console.error ( 'minifigure [ status ] : load failed - /resources/minifigures/exports/minifigure-white.dae', error );
+							console.error ( 'minifigure [ status ] : load failed - /resources/minifigures/exports/minifigure-fuschia.dae', error );
 
 						}
 
@@ -4667,14 +4667,6 @@
 
 							break;
 
-						// SPACE //
-
-						case 32:
-
-							self.transform_toggle_ ( ) ;
-
-							break;
-
 						// X //
 
 						case 88:
@@ -4696,22 +4688,6 @@
 						case 90:
 
 							self.transform_controls.showZ = ! self.transform_controls.showZ;
-
-							break;
-
-						// SHIFT //
-
-						case 16:
-
-							self.snap_toggle_ ( ) ;
-
-							break;
-
-						// CTRL //
-
-						case 17:
-
-							self.controlsSpace_ ( ) ;
 
 							break;
 
