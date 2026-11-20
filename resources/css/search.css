@@ -92,10 +92,16 @@
 	background: #ffd100ff;
 }
 
-/* search count above the models */
+/* no match notice above the models */
 
 .search .count {
 	margin: 5px 5px 0px 5px;
+}
+
+/* no gap while there is nothing to say */
+
+.search .count:empty {
+	display: none;
 }
 
 /* matches fade in when shown */

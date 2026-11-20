@@ -12,6 +12,10 @@ $( document ).ready ( function ( ) {
 
 	var series = '';
 
+	// model count lives in the search field
+
+	field.attr ( 'placeholder', 'SEARCH ALL ' + models.length + ' MODELS...' );
+
 	// series chips with model counts
 
 	var counts = { };
@@ -106,7 +110,7 @@ $( document ).ready ( function ( ) {
 
 		} );
 
-		count.text ( shown ? shown + ( shown === 1 ? ' MODEL' : ' MODELS' ) : 'NO MODELS MATCH YOUR SEARCH' );
+		count.text ( shown ? '' : 'NO MODELS MATCH YOUR SEARCH' );
 
 	};
 
