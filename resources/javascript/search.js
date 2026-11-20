@@ -110,7 +110,9 @@ $( document ).ready ( function ( ) {
 
 		} );
 
-		count.text ( shown ? '' : 'NO MODELS MATCH YOUR SEARCH' );
+		// result shown inside the field while filtering
+
+		count.text ( ! words.length && ! series ? '' : shown ? shown + ( shown === 1 ? ' MODEL' : ' MODELS' ) : 'NO MATCH' );
 
 	};
 

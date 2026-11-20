@@ -256,11 +256,15 @@ cat << MODEL-DRAWER-HEADER -> "${directory_modules}"/drawer.html
 
 				</div>
 
-				<input class="field" id="search-field" type="search" placeholder="SEARCH MODELS..." autocomplete="off" spellcheck="false"/>
+				<div class="box">
+
+					<input class="field" id="search-field" type="search" placeholder="SEARCH MODELS..." autocomplete="off" spellcheck="false"/>
+
+					<div class="count" id="search-count"></div>
+
+				</div>
 
 				<div class="chips" id="search-chips"></div>
-
-				<div class="count text-center" id="search-count"></div>
 
 			</div>
 

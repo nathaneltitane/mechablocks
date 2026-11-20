@@ -19,7 +19,7 @@
 	border: 0px;
 	border-radius: 20px 20px 20px 20px;
 	margin: 5px 5px 5px 5px;
-	padding: 10px 20px 10px 20px;
+	padding: 10px 140px 10px 20px;
 
 	font-size: 14px;
 
@@ -92,16 +92,29 @@
 	background: #ffd100ff;
 }
 
-/* no match notice above the models */
+/* field holder for the result */
 
-.search .count {
-	margin: 5px 5px 0px 5px;
+.search .box {
+	display: flex;
+	flex-direction: column;
+
+	position: relative;
 }
 
-/* no gap while there is nothing to say */
+/* search result inside the field */
 
-.search .count:empty {
-	display: none;
+.search .count {
+	color: #999999ff;
+
+	font-size: 14px;
+
+	position: absolute;
+	top: 50%;
+	right: 45px;
+
+	pointer-events: none;
+
+	transform: translateY( -50% );
 }
 
 /* matches fade in when shown */
