@@ -262,7 +262,7 @@ cat << MODEL-DRAWER-HEADER -> "${directory_modules}"/drawer.html
 
 					<div class="count" id="search-count"></div>
 
-					<div class="clear hide" id="search-clear">X</div>
+					<div class="clear hide" id="search-clear">✕</div>
 
 				</div>
 
