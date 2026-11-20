@@ -10,6 +10,8 @@ $( document ).ready ( function ( ) {
 
 	var clear = $( '#search-clear' );
 
+	var measure = document.createElement ( 'canvas' ).getContext ( '2d' );
+
 	var models = $( '.model' );
 
 	var series = '';
@@ -116,7 +118,15 @@ $( document ).ready ( function ( ) {
 
 		clear.toggleClass ( 'hide', ! field.val ( ) );
 
-		count.text ( ! words.length && ! series ? '' : shown ? shown + ( shown === 1 ? ' MODEL' : ' MODELS' ) : 'NO MATCH' );
+		count.text ( ! words.length && ! series ? '' : ' // ' + ( shown ? shown + ( shown === 1 ? ' MODEL' : ' MODELS' ) : 'NO MATCH' ) );
+
+		// result joined right after the typed text
+
+		var style = getComputedStyle ( field [ 0 ] );
+
+		measure.font = style.font;
+
+		count.css ( 'left', field [ 0 ].offsetLeft + parseFloat ( style.paddingLeft ) + measure.measureText ( field.val ( ) ).width - field [ 0 ].scrollLeft );
 
 	};
 

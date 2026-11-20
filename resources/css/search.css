@@ -49,7 +49,7 @@
 
 	position: absolute;
 	top: 50%;
-	right: 25px;
+	right: 20px;
 
 	cursor: pointer;
 
@@ -133,9 +133,10 @@
 
 	font-size: 14px;
 
+	white-space: pre;
+
 	position: absolute;
 	top: 50%;
-	right: 45px;
 
 	pointer-events: none;
 
