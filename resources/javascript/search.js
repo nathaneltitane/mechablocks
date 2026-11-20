@@ -118,7 +118,7 @@ $( document ).ready ( function ( ) {
 
 		// result shown inside the field while filtering
 
-		clear.toggleClass ( 'hide', ! field.val ( ) );
+		clear.toggleClass ( 'hide', ! field.val ( ) && ! series );
 
 		count.toggleClass ( 'none', ! shown );
 
@@ -142,11 +142,15 @@ $( document ).ready ( function ( ) {
 
 	field.on ( 'input', filter );
 
-	// clear marker empties the field
+	// clear marker empties the field and resets the series to all
 
 	clear.on ( 'click', function ( ) {
 
-		field.val ( '' ).trigger ( 'input' ).focus ( );
+		field.val ( '' );
+
+		chips.children ( ).first ( ).click ( );
+
+		field.focus ( );
 
 	} );
 
