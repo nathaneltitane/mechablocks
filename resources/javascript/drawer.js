@@ -83,11 +83,11 @@ $( document ).ready ( function ( ) {
 
     } );
 
-    // click on a section closes it
+    // click on a section closes it - cards switch modes instead
 
     $( '.section' ).click ( function ( event ) {
 
-        if ( drawer.hasClass ( 'show' ) ) {
+        if ( drawer.hasClass ( 'show' ) && ! $( event.target ).closest ( '.stack' ).length ) {
 
             hide ( );
 
