@@ -18,7 +18,7 @@
 	position: fixed;
 	bottom: calc( 80px + 10px );
 	left: 10px;
-	max-height: calc( 100vh - 170px - 90px );
+	max-height: calc( 100vh - 90px - 90px );
 
 	overflow-x: hidden;
 	overflow-y: auto;
