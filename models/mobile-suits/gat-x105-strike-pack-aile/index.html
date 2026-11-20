@@ -2855,7 +2855,7 @@
 
 					loader.load (
 
-						'/resources/minifigures/exports/minifigure-yellow.dae',
+						'/resources/minifigures/exports/minifigure-green.dae',
 
 						function ( collada ) {
 
@@ -3082,7 +3082,7 @@
 
 							self.minifigure_loading = false;
 
-							console.error ( 'minifigure [ status ] : load failed - /resources/minifigures/exports/minifigure-yellow.dae', error );
+							console.error ( 'minifigure [ status ] : load failed - /resources/minifigures/exports/minifigure-green.dae', error );
 
 						}
 
@@ -4688,30 +4688,6 @@
 						case 90:
 
 							self.transform_controls.showZ = ! self.transform_controls.showZ;
-
-							break;
-
-						// EQUAL [ = ] //
-						// ADD [ + ] //
-
-						case 187:
-						case 107:
-
-							self.transform_controls.setSize ( self.transform_controls.size + 0.1 );
-
-							console.log ( "size [ widget  ] = " + self.transform_controls.size );
-
-							break;
-
-						// DASH [ — ] //
-						// SUBTRACT [ - ] //
-
-						case 189:
-						case 109:
-
-							self.transform_controls.setSize ( Math.max ( self.transform_controls.size - 0.1, 0.1 ) );
-
-							console.log ( "size [ widget  ] = " + self.transform_controls.size );
 
 							break;
 					}
