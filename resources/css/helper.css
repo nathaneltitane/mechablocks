@@ -46,7 +46,7 @@
 /* names and keys kept apart */
 
 .helper .grid {
-	column-gap: 20px;
+	column-gap: 100px;
 }
 
 /* gap between groups */
