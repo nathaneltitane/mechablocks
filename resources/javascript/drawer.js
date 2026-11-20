@@ -115,11 +115,38 @@ $( document ).ready ( function ( ) {
 
 	}
 
-	// hovering a chip or dash shows its mode
+	// finger position before the phone snaps the tap to a link
+
+	$( document ).on ( 'touchstart', '.stack', function ( event ) {
+
+		var touch = event.originalEvent.touches [ 0 ];
+
+		var frame = $( this ).find ( '.frame' ) [ 0 ].getBoundingClientRect ( );
+
+		var edge = $( this ).find ( '.edge' ) [ 0 ].getBoundingClientRect ( );
+
+		$( this ).data ( 'touched', true );
+
+		$( this ).data ( 'touch_image',
+			touch.clientX >= frame.left &&
+			touch.clientX < edge.left - 15 &&
+			touch.clientY >= frame.top &&
+			touch.clientY <= frame.bottom
+		);
+
+	} );
+
+	// hovering a chip or dash shows its mode - touch fakes a hover first
 
 	$( document ).on ( 'mouseenter', '.stack .chip, .stack .segment', function ( ) {
 
-		stack_focus ( $( this ).closest ( '.stack' ), $( this ).index ( ) );
+		var stack = $( this ).closest ( '.stack' );
+
+		if ( ! stack.data ( 'touched' ) ) {
+
+			stack_focus ( stack, $( this ).index ( ) );
+
+		}
 
 	} );
 
@@ -127,7 +154,7 @@ $( document ).ready ( function ( ) {
 
 	$( document ).on ( 'mouseleave', '.stack', function ( ) {
 
-		if ( window.matchMedia ( '(hover: hover)' ).matches ) {
+		if ( ! $( this ).data ( 'touched' ) ) {
 
 			stack_focus ( $( this ), 0 );
 
@@ -139,44 +166,37 @@ $( document ).ready ( function ( ) {
 
 	$( document ).on ( 'click', '.stack .chip', function ( event ) {
 
-		if (
-			! $( this ).hasClass ( 'active' ) &&
-			! window.matchMedia ( '(hover: hover)' ).matches
-		) {
+		var stack = $( this ).closest ( '.stack' );
+
+		if ( stack.data ( 'touched' ) && ! $( this ).hasClass ( 'active' ) ) {
 
 			event.preventDefault ( );
 
-			stack_focus ( $( this ).closest ( '.stack' ), $( this ).index ( ) );
+			stack_focus ( stack, $( this ).index ( ) );
 
 		}
 
 	} );
 
-	// touch on the mode dashes - finger position before the phone snaps it to the card
-
-	$( document ).on ( 'touchstart', '.stack .frame', function ( event ) {
-
-		var touch = event.originalEvent.touches [ 0 ];
-
-		var edge = $( this ).find ( '.edge' ) [ 0 ].getBoundingClientRect ( );
-
-		$( this ).data ( 'edge_touched', touch.clientX >= edge.left - 15 );
-
-	} );
-
-	// only the image opens the page
+	// touch opens the page only from the image
 
 	$( document ).on ( 'click', '.stack .card', function ( event ) {
 
-		var frame = $( this ).closest ( '.frame' );
+		var stack = $( this ).closest ( '.stack' );
 
-		if ( frame.data ( 'edge_touched' ) ) {
+		if ( stack.data ( 'touched' ) && ! stack.data ( 'touch_image' ) ) {
 
 			event.preventDefault ( );
 
 		}
 
-		frame.data ( 'edge_touched', false );
+	} );
+
+	// touch over - mouse hover works again
+
+	$( document ).on ( 'click', '.stack', function ( ) {
+
+		$( this ).data ( 'touched', false );
 
 	} );
 
