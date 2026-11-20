@@ -31,6 +31,31 @@
 	user-select: text;
 }
 
+/* native clear marker replaced by a text one */
+
+.search .field::-webkit-search-cancel-button {
+	display: none;
+
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+/* text clear marker inside the field */
+
+.search .clear {
+	color: #000000ff;
+
+	font-size: 14px;
+
+	position: absolute;
+	top: 50%;
+	right: 25px;
+
+	cursor: pointer;
+
+	transform: translateY( -50% );
+}
+
 /* search field focused */
 
 .search .field:focus {

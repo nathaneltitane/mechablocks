@@ -8,6 +8,8 @@ $( document ).ready ( function ( ) {
 
 	var count = $( '#search-count' );
 
+	var clear = $( '#search-clear' );
+
 	var models = $( '.model' );
 
 	var series = '';
@@ -112,6 +114,8 @@ $( document ).ready ( function ( ) {
 
 		// result shown inside the field while filtering
 
+		clear.toggleClass ( 'hide', ! field.val ( ) );
+
 		count.text ( ! words.length && ! series ? '' : shown ? shown + ( shown === 1 ? ' MODEL' : ' MODELS' ) : 'NO MATCH' );
 
 	};
@@ -119,6 +123,14 @@ $( document ).ready ( function ( ) {
 	// search filters while typing
 
 	field.on ( 'input', filter );
+
+	// clear marker empties the field
+
+	clear.on ( 'click', function ( ) {
+
+		field.val ( '' ).trigger ( 'input' ).focus ( );
+
+	} );
 
 	// keep typing from toggling the drawer
 
