@@ -837,6 +837,12 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 					console_overlay.id = 'console-overlay';
 
 					document.body.appendChild ( console_overlay );
+
+					// drawn see-through first so it fades in
+
+					console_overlay.offsetWidth;
+
+					console_overlay.classList.add ( 'shown' ) ;
 				}
 
 				const os = operating_system ( ) ;
@@ -851,15 +857,33 @@ cat << 3D-MODEL-PAGE-VIEWER ->> "${directory_model}/index.html"
 
 					if ( enabled ) {
 
+						// helper shares the spot
+
+						if ( window.helper_hide_ ) {
+
+							window.helper_hide_ ( ) ;
+
+						}
+
 						console_overlay_refresh ( ) ;
 
 					} else {
 
 						if ( console_overlay ) {
 
-							console_overlay.remove ( ) ;
+							// fade out then drop it
+
+							var console_fading = console_overlay;
 
 							console_overlay = null ;
+
+							console_fading.classList.remove ( 'shown' ) ;
+
+							setTimeout ( function ( ) {
+
+								console_fading.remove ( ) ;
+
+							}, 250 );
 
 						}
 

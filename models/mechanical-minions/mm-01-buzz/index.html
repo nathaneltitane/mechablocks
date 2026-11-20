@@ -512,6 +512,12 @@
 					console_overlay.id = 'console-overlay';
 
 					document.body.appendChild ( console_overlay );
+
+					// drawn see-through first so it fades in
+
+					console_overlay.offsetWidth;
+
+					console_overlay.classList.add ( 'shown' ) ;
 				}
 
 				const os = operating_system ( ) ;
@@ -526,15 +532,33 @@
 
 					if ( enabled ) {
 
+						// helper shares the spot
+
+						if ( window.helper_hide_ ) {
+
+							window.helper_hide_ ( ) ;
+
+						}
+
 						console_overlay_refresh ( ) ;
 
 					} else {
 
 						if ( console_overlay ) {
 
-							console_overlay.remove ( ) ;
+							// fade out then drop it
+
+							var console_fading = console_overlay;
 
 							console_overlay = null ;
+
+							console_fading.classList.remove ( 'shown' ) ;
+
+							setTimeout ( function ( ) {
+
+								console_fading.remove ( ) ;
+
+							}, 250 );
 
 						}
 
@@ -2831,7 +2855,7 @@
 
 					loader.load (
 
-						'/resources/minifigures/exports/minifigure-yellow.dae',
+						'/resources/minifigures/exports/minifigure-purple.dae',
 
 						function ( collada ) {
 
@@ -3058,7 +3082,7 @@
 
 							self.minifigure_loading = false;
 
-							console.error ( 'minifigure [ status ] : load failed - /resources/minifigures/exports/minifigure-yellow.dae', error );
+							console.error ( 'minifigure [ status ] : load failed - /resources/minifigures/exports/minifigure-purple.dae', error );
 
 						}
 

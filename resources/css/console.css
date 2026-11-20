@@ -38,7 +38,15 @@
 	scrollbar-gutter: stable;
 	color: #dddddd00;
 	border-right-color: #bbbbbb00;
-	transition: color 0.5s, border-right-color 0.5s;
+	opacity: 0;
+
+	transition: color 0.5s, border-right-color 0.5s, opacity 0.25s ease;
+}
+
+/* console overlay faded in */
+
+#console-overlay.shown {
+	opacity: 1;
 }
 
 /* console overlay scrolling */

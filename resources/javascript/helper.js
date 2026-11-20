@@ -4,6 +4,14 @@ $( document ).ready ( function ( ) {
 
 	var helper = $( '.helper' );
 
+	// loaded twice - set up once the helper is on the page
+
+	if ( ! helper.length || window.helper_hide_ ) {
+
+		return;
+
+	}
+
 	var ids = [
         '#browse-button-label',
         '#paypal-button-label',
@@ -36,15 +44,23 @@ $( document ).ready ( function ( ) {
 
     function show () {
 
-    $( ids ).addClass ( classes );
+        $( ids ).addClass ( classes );
 
-        helper.removeClass ( 'hide' );
+        // console shares the spot
 
-        setTimeout ( function ( ) {
+        if ( $( '#console-overlay.shown' ).length && window.console_toggle_ ) {
 
-            helper.addClass ( 'show' );
+            window.console_toggle_ ( );
 
-        }, 250 );
+        }
+
+        // drawn see-through first so it fades in
+
+        helper.addClass ( 'hide' );
+
+        helper [ 0 ].offsetWidth;
+
+        helper.removeClass ( 'hide' ).addClass ( 'show' );
 
     };
 
@@ -52,17 +68,33 @@ $( document ).ready ( function ( ) {
 
     function hide ( ) {
 
-        helper.removeClass ( 'show' );
+        if ( ! helper.hasClass ( 'show' ) ) {
 
-        helper.addClass ( 'hide' );
+            return;
+
+        }
+
+        helper.removeClass ( 'show' ).addClass ( 'hide' );
 
         setTimeout ( function ( ) {
 
+            if ( helper.hasClass ( 'show' ) ) {
+
+                return;
+
+            }
+
+            helper.removeClass ( 'hide' );
+
             $( ids ).removeClass ( classes );
 
-        }, 500 );
+        }, 250 );
 
     };
+
+    // console closes the helper when it opens
+
+    window.helper_hide_ = hide;
 
     // helper opens or closes
 
