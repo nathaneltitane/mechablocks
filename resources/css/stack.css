@@ -110,8 +110,9 @@
 	background-color: #bbbbbbff;
 	border-radius: 20px 20px 20px 20px;
 	color: #666666ff;
-	font-size: 0.75em;
-	padding: 5px 10px 5px 10px;
+	font-size: 1em;
+	line-height: 20px;
+	padding: 5px 15px 5px 15px;
 
 	transition: background-color 0.4s ease, color 0.4s ease;
 }
