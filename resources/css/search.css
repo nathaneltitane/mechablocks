@@ -140,6 +140,12 @@
 	background: #ffd100ff;
 }
 
+/* no match result in work in progress red */
+
+.search .count.none {
+	color: #dc2a30ff;
+}
+
 /* field holder for the result */
 
 .search .box {

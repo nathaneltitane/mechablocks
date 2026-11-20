@@ -118,6 +118,8 @@ $( document ).ready ( function ( ) {
 
 		clear.toggleClass ( 'hide', ! field.val ( ) );
 
+		count.toggleClass ( 'none', ! shown );
+
 		count.text ( ! words.length && ! series ? '' : ' // ' + ( shown ? shown + ( shown === 1 ? ' MODEL' : ' MODELS' ) : 'NO MATCH' ) );
 
 		// result joined right after the typed text
