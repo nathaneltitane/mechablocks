@@ -151,6 +151,15 @@ instructions () {
 					--instructions ${option_instructions}	\
 					--directory "${directory}"
 
+	# stop when l2cu failed
+
+	if [ "${?}" -ne 0 ]
+	then
+		frobulator.err "Instructions failure" "[ ${option_instructions} ]"
+
+		exit 1
+	fi
+
 }
 
 # requirements ─────────────────────────────────────────────────────────────────

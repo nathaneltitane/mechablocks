@@ -165,7 +165,16 @@ do
 
 	# compressed visible surface only
 
-	"${SHELL}" "${directory_root%/*}"/l2cu/l2cu --file mpd --export collada surface kmz --directory "${directory}"
+	"${SHELL}" "${directory_root%/*}"/l2cu/l2cu --file mpd --export kmz --directory "${directory}"
+
+	# stop when l2cu failed
+
+	if [ "${?}" -ne 0 ]
+	then
+		frobulator.err "Exports failure" "[ ${directory} ]"
+
+		exit 1
+	fi
 done
 
 list=()

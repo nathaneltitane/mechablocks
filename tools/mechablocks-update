@@ -259,6 +259,15 @@ option () {
 	for name_tool in "${list[@]}"
 	do
 		bash "${directory_tools}/${name_tool}"
+
+		# stop before publishing a failed update
+
+		if [ "${?}" -ne 0 ]
+		then
+			frobulator.err "Update stopped" "[ ${name_tool} ]"
+
+			exit 1
+		fi
 	done
 
 	# publish the results
