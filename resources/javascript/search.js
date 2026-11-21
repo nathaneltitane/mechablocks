@@ -52,6 +52,10 @@ $( document ).ready ( function ( ) {
 
 			series = name;
 
+			// a picked series overrides the typed search
+
+			field.val ( '' );
+
 			chips.children ( ).removeClass ( 'active' );
 
 			button.addClass ( 'active' );
